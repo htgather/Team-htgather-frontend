@@ -53,19 +53,6 @@ const BackGround = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 0;
-  /* width: 100%;
-  height: 100vh;
-  background-color: rgba(000, 00, 00, 0.7);
-  z-index: 20;
-  position: fixed;
-  top: 0px;
-  left: 0px; */
-
-  & .modal__button {
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-  }
 `;
 
 const ModalContainer = styled.div`
@@ -78,7 +65,6 @@ const ModalContainer = styled.div`
   max-height: 80%;
   width: 20rem;
   height: 80%;
-  background: rgb(25, 31, 44);
   text-align: center;
 
   @media ${(props) => props.theme.device.MobileLandscape} {
@@ -100,8 +86,8 @@ const CloseBtn = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 28px;
+  top: 25px;
   cursor: pointer;
 `;
 
