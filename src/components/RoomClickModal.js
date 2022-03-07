@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import KakaoLogin from './KakaoLogin';
 import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import styled from 'styled-components';
@@ -36,7 +37,10 @@ const RoomClickModal = (props) => {
                     <br />
                     3초 로그인하고 사람들과 함께 운동해볼까요?
                   </div>
-                  <LoginBtn>카카오 계정으로 시작하기</LoginBtn>
+                  <Kakao>
+                    <KakaoLogin />
+                  </Kakao>
+                  {/* <LoginBtn>카카오 계정으로 시작하기</LoginBtn> */}
                 </Container>
               </DIV>
             </ModalContainer>
@@ -54,6 +58,7 @@ const BackGround = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
 `;
 
 const ModalContainer = styled.div`
@@ -67,6 +72,7 @@ const ModalContainer = styled.div`
   width: 20rem;
   height: 80%;
   text-align: center;
+  z-index: 999;
 
   @media ${(props) => props.theme.device.MobileLandscape} {
     width: 90%;
@@ -104,14 +110,18 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const LoginBtn = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ddd;
-  border-radius: 20px;
-  width: 316px;
-  height: 56px;
+const Kakao = styled.div`
   margin-top: 30px;
 `;
+
+// const LoginBtn = styled.div`
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: #ddd;
+//   border-radius: 20px;
+//   width: 316px;
+//   height: 56px;
+//   margin-top: 30px;
+// `;
 export default RoomClickModal;

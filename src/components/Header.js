@@ -24,7 +24,6 @@ const HeaderContainer = styled.div`
   height: 64px;
   background: #ddd;
   position: fixed;
-  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;

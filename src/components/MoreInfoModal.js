@@ -68,7 +68,10 @@ const MoreInfoModal = (props) => {
                   <img src={lock} width="48px" height="50px" />
                 </div>
                 <div style={{ marginTop: '20px' }}>로그인 후에 이용해주세요</div>
-                <KakaoLogin />
+                <Kakao>
+                  <KakaoLogin />
+                </Kakao>
+
                 <LoginBtn onClick={login}>카카오 계정으로 시작하기</LoginBtn>
               </Container>
             )}
@@ -201,5 +204,9 @@ const LoginBtn = styled.div`
   height: 56px;
   margin-top: 30px;
   cursor: pointer;
+`;
+
+const Kakao = styled.div`
+  margin-top: 30px;
 `;
 export default MoreInfoModal;

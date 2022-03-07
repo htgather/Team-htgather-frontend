@@ -14,7 +14,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
-          {/* <Header></Header> */}
+          <Header></Header>
           <Route path="/" exact component={Main}></Route>
           <Route path="/kakaoLogin" component={KakaoLogin}></Route>
         </ConnectedRouter>

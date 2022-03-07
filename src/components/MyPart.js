@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import lock from '../Images/lock.png';
+import KakaoLogin from '../components/KakaoLogin';
 
 const MyPart = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -27,7 +28,10 @@ const MyPart = () => {
                 <img src={lock} width="48px" height="50px" />
               </div>
               <div style={{ marginTop: '20px', color: '#fff' }}>로그인 후에 이용해주세요</div>
-              <LoginBtn>카카오 계정으로 시작하기</LoginBtn>
+              <BtnWrap>
+                <KakaoLogin />
+              </BtnWrap>
+              {/* <LoginBtn>카카오 계정으로 시작하기</LoginBtn> */}
             </Container>
           </DIV>
         )}
@@ -81,6 +85,10 @@ const Unknown2 = styled.div`
 const Container = styled.div`
   margin: auto;
   text-align: center;
+`;
+
+const BtnWrap = styled.div`
+  margin-top: 25px;
 `;
 
 const LoginBtn = styled.div`

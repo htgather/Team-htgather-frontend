@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import MyPart from '../components/MyPart';
+import RoomClickModal from '../components/RoomClickModal';
 import KakaoLogin from '../components/KakaoLogin';
 // import { FaHeart } from "react-icons/fa";
 // import Post from "../components/Post";
@@ -20,10 +21,13 @@ const Main = () => {
   return (
     <>
       <Container>
+        {/* <MoreInfoModal /> */}
         <DIV>
+          <RoomClickModal />
           <Card />
         </DIV>
       </Container>
+      <MyPart />
     </>
   );
 };
@@ -31,13 +35,10 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #e5e5e5;
-  display: inline-flex;
-  //
-  margin-top: 100px;
-  z-index: 999;
-  /* display: flex;
+  z-index: 10;
+  display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 `;
 
 const DIV = styled.div`
