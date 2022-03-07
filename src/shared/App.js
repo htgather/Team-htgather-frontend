@@ -5,16 +5,18 @@ import Main from '../pages/Main';
 import Header from '../components/Header';
 import { ThemeProvider } from 'styled-components';
 import theme from './Theme';
-import MoreInfoModal from '../components/MoreInfoModal';
 import RoomClickModal from '../components/RoomClickModal';
+import MyPart from '../components/MyPart';
+import KakaoLogin from '../components/KakaoLogin';
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
-          <Header></Header>
+          {/* <Header></Header> */}
           <Route path="/" exact component={Main}></Route>
+          <Route path="/kakaoLogin" component={KakaoLogin}></Route>
         </ConnectedRouter>
       </ThemeProvider>
     </>

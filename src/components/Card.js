@@ -4,7 +4,7 @@ import RoomClickModal from './RoomClickModal';
 import person from '../Images/CardIcon_person.png';
 const Card = () => {
   return (
-    <CardContainer onClick={RoomClickModal}>
+    <CardContainer onClick={RoomClickModal()}>
       <CardImg></CardImg>
       <CardContent>
         <div>

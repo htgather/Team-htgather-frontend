@@ -2,7 +2,8 @@ import React from 'react';
 // import { Button, Grid, Input, Text } from "../elements";
 import styled from 'styled-components';
 import Card from '../components/Card';
-import NotLoginMain from '../components/NotLoginMain';
+import MyPart from '../components/MyPart';
+import KakaoLogin from '../components/KakaoLogin';
 // import { FaHeart } from "react-icons/fa";
 // import Post from "../components/Post";
 // import { useDispatch, useSelector } from "react-redux";
@@ -19,8 +20,9 @@ const Main = () => {
   return (
     <>
       <Container>
-        {/* <NotLoginMain /> */}
-        {/* <Card></Card> */}
+        <DIV>
+          <Card />
+        </DIV>
       </Container>
     </>
   );
@@ -29,9 +31,19 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #e5e5e5;
-  display: flex;
+  display: inline-flex;
+  //
+  margin-top: 100px;
+  z-index: 999;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+`;
+
+const DIV = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  margin: auto;
 `;
 
 export default Main;

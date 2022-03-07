@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import lock from '../Images/lock.png';
 
-const NotLoginMain = () => {
+const MyPart = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   const login = () => {
@@ -10,27 +10,29 @@ const NotLoginMain = () => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <React.Fragment>
       <button onClick={login}>로그인 전환 버튼</button>
-      <LoginDiv>
-        <Calendar>달력</Calendar>
-        <Contents>뭐들어가지</Contents>
-        <Unknown2>뭐들어가지22</Unknown2>
-      </LoginDiv>
-      {isLogin ? (
-        ''
-      ) : (
-        <DIV>
-          <Container>
-            <div>
-              <img src={lock} width="48px" height="50px" />
-            </div>
-            <div style={{ marginTop: '20px', color: '#fff' }}>로그인 후에 이용해주세요</div>
-            <LoginBtn>카카오 계정으로 시작하기</LoginBtn>
-          </Container>
-        </DIV>
-      )}
-    </div>
+      <div style={{ display: 'flex' }}>
+        <LoginDiv>
+          <Calendar>달력</Calendar>
+          <Contents>뭐들어가지</Contents>
+          <Unknown2>뭐들어가지22</Unknown2>
+        </LoginDiv>
+        {isLogin ? (
+          ''
+        ) : (
+          <DIV>
+            <Container>
+              <div>
+                <img src={lock} width="48px" height="50px" />
+              </div>
+              <div style={{ marginTop: '20px', color: '#fff' }}>로그인 후에 이용해주세요</div>
+              <LoginBtn>카카오 계정으로 시작하기</LoginBtn>
+            </Container>
+          </DIV>
+        )}
+      </div>
+    </React.Fragment>
   );
 };
 
@@ -92,4 +94,4 @@ const LoginBtn = styled.div`
   margin-top: 30px;
 `;
 
-export default NotLoginMain;
+export default MyPart;

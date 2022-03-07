@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import NotLoginMain from './NotLoginMain';
+import KakaoLogin from './KakaoLogin';
 import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import Icon_Menu from '../Images/Icon_Menu.png';
@@ -16,12 +16,8 @@ const MoreInfoModal = (props) => {
     isLogin ? setIsLogin(false) : setIsLogin(true);
   };
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
+  const setModal = () => {
+    setShowModal(!showModal);
   };
 
   const NicknameChange = (e) => {
@@ -40,13 +36,13 @@ const MoreInfoModal = (props) => {
   return (
     <React.Fragment>
       <MenuBtn>
-        <img style={{ cursor: 'pointer' }} src={Icon_Menu} alt="menu" onClick={openModal} />
+        <img style={{ cursor: 'pointer' }} src={Icon_Menu} alt="menu" onClick={setModal} />
       </MenuBtn>
       {showModal ? (
         <>
           <DIV>
             <CloseBtn>
-              <img onClick={closeModal} src={Close} alt="closeBtn" />
+              <img onClick={setModal} src={Close} alt="closeBtn" />
             </CloseBtn>
             <TextWrap style={{ fontSize: '25px' }}>더보기</TextWrap>
             <Line />
@@ -72,6 +68,7 @@ const MoreInfoModal = (props) => {
                   <img src={lock} width="48px" height="50px" />
                 </div>
                 <div style={{ marginTop: '20px' }}>로그인 후에 이용해주세요</div>
+                <KakaoLogin />
                 <LoginBtn onClick={login}>카카오 계정으로 시작하기</LoginBtn>
               </Container>
             )}
@@ -84,7 +81,7 @@ const MoreInfoModal = (props) => {
 
 const DIV = styled.div`
   background-color: #fff;
-  z-index: 100;
+  z-index: 999;
   width: 400px;
   height: 500px;
   border-radius: 12px;
