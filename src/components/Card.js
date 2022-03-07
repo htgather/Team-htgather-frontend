@@ -1,26 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import person from "../Images/CardIcon_person.png";
+import React from 'react';
+import styled from 'styled-components';
+import RoomClickModal from './RoomClickModal';
+import person from '../Images/CardIcon_person.png';
 const Card = () => {
   return (
-    <CardContainer>
+    <CardContainer onClick={RoomClickModal}>
       <CardImg></CardImg>
       <CardContent>
         <div>
           <CardTag>초보</CardTag>
           <CardTag>타이틀</CardTag>
         </div>
-        <CardTitle>
-          타바타 여신 김쌤 모시고 합니다 이것은 방제목이고, 두줄까지 가능합니다.
-        </CardTitle>
+        <CardTitle>타바타 여신 김쌤 모시고 합니다 이것은 방제목이고, 두줄까지 가능합니다.</CardTitle>
         <CardInfo>
           <p>오후 8시 시작</p>
           <div className="cardInfo_personBox">
-            <img
-              src={person}
-              alt="사람 아이콘"
-              style={{ marginRight: "6px" }}
-            />
+            <img src={person} alt="사람 아이콘" style={{ marginRight: '6px' }} />
             <p>2 / 6</p>
           </div>
         </CardInfo>
@@ -43,7 +38,7 @@ const CardContainer = styled.div`
 `;
 
 const CardImg = styled.div`
-  background-image: url("https://i.ytimg.com/vi/1W9gMxLoW6Q/hqdefault.jpg");
+  background-image: url('https://i.ytimg.com/vi/1W9gMxLoW6Q/hqdefault.jpg');
   padding-top: 54%;
   background-size: cover;
   background-position: center;

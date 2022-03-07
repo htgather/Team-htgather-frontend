@@ -5,13 +5,12 @@ import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import Icon_Menu from '../Images/Icon_Menu.png';
 
-const MoreInfoModal = () => {
+const MoreInfoModal = (props) => {
+  // const { openModal } = props;
   const [isLogin, setIsLogin] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   const [nickname, setNickname] = useState('');
-
-  // if (!isLogin)
 
   const login = () => {
     isLogin ? setIsLogin(false) : setIsLogin(true);
@@ -40,8 +39,9 @@ const MoreInfoModal = () => {
 
   return (
     <React.Fragment>
-      <NotLoginMain />
-      <img style={{ cursor: 'pointer' }} src={Icon_Menu} alt="menu" onClick={openModal} />
+      <MenuBtn>
+        <img style={{ cursor: 'pointer' }} src={Icon_Menu} alt="menu" onClick={openModal} />
+      </MenuBtn>
       {showModal ? (
         <>
           <DIV>
@@ -83,12 +83,13 @@ const MoreInfoModal = () => {
 };
 
 const DIV = styled.div`
-  /* background-color: #ddd; */
-
+  background-color: #fff;
+  z-index: 100;
   width: 400px;
   height: 500px;
   border-radius: 12px;
   position: relative;
+  top: 300px;
   padding: 50px;
   :before {
     border-top: 0px solid;
@@ -98,19 +99,26 @@ const DIV = styled.div`
     content: '';
     position: absolute;
     top: -10px;
-    right: 100px;
+    right: 24px;
   }
-  :after {
+  /* :after {
     border-top: 0px solid;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #fff;
+    border-bottom: 10px solid #ddd;
     content: '';
     position: absolute;
     top: -10px;
     right: 100px;
-  }
+  } */
   box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 15px 0px;
+`;
+
+const MenuBtn = styled.div`
+  position: absolute;
+  right: 30px;
+  display: flex;
+  align-items: center;
 `;
 
 const Line = styled.div`

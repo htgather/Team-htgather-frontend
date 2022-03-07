@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
 // import { Button, Grid, Input, Text } from "../elements";
-import styled from "styled-components";
-import Card from "../components/Card";
+import styled from 'styled-components';
+import Card from '../components/Card';
+import NotLoginMain from '../components/NotLoginMain';
 // import { FaHeart } from "react-icons/fa";
 // import Post from "../components/Post";
 // import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +19,8 @@ const Main = () => {
   return (
     <>
       <Container>
-        <Card></Card>
+        {/* <NotLoginMain /> */}
+        {/* <Card></Card> */}
       </Container>
     </>
   );

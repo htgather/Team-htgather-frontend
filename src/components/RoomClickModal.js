@@ -19,27 +19,29 @@ const RoomClickModal = (props) => {
       <button onClick={openModal}>모달 오픈</button>
 
       {showModal ? (
-        <BackGround onClick={closeModal}>
-          <ModalContainer>
-            <DIV onClick={(e) => e.stopPropagation()}>
-              <ImgWrap>이미지</ImgWrap>
-              <CloseBtn onClick={closeModal}>
-                <img src={Close} />
-              </CloseBtn>
-              <Container>
-                <div>
-                  <img src={lock} width="48px" height="50px" />
-                </div>
-                <div style={{ marginTop: '20px' }}>
-                  로그인 후에 확인할 수 있어요
-                  <br />
-                  3초 로그인하고 사람들과 함께 운동해볼까요?
-                </div>
-                <LoginBtn>카카오 계정으로 시작하기</LoginBtn>
-              </Container>
-            </DIV>
-          </ModalContainer>
-        </BackGround>
+        <div style={{ zIndex: '100' }}>
+          <BackGround onClick={closeModal}>
+            <ModalContainer>
+              <DIV onClick={(e) => e.stopPropagation()}>
+                <ImgWrap>이미지</ImgWrap>
+                <CloseBtn onClick={closeModal}>
+                  <img src={Close} />
+                </CloseBtn>
+                <Container>
+                  <div>
+                    <img src={lock} width="48px" height="50px" />
+                  </div>
+                  <div style={{ marginTop: '20px' }}>
+                    로그인 후에 확인할 수 있어요
+                    <br />
+                    3초 로그인하고 사람들과 함께 운동해볼까요?
+                  </div>
+                  <LoginBtn>카카오 계정으로 시작하기</LoginBtn>
+                </Container>
+              </DIV>
+            </ModalContainer>
+          </BackGround>
+        </div>
       ) : null}
     </React.Fragment>
   );
@@ -52,7 +54,6 @@ const BackGround = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 0;
 `;
 
 const ModalContainer = styled.div`

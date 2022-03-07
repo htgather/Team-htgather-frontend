@@ -10,30 +10,12 @@ const NotLoginMain = () => {
   };
 
   return (
-    <>
+    <div style={{ display: 'flex' }}>
       <button onClick={login}>로그인 전환 버튼</button>
       <LoginDiv>
-        <Calendar
-          onClick={() => {
-            window.alert('클릭1');
-          }}
-        >
-          달력
-        </Calendar>
-        <Contents
-          onClick={() => {
-            window.alert('클릭2');
-          }}
-        >
-          뭐들어가지
-        </Contents>
-        <Unknown2
-          onClick={() => {
-            window.alert('클릭3');
-          }}
-        >
-          뭐들어가지22
-        </Unknown2>
+        <Calendar>달력</Calendar>
+        <Contents>뭐들어가지</Contents>
+        <Unknown2>뭐들어가지22</Unknown2>
       </LoginDiv>
       {isLogin ? (
         ''
@@ -48,7 +30,7 @@ const NotLoginMain = () => {
           </Container>
         </DIV>
       )}
-    </>
+    </div>
   );
 };
 
@@ -61,7 +43,6 @@ const DIV = styled.div`
   align-items: center;
   border-radius: 12px;
   position: absolute;
-  z-index: 1;
 `;
 
 const LoginDiv = styled.div`
@@ -71,7 +52,8 @@ const LoginDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  z-index: 1;
+  background-color: #fff;
+  border-radius: 12px;
 `;
 
 const Contents = styled.div`
@@ -81,7 +63,7 @@ const Contents = styled.div`
 const Calendar = styled.div`
   width: 328px;
   height: 284px;
-  background-color: #f2d2de;
+  /* background-color: #f2d2de; */
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 `;
@@ -89,7 +71,7 @@ const Calendar = styled.div`
 const Unknown2 = styled.div`
   width: 328px;
   height: 284px;
-  background-color: blue;
+  /* background-color: blue; */
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 `;

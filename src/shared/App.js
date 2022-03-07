@@ -15,8 +15,6 @@ function App() {
         <ConnectedRouter history={history}>
           <Header></Header>
           <Route path="/" exact component={Main}></Route>
-          <MoreInfoModal />
-          <RoomClickModal />
         </ConnectedRouter>
       </ThemeProvider>
     </>
