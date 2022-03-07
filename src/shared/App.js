@@ -1,10 +1,12 @@
-import { Route, Switch } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "../redux/configureStore";
-import Main from "../pages/Main";
-import Header from "../components/Header";
-import { ThemeProvider } from "styled-components";
-import theme from "./Theme";
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../redux/configureStore';
+import Main from '../pages/Main';
+import Header from '../components/Header';
+import { ThemeProvider } from 'styled-components';
+import theme from './Theme';
+import MoreInfoModal from '../components/MoreInfoModal';
+import RoomClickModal from '../components/RoomClickModal';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <ConnectedRouter history={history}>
           <Header></Header>
           <Route path="/" exact component={Main}></Route>
+          <MoreInfoModal />
+          <RoomClickModal />
         </ConnectedRouter>
       </ThemeProvider>
     </>
