@@ -12,17 +12,14 @@ import { actionCreators as userActions } from '../redux/modules/User';
 
 const MoreInfoModal = (props) => {
   const dispatch = useDispatch();
+  const myNickname = useSelector((state) => state.User.nickname);
   const is_local = localStorage.getItem('isLogin') ? true : false;
 
-  // const _nickname = useSelector(User.nickname);
-
-  // const myToken = localStorage.getItem('isLogin');
-  // // console.log(myToken);
-  // const base64payload = myToken.split('.')[1];
+  // const base64payload = is_local ? localStorage.getItem('isLogin').split('.')[1] : null;
   // console.log(base64payload);
-  // const payload = Buffer.from(base64payload, 'base64');
+  // const payload = is_local ? Buffer.from(base64payload, 'base64') : null;
   // // console.log(payload);
-  // const result = JSON.parse(payload.toString());
+  // const result = is_local ? JSON.parse(payload.toString()) : null;
   // console.log('결과다~~~~!!!!!', result);
   // console.log(result.nickName);
   // const _nickname = result.nickName;
@@ -70,6 +67,7 @@ const MoreInfoModal = (props) => {
             {is_local ? (
               <>
                 <TextWrap>닉네임</TextWrap>
+                <div>{myNickname}님</div>
                 <NickChange>
                   <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
                   <NickBtn onClick={onClickNickname}>

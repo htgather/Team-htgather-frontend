@@ -6,6 +6,7 @@ import { ActionCreators as userActions } from '../redux/modules/User';
 // import jwt from 'jsonwebtoken';
 import { history } from '../redux/configureStore';
 // import setAuthorizationToken from '../shared/Request';
+import { Buffer } from 'buffer';
 
 const { Kakao } = window;
 
@@ -26,19 +27,29 @@ const LoginWithKakao = () => {
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (response) => {
+          console.log(response);
           const _id = response.id;
           const { profile } = response.kakao_account;
-
+          console.log(profile);
+          console.log({ profile });
           axios
             .post('http://3.39.58.56:4000/users/auth', {
               nickName: profile.nickname,
               snsId: _id,
             })
             .then((res) => {
-              console.log(res);
+              // console.log(res)
               localStorage.setItem('isLogin', res.data.token);
-              // dispatch(userActions.getNickname(profile.nickname));
-              // window.alert(`반갑습니다 ${profile.nickname}님!😄`);
+              // const base64payload = localStorage.getItem('isLogin').split('.')[1];
+              // console.log(base64payload);
+              // const payload = Buffer.from(base64payload, 'base64');
+              // // console.log(payload);
+              // const result = JSON.parse(payload.toString());
+              // console.log('결과다~~~~!!!!!', result);
+              // console.log(result.nickName);
+              // const _nickname = result.nickName;
+              // // dispatch(userActions.getNickname(profile.nickname));
+              // window.alert(`반갑습니다 ${_nickname}님!😄`);
               // window.location.replace('/');
               // setAuthorizationToken(res.data.token);
               // console.log(jwt.decode(res.data.token));
@@ -66,6 +77,22 @@ export const logoutWithKakao = () => {
   Kakao.Auth.logout();
   localStorage.clear();
 };
+
+// 회원탈퇴
+// export const UnlinkWithKakao = () => {
+// 	Kakao.API.request({
+//     	url: '/v1/user/unlink',
+//     	success: function(response) {
+//     		console.log(response);
+//     		//callback(); //연결끊기(탈퇴)성공시 서버에서 처리할 함수
+//     		window.location.href='/'
+//     	},
+//     	fail: function(error) {
+//     		console.log('탈퇴 미완료')
+//     		console.log(error);
+//     	},
+// 	});
+// };
 
 const KakaoLogin = () => {
   return (
