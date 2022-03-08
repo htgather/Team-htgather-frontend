@@ -3,8 +3,11 @@ import KakaoLogin from './KakaoLogin';
 import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import styled from 'styled-components';
+import Frame from '../Images/Frame.png';
 
 const RoomClickModal = (props) => {
+  const is_local = localStorage.getItem('isLogin') ? true : false;
+
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -24,7 +27,15 @@ const RoomClickModal = (props) => {
           <BackGround onClick={closeModal}>
             <ModalContainer>
               <DIV onClick={(e) => e.stopPropagation()}>
-                <ImgWrap>이미지</ImgWrap>
+                <ImgWrap>
+                  <img src={Frame} />
+                  <div style={{ fontWeight: 'bold', marginTop: '20px' }}>홈트게더와 함께하는 홈 트레이닝</div>
+                  <div style={{ fontSize: '14px', marginTop: '20px', color: '#aaa' }}>
+                    혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
+                    <br />
+                    홈트게더와 함께 사람들과 소통하며 재미있는 홈트를 시작해보세요.
+                  </div>
+                </ImgWrap>
                 <CloseBtn onClick={closeModal}>
                   <img src={Close} />
                 </CloseBtn>
@@ -65,21 +76,21 @@ const ModalContainer = styled.div`
   position: fixed;
   left: 50%;
   right: 50%;
-  top: 50%;
+  top: 55%;
   bottom: 50%;
   transform: translate(-50%, -50%);
-  max-height: 80%;
-  width: 20rem;
-  height: 80%;
+  /* max-height: 80%; */
+  width: 960px;
+  height: 480px;
   text-align: center;
   z-index: 999;
 
-  @media ${(props) => props.theme.device.MobileLandscape} {
-    width: 90%;
+  /* @media ${(props) => props.theme.device.MobileLandscape} {
+    width: 90%; */
   }
 `;
 const DIV = styled.div`
-  background-color: #fff;
+  background-color: #f1f3f5;
   border-radius: 12px;
   margin: auto;
   width: 880px;
@@ -100,9 +111,10 @@ const CloseBtn = styled.div`
 
 const ImgWrap = styled.div`
   width: 440px;
-  background-color: #ddd;
+  background-color: #fff;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
+  padding: 70px;
 `;
 
 const Container = styled.div`

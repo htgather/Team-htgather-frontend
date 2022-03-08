@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MoreInfoModal from '../components/MoreInfoModal';
 import Icon_Menu from '../Images/Icon_Menu.png';
 
-const Header = (props) => {
+const Header = () => {
   const [showModal, setShowModal] = React.useState(false);
 
   const openModal = () => {

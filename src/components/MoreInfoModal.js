@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import KakaoLogin from './KakaoLogin';
 import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import Icon_Menu from '../Images/Icon_Menu.png';
 
+import { actionCreators as userActions } from '../redux/modules/user';
+
 const MoreInfoModal = (props) => {
-  // const { openModal } = props;
-  const [isLogin, setIsLogin] = useState(true);
+  const dispatch = useDispatch();
+  const is_local = localStorage.getItem('isLogin') ? true : false;
+
   const [showModal, setShowModal] = useState(false);
-
   const [nickname, setNickname] = useState('');
-
-  const login = () => {
-    isLogin ? setIsLogin(false) : setIsLogin(true);
-  };
 
   const setModal = () => {
     setShowModal(!showModal);
@@ -30,7 +29,7 @@ const MoreInfoModal = (props) => {
       return;
     }
     window.alert(nickname);
-    // dispatch(userActions.nickChangeFB(nickname))
+    dispatch(userActions.nickChangeFB(nickname));
   };
 
   return (
@@ -46,13 +45,13 @@ const MoreInfoModal = (props) => {
             </CloseBtn>
             <TextWrap style={{ fontSize: '25px' }}>더보기</TextWrap>
             <Line />
-            {isLogin ? (
+            {is_local ? (
               <>
                 <TextWrap>닉네임</TextWrap>
                 <NickChange>
                   <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
                   <NickBtn onClick={onClickNickname}>
-                    <p>수정하기</p>
+                    <p>변경하기</p>
                   </NickBtn>
                 </NickChange>
                 <Line />
@@ -60,7 +59,7 @@ const MoreInfoModal = (props) => {
                 <div style={{ marginTop: '20px' }}>✍️홈트게더 이용 후기 남기기</div>
                 <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
                 <Line />
-                <LogOutBtn onClick={login}>로그아웃</LogOutBtn>
+                <LogOutBtn>로그아웃</LogOutBtn>
               </>
             ) : (
               <Container>
@@ -71,8 +70,6 @@ const MoreInfoModal = (props) => {
                 <Kakao>
                   <KakaoLogin />
                 </Kakao>
-
-                <LoginBtn onClick={login}>카카오 계정으로 시작하기</LoginBtn>
               </Container>
             )}
           </DIV>

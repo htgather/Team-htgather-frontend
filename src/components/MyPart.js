@@ -4,22 +4,17 @@ import lock from '../Images/lock.png';
 import KakaoLogin from '../components/KakaoLogin';
 
 const MyPart = () => {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const login = () => {
-    setIsLogin(!isLogin);
-  };
+  const is_local = localStorage.getItem('isLogin') ? true : false;
 
   return (
     <React.Fragment>
-      <button onClick={login}>로그인 전환 버튼</button>
       <div style={{ display: 'flex' }}>
         <LoginDiv>
           <Calendar>달력</Calendar>
           <Contents>뭐들어가지</Contents>
           <Unknown2>뭐들어가지22</Unknown2>
         </LoginDiv>
-        {isLogin ? (
+        {is_local ? (
           ''
         ) : (
           <DIV>

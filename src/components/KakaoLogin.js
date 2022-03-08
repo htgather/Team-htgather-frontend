@@ -5,8 +5,7 @@ import { history } from '../redux/configureStore';
 
 const { Kakao } = window;
 
-const loginWithKakao = (props) => {
-  const { history } = props;
+const loginWithKakao = () => {
   //scope : 수집할 사용자 정보를 명시.
   const scope = 'profile_nickname';
 
@@ -23,27 +22,21 @@ const loginWithKakao = (props) => {
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (response) => {
-          //   console.log(response);
-          //   console.log(response.id); //Number
           const _id = response.id;
           const { profile } = response.kakao_account;
-          console.log(profile);
-          console.log(_id);
 
           axios
-            .post('', {
-              nickname: profile.nickname,
+            .post('http://54.180.105.226:4000/users/auth', {
+              nickName: profile.nickname,
               snsId: _id,
             })
             .then((res) => {
-              console.log('랄라', res);
-              // history.push("/");
-              localStorage.setItem('isLogin', res.token);
+              window.alert(`반갑습니다 ${profile.nickname}님!😄`);
+              window.location.replace('/');
+              localStorage.setItem('isLogin', res.data.token);
             })
             .catch((error) => {
-              // console.log(error);
-              console.error(error);
-              alert('카카오 로그인 에러?');
+              alert('카카오 로그인 에러', error.data);
             });
         },
         fail: function (error) {
@@ -58,19 +51,21 @@ const loginWithKakao = (props) => {
 };
 
 const logoutWithKakao = () => {
+  if (!Kakao.Auth.getAccessToken()) {
+    console.log('로그인되어 있지 않습니다.');
+    return;
+  }
   Kakao.Auth.logout();
-  console.log(Kakao.Auth.getAccessToken());
+  localStorage.clear();
 };
 
 const KakaoLogin = () => {
-  //   const uri = window.location.href;
-  //   const arr = uri.split('=');
   return (
     <>
       <a id="custom-login-btn" onClick={loginWithKakao}>
         <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="250" />
       </a>
-      {/* <button onClick={logoutWithKakao}>로그아웃!!!!!!!!!</button> */}
+      <button onClick={logoutWithKakao}>로그아웃!!!!!!!!!</button>
     </>
   );
 };
