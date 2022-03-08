@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import KakaoLogin from './KakaoLogin';
+import Card from '../components/Card';
 import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import styled from 'styled-components';
@@ -11,7 +12,10 @@ const RoomClickModal = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
-    setShowModal(true);
+    if (!is_local) {
+      setShowModal(true);
+    }
+    return;
   };
 
   const closeModal = () => {
@@ -20,8 +24,9 @@ const RoomClickModal = (props) => {
 
   return (
     <React.Fragment>
-      <button onClick={openModal}>모달 오픈</button>
-
+      <div onClick={openModal}>
+        <Card />
+      </div>
       {showModal ? (
         <div style={{ zIndex: '100' }}>
           <BackGround onClick={closeModal}>

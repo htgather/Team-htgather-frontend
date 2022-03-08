@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import KakaoLogin from './KakaoLogin';
 import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
 import Icon_Menu from '../Images/Icon_Menu.png';
+import { logoutWithKakao } from '../components/KakaoLogin';
+import { Buffer } from 'buffer';
 
-import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as userActions } from '../redux/modules/User';
 
 const MoreInfoModal = (props) => {
   const dispatch = useDispatch();
   const is_local = localStorage.getItem('isLogin') ? true : false;
+
+  // const _nickname = useSelector(User.nickname);
+
+  // const myToken = localStorage.getItem('isLogin');
+  // // console.log(myToken);
+  // const base64payload = myToken.split('.')[1];
+  // console.log(base64payload);
+  // const payload = Buffer.from(base64payload, 'base64');
+  // // console.log(payload);
+  // const result = JSON.parse(payload.toString());
+  // console.log('결과다~~~~!!!!!', result);
+  // console.log(result.nickName);
+  // const _nickname = result.nickName;
 
   const [showModal, setShowModal] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -28,8 +43,15 @@ const MoreInfoModal = (props) => {
       window.alert('수정할 닉네임을 입력해주세요!');
       return;
     }
-    window.alert(nickname);
+    // window.alert(nickname);
     dispatch(userActions.nickChangeFB(nickname));
+  };
+
+  const onClickLogOut = () => {
+    logoutWithKakao();
+    setShowModal(false);
+    window.alert('로그아웃이 완료되었습니다!');
+    // window.location.reload();
   };
 
   return (
@@ -59,7 +81,7 @@ const MoreInfoModal = (props) => {
                 <div style={{ marginTop: '20px' }}>✍️홈트게더 이용 후기 남기기</div>
                 <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
                 <Line />
-                <LogOutBtn>로그아웃</LogOutBtn>
+                <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
               </>
             ) : (
               <Container>

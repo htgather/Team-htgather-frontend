@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { ActionCreators as userActions } from '../redux/modules/User';
+// import jwt from 'jsonwebtoken';
 import { history } from '../redux/configureStore';
+// import setAuthorizationToken from '../shared/Request';
 
 const { Kakao } = window;
 
-const loginWithKakao = () => {
+const LoginWithKakao = () => {
   //scope : 수집할 사용자 정보를 명시.
   const scope = 'profile_nickname';
 
@@ -17,7 +21,7 @@ const loginWithKakao = () => {
       //카카오 SDK에 사용자 토큰을 설정한다.
       window.Kakao.Auth.setAccessToken(response.access_token);
       const ACCESS_TOKEN = window.Kakao.Auth.getAccessToken();
-      console.log(ACCESS_TOKEN); //토큰 발급 완료
+      // console.log(ACCESS_TOKEN); //토큰 발급 완료
       // 사용자 정보 불러오기
       window.Kakao.API.request({
         url: '/v2/user/me',
@@ -26,17 +30,21 @@ const loginWithKakao = () => {
           const { profile } = response.kakao_account;
 
           axios
-            .post('http://54.180.105.226:4000/users/auth', {
+            .post('http://3.39.58.56:4000/users/auth', {
               nickName: profile.nickname,
               snsId: _id,
             })
             .then((res) => {
-              window.alert(`반갑습니다 ${profile.nickname}님!😄`);
-              window.location.replace('/');
+              console.log(res);
               localStorage.setItem('isLogin', res.data.token);
+              // dispatch(userActions.getNickname(profile.nickname));
+              // window.alert(`반갑습니다 ${profile.nickname}님!😄`);
+              // window.location.replace('/');
+              // setAuthorizationToken(res.data.token);
+              // console.log(jwt.decode(res.data.token));
             })
             .catch((error) => {
-              alert('카카오 로그인 에러', error.data);
+              alert('카카오 로그인 에러', error.message);
             });
         },
         fail: function (error) {
@@ -50,7 +58,7 @@ const loginWithKakao = () => {
   });
 };
 
-const logoutWithKakao = () => {
+export const logoutWithKakao = () => {
   if (!Kakao.Auth.getAccessToken()) {
     console.log('로그인되어 있지 않습니다.');
     return;
@@ -62,10 +70,10 @@ const logoutWithKakao = () => {
 const KakaoLogin = () => {
   return (
     <>
-      <a id="custom-login-btn" onClick={loginWithKakao}>
+      <a id="custom-login-btn" onClick={LoginWithKakao}>
         <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="250" />
       </a>
-      <button onClick={logoutWithKakao}>로그아웃!!!!!!!!!</button>
+      {/* <button onClick={logoutWithKakao}>로그아웃!!!!!!!!!</button> */}
     </>
   );
 };

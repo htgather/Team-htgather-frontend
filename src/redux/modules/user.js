@@ -16,7 +16,7 @@ const nickChangeFB = (nickname) => {
   return function (dispatch, getState, { history }) {
     axios
       .patch(
-        'http://54.180.105.226:4000/users',
+        'http://3.39.58.56:4000/users',
         {
           nickName: nickname,
         },
@@ -27,7 +27,7 @@ const nickChangeFB = (nickname) => {
         }
       )
       .then((response) => {
-        console.log('fb성공');
+        window.alert('changeFB 성공' + nickname);
         console.log(response);
         dispatch(getNickname(response.data.nickname));
       })

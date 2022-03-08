@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import RoomClickModal from './RoomClickModal';
 import person from '../Images/CardIcon_person.png';
@@ -6,10 +6,12 @@ import person from '../Images/CardIcon_person.png';
 const Card = () => {
   const is_local = localStorage.getItem('isLogin') ? true : false;
 
-  // const cardClick = () => {
-  //     RoomClickModal();
-  //   }
-  // };
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+    RoomClickModal();
+  };
 
   return (
     <CardContainer>
