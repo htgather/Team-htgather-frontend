@@ -5,6 +5,8 @@ import Card from '../components/Card';
 import MyPart from '../components/MyPart';
 import RoomClickModal from '../components/RoomClickModal';
 import KakaoLogin from '../components/KakaoLogin';
+import { Buffer } from 'buffer';
+
 // import { FaHeart } from "react-icons/fa";
 // import Post from "../components/Post";
 // import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +14,19 @@ import KakaoLogin from '../components/KakaoLogin';
 // import { actionCreators as CommonActions } from "../redux/modules/common";
 
 const Main = () => {
+  const isLocal = localStorage.getItem('isLogin') ? true : false;
   //   const dispatch = useDispatch();
   //   const postList = useSelector((state) => state.post.list);
   //   React.useEffect(() => {
   //     dispatch(PostActions.getPostDB());
   //   }, []);
+  if (isLocal) {
+    const base64payload = localStorage.getItem('isLogin').split('.')[1];
+    const payload = Buffer.from(base64payload, 'base64');
+    const result = JSON.parse(payload.toString());
+    console.log('main.js의 token복호화 결과', result);
+    const _nickname = result.nickName;
+  }
 
   return (
     <>

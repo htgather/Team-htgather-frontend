@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { ActionCreators as userActions } from '../redux/modules/User';
+import { actionCreators as userActions } from '../redux/modules/User';
 // import jwt from 'jsonwebtoken';
 import { history } from '../redux/configureStore';
 // import setAuthorizationToken from '../shared/Request';
@@ -13,7 +13,6 @@ const { Kakao } = window;
 const LoginWithKakao = () => {
   //scope : 수집할 사용자 정보를 명시.
   const scope = 'profile_nickname';
-
   // Kakao.Auth.login는 인증에 성공하면 success call back이 실행된다.
   Kakao.Auth.login({
     scope,
@@ -27,11 +26,12 @@ const LoginWithKakao = () => {
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (response) => {
-          console.log(response);
+          console.log('카카오에서', response);
           const _id = response.id;
           const { profile } = response.kakao_account;
-          console.log(profile);
-          console.log({ profile });
+          // console.log(profile);
+          // console.log(profile.nickname);
+          // console.log({ profile });
           axios
             .post('http://3.39.58.56:4000/users/auth', {
               nickName: profile.nickname,
@@ -40,19 +40,14 @@ const LoginWithKakao = () => {
             .then((res) => {
               // console.log(res)
               localStorage.setItem('isLogin', res.data.token);
-              // const base64payload = localStorage.getItem('isLogin').split('.')[1];
-              // console.log(base64payload);
-              // const payload = Buffer.from(base64payload, 'base64');
-              // // console.log(payload);
-              // const result = JSON.parse(payload.toString());
-              // console.log('결과다~~~~!!!!!', result);
-              // console.log(result.nickName);
-              // const _nickname = result.nickName;
-              // // dispatch(userActions.getNickname(profile.nickname));
-              // window.alert(`반갑습니다 ${_nickname}님!😄`);
-              // window.location.replace('/');
-              // setAuthorizationToken(res.data.token);
-              // console.log(jwt.decode(res.data.token));
+              const base64payload = localStorage.getItem('isLogin').split('.')[1];
+              const payload = Buffer.from(base64payload, 'base64');
+              const result = JSON.parse(payload.toString());
+              // console.log('token복호화 결과', result);
+              const _nickname = result.nickName;
+
+              window.alert(`반갑습니다 ${_nickname}님!😄`); // 변경하는 값 반영됨 근데 로그아웃했다가 로그인해야
+              window.location.reload('/');
             })
             .catch((error) => {
               alert('카카오 로그인 에러', error.message);
@@ -76,6 +71,7 @@ export const logoutWithKakao = () => {
   }
   Kakao.Auth.logout();
   localStorage.clear();
+  window.location.reload('/');
 };
 
 // 회원탈퇴
@@ -100,7 +96,6 @@ const KakaoLogin = () => {
       <a id="custom-login-btn" onClick={LoginWithKakao}>
         <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="250" />
       </a>
-      {/* <button onClick={logoutWithKakao}>로그아웃!!!!!!!!!</button> */}
     </>
   );
 };

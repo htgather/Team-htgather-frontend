@@ -11,6 +11,20 @@ import MyPart from '../components/MyPart';
 import KakaoLogin from '../components/KakaoLogin';
 
 function App() {
+  const isLocal = localStorage.getItem('isLogin') ? true : false;
+  //   const dispatch = useDispatch();
+  //   const postList = useSelector((state) => state.post.list);
+  //   React.useEffect(() => {
+  //     dispatch(PostActions.getPostDB());
+  //   }, []);
+  if (isLocal) {
+    const base64payload = localStorage.getItem('isLogin').split('.')[1];
+    const payload = Buffer.from(base64payload, 'base64');
+    const result = JSON.parse(payload.toString());
+    console.log('main.js의 token복호화 결과', result);
+    const _nickname = result.nickName;
+  }
+
   return (
     <>
       <Background>
@@ -18,7 +32,6 @@ function App() {
           <ConnectedRouter history={history}>
             <Header></Header>
             <Route path="/" exact component={Main}></Route>
-            <Route path="/kakaoLogin" component={KakaoLogin}></Route>
           </ConnectedRouter>
         </ThemeProvider>
       </Background>

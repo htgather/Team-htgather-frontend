@@ -66,8 +66,11 @@ const MoreInfoModal = (props) => {
             <Line />
             {is_local ? (
               <>
-                <TextWrap>닉네임</TextWrap>
-                <div>{myNickname}님</div>
+                <NickName>
+                  <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
+                  <div style={{ fontSize: '10px', color: '#aaa', marginLeft: '9px' }}>닉네임변경시 재로그인이 필요합니다</div>
+                </NickName>
+                {/* <div>{myNickname}님</div> */}
                 <NickChange>
                   <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
                   <NickBtn onClick={onClickNickname}>
@@ -75,7 +78,7 @@ const MoreInfoModal = (props) => {
                   </NickBtn>
                 </NickChange>
                 <Line />
-                <TextWrap>고객 지원</TextWrap>
+                <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
                 <div style={{ marginTop: '20px' }}>✍️홈트게더 이용 후기 남기기</div>
                 <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
                 <Line />
@@ -142,12 +145,18 @@ const Line = styled.div`
   background-color: #eaecef;
   width: 320px;
   height: 1px;
-  margin: 30px auto 30px;
+  margin: 20px auto 30px;
 `;
 
 const TextWrap = styled.div`
+  vertical-align: middle;
   font-weight: bold;
-  margin-top: 15px;
+`;
+
+const NickName = styled.div`
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const NickChange = styled.div`
