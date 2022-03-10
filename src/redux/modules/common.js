@@ -2,23 +2,23 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import instance from "../../shared/Request";
 
-// import axios from "axios"
-const GET_POST = "SET_POST";
+const GET_CALENDAR = "GET_CALENDAR";
 
-const getPost = createAction(GET_POST, (postList) => ({
-  postList,
+const getCalendar = createAction(GET_CALENDAR, (calenderList) => ({
+  calenderList,
 }));
 
 const initialState = {
-  list: [],
+  list: {},
 };
 
-const getPostDB = (category) => {
+// 사용자의 운동날짜 기록 가져오기
+const getCalendarDB = () => {
   return function (dispatch, getState, { history }) {
     instance
-      .get("/post")
+      .get(`/calendar`)
       .then((response) => {
-        dispatch(getPost(response.data.posts));
+        dispatch(getCalendar(response.data.dates));
       })
       .catch((error) => {
         console.error(error);
@@ -28,15 +28,16 @@ const getPostDB = (category) => {
 
 export default handleActions(
   {
-    [GET_POST]: (state, action) =>
+    [GET_CALENDAR]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.postList;
+        draft.calendarList = action.payload.calenderList;
       }),
   },
   initialState
 );
 
 const actionCreators = {
-  getPostDB,
+  getCalendarDB,
 };
+
 export { actionCreators };

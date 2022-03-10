@@ -1,41 +1,26 @@
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from '../redux/configureStore';
-import styled from 'styled-components';
-import Main from '../pages/Main';
-import Header from '../components/Header';
-import { ThemeProvider } from 'styled-components';
-import theme from './Theme';
-import RoomClickModal from '../components/RoomClickModal';
-import MyPart from '../components/MyPart';
-import KakaoLogin from '../components/KakaoLogin';
-import { Buffer } from 'buffer';
+
+import { Route, Switch } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configureStore";
+import Main from "../pages/Main";
+import Header from "../components/Header";
+import { ThemeProvider } from "styled-components";
+import theme from "./Theme";
+import Detail from "../pages/Detail";
+
 
 function App() {
   const isLocal = localStorage.getItem('isLogin') ? true : false;
-  //   const dispatch = useDispatch();
-  //   const postList = useSelector((state) => state.post.list);
-  //   React.useEffect(() => {
-  //     dispatch(PostActions.getPostDB());
-  //   }, []);
-  if (isLocal) {
-    const base64payload = localStorage.getItem('isLogin').split('.')[1];
-    const payload = Buffer.from(base64payload, 'base64');
-    const result = JSON.parse(payload.toString());
-    console.log('main.js의 token복호화 결과', result);
-    const _nickname = result.nickName;
-  }
 
   return (
     <>
-      <Background>
-        <ThemeProvider theme={theme}>
-          <ConnectedRouter history={history}>
-            <Header></Header>
-            <Route path="/" exact component={Main}></Route>
-          </ConnectedRouter>
-        </ThemeProvider>
-      </Background>
+      <ThemeProvider theme={theme}>
+        <ConnectedRouter history={history}>
+          <Header></Header>
+          <Route path="/" exact component={Main}></Route>
+          <Route path="/room/:roomId" exact component={Detail}></Route>
+        </ConnectedRouter>
+      </ThemeProvider>
     </>
   );
 }

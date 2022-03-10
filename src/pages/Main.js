@@ -1,54 +1,70 @@
 import React from 'react';
-// import { Button, Grid, Input, Text } from "../elements";
-import styled from 'styled-components';
-import Card from '../components/Card';
+import styled from "styled-components";
+import RoomCard from "../components/Card";
+import RoomSectionTab from "../components/RoomSectionTab";
+import MySection from "../components/MySection";
 import MyPart from '../components/MyPart';
 import RoomClickModal from '../components/RoomClickModal';
 import KakaoLogin from '../components/KakaoLogin';
 import { Buffer } from 'buffer';
-
-// import { FaHeart } from "react-icons/fa";
-// import Post from "../components/Post";
-// import { useDispatch, useSelector } from "react-redux";
-// import { actionCreators as PostActions } from "../redux/modules/post";
-// import { actionCreators as CommonActions } from "../redux/modules/common";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as roomActions } from "../redux/modules/room";
 
 const Main = () => {
   const isLocal = localStorage.getItem('isLogin') ? true : false;
-  //   const dispatch = useDispatch();
-  //   const postList = useSelector((state) => state.post.list);
-  //   React.useEffect(() => {
-  //     dispatch(PostActions.getPostDB());
-  //   }, []);
-  if (isLocal) {
-    const base64payload = localStorage.getItem('isLogin').split('.')[1];
-    const payload = Buffer.from(base64payload, 'base64');
-    const result = JSON.parse(payload.toString());
-    // console.log('main.js의 token복호화 결과', result);
-    const _nickname = result.nickName;
-  }
+  const dispatch = useDispatch();
+  const roomList = useSelector((state) => state.room.list);
+  React.useEffect(() => {
+    // 방정보 리스트 불러오기
+    dispatch(roomActions.getRoomDB());
+  }, []);
 
   return (
     <>
       <Container>
+
         {/* <MoreInfoModal /> */}
         <DIV>
           <RoomClickModal />
           <Card />
         </DIV>
+
+        <MySection></MySection>
+        <RoomSection>
+          <RoomSectionTab></RoomSectionTab>
+          <RoomCardList>
+            {roomList.map((e, i) => (
+              <RoomCard key={i} roomInfo={e}></RoomCard>
+            ))}
+            <RoomCard last="last"></RoomCard>
+          </RoomCardList>
+        </RoomSection>
+
       </Container>
       <MyPart />
     </>
   );
 };
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #e5e5e5;
-  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  padding-bottom: 40px;
+`;
+
+const RoomSection = styled.div``;
+
+const RoomCardList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 315px);
+  grid-gap: 20px;
+  @media screen and (max-width: 1360px) {
+    grid-template-columns: repeat(3, 315px);
+  }
 `;
 
 const DIV = styled.div`
