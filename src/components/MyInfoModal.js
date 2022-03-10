@@ -30,8 +30,12 @@ const MoreInfoModal = (props) => {
   const [cntAWeek, setCntAWeek] = React.useState();
 
   // React.useEffect(() => {
-  //   dispatch~
+  //   // dispatch~
   // }, [cntAWeek]);
+
+  // const getCntAWeek = (cntAWeek) => {
+  //   setCntAWeek(cntAWeek);
+  // };
 
   //모달
   const setModal = () => {
@@ -80,7 +84,7 @@ const MoreInfoModal = (props) => {
               주
               <CategoryBox>
                 <Dropdown dropdownList={myDropdownList} width="89px">
-                  3
+                  {/* getCntAWeek={getCntAWeek} */}3
                 </Dropdown>
               </CategoryBox>
               회

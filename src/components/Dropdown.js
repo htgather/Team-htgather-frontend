@@ -42,7 +42,8 @@ const Dropdown = (props) => {
               length={dropdownList.length}
               onClick={() => {
                 setClickedDropdown(i);
-                // props.getCategory(i);
+                props.getCategory(i);
+                props.getCntAWeek(i);
               }}
             >
               {e}
