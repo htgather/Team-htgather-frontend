@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
-import { Grid } from "../elements";
-
 import { HiVolumeUp } from "react-icons/hi";
 import { FaVolumeMute } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";

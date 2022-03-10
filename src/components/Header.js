@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import MoreInfoModal from '../components/MoreInfoModal';
-import Icon_Menu from '../Images/Icon_Menu.png';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MoreInfoModal from "../components/MoreInfoModal";
+import Icon_Menu from "../Images/Icon_Menu.png";
 const Header = () => {
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
@@ -11,24 +11,21 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <div>홈트게더</div>
-      <MoreInfoModal />
+      <HeaderGrid>
+        <p>홈트게더</p>
+        <MoreInfoModal />
+      </HeaderGrid>
     </HeaderContainer>
   );
 };
-
 const HeaderContainer = styled.div`
-  width: 100%;
   height: 64px;
-  background: #ddd;
-  position: fixed;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eaecef;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
-  cursor: pointer;
 `;
-
 const HeaderGrid = styled.div`
   display: flex;
   justify-content: space-between;

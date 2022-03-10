@@ -32,7 +32,7 @@ const Calender = () => {
         : today.clone().endOf("month").week();
 
     let calendar = [];
-    console.log(endWeek - startWeek);
+
     // 시작 주부터 마지막 주까지 +1 씩 증가시킴
     // 이제 주마다 일을 표기해야 하므로 len이 7인 arr를 생성 후 index를 기반으로 day를 표기하자
     for (let week = startWeek; week <= endWeek; week++) {
@@ -50,7 +50,7 @@ const Calender = () => {
 
               // db에서 받아온 날짜 배열 안에 현재 돌고있는 순번의 날짜가 포함돼어있으면서
               // 이전 달의 날짜들은 아닌 경우, selected
-              console.log(today.format("MM"), "엠엠");
+
               let isSelected =
                 myRecords &&
                 myRecords.includes(current.format("YYYY-M-D")) &&
