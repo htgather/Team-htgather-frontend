@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import clap from "../Images/MySectionIcon_clap.png";
-import Banner from "./Banner";
-import Calender from "./Calender";
+import React from 'react';
+import styled from 'styled-components';
+import clap from '../Images/MySectionIcon_clap.png';
+import Banner from './Banner';
+import Calender from './Calender';
 const MySection = () => {
   return (
     <MySectionContainer>
       <MySectionTitle>
-        <img src={clap} alt="박수 아이콘" style={{ marginRight: "4px" }} />
+        <img src={clap} alt="박수 아이콘" style={{ marginRight: '4px' }} />
         안녕하세요 00님, 오늘도 함께 운동해요!
       </MySectionTitle>
       <MySectionContent>

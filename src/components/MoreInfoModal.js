@@ -1,20 +1,21 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import KakaoLogin from "./KakaoLogin";
-import lock from "../Images/lock.png";
-import Close from "../Images/Close.png";
-import Icon_Menu from "../Images/Icon_Menu.png";
-import { logoutWithKakao } from "../components/KakaoLogin";
-import { Buffer } from "buffer";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import KakaoLogin from './KakaoLogin';
+import lock from '../Images/lock.png';
+import Close from '../Images/Close.png';
+import Icon_Menu from '../Images/Icon_Menu.png';
+import { logoutWithKakao } from '../components/KakaoLogin';
+import { Buffer } from 'buffer';
 
-import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const MoreInfoModal = (props) => {
+  const { openModal } = props;
   const dispatch = useDispatch();
   const myNickname = useSelector((state) => state.User.nickname);
 
-  const is_local = localStorage.getItem("isLogin") ? true : false;
+  const is_local = localStorage.getItem('isLogin') ? true : false;
 
   // const base64payload = is_local ? localStorage.getItem('isLogin').split('.')[1] : null;
   // console.log(base64payload);
@@ -26,7 +27,7 @@ const MoreInfoModal = (props) => {
   // const _nickname = result.nickName;
 
   const [showModal, setShowModal] = useState(false);
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState('');
 
   const setModal = () => {
     setShowModal(!showModal);
@@ -37,8 +38,8 @@ const MoreInfoModal = (props) => {
   };
 
   const onClickNickname = () => {
-    if (nickname === "") {
-      window.alert("수정할 닉네임을 입력해주세요!");
+    if (nickname === '') {
+      window.alert('수정할 닉네임을 입력해주세요!');
       return;
     }
     // window.alert(nickname);
@@ -54,72 +55,47 @@ const MoreInfoModal = (props) => {
 
   return (
     <React.Fragment>
-      <MenuBtn>
-        <img
-          style={{ cursor: "pointer" }}
-          src={Icon_Menu}
-          alt="menu"
-          onClick={setModal}
-        />
-      </MenuBtn>
-      {showModal ? (
-        <>
-          <DIV>
-            <CloseBtn>
-              <img onClick={setModal} src={Close} alt="closeBtn" />
-            </CloseBtn>
-            <TextWrap style={{ fontSize: "25px" }}>더보기</TextWrap>
-            <Line />
-            {is_local ? (
-              <>
-                <NickName>
-                  <TextWrap style={{ fontSize: "17px" }}>닉네임</TextWrap>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      color: "#aaa",
-                      marginLeft: "9px",
-                    }}
-                  >
-                    닉네임변경시 재로그인이 필요합니다
-                  </div>
-                </NickName>
-                {/* <div>{myNickname}님</div> */}
-                <NickChange>
-                  <NickInput
-                    type="text"
-                    placeholder="닉네임을 입력해주세요"
-                    onChange={NicknameChange}
-                  />
-                  <NickBtn onClick={onClickNickname}>
-                    <p>변경하기</p>
-                  </NickBtn>
-                </NickChange>
-                <Line />
-                <TextWrap style={{ fontSize: "17px" }}>고객 지원</TextWrap>
-                <div style={{ marginTop: "20px" }}>
-                  ✍️홈트게더 이용 후기 남기기
-                </div>
-                <div style={{ marginTop: "10px" }}>😱오류, 버그 신고하기</div>
-                <Line />
-                <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
-              </>
-            ) : (
-              <Container>
-                <div>
-                  <img src={lock} width="48px" height="50px" />
-                </div>
-                <div style={{ marginTop: "20px" }}>
-                  로그인 후에 이용해주세요
-                </div>
-                <Kakao>
-                  <KakaoLogin />
-                </Kakao>
-              </Container>
-            )}
-          </DIV>
-        </>
-      ) : null}
+      <DIV onClick={openModal}>
+        <CloseBtn>
+          <img onClick={setModal} src={Close} alt="closeBtn" />
+        </CloseBtn>
+        <TextWrap style={{ fontSize: '25px' }}>더보기</TextWrap>
+        <Line />
+        {is_local ? (
+          <>
+            <NickName>
+              <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
+              <div
+                style={{
+                  fontSize: '10px',
+                  color: '#aaa',
+                  marginLeft: '9px',
+                }}
+              >
+                닉네임변경시 재로그인이 필요합니다
+              </div>
+            </NickName>
+            {/* <div>{myNickname}님</div> */}
+            <NickChange>
+              <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
+              <NickBtn onClick={onClickNickname}>
+                <p>변경하기</p>
+              </NickBtn>
+            </NickChange>
+            <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
+          </>
+        ) : (
+          <Container>
+            <div>
+              <img src={lock} width="48px" height="50px" />
+            </div>
+            <div style={{ marginTop: '20px' }}>로그인 후에 이용해주세요</div>
+            <Kakao>
+              <KakaoLogin />
+            </Kakao>
+          </Container>
+        )}
+      </DIV>
     </React.Fragment>
   );
 };
@@ -130,8 +106,8 @@ const DIV = styled.div`
   width: 400px;
   height: 500px;
   border-radius: 12px;
-  top: 80px;
-  right: 360px;
+  top: 45px;
+  right: -20px;
   padding: 50px;
   position: absolute;
   :before {
@@ -139,7 +115,7 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: "";
+    content: '';
     position: absolute;
     top: -10px;
     right: 24px;
