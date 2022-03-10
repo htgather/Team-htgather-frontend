@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import lock from '../Images/lock.png';
-import KakaoLogin from '../components/KakaoLogin';
+import React, { useState } from "react";
+import styled from "styled-components";
+import lock from "../Images/lock.png";
+import KakaoLogin from "../components/KakaoLogin";
 
 const MyPart = () => {
-  const is_local = localStorage.getItem('isLogin') ? true : false;
+  const is_local = localStorage.getItem("isLogin") ? true : false;
 
   return (
     <React.Fragment>
-      <div style={{ display: 'flex' }}>
-        <LoginDiv>
-          <Calendar>달력</Calendar>
-          <Contents>뭐들어가지</Contents>
-          <Unknown2>뭐들어가지22</Unknown2>
-        </LoginDiv>
+      <div style={{ display: "flex" }}>
         {is_local ? (
-          ''
+          ""
         ) : (
           <DIV>
             <Container>
               <div>
                 <img src={lock} width="48px" height="50px" />
               </div>
-              <div style={{ marginTop: '20px', color: '#fff' }}>로그인 후에 이용해주세요</div>
+              <div style={{ marginTop: "20px", color: "#fff" }}>
+                로그인 후에 이용해주세요
+              </div>
               <BtnWrap>
                 <KakaoLogin />
               </BtnWrap>
