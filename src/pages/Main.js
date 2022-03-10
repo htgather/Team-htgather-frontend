@@ -24,7 +24,7 @@ const Main = () => {
     const base64payload = localStorage.getItem('isLogin').split('.')[1];
     const payload = Buffer.from(base64payload, 'base64');
     const result = JSON.parse(payload.toString());
-    console.log('main.js의 token복호화 결과', result);
+    // console.log('main.js의 token복호화 결과', result);
     const _nickname = result.nickName;
   }
 

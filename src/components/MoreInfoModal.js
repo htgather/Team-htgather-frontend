@@ -13,6 +13,7 @@ import { actionCreators as userActions } from '../redux/modules/User';
 const MoreInfoModal = (props) => {
   const dispatch = useDispatch();
   const myNickname = useSelector((state) => state.User.nickname);
+  console.log(myNickname);
   const is_local = localStorage.getItem('isLogin') ? true : false;
 
   // const base64payload = is_local ? localStorage.getItem('isLogin').split('.')[1] : null;
@@ -47,7 +48,7 @@ const MoreInfoModal = (props) => {
   const onClickLogOut = () => {
     logoutWithKakao();
     setShowModal(false);
-    window.alert('로그아웃이 완료되었습니다!');
+    // window.alert('로그아웃이 완료되었습니다!');
     // window.location.reload();
   };
 

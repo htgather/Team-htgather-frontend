@@ -9,6 +9,7 @@ import theme from './Theme';
 import RoomClickModal from '../components/RoomClickModal';
 import MyPart from '../components/MyPart';
 import KakaoLogin from '../components/KakaoLogin';
+import { Buffer } from 'buffer';
 
 function App() {
   const isLocal = localStorage.getItem('isLogin') ? true : false;

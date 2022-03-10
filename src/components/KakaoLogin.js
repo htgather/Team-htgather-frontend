@@ -10,7 +10,7 @@ import { Buffer } from 'buffer';
 
 const { Kakao } = window;
 
-const LoginWithKakao = () => {
+export const LoginWithKakao = () => {
   //scope : 수집할 사용자 정보를 명시.
   const scope = 'profile_nickname';
   // Kakao.Auth.login는 인증에 성공하면 success call back이 실행된다.
@@ -71,6 +71,7 @@ export const logoutWithKakao = () => {
   }
   Kakao.Auth.logout();
   localStorage.clear();
+  console.log('클리어 완료');
   window.location.reload('/');
 };
 

@@ -11,6 +11,11 @@ const RoomClickModal = (props) => {
 
   const [showModal, setShowModal] = useState(false);
 
+  const setModal = () => {
+    {
+      is_local ? openModal(true) : openModal(false);
+    }
+  };
   const openModal = () => {
     if (!is_local) {
       setShowModal(true);
