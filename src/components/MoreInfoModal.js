@@ -1,100 +1,23 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import KakaoLogin from './KakaoLogin';
-import lock from '../Images/lock.png';
 import Close from '../Images/Close.png';
-import Icon_Menu from '../Images/Icon_Menu.png';
-import { logoutWithKakao } from '../components/KakaoLogin';
-import { Buffer } from 'buffer';
 
-import { actionCreators as userActions } from '../redux/modules/user';
+const MyInfoModal = (props) => {
+  const { openMyInfoModal } = props;
 
-const MoreInfoModal = (props) => {
-  const { openModal } = props;
-  const dispatch = useDispatch();
-  const myNickname = useSelector((state) => state.User.nickname);
-
-  const is_local = localStorage.getItem('isLogin') ? true : false;
-
-  // const base64payload = is_local ? localStorage.getItem('isLogin').split('.')[1] : null;
-  // console.log(base64payload);
-  // const payload = is_local ? Buffer.from(base64payload, 'base64') : null;
-  // // console.log(payload);
-  // const result = is_local ? JSON.parse(payload.toString()) : null;
-  // console.log('결과다~~~~!!!!!', result);
-  // console.log(result.nickName);
-  // const _nickname = result.nickName;
-
-  const [showModal, setShowModal] = useState(false);
-  const [nickname, setNickname] = useState('');
-
-  const setModal = () => {
-    setShowModal(!showModal);
-  };
-
-  const NicknameChange = (e) => {
-    setNickname(e.target.value);
-  };
-
-  const onClickNickname = () => {
-    if (nickname === '') {
-      window.alert('수정할 닉네임을 입력해주세요!');
-      return;
-    }
-    // window.alert(nickname);
-    dispatch(userActions.nickChangeFB(nickname));
-  };
-
-  const onClickLogOut = () => {
-    logoutWithKakao();
-    setShowModal(false);
-    // window.alert('로그아웃이 완료되었습니다!');
-    // window.location.reload();
-  };
+  const [MyModal, setMyModal] = useState(false);
 
   return (
     <React.Fragment>
-      <DIV onClick={openModal}>
+      <DIV onClick={openMyInfoModal}>
         <CloseBtn>
-          <img onClick={setModal} src={Close} alt="closeBtn" />
+          <img src={Close} alt="closeBtn" />
         </CloseBtn>
         <TextWrap style={{ fontSize: '25px' }}>더보기</TextWrap>
         <Line />
-        {is_local ? (
-          <>
-            <NickName>
-              <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
-              <div
-                style={{
-                  fontSize: '10px',
-                  color: '#aaa',
-                  marginLeft: '9px',
-                }}
-              >
-                닉네임변경시 재로그인이 필요합니다
-              </div>
-            </NickName>
-            {/* <div>{myNickname}님</div> */}
-            <NickChange>
-              <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
-              <NickBtn onClick={onClickNickname}>
-                <p>변경하기</p>
-              </NickBtn>
-            </NickChange>
-            <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
-          </>
-        ) : (
-          <Container>
-            <div>
-              <img src={lock} width="48px" height="50px" />
-            </div>
-            <div style={{ marginTop: '20px' }}>로그인 후에 이용해주세요</div>
-            <Kakao>
-              <KakaoLogin />
-            </Kakao>
-          </Container>
-        )}
+        <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
+        <div style={{ marginTop: '20px' }}>✍️홈트게더 이용 후기 남기기</div>
+        <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
       </DIV>
     </React.Fragment>
   );
@@ -104,7 +27,7 @@ const DIV = styled.div`
   background-color: #fff;
   z-index: 999;
   width: 400px;
-  height: 500px;
+  height: 285px;
   border-radius: 12px;
   top: 45px;
   right: -20px;
@@ -131,12 +54,6 @@ const DIV = styled.div`
     right: 100px;
   } */
   box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 15px 0px;
-`;
-
-const MenuBtn = styled.div`
-  right: 30px;
-  display: flex;
-  align-items: center;
 `;
 
 const Line = styled.div`
@@ -212,25 +129,4 @@ const LogOutBtn = styled.div`
   cursor: pointer;
 `;
 
-// 비로그인
-const Container = styled.div`
-  margin: 70px auto;
-  text-align: center;
-`;
-
-const LoginBtn = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: dimgray;
-  border-radius: 20px;
-  width: 316px;
-  height: 56px;
-  margin-top: 30px;
-  cursor: pointer;
-`;
-
-const Kakao = styled.div`
-  margin-top: 30px;
-`;
-export default MoreInfoModal;
+export default MyInfoModal;

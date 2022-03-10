@@ -13,21 +13,26 @@ const Header = () => {
 
   const openModal = () => {
     setShowModal(!showModal);
-    console.log(showModal);
+    if (!showModal) {
+      setMyModal(false);
+    }
   };
 
   const openMyInfoModal = () => {
     setMyModal(!myModal);
+    if (!myModal) {
+      setShowModal(false);
+    }
   };
 
   return (
     <HeaderContainer>
       <HeaderGrid>
         <p>홈트게더</p>
-        <div style={{ width: '125px', paddingRight: '45px', display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ width: '125px', paddingRight: '45px', display: 'flex', justifyContent: 'space-between', position: 'relative' }}>
           {isLocal ? (
-            <div onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }}>
-              <div>
+            <div>
+              <div onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }}>
                 <img src={User} />
               </div>
               {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
