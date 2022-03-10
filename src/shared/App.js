@@ -5,6 +5,7 @@ import Main from "../pages/Main";
 import Header from "../components/Header";
 import { ThemeProvider } from "styled-components";
 import theme from "./Theme";
+import Detail from "../pages/Detail";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <ConnectedRouter history={history}>
           <Header></Header>
           <Route path="/" exact component={Main}></Route>
+          <Route path="/room/:roomId" exact component={Detail}></Route>
         </ConnectedRouter>
       </ThemeProvider>
     </>

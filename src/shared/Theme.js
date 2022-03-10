@@ -1,6 +1,7 @@
 const colors = {
   gray200: "#EAECEF",
   gray700: "#4A5056",
+  gray900: "#222529",
 };
 
 const device = {
