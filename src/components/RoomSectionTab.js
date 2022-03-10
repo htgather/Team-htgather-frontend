@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import fire from '../Images/RoomSectionIcon_fire.png';
 import Reload from '../Images/RoomSectionIcon_Reload.png';
 import Dropdown from './Dropdown';
-import MakeRoomModal from './MakeRoomModal';
+import MakeRoomModal from './modals/MakeRoomModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as roomActions } from '../redux/modules/room';
 

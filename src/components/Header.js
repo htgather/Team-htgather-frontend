@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import MoreInfoModal from '../components/MoreInfoModal';
-import MyInfoModal from '../components/MyInfoModal';
+import MoreInfoModal from '../components/modals/MoreInfoModal';
+import MyInfoModal from '../components/modals/MyInfoModal';
 import Icon_Menu from '../Images/Icon_Menu.png';
 import User from '../Images/User.png';
+import { history } from '../redux/configureStore';
 
 const Header = () => {
   const isLocal = localStorage.getItem('isLogin') ? true : false;
@@ -28,7 +29,13 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderGrid>
-        <p>홈트게더</p>
+        <p
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          홈트게더
+        </p>
         <div style={{ width: '125px', paddingRight: '45px', display: 'flex', justifyContent: 'space-between', position: 'relative' }}>
           {isLocal ? (
             <div>

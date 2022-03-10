@@ -5,8 +5,8 @@ import person from '../Images/CardIcon_person.png';
 import lock from '../Images/CardIcon_lock.png';
 import emoji from '../Images/RoomCardIcon_emoji.png';
 
-import MakeRoomModal from './MakeRoomModal';
-import RoomClickModal from './RoomClickModal';
+import MakeRoomModal from './modals/MakeRoomModal';
+import RoomClickModal from './modals/RoomClickModal';
 
 import { history } from '../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';

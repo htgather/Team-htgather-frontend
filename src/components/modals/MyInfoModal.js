@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import KakaoLogin from './KakaoLogin';
-import lock from '../Images/lock.png';
-import Close from '../Images/Close.png';
-import Icon_Menu from '../Images/Icon_Menu.png';
-import Dropdown from './Dropdown';
+import KakaoLogin from '../KakaoLogin';
+import lock from '../../Images/lock.png';
+import Close from '../../Images/Close.png';
+import Icon_Menu from '../../Images/Icon_Menu.png';
+import Dropdown from '../Dropdown';
 
-import { logoutWithKakao } from '../components/KakaoLogin';
+import { logoutWithKakao } from '../../components/KakaoLogin';
 import { Buffer } from 'buffer';
 
-import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as userActions } from '../../redux/modules/user';
 
 const MoreInfoModal = (props) => {
   const { openMyInfoModal, width } = props;

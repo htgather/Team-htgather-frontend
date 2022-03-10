@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Close from '../Images/Close.png';
+import Close from '../../Images/Close.png';
 
 const MyInfoModal = (props) => {
   const { openMyInfoModal } = props;
