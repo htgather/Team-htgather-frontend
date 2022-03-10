@@ -35,6 +35,7 @@
    yarn add redux-logger // 리덕스 실행 전과 후를 콘솔 창에서 볼 수 있게해줌.
    서버통신
    yarn add axios // 서버와의 통신을 위한 axios설치
+   npm add buffer // 토큰값 해독을 위한 buffer 설치
 
    추가 사용 라이브러리
    아이콘 관련

@@ -1,47 +1,34 @@
-import React from "react";
-import styled from "styled-components";
-import hamburger from "../Images/HeaderIcon_hamburger.png";
-// 로그인테스트 _ 나중에 지우기
-import instance from "../shared/Request";
-import jwt_decode from "jwt-decode";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import MoreInfoModal from '../components/MoreInfoModal';
+import Icon_Menu from '../Images/Icon_Menu.png';
 const Header = () => {
-  const login = () => {
-    instance
-      .post("/users/auth", { nickName: "sangwon", snsId: 914914 })
-      .then((response) => {
-        console.log(response.data.token);
-        localStorage.setItem("token", response.data.token);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const [showModal, setShowModal] = React.useState(false);
+  const openModal = () => {
+    setShowModal(true);
+    console.log(showModal);
   };
+
   return (
     <HeaderContainer>
-      <HeaderGrid>
-        <p onClick={login}>홈트게더</p>
-        <img
-          src={hamburger}
-          alt="햄버거 아이콘"
-          onClick={() => {
-            const token = localStorage.getItem("token");
-            const decoded = jwt_decode(token);
-            console.log(decoded);
-          }}
-        />
-      </HeaderGrid>
+      <div>홈트게더</div>
+      <MoreInfoModal />
     </HeaderContainer>
   );
 };
 
 const HeaderContainer = styled.div`
+  width: 100%;
   height: 64px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #eaecef;
+  background: #ddd;
+  position: fixed;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  cursor: pointer;
 `;
+
 const HeaderGrid = styled.div`
   display: flex;
   justify-content: space-between;

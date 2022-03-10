@@ -1,16 +1,29 @@
 import React from "react";
 import styled from "styled-components";
+
 import person from "../Images/CardIcon_person.png";
 import lock from "../Images/CardIcon_lock.png";
 import emoji from "../Images/RoomCardIcon_emoji.png";
+
 import MakeRoomModal from "./MakeRoomModal";
+import RoomClickModal from './RoomClickModal';
+
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../redux/modules/room";
+
 const Card = (props) => {
   const { roomInfo } = props;
   const dispatch = useDispatch();
   const [isModal, setIsModal] = React.useState();
+  
+  const is_local = localStorage.getItem('isLogin') ? true : false;
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal(true);
+    RoomClickModal();
+  };
+
 
   // 카드 클릭시 방입장 함수
   function joinRoom() {
@@ -79,7 +92,6 @@ const Card = (props) => {
           <CardImg thumbnail={roomInfo.videoThumbnail}></CardImg>
           <CardHoverBox>
             <p>{roomInfo.videoTitle}</p>
-
             <p style={{ textAlign: "end" }}>{roomInfo.videoLength}</p>
           </CardHoverBox>
         </CardImgBox>
@@ -157,6 +169,7 @@ const LastCardBtn = styled.div`
 `;
 
 const CardImg = styled.div`
+
   background-image: ${(props) =>
     props.thumbnail
       ? `url(${props.thumbnail})`
