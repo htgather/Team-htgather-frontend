@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import ReactPlayer from "react-player";
-import styled from "styled-components";
-import { HiVolumeUp } from "react-icons/hi";
-import { FaVolumeMute } from "react-icons/fa";
-import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
+import React, { useEffect } from 'react';
+import ReactPlayer from 'react-player';
+import styled from 'styled-components';
+import { HiVolumeUp } from 'react-icons/hi';
+import { FaVolumeMute } from 'react-icons/fa';
+import { getTimeStringSeconds, calCount } from './YoutubeDataAPI';
 
 function Player(props) {
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
@@ -38,7 +38,7 @@ function Player(props) {
           clearInterval(getTimeInterval);
           setCountTime(false);
         } else if (Math.abs(diffS) >= durationS) {
-          setCountTime("영상이 종료되었습니다");
+          setCountTime('영상이 종료되었습니다');
         }
       }
     }, 100);
@@ -48,13 +48,13 @@ function Player(props) {
 
   return (
     <Container>
-      <div style={{ pointerEvents: "none" }}>
+      <div style={{ pointerEvents: 'none' }}>
         {countTime && <Count>{countTime}</Count>}
         <ReactPlayer
           url={roomInfo.videoUrl}
           controls
-          width="1116px"
-          height="627px"
+          width="1096px"
+          height="616px"
           ref={player}
           playing={isPlaying}
           // 특정시점부터 시작
@@ -73,14 +73,14 @@ function Player(props) {
       </div>
       {isMuted ? (
         <FaVolumeMute
-          style={{ color: "white", fontSize: "60px" }}
+          style={{ color: 'white', fontSize: '60px' }}
           onClick={() => {
             setIsMuted(!isMuted);
           }}
         />
       ) : (
         <HiVolumeUp
-          style={{ color: "white", fontSize: "60px" }}
+          style={{ color: 'white', fontSize: '60px' }}
           onClick={() => {
             setIsMuted(!isMuted);
           }}
@@ -91,21 +91,21 @@ function Player(props) {
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 1096px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   * {
-    font-size: 1.1em;
+    font-size: 0.6em;
     font-weight: 700;
   }
 `;
 
 const Count = styled.div`
-  width: 1116px;
-  height: 627px;
+  width: 1096px;
+  height: 616px;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;

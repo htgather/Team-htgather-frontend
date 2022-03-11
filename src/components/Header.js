@@ -6,11 +6,13 @@ import Icon_Menu from '../Images/Icon_Menu.png';
 import User from '../Images/User.png';
 import { history } from '../redux/configureStore';
 
-const Header = () => {
+const Header = (props) => {
   const isLocal = localStorage.getItem('isLogin') ? true : false;
 
   const [showModal, setShowModal] = React.useState(false);
   const [myModal, setMyModal] = React.useState(false);
+
+  const [isWorkOut, setIsWorkOut] = React.useState(true);
 
   const openModal = () => {
     setShowModal(!showModal);
@@ -36,7 +38,13 @@ const Header = () => {
         >
           홈트게더
         </p>
-        <div style={{ width: '125px', paddingRight: '45px', display: 'flex', justifyContent: 'space-between', position: 'relative' }}>
+        <div style={{ width: '80px', display: 'flex', justifyContent: 'space-between', position: 'relative', flexDirection: 'row-reverse' }}>
+          <div onClick={openModal} style={{ cursor: 'pointer', position: 'relative' }}>
+            <div>
+              <img src={Icon_Menu} />
+            </div>
+            {showModal && <MoreInfoModal openModal={openModal} />}
+          </div>
           {isLocal ? (
             <div>
               <div onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }}>
@@ -44,30 +52,13 @@ const Header = () => {
               </div>
               {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
             </div>
-          ) : (
-            ''
-          )}
-
-          {/* {showModal && <MoreInfoModal openModal={openModal} />} */}
-          <div onClick={openModal} style={{ cursor: 'pointer', position: 'relative' }}>
-            <div>
-              <img src={Icon_Menu} />
-            </div>
-            {showModal && <MoreInfoModal openModal={openModal} />}
-          </div>
+          ) : null}
         </div>
       </HeaderGrid>
     </HeaderContainer>
   );
 };
 
-const Test = styled.div`
-  width: 300px;
-  height: 300px;
-  background-color: dimgray;
-  position: absolute;
-  right: 10px;
-`;
 const HeaderContainer = styled.div`
   height: 64px;
   background: #f8f9fa;
@@ -75,7 +66,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index:2;
+  z-index: 2;
 `;
 const HeaderGrid = styled.div`
   display: flex;
