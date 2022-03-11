@@ -1,17 +1,20 @@
-import React from "react";
-import styled from "styled-components";
-import RoomCard from "../components/Card";
-import RoomSectionTab from "../components/RoomSectionTab";
-import MySection from "../components/MySection";
-import MyPart from "../components/MyPart";
-import RoomClickModal from "../components/RoomClickModal";
-import KakaoLogin from "../components/KakaoLogin";
-import { Buffer } from "buffer";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as roomActions } from "../redux/modules/room";
+import React from 'react';
+import styled from 'styled-components';
+import { Buffer } from 'buffer';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Header from '../components/Header';
+import RoomCard from '../components/Card';
+import RoomSectionTab from '../components/RoomSectionTab';
+import MySection from '../components/MySection';
+import MyPart from '../components/MyPart';
+import RoomClickModal from '../components/modals/RoomClickModal';
+import KakaoLogin from '../components/KakaoLogin';
+
+import { actionCreators as roomActions } from '../redux/modules/room';
 
 const Main = () => {
-  const isLocal = localStorage.getItem("isLogin") ? true : false;
+  const isLocal = localStorage.getItem('isLogin') ? true : false;
   const dispatch = useDispatch();
   const roomList = useSelector((state) => state.room.list);
   React.useEffect(() => {
@@ -21,8 +24,8 @@ const Main = () => {
   console.log(roomList);
   return (
     <>
+      <Header />
       <Container>
-        {/* <MoreInfoModal /> */}
         <DIV>
           <RoomClickModal />
         </DIV>
