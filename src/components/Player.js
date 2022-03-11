@@ -66,7 +66,7 @@ function Player(props) {
             },
           }}
           onStart={() => {
-            // window.alert("시작이때부터 프로그래스바 카운트");
+            props.setIsStart(true);
           }}
           muted={isMuted}
         />

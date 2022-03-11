@@ -5,21 +5,16 @@ import { duration } from "moment";
 import { changeToSeconds } from "./YoutubeDataAPI";
 
 export default function Timer(props) {
-  //https://www.youtube.com/watch?v=aFrzffg36yk
-
-  const videoLength = changeToSeconds(props.roomInfo.videoLength);
+  const videoLength = changeToSeconds(props.roomInfo.videoLength) - 2;
 
   const [text, setText] = useState("오늘도 운동하는 여러분👍🏻");
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [isStart, setIsStart] = useState(0);
   const [progress, setProgress] = useState(0);
-
   const hour = parseInt(hours);
   const min = parseInt(minutes);
   const sec = parseInt(seconds);
-
   const progressBar = useRef();
 
   useEffect(() => {
@@ -34,6 +29,10 @@ export default function Timer(props) {
         setSeconds(temp[1]);
       }
     }
+  }, []);
+
+  useEffect(() => {
+    if (!props.isStart) return;
     const countdown = setInterval(() => {
       if (sec > 0) {
         setSeconds(sec - 1);
@@ -59,9 +58,10 @@ export default function Timer(props) {
       }
     }, 1000);
     return () => clearInterval(countdown);
-  }, [hours, minutes, seconds]);
+  }, [hours, minutes, seconds, props.isStart]);
 
   useEffect(() => {
+    if (!props.isStart) return;
     const pg = parseInt(progress);
     const myProgressBar = setInterval(() => {
       if (pg < videoLength) {
@@ -80,15 +80,17 @@ export default function Timer(props) {
         setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
         clearInterval(myProgressBar);
       }
-    }, 100);
+    }, 1000);
     return () => clearInterval(myProgressBar);
-  }, [progress]);
+  }, [progress, props.isStart]);
 
   return (
     <div className="App" style={{ color: "white" }}>
       <div>
         <h2>
-          {hours < 10 ? `0${hours}` : hours}:{minutes}:{seconds}
+          {hours < 10 ? `0${hours}` : hours}:
+          {String(minutes).length < 2 ? "0" + minutes : minutes}:
+          {String(seconds).length < 2 ? "0" + seconds : seconds}
         </h2>
         <h3>{text}</h3>
       </div>
@@ -97,6 +99,7 @@ export default function Timer(props) {
         completed={progress}
         isLabelVisible={false}
         maxCompleted={videoLength}
+        width={1000}
       />
     </div>
   );

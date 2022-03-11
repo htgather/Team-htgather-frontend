@@ -16,7 +16,7 @@ const initialState = {
 const getCalendarDB = () => {
   return function (dispatch, getState, { history }) {
     instance
-      .get(`/calendar`)
+      .get(`/myinfo/calendar`)
       .then((response) => {
         dispatch(getCalendar(response.data.dates));
       })

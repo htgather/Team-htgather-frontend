@@ -9,10 +9,12 @@ function Detail(props) {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
+  const [isStart, setIsStart] = React.useState();
+
   return (
     <Container>
-      <Progress roomInfo={roomInfo}></Progress>
-      <Player roomInfo={roomInfo}></Player>
+      <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+      <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
     </Container>
   );
 }
