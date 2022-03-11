@@ -164,6 +164,8 @@ const VideoWrap = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  margin-top: 30px;
+  box-sizing: border-box;
 `;
 
 const MainVideo = styled.div`

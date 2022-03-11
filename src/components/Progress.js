@@ -85,27 +85,19 @@ export default function Timer(props) {
   }, [progress, props.isStart]);
 
   return (
-    <div className="App" style={{ color: 'white' }}>
-      <div>
-        <h2>
-          {hours < 10 ? `0${hours}` : hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
-        </h2>
+    <Wrap className="App" style={{ color: 'black' }}>
+      <TextWrap>
         <h3>{text}</h3>
+      </TextWrap>
+      <div>
+        <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={983} />
+        <div>
+          {hours < 10 ? `0${hours}` : hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
+        </div>
       </div>
-      <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={1000} />
-    </div>
+    </Wrap>
   );
 }
 
-const BarWrap = styled.div`
-  background-color: rgb(233, 233, 233);
-  border-radius: 0.5rem;
-`;
-
-const Bar = styled.div`
-  background-color: rgb(62, 122, 235);
-  height: 10px;
-  border-radius: 1rem;
-  transition: 1s ease;
-  transition-delay: 0.5s;
-`;
+const Wrap = styled.div``;
+const TextWrap = styled.div``;

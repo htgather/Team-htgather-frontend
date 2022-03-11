@@ -53,8 +53,8 @@ function Player(props) {
         <ReactPlayer
           url={roomInfo.videoUrl}
           controls
-          width="1116px"
-          height="627px"
+          width="1096px"
+          height="616px"
           ref={player}
           playing={isPlaying}
           // 특정시점부터 시작
@@ -91,7 +91,7 @@ function Player(props) {
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 1096px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -104,8 +104,8 @@ const Container = styled.div`
 `;
 
 const Count = styled.div`
-  width: 1116px;
-  height: 627px;
+  width: 1096px;
+  height: 616px;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
