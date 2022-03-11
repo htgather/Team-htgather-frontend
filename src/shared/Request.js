@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://test.kimjeongho-server.com",
@@ -6,7 +6,6 @@ const instance = axios.create({
 
 instance.defaults.headers.common[
   "Authorization"
-] = `Bearer ${localStorage.getItem("token")}`;
+] = `Bearer ${localStorage.getItem("isLogin")}`;
 
 export default instance;
-

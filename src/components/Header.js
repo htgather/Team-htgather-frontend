@@ -25,6 +25,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index:2;
 `;
 const HeaderGrid = styled.div`
   display: flex;

@@ -70,7 +70,6 @@ const getRoomDB = (difficulty, category) => {
       instance
         .get("/rooms")
         .then((response) => {
-          console.log("4조회");
           dispatch(getRoom(response.data.rooms));
         })
         .catch((error) => {

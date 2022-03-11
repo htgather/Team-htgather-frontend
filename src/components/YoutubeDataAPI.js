@@ -27,7 +27,7 @@ export async function _getVideoInfo(videoId) {
     const title = resData.items[0].snippet.title;
     const thumbnail = resData.items[0].snippet.thumbnails.high.url;
     let { duration } = resData.items[0].contentDetails;
-    console.log(duration);
+    console.log(duration, "바꾸기전");
     duration = changePlayTime(duration);
     return { title, thumbnail, duration }; //객체로 전달
   }
@@ -66,5 +66,44 @@ function changePlayTime(given) {
   } else {
     result = result + "00";
   }
+  return result;
+}
+
+//초를 시분초로 바꿔주는 함수 HH:MM:SS형식으로 바꿔주는 함수
+export function getTimeStringSeconds(seconds) {
+  let hour, min, sec;
+  hour = parseInt(seconds / 3600);
+  min = parseInt((seconds % 3600) / 60);
+  sec = seconds % 60;
+  if (hour.toString().length === 1) hour = "0" + hour;
+  if (min.toString().length === 1) min = "0" + min;
+  if (sec.toString().length === 1) sec = "0" + sec;
+  return hour + ":" + min + ":" + sec;
+}
+
+// 시분초 HH:MM:SS형식을 초로 바꿔주는 함수
+export function changeToSeconds(s) {
+  let temp = s.split(":");
+  let result = 0;
+  if (temp.length === 3) {
+    result = Number(temp[0]) * 3600 + Number(temp[1]) * 60 + Number(temp[2]);
+  } else {
+    result = Number(temp[0]) * 60 + Number(temp[1]);
+  }
+  return result;
+}
+
+// 타이머에 표시할 시작시간-현재시간_HH:MM:SS를 받아서 MM:SS로 표기
+export function calCount(Time) {
+  let m = Time.split(":")[1];
+  let s = Time.split(":")[2];
+  if (s < 0) {
+    m = m - 1;
+    s = s + 60;
+  }
+  if (m < 0) {
+    m = m + 60;
+  }
+  let result = m + ":" + s;
   return result;
 }
