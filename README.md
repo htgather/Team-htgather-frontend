@@ -35,10 +35,11 @@
    yarn add redux-logger // 리덕스 실행 전과 후를 콘솔 창에서 볼 수 있게해줌.
    서버통신
    yarn add axios // 서버와의 통신을 위한 axios설치
-   npm add buffer // 토큰값 해독을 위한 buffer 설치
+   npm install buffer // 토큰값 해독을 위한 buffer 설치
 
    추가 사용 라이브러리
    아이콘 관련
    yarn add react-icons // 참고 : https://react-icons.github.io/react-icons/icons?name=fc
    yarn add react-player // 유튜브 api플레이어를 리액트에서 좀 더 쉽게 쓰게 해줌. 참고: https://www.npmjs.com/package/react-player/v/2.9.0
    yarn add moment // 시간데티터 관리를 쉽게
+   npm install @ramonak/react-progress-bar //프로그레스바 라이브러리
