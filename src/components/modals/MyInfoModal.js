@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import KakaoLogin from "../KakaoLogin";
-import lock from "../../Images/lock.png";
-import Close from "../../Images/Close.png";
-import Icon_Menu from "../../Images/Icon_Menu.png";
-import Dropdown from "../Dropdown";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import KakaoLogin from '../KakaoLogin';
+import lock from '../../Images/lock.png';
+import Close from '../../Images/Close.png';
+import Icon_Menu from '../../Images/Icon_Menu.png';
+import Dropdown from '../Dropdown';
 
-import { logoutWithKakao } from "../../components/KakaoLogin";
-import { Buffer } from "buffer";
+import { logoutWithKakao } from '../../components/KakaoLogin';
+import { Buffer } from 'buffer';
 
-import { actionCreators as userActions } from "../../redux/modules/user";
+import { actionCreators as userActions } from '../../redux/modules/user';
 
 const MoreInfoModal = (props) => {
   const { openMyInfoModal, width } = props;
 
   const dispatch = useDispatch();
-  const is_local = localStorage.getItem("isLogin") ? true : false;
+  const is_local = localStorage.getItem('isLogin') ? true : false;
 
   //닉네임 변경
   const myNickname = useSelector((state) => state.User.nickname);
 
   const [showModal, setShowModal] = useState(false);
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState('');
 
   //드롭다운
   const myDropdownList = [1, 2, 3, 4, 5, 6, 7];
@@ -47,8 +47,8 @@ const MoreInfoModal = (props) => {
   };
 
   const onClickNickname = () => {
-    if (nickname === "") {
-      window.alert("수정할 닉네임을 입력해주세요!");
+    if (nickname === '') {
+      window.alert('수정할 닉네임을 입력해주세요!');
       return;
     }
     // window.alert(nickname);
@@ -68,24 +68,18 @@ const MoreInfoModal = (props) => {
         <CloseBtn>
           <img onClick={openMyInfoModal} src={Close} alt="closeBtn" />
         </CloseBtn>
-        <TextWrap style={{ fontSize: "25px" }}>마이페이지</TextWrap>
+        <TextWrap style={{ fontSize: '25px' }}>마이페이지</TextWrap>
         <Line />
         {is_local ? (
           <>
             <NickName>
-              <TextWrap style={{ fontSize: "17px" }}>닉네임</TextWrap>
+              <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
             </NickName>
             {/* <div>{myNickname}님</div> */}
             <NickChange>
-              <NickInput
-                type="text"
-                placeholder="닉네임을 입력해주세요"
-                onChange={NicknameChange}
-              />
+              <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
             </NickChange>
-            <TextWrap style={{ fontSize: "17px", margin: "25px 0px 15px" }}>
-              목표
-            </TextWrap>
+            <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
             <GoalWrap>
               주
               <CategoryBox>
@@ -96,7 +90,7 @@ const MoreInfoModal = (props) => {
               회
             </GoalWrap>
             {/* <NickBtn onClick={onClickNickname}>변경하기</NickBtn> */}
-            <div style={{ display: "inline-block" }}>
+            <div style={{ display: 'inline-block' }}>
               <ChangeBtn>변경하기</ChangeBtn>
               <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
             </div>
@@ -106,7 +100,7 @@ const MoreInfoModal = (props) => {
             <div>
               <img src={lock} width="48px" height="50px" />
             </div>
-            <div style={{ marginTop: "20px" }}>로그인 후에 이용해주세요</div>
+            <div style={{ marginTop: '20px' }}>로그인 후에 이용해주세요</div>
             <Kakao>
               <KakaoLogin />
             </Kakao>
@@ -124,7 +118,7 @@ const DIV = styled.div`
   height: 500px;
   border-radius: 12px;
   top: 45px;
-  right: 80px;
+  right: 33px;
   padding: 50px;
   position: absolute;
   :before {
@@ -132,21 +126,11 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: "";
+    content: '';
     position: absolute;
     top: -10px;
     right: 24px;
   }
-  /* :after {
-    border-top: 0px solid;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #ddd;
-    content: '';
-    position: absolute;
-    top: -10px;
-    right: 100px;
-  } */
   box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 15px 0px;
 `;
 
