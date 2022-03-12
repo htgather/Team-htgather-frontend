@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as commonActions } from "../redux/modules/common";
-import Progress from "@delowar/react-circle-progressbar";
-import fireIcon from "../Images/MyRecordIcon_Fire.png";
-import clockIcon from "../Images/MyRecordIcon_Clock.png";
+import React from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as commonActions } from '../redux/modules/common';
+import Progress from '@delowar/react-circle-progressbar';
+import fireIcon from '../Images/MyRecordIcon_Fire.png';
+import clockIcon from '../Images/MyRecordIcon_Clock.png';
 const MyRecord = (props) => {
   const {
     myRecords: {
@@ -15,24 +15,13 @@ const MyRecord = (props) => {
       totalTimePerMonth = 40,
     } = {},
   } = props;
-  const [percent, SetPercent] = React.useState(
-    (countPerWeek / weeklyGoal) * 100 >= 100
-      ? 100
-      : (countPerWeek / weeklyGoal) * 100
-  );
+  const [percent, SetPercent] = React.useState((countPerWeek / weeklyGoal) * 100 >= 100 ? 100 : (countPerWeek / weeklyGoal) * 100);
   // countPerWeek, weeklyGoal, daysInARow, totalTimePerMonth
   return (
     <MyRecordBox>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
-        <Progress
-          percent={percent}
-          fillColor="#0028FA"
-          emptyColor="#EAECEF"
-          size={144}
-          borderWidth={9}
-          borderBgWidth={9}
-        >
+        <Progress percent={percent} fillColor="#0028FA" emptyColor="#EAECEF" size={144} borderWidth={9} borderBgWidth={9}>
           <div className="progressInTextBox">
             <div className="countPerWeekText">{countPerWeek}일</div>
             <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
@@ -40,21 +29,12 @@ const MyRecord = (props) => {
         </Progress>
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img
-              src={fireIcon}
-              alt="불꽃 아이콘"
-              style={{ marginRight: "2px" }}
-            />
+            <img src={fireIcon} alt="불꽃 아이콘" style={{ marginRight: '2px' }} />
             연속 <span className="bold">{daysInARow}</span>일째 운동중이에요
           </div>
           <div className="bottomTextBox">
-            <img
-              src={clockIcon}
-              alt="시계 아이콘"
-              style={{ marginRight: "2px" }}
-            />
-            이번 주에 <span className="bold">{totalTimePerMonth}</span>분
-            운동했어요
+            <img src={clockIcon} alt="시계 아이콘" style={{ marginRight: '2px' }} />
+            이번 주에 <span className="bold">{totalTimePerMonth}</span>분 운동했어요
           </div>
         </BottomTextContainer>
       </MyRecordContent>
@@ -70,7 +50,7 @@ const MyRecord = (props) => {
 // };
 const MyRecordBox = styled.div`
   height: 100%;
-  width: 284px;
+  width: 315px;
   padding: 0px 24px;
   display: flex;
   flex-direction: column;
