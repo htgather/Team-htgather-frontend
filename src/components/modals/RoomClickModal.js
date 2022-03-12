@@ -9,7 +9,7 @@ import Frame from '../../Images/Frame.png';
 const RoomClickModal = (props) => {
   const is_local = localStorage.getItem('isLogin') ? true : false;
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   // const setModal = () => {
   //   {

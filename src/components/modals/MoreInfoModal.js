@@ -6,23 +6,37 @@ import KakaoLogin from '../../components/KakaoLogin';
 const MyInfoModal = (props) => {
   const { openMyInfoModal } = props;
 
+  const is_local = localStorage.getItem('isLogin') ? true : false;
   const [MyModal, setMyModal] = useState(false);
 
   return (
     <React.Fragment>
-      <DIV onClick={openMyInfoModal}>
-        <CloseBtn>
-          <img src={Close} alt="closeBtn" />
-        </CloseBtn>
-        <TextWrap style={{ fontSize: '24px' }}>더보기</TextWrap>
-        <Line />
-        <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
-        <div style={{ marginTop: '15px' }}>✍️홈트게더 이용 후기 남기기</div>
-        <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
-        <Login>
-          <KakaoLogin />
-        </Login>
-      </DIV>
+      {is_local ? (
+        <DIV onClick={openMyInfoModal}>
+          <CloseBtn>
+            <img src={Close} alt="closeBtn" />
+          </CloseBtn>
+          <TextWrap style={{ fontSize: '24px' }}>더보기</TextWrap>
+          <Line />
+          <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
+          <div style={{ marginTop: '15px' }}>✍️홈트게더 이용 후기 남기기</div>
+          <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
+        </DIV>
+      ) : (
+        <DIV height="350px">
+          <CloseBtn>
+            <img src={Close} alt="closeBtn" />
+          </CloseBtn>
+          <TextWrap style={{ fontSize: '24px' }}>더보기</TextWrap>
+          <Line />
+          <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
+          <div style={{ marginTop: '15px' }}>✍️홈트게더 이용 후기 남기기</div>
+          <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
+          <Login>
+            <KakaoLogin />
+          </Login>
+        </DIV>
+      )}
     </React.Fragment>
   );
 };
@@ -31,7 +45,8 @@ const DIV = styled.div`
   background-color: #fff;
   z-index: 999;
   width: 400px;
-  height: 350px;
+  ${(props) => (props.height ? `height: ${props.height};` : 300)};
+  /* height: 350px; */
   border-radius: 12px;
   top: 45px;
   right: -20px;

@@ -16,11 +16,16 @@ import Video from '../Images/Video.png';
 import Microphone from '../Images/Microphone.png';
 import Happy from '../Images/Happy.png';
 import People from '../Images/People.png';
+import Me from '../Images/Me.png';
+import NoVideo from '../Images/NoVideo.png';
+import Notmute from '../Images/Notmute.png';
 
 const GyuDetail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
+  const roomTitle = roomInfo.roomTitle;
+  console.log(roomTitle);
   const [isStart, setIsStart] = React.useState();
 
   const [isClicked, setIsClicked] = useState(false);
@@ -45,7 +50,7 @@ const GyuDetail = (props) => {
   };
   return (
     <>
-      <DetailHeader />
+      <DetailHeader roomTitle={roomTitle} />
 
       <Detail>
         <div>
@@ -58,7 +63,12 @@ const GyuDetail = (props) => {
               <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
             </MainVideo>
             <MemberWrap>
-              <MemberVideo />
+              <MemberVideo>
+                <Circle>
+                  {' '}
+                  <img src={Me} />
+                </Circle>
+              </MemberVideo>
               <MemberVideo />
               <MemberVideo />
               <MemberVideo />
@@ -92,26 +102,26 @@ const GyuDetail = (props) => {
               <Btn onClick={setSound}>
                 {soundOn ? (
                   <>
-                    <img alt="마이크 음소거" />
-                    on
+                    <img src={Notmute} alt="음소거해제" />
+                    음소거해제
                   </>
                 ) : (
                   <>
-                    <img src={Microphone} alt="음량조절 버튼" />
-                    off
+                    <img src={Microphone} alt="음소거" />
+                    음소거
                   </>
                 )}
               </Btn>
               <Btn onClick={setVideo}>
                 {videoOn ? (
                   <>
-                    <img alt="마이크 음소거" />
-                    on
+                    <img src={NoVideo} alt="마이크 음소거" />
+                    비디오켜기
                   </>
                 ) : (
                   <>
                     <img src={Video} alt="카메라 버튼" />
-                    off
+                    비디오끄기
                   </>
                 )}
               </Btn>
@@ -197,6 +207,13 @@ const MemberVideo = styled.div`
   height: 112px;
   border-radius: 8px;
   background-color: skyblue;
+  position: relative;
+`;
+
+const Circle = styled.div`
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
 `;
 
 const SoundBtn = styled.div`

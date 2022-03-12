@@ -16,13 +16,14 @@ const initialState = {
   nickname: 'User의 Initial값',
 };
 
-const nickChangeFB = (nickname) => {
+const userInfoChangeFB = (nickname, weeklyGoal) => {
   return function (dispatch, getState, { history }) {
     axios
       .patch(
         'http://3.39.58.56:4000/users',
         {
           nickName: nickname,
+          weeklyGoal: weeklyGoal,
         },
         {
           headers: {
@@ -85,7 +86,7 @@ export default handleActions(
 
 const actionCreators = {
   getNickname,
-  nickChangeFB,
+  userInfoChangeFB,
 };
 
 export { actionCreators };

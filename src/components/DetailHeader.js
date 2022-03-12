@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 import ExitModal from '../components/modals/ExitModal';
 import People from '../Images/People.png';
 
 import { history } from '../redux/configureStore';
 
 const Header = (props) => {
-  //   const { roomInfo } = props;
-  // {roomInfo.roomTitle}
+  const { roomTitle } = props;
+
   const [modalOn, setModalOn] = React.useState(false);
 
   const exitRoom = () => {
     setModalOn(!modalOn);
+    console.log(modalOn);
   };
 
   return (
     <HeaderContainer>
       <HeaderGrid>
-        <RoomTitle>요기는 방제목 자리입니다</RoomTitle>
+        <RoomTitle>{roomTitle}</RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
           <HeaderBtn onClick={exitRoom}>
             <BtnContents style={{ color: '#aeb5bc' }}>나가기</BtnContents>
             {modalOn && <ExitModal exitRoom={exitRoom} />}
           </HeaderBtn>
-
           {/*  인원수*/}
           <HeaderBtn>
             <BtnContents>

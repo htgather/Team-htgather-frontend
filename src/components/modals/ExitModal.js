@@ -16,42 +16,32 @@ const CompleteModal = (props) => {
   const [closeModal, setCloseModal] = React.useState(false);
 
   const exitModal = () => {
-    setCloseModal(!closeModal);
+    setCloseModal(false);
   };
 
   // onClick={exitModal}
-  //
+  // onClick={(e) => e.stopPropagation()}
   return (
     <>
       <BackGround>
-        <div onClick={exitRoom}>
-          <ModalWrap>
-            <CloseBtn onClick={exitModal}>
-              <img
+        <CloseBtn onClick={exitRoom}>
+          <img src={Close} alt="취소" />
+        </CloseBtn>
+        <ModalWrap>
+          <div onClick={(e) => e.stopPropagation()}>
+            <ModalContents>
+              <div style={{ fontSize: '33px', fontWeight: 'bold', marginBottom: '20px' }}>{isDone ? '운동끝! 오늘도 해냈어요!' : '정말 나가시겠어요?'}</div>
+              <div style={{ fontSize: '16px', color: '#878E95' }}>{isDone ? '운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!' : '지금 운동을 종료하면 운동시간이 기록되지 않아요.'} </div>
+              <BtnWrap
                 onClick={() => {
-                  window.alert('하이~');
+                  history.replace('/');
                 }}
-                src={Close}
-                alt="취소"
-              />
-            </CloseBtn>
-            <div onClick={(e) => e.stopPropagation()}>
-              <ModalContents>
-                <div style={{ fontSize: '33px', fontWeight: 'bold', marginBottom: '20px' }}>{isDone ? '운동끝! 오늘도 해냈어요!' : '정말 나가시겠어요?'}</div>
-                <div style={{ fontSize: '16px', color: '#878E95' }}>
-                  {isDone ? '운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!' : '지금 운동을 종료하면 운동시간이 기록되지 않아요.'}{' '}
-                </div>
-                <BtnWrap
-                  onClick={() => {
-                    history.replace('/');
-                  }}
-                >
-                  {isDone ? '운동시간 저장하기' : '운동 그만하기'}
-                </BtnWrap>
-              </ModalContents>
-            </div>
-          </ModalWrap>
-        </div>
+              >
+                {isDone ? '운동시간 저장하기' : '운동 그만하기'}
+              </BtnWrap>
+            </ModalContents>
+          </div>
+        </ModalWrap>
       </BackGround>
     </>
   );
@@ -86,8 +76,9 @@ const CloseBtn = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 28px;
-  top: 25px;
+  right: 245px;
+  top: 255px;
+  z-index: 15;
   cursor: pointer;
 `;
 
