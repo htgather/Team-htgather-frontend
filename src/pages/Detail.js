@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-
 import ReactPlayer from 'react-player';
+import styled from 'styled-components';
 import { HiVolumeUp } from 'react-icons/hi';
 import { FaVolumeMute } from 'react-icons/fa';
-
 import DetailHeader from '../components/DetailHeader';
 import ExitModal from '../components/modals/ExitModal';
 import Timer from '../components/Progress';
 import Player from '../components/Player';
 import Progress from '../components/Progress';
-import { actionCreators as roomActions } from "../redux/modules/room";
 
 import Mute from '../Images/Mute.png';
 import Speaker from '../Images/Speaker.png';
@@ -30,13 +27,6 @@ const Detail = (props) => {
   const roomTitle = roomInfo.roomTitle;
   console.log(roomTitle);
   const [isStart, setIsStart] = React.useState();
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (!roomInfo) {
-      dispatch(roomActions.getRoomDB());
-    }
-  }, []);
 
   const [isClicked, setIsClicked] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
@@ -56,13 +46,13 @@ const Detail = (props) => {
   };
 
   const fighting = () => {
-    window.alert("💪🏻");
+    window.alert('💪🏻');
   };
   return (
     <>
       <DetailHeader roomTitle={roomTitle} />
 
-      <Detail>
+      <DIV>
         <div>
           <TimerWrap>
             <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
@@ -88,75 +78,25 @@ const Detail = (props) => {
 
           <SoundBtn>
             <div>
-              <VideoWrap>
-                <MainVideo>
-                  {" "}
-                  <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
-                </MainVideo>
-                <MemberWrap>
-                  <MemberVideo />
-                  <MemberVideo />
-                  <MemberVideo />
-                  <MemberVideo />
-                  <MemberVideo />
-                </MemberWrap>
-              </VideoWrap>
-
-              <SoundBtn>
-                <div>
-                  {isClicked ? (
-                    <>
-                      <Btn onClick={setClicked} style={{ width: "236px" }}>
-                        <img src={Speaker} alt="음량조절" />
-                        <div>음량조절</div>
-                        <div>음량수치</div>
-                      </Btn>
-                    </>
-                  ) : (
-                    <>
-                      <BubbleWrap>
-                        <div>먼저 음소거해제 버튼을 눌러주세요!</div>
-                      </BubbleWrap>
-                      <Btn onClick={setClicked}>
-                        <img src={Mute} alt="비디오 음소거해제 버튼" />
-                        <div>음소거해제</div>
-                      </Btn>
-                    </>
-                  )}
-                </div>
-                <BtnWrap>
-                  <Btn onClick={setSound}>
-                    {soundOn ? (
-                      <>
-                        <img alt="마이크 음소거" />
-                        on
-                      </>
-                    ) : (
-                      <>
-                        <img src={Microphone} alt="음량조절 버튼" />
-                        off
-                      </>
-                    )}
+              {isClicked ? (
+                <>
+                  <Btn onClick={setClicked} style={{ width: '236px' }}>
+                    <img src={Speaker} alt="음량조절" />
+                    <div>음량조절</div>
+                    <div>음량수치</div>
                   </Btn>
-                  <Btn onClick={setVideo}>
-                    {videoOn ? (
-                      <>
-                        <img alt="마이크 음소거" />
-                        on
-                      </>
-                    ) : (
-                      <>
-                        <img src={Video} alt="카메라 버튼" />
-                        off
-                      </>
-                    )}
+                </>
+              ) : (
+                <>
+                  <BubbleWrap>
+                    <div>먼저 음소거해제 버튼을 눌러주세요!</div>
+                  </BubbleWrap>
+                  <Btn onClick={setClicked}>
+                    <img src={Mute} alt="비디오 음소거해제 버튼" />
+                    <div>음소거해제</div>
                   </Btn>
-                  <Btn onClick={fighting}>
-                    <img src={Happy} alt="격려하기" />
-                    격려하기
-                  </Btn>
-                </BtnWrap>
-              </SoundBtn>
+                </>
+              )}
             </div>
             <BtnWrap>
               <Btn onClick={setSound}>
@@ -192,8 +132,7 @@ const Detail = (props) => {
             </BtnWrap>
           </SoundBtn>
         </div>
-      </Detail>
-
+      </DIV>
     </>
   );
 };
@@ -215,14 +154,14 @@ const BubbleWrap = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 0px solid;
-    content: "";
+    content: '';
     position: absolute;
     bottom: -9px;
     left: 20px;
   }
 `;
 
-const Detail = styled.div`
+const DIV = styled.div`
   width: 100%;
   height: 1000px;
   margin: 0px auto;

@@ -15,19 +15,15 @@ const CompleteModal = (props) => {
   const [isDone, setIsDone] = React.useState(false);
   const [closeModal, setCloseModal] = React.useState(false);
 
-  const exitModal = () => {
-    setCloseModal(false);
-  };
-
   // onClick={exitModal}
   // onClick={(e) => e.stopPropagation()}
   return (
     <>
       <BackGround>
-        <CloseBtn onClick={exitRoom}>
-          <img src={Close} alt="취소" />
-        </CloseBtn>
         <ModalWrap>
+          <CloseBtn onClick={exitRoom}>
+            <img src={Close} alt="취소" />
+          </CloseBtn>
           <div onClick={(e) => e.stopPropagation()}>
             <ModalContents>
               <div style={{ fontSize: '33px', fontWeight: 'bold', marginBottom: '20px' }}>{isDone ? '운동끝! 오늘도 해냈어요!' : '정말 나가시겠어요?'}</div>
@@ -76,8 +72,8 @@ const CloseBtn = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 245px;
-  top: 255px;
+  right: 15px;
+  top: 15px;
   z-index: 15;
   cursor: pointer;
 `;

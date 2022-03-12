@@ -64,11 +64,10 @@ const Dropdown = (props) => {
               {myDropdownList.map((e, i) => (
                 <DdEl
                   key={i}
-                  i={i}
+                  i={i + 1}
                   length={myDropdownList.length}
                   onClick={() => {
                     setClickedDropdown(i);
-                    // props.getCategory(i);
                     props.changeGoal(i);
                   }}
                 >
