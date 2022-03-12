@@ -69,16 +69,6 @@ const Header = (props) => {
                 </div>
                 {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
               </div>
-
-              <div
-                onClick={openModal}
-                style={{ cursor: "pointer", position: "relative" }}
-              >
-                <div>
-                  <img src={Icon_Menu} />
-                </div>
-                {showModal && <MoreInfoModal openModal={openModal} />}
-              </div>
             </div>
           ) : null}
         </div>

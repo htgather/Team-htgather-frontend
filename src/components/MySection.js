@@ -6,10 +6,20 @@ import Calender from "./Calender";
 import jwt_decode from "jwt-decode";
 import MyPart from "./MyPart";
 import MyRecord from "./MyRecord";
+import MostExercised from "./MostExercised";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commonActions } from "../redux/modules/common";
 const MySection = () => {
   const nickName = localStorage.getItem("isLogin")
     ? jwt_decode(localStorage.getItem("isLogin")).nickName
     : false;
+  const dispatch = useDispatch();
+  const myRecords = useSelector((state) => state.common.myRecords);
+  React.useEffect(() => {
+    if (nickName) {
+      dispatch(commonActions.getRecordsDB());
+    }
+  }, []);
   return (
     <MySectionContainer>
       <MySectionTitle>
@@ -19,11 +29,11 @@ const MySection = () => {
       <MySectionContent>
         <MyPart></MyPart>
         <MyPage>
-          <MyRecord></MyRecord>
+          <MyRecord myRecords={myRecords}></MyRecord>
           <Calender></Calender>
         </MyPage>
         <RightSection>
-          <MyCategoryRecord></MyCategoryRecord>
+          <MostExercised myRecords={myRecords} />
           <Banner></Banner>
         </RightSection>
       </MySectionContent>
@@ -76,10 +86,5 @@ const RightSection = styled.div`
     display: none;
   }
 `;
-const MyCategoryRecord = styled.div`
-  width: 315px;
-  height: 136px;
-  background: white;
-  border-radius: 12px;
-`;
+
 export default MySection;

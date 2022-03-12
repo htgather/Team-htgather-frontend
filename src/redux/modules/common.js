@@ -34,8 +34,6 @@ const getRecordsDB = () => {
     instance
       .get(`/myinfo/statistics`)
       .then((response) => {
-        console.log(response.data);
-        return;
         dispatch(getRecords(response.data));
       })
       .catch((error) => {

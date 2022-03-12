@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@delowar/react-circle-progressbar": "^1.0.0",
     "@ramonak/react-progress-bar": "^4.4.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",

@@ -17,8 +17,8 @@ import Microphone from "../Images/Microphone.png";
 import Happy from "../Images/Happy.png";
 import People from "../Images/People.png";
 
-import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../redux/modules/room";
+
 const Detail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
@@ -57,7 +57,7 @@ const Detail = (props) => {
       {roomInfo && (
         <>
           <DetailHeader />
-          <Detail>
+          <Container>
             <div>
               <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
             </div>
@@ -132,7 +132,7 @@ const Detail = (props) => {
                 </BtnWrap>
               </SoundBtn>
             </div>
-          </Detail>
+          </Container>
         </>
       )}
     </>
@@ -163,7 +163,7 @@ const BubbleWrap = styled.div`
   }
 `;
 
-const Detail = styled.div`
+const Container = styled.div`
   width: 100%;
   margin: 0px auto;
   display: flex;
@@ -229,4 +229,4 @@ const Btn = styled.div`
   cursor: pointer;
 `;
 
-export default GyuDetail;
+export default Detail;
