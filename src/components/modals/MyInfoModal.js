@@ -2,40 +2,38 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import KakaoLogin from '../KakaoLogin';
+import jwt_decode from 'jwt-decode';
+
 import lock from '../../Images/lock.png';
 import Close from '../../Images/Close.png';
 import Icon_Menu from '../../Images/Icon_Menu.png';
 import Dropdown from '../Dropdown';
 
 import { logoutWithKakao } from '../../components/KakaoLogin';
-import { Buffer } from 'buffer';
-
 import { actionCreators as userActions } from '../../redux/modules/user';
 
 const MoreInfoModal = (props) => {
   const { openMyInfoModal, width } = props;
 
   const dispatch = useDispatch();
-  const is_local = localStorage.getItem('isLogin') ? true : false;
+
+  const is_local = localStorage.getItem('isLogin');
+  const myToken = jwt_decode(localStorage.getItem('isLogin'));
+  const nickName = is_local ? myToken.nickName : false;
+  const Goal = is_local ? myToken.weeklyGoal : null;
+
+  console.log(myToken);
 
   //닉네임 변경
-  const myNickname = useSelector((state) => state.User.nickname);
-
   const [showModal, setShowModal] = useState(false);
   const [nickname, setNickname] = useState('');
+  const [selectGoal, setSelectGoal] = useState();
 
-  //드롭다운
   const myDropdownList = [1, 2, 3, 4, 5, 6, 7];
 
-  // const [cntAWeek, setCntAWeek] = React.useState();
-
-  // React.useEffect(() => {
-  //   // dispatch~
-  // }, [cntAWeek]);
-
-  // const getCntAWeek = (cntAWeek) => {
-  //   setCntAWeek(cntAWeek);
-  // };
+  const changeGoal = (weeklyGoal) => {
+    setSelectGoal(weeklyGoal);
+  };
 
   //모달
   const setModal = () => {
@@ -43,23 +41,25 @@ const MoreInfoModal = (props) => {
   };
 
   const NicknameChange = (e) => {
+    if (e.target.value === '') {
+      setNickname(nickName);
+      return;
+    }
     setNickname(e.target.value);
   };
 
-  const onClickNickname = () => {
+  const onClickChange = () => {
     if (nickname === '') {
-      window.alert('수정할 닉네임을 입력해주세요!');
+      dispatch(userActions.userInfoChangeFB(nickName, selectGoal));
       return;
     }
-    // window.alert(nickname);
-    dispatch(userActions.nickChangeFB(nickname));
+    dispatch(userActions.userInfoChangeFB(nickname, selectGoal));
   };
 
   const onClickLogOut = () => {
     logoutWithKakao();
     setShowModal(false);
-    // window.alert('로그아웃이 완료되었습니다!');
-    // window.location.reload();
+    window.alert('다음에 또 만나요!');
   };
 
   return (
@@ -75,23 +75,23 @@ const MoreInfoModal = (props) => {
             <NickName>
               <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
             </NickName>
-            {/* <div>{myNickname}님</div> */}
             <NickChange>
-              <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
+              <NickInput type="text" placeholder={nickName ? nickName : '닉네임을 입력해주세요'} onChange={NicknameChange} />
+              {/* onChange={NicknameChange ? NicknameChange : nickName} */}
             </NickChange>
             <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
             <GoalWrap>
               주
               <CategoryBox>
-                <Dropdown dropdownList={myDropdownList} width="89px">
-                  {/* getCntAWeek={getCntAWeek} */}3
+                <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px">
+                  {Goal}
                 </Dropdown>
               </CategoryBox>
               회
             </GoalWrap>
-            {/* <NickBtn onClick={onClickNickname}>변경하기</NickBtn> */}
+            {/* <NickBtn >변경하기</NickBtn> */}
             <div style={{ display: 'inline-block' }}>
-              <ChangeBtn>변경하기</ChangeBtn>
+              <ChangeBtn onClick={onClickChange}>변경하기</ChangeBtn>
               <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
             </div>
           </>
