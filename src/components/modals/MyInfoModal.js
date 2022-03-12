@@ -22,6 +22,8 @@ const MoreInfoModal = (props) => {
   const nickName = is_local ? myToken.nickName : false;
   const Goal = is_local ? myToken.weeklyGoal : null;
 
+  console.log(myToken);
+
   //닉네임 변경
   const [showModal, setShowModal] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -39,9 +41,11 @@ const MoreInfoModal = (props) => {
   };
 
   const NicknameChange = (e) => {
-    setNickname(e.target.value);
     if (e.target.value === '') {
+      setNickname(nickName);
+      return;
     }
+    setNickname(e.target.value);
   };
 
   const onClickChange = () => {
@@ -72,7 +76,8 @@ const MoreInfoModal = (props) => {
               <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
             </NickName>
             <NickChange>
-              <NickInput type="text" value={nickName ? nickName : null} placeholder={'닉네임을 입력해주세요'} onChange={NicknameChange ? NicknameChange : nickName} />
+              <NickInput type="text" placeholder={nickName ? nickName : '닉네임을 입력해주세요'} onChange={NicknameChange} />
+              {/* onChange={NicknameChange ? NicknameChange : nickName} */}
             </NickChange>
             <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
             <GoalWrap>
