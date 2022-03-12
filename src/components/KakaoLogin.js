@@ -49,6 +49,7 @@ export const LoginWithKakao = () => {
               const _nickname = result.nickName;
 
               window.alert(`반갑습니다 ${_nickname}님!😄`); // 변경하는 값 반영됨 근데 로그아웃했다가 로그인해야
+
               window.location.reload("/");
             })
             .catch((error) => {
