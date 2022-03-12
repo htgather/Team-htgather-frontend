@@ -46,11 +46,12 @@ const GyuDetail = (props) => {
   return (
     <>
       <DetailHeader />
+
       <Detail>
         <div>
-          <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
-        </div>
-        <div>
+          <TimerWrap>
+            <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+          </TimerWrap>
           <VideoWrap>
             <MainVideo>
               {' '}
@@ -152,10 +153,19 @@ const BubbleWrap = styled.div`
 
 const Detail = styled.div`
   width: 100%;
+  height: 1000px;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const TimerWrap = styled.div`
+  width: 1096px;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 `;
 
 const VideoWrap = styled.div`
@@ -164,7 +174,7 @@ const VideoWrap = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-top: 30px;
+  margin-top: 10px;
   box-sizing: border-box;
 `;
 
@@ -193,7 +203,7 @@ const SoundBtn = styled.div`
   width: 740px;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 13px;
   position: relative;
 `;
 

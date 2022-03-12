@@ -65,6 +65,9 @@ const HeaderGrid = styled.div`
 const RoomTitle = styled.div`
   display: flex;
   align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #878e95;
 `;
 
 const BtnWrap = styled.div`
