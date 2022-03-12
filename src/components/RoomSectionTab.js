@@ -16,6 +16,7 @@ const RoomSectionTop = () => {
   const dropdownList = ['전체', '스트레칭', '요가', '필라테스', '근력운동', '타바타'];
   const dispatch = useDispatch();
   const [clickedCategory, setClickedCategory] = React.useState();
+
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
   }, [clickedCategory, clickedDifficulty]);

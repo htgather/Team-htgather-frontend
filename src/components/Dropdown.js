@@ -1,10 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { IoMdArrowDropdown } from "react-icons/io";
+import React from 'react';
+import styled from 'styled-components';
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Dropdown = (props) => {
   // props로 리스트목록을 받아오고, useState로 모달 및 클릭 관리
-  const { dropdownList, width } = props;
+  const { dropdownList, myDropdownList, width } = props;
+
   const [isDropdown, setIsDropdown] = React.useState();
   const [clickedDropdown, setClickedDropdown] = React.useState();
 
@@ -17,9 +18,9 @@ const Dropdown = (props) => {
     }
   };
   React.useEffect(() => {
-    window.addEventListener("click", handleClose);
+    window.addEventListener('click', handleClose);
     return () => {
-      window.removeEventListener("click", handleClose);
+      window.removeEventListener('click', handleClose);
     };
   });
 
@@ -30,37 +31,60 @@ const Dropdown = (props) => {
           setIsDropdown(!isDropdown);
         }}
       >
-        <DropdownInput>
-          <div>
-            {dropdownList[clickedDropdown]
-              ? dropdownList[clickedDropdown]
-              : props.children}
-          </div>
-          <IoMdArrowDropdown style={{ color: "#4a5056" }}></IoMdArrowDropdown>
-        </DropdownInput>
-        <DropdownModal {...styles} isDropdown={isDropdown}>
-          {dropdownList.map((e, i) => (
-            <DdEl
-              key={i}
-              i={i}
-              length={dropdownList.length}
-              onClick={() => {
-                setClickedDropdown(i);
-                props.getCategory(i);
-                // props.getCntAWeek(i);
-              }}
-            >
-              {e}
-            </DdEl>
-          ))}
-        </DropdownModal>
+        {dropdownList ? (
+          <>
+            <DropdownInput>
+              <div>{dropdownList[clickedDropdown] ? dropdownList[clickedDropdown] : props.children}</div>
+              <IoMdArrowDropdown style={{ color: '#4a5056' }}></IoMdArrowDropdown>
+            </DropdownInput>
+            <DropdownModal {...styles} isDropdown={isDropdown}>
+              {dropdownList.map((e, i) => (
+                <DdEl
+                  key={i}
+                  i={i}
+                  length={dropdownList.length}
+                  onClick={() => {
+                    setClickedDropdown(i);
+                    props.getCategory(i);
+                    // props.changeGoal(i);
+                  }}
+                >
+                  {e}
+                </DdEl>
+              ))}
+            </DropdownModal>
+          </>
+        ) : (
+          <>
+            <DropdownInput>
+              <div>{myDropdownList[clickedDropdown] ? myDropdownList[clickedDropdown] : props.children}</div>
+              <IoMdArrowDropdown style={{ color: '#4a5056' }}></IoMdArrowDropdown>
+            </DropdownInput>
+            <DropdownModal {...styles} isDropdown={isDropdown}>
+              {myDropdownList.map((e, i) => (
+                <DdEl
+                  key={i}
+                  i={i}
+                  length={myDropdownList.length}
+                  onClick={() => {
+                    setClickedDropdown(i);
+                    // props.getCategory(i);
+                    props.changeGoal(i);
+                  }}
+                >
+                  {e}
+                </DdEl>
+              ))}
+            </DropdownModal>
+          </>
+        )}
       </DropdownBtn>
     </>
   );
 };
 
 Dropdown.defaultProps = {
-  width: "285px",
+  width: '285px',
 };
 
 const DropdownBtn = styled.div`
@@ -93,16 +117,15 @@ const DropdownModal = styled.div`
   top: 38px;
   right: 0px;
   z-index: 2;
-  display: ${(props) => (props.isDropdown ? null : "none")};
+  display: ${(props) => (props.isDropdown ? null : 'none')};
 `;
 
 const DdEl = styled.div`
-  height: ${(props) => 240 / props.length + "px"};
+  height: ${(props) => 240 / props.length + 'px'};
   display: flex;
   align-items: center;
   padding-left: 16px;
-  border-bottom: ${(props) =>
-    props.i === props.length - 1 ? "" : "1px solid #f1f3f5"};
+  border-bottom: ${(props) => (props.i === props.length - 1 ? '' : '1px solid #f1f3f5')};
   font-weight: 500;
   font-size: 13px;
   cursor: pointer;

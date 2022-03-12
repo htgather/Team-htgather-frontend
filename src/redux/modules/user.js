@@ -6,24 +6,24 @@ import axios from 'axios';
 import { Buffer } from 'buffer';
 
 const GET_NICKNAME = 'GET_NICKNAME';
-const SET_NICKNAME = 'SET_NICKNAME';
+const SET_WEEKLY_GOAL = 'SET_WEEKLY_GOAL';
 
 const getNickname = createAction(GET_NICKNAME, (nickname) => ({ nickname }));
-const setNickname = createAction(SET_NICKNAME, (nickname) => ({ nickname }));
+const setWeeklyGoal = createAction(SET_WEEKLY_GOAL, (selectGoal) => ({ selectGoal }));
 
 const initialState = {
   // nickname: '',
   nickname: 'User의 Initial값',
 };
 
-const userInfoChangeFB = (nickname, weeklyGoal) => {
+const userInfoChangeFB = (nickname, selectGoal) => {
   return function (dispatch, getState, { history }) {
     axios
       .patch(
         'http://3.39.58.56:4000/users',
         {
           nickName: nickname,
-          weeklyGoal: weeklyGoal,
+          weeklyGoal: selectGoal,
         },
         {
           headers: {
@@ -41,6 +41,7 @@ const userInfoChangeFB = (nickname, weeklyGoal) => {
         const _nickname = result.nickNaㅋme;
 
         dispatch(getNickname(nickname));
+        dispatch(setWeeklyGoal(selectGoal));
         // 토큰값 업데이트를 위한 로그아웃 후 재로그인
         localStorage.removeItem('isLogin');
         // localStorage.clear();
@@ -79,6 +80,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.nickname = action.payload.nickname;
         // console.log(action.payload.nickname); //찍힘
+      }),
+    [SET_WEEKLY_GOAL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.selectGoal = action.payload.selectGoal;
       }),
   },
   initialState
