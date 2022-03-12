@@ -16,21 +16,18 @@ import Video from "../Images/Video.png";
 import Microphone from "../Images/Microphone.png";
 import Happy from "../Images/Happy.png";
 import People from "../Images/People.png";
-
+import Me from "../Images/Me.png";
+import NoVideo from "../Images/NoVideo.png";
+import Notmute from "../Images/Notmute.png";
 import { actionCreators as roomActions } from "../redux/modules/room";
 
 const Detail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
+  const roomTitle = roomInfo.roomTitle;
+  console.log(roomTitle);
   const [isStart, setIsStart] = React.useState();
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (!roomInfo) {
-      dispatch(roomActions.getRoomDB());
-    }
-  }, []);
 
   const [isClicked, setIsClicked] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
@@ -56,19 +53,25 @@ const Detail = (props) => {
     <>
       {roomInfo && (
         <>
-          <DetailHeader />
-          <Container>
+          <DetailHeader roomTitle={roomTitle} />
+
+          <DIV>
             <div>
-              <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
-            </div>
-            <div>
+              <TimerWrap>
+                <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+              </TimerWrap>
               <VideoWrap>
                 <MainVideo>
                   {" "}
                   <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
                 </MainVideo>
                 <MemberWrap>
-                  <MemberVideo />
+                  <MemberVideo>
+                    <Circle>
+                      {" "}
+                      <img src={Me} />
+                    </Circle>
+                  </MemberVideo>
                   <MemberVideo />
                   <MemberVideo />
                   <MemberVideo />
@@ -98,30 +101,31 @@ const Detail = (props) => {
                     </>
                   )}
                 </div>
+
                 <BtnWrap>
                   <Btn onClick={setSound}>
                     {soundOn ? (
                       <>
-                        <img alt="마이크 음소거" />
-                        on
+                        <img src={Notmute} alt="음소거해제" />
+                        음소거해제
                       </>
                     ) : (
                       <>
-                        <img src={Microphone} alt="음량조절 버튼" />
-                        off
+                        <img src={Microphone} alt="음소거" />
+                        음소거
                       </>
                     )}
                   </Btn>
                   <Btn onClick={setVideo}>
                     {videoOn ? (
                       <>
-                        <img alt="마이크 음소거" />
-                        on
+                        <img src={NoVideo} alt="마이크 음소거" />
+                        비디오켜기
                       </>
                     ) : (
                       <>
                         <img src={Video} alt="카메라 버튼" />
-                        off
+                        비디오끄기
                       </>
                     )}
                   </Btn>
@@ -132,9 +136,10 @@ const Detail = (props) => {
                 </BtnWrap>
               </SoundBtn>
             </div>
-          </Container>
+          </DIV>
         </>
       )}
+      ;
     </>
   );
 };
@@ -163,12 +168,21 @@ const BubbleWrap = styled.div`
   }
 `;
 
-const Container = styled.div`
+const DIV = styled.div`
   width: 100%;
+  height: 1000px;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const TimerWrap = styled.div`
+  width: 1096px;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 `;
 
 const VideoWrap = styled.div`
@@ -177,7 +191,7 @@ const VideoWrap = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-top: 30px;
+  margin-top: 10px;
   box-sizing: border-box;
 `;
 
@@ -200,13 +214,20 @@ const MemberVideo = styled.div`
   height: 112px;
   border-radius: 8px;
   background-color: skyblue;
+  position: relative;
+`;
+
+const Circle = styled.div`
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
 `;
 
 const SoundBtn = styled.div`
   width: 740px;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 13px;
   position: relative;
 `;
 

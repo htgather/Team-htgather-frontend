@@ -98,7 +98,6 @@ const HeaderGrid = styled.div`
   }
   @media screen and (max-width: 1360px) {
     width: 980px;
-    padding: 1.2rem;
   }
 `;
 export default Header;

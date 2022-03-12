@@ -115,8 +115,9 @@ const Count = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 140px;
+  font-size: 70px;
   color: white;
   position: absolute;
+  z-index: 2;
 `;
 export default Player;
