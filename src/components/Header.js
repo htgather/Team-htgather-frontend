@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import MoreInfoModal from '../components/modals/MoreInfoModal';
-import MyInfoModal from '../components/modals/MyInfoModal';
-import Icon_Menu from '../Images/Icon_Menu.png';
-import User from '../Images/User.png';
-import { history } from '../redux/configureStore';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MoreInfoModal from "../components/modals/MoreInfoModal";
+import MyInfoModal from "../components/modals/MyInfoModal";
+import Icon_Menu from "../Images/Icon_Menu.png";
+import User from "../Images/User.png";
+import { history } from "../redux/configureStore";
 
 const Header = () => {
-  const isLocal = localStorage.getItem('isLogin') ? true : false;
+  const isLocal = localStorage.getItem("isLogin") ? true : false;
 
   const [showModal, setShowModal] = React.useState(false);
   const [myModal, setMyModal] = React.useState(false);
@@ -31,25 +31,39 @@ const Header = () => {
       <HeaderGrid>
         <p
           onClick={() => {
-            history.push('/');
+            history.push("/");
           }}
         >
           홈트게더
         </p>
-        <div style={{ width: '125px', paddingRight: '45px', display: 'flex', justifyContent: 'space-between', position: 'relative' }}>
+        <div
+          style={{
+            width: "125px",
+            paddingRight: "45px",
+            display: "flex",
+            justifyContent: "space-between",
+            position: "relative",
+          }}
+        >
           {isLocal ? (
             <div>
-              <div onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }}>
+              <div
+                onClick={openMyInfoModal}
+                style={{ cursor: "pointer", position: "relative" }}
+              >
                 <img src={User} />
               </div>
               {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
             </div>
           ) : (
-            ''
+            ""
           )}
 
           {/* {showModal && <MoreInfoModal openModal={openModal} />} */}
-          <div onClick={openModal} style={{ cursor: 'pointer', position: 'relative' }}>
+          <div
+            onClick={openModal}
+            style={{ cursor: "pointer", position: "relative" }}
+          >
             <div>
               <img src={Icon_Menu} />
             </div>
@@ -75,7 +89,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index:2;
+  z-index: 2;
 `;
 const HeaderGrid = styled.div`
   display: flex;

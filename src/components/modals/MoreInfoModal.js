@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Close from '../../Images/Close.png';
-
+import React, { useState } from "react";
+import styled from "styled-components";
+import Close from "../../Images/Close.png";
+import KakaoLogin from "../KakaoLogin";
 const MyInfoModal = (props) => {
   const { openMyInfoModal } = props;
 
@@ -13,11 +13,12 @@ const MyInfoModal = (props) => {
         <CloseBtn>
           <img src={Close} alt="closeBtn" />
         </CloseBtn>
-        <TextWrap style={{ fontSize: '25px' }}>더보기</TextWrap>
+        <TextWrap style={{ fontSize: "25px" }}>더보기</TextWrap>
         <Line />
-        <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
-        <div style={{ marginTop: '20px' }}>✍️홈트게더 이용 후기 남기기</div>
-        <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
+        <TextWrap style={{ fontSize: "17px" }}>고객 지원</TextWrap>
+        <KakaoLogin></KakaoLogin>
+        <div style={{ marginTop: "20px" }}>✍️홈트게더 이용 후기 남기기</div>
+        <div style={{ marginTop: "10px" }}>😱오류, 버그 신고하기</div>
       </DIV>
     </React.Fragment>
   );
@@ -38,7 +39,7 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: '';
+    content: "";
     position: absolute;
     top: -10px;
     right: 24px;

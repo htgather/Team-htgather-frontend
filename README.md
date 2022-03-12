@@ -42,3 +42,4 @@
    yarn add react-icons // 참고 : https://react-icons.github.io/react-icons/icons?name=fc
    yarn add react-player // 유튜브 api플레이어를 리액트에서 좀 더 쉽게 쓰게 해줌. 참고: https://www.npmjs.com/package/react-player/v/2.9.0
    yarn add moment // 시간데티터 관리를 쉽게
+   yarn add jwt-decode // jwt 디코딩

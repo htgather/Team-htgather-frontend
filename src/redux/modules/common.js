@@ -3,11 +3,14 @@ import { produce } from "immer";
 import instance from "../../shared/Request";
 
 const GET_CALENDAR = "GET_CALENDAR";
+const GET_RECORDS = "GET_RECORDS";
 
 const getCalendar = createAction(GET_CALENDAR, (calenderList) => ({
   calenderList,
 }));
-
+const getRecords = createAction(GET_RECORDS, (records) => ({
+  records,
+}));
 const initialState = {
   list: {},
 };
@@ -26,11 +29,30 @@ const getCalendarDB = () => {
   };
 };
 
+const getRecordsDB = () => {
+  return function (dispatch, getState, { history }) {
+    instance
+      .get(`/myinfo/statistics`)
+      .then((response) => {
+        console.log(response.data);
+        return;
+        dispatch(getRecords(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
 export default handleActions(
   {
     [GET_CALENDAR]: (state, action) =>
       produce(state, (draft) => {
         draft.calendarList = action.payload.calenderList;
+      }),
+    [GET_RECORDS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.myRecords = action.payload.records;
       }),
   },
   initialState
@@ -38,6 +60,7 @@ export default handleActions(
 
 const actionCreators = {
   getCalendarDB,
+  getRecordsDB,
 };
 
 export { actionCreators };

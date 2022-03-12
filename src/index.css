@@ -4,6 +4,12 @@
   /* background-color: #FFFFFF */
   box-sizing: border-box;
   font-family: "Pretendard", "Noto Sans KR", "Roboto", sans-serif;
+  /* 브라우저별 마우스 드래그막기 */
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {

@@ -1,76 +1,63 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import KakaoLogin from '../KakaoLogin';
-import lock from '../../Images/lock.png';
-import Close from '../../Images/Close.png';
-import Frame from '../../Images/Frame.png';
+import KakaoLogin from "../KakaoLogin";
+import lock from "../../Images/lock.png";
+import Close from "../../Images/Close.png";
+import Frame from "../../Images/Frame.png";
 
 const RoomClickModal = (props) => {
-  const is_local = localStorage.getItem('isLogin') ? true : false;
-
-  const [showModal, setShowModal] = useState(false);
-
-  // const setModal = () => {
-  //   {
-  //     is_local ? openModal(true) : openModal(false);
-  //   }
-  // };
-  const openModal = () => {
-    if (!is_local) {
-      setShowModal(true);
-    }
-    return;
-  };
+  const is_local = localStorage.getItem("isLogin") ? true : false;
 
   const closeModal = () => {
-    setShowModal(false);
+    props.setIsLoginModal(false);
   };
 
   return (
     <React.Fragment>
-      {showModal ? (
-        <div style={{ zIndex: '100' }}>
-          <BackGround onClick={closeModal}>
-            <ModalContainer>
-              <DIV onClick={(e) => e.stopPropagation()}>
-                <ImgWrap>
-                  <img src={Frame} />
-                  <div style={{ fontWeight: 'bold', marginTop: '20px' }}>홈트게더와 함께하는 홈 트레이닝</div>
-                  <div
-                    style={{
-                      fontSize: '14px',
-                      marginTop: '20px',
-                      color: '#aaa',
-                    }}
-                  >
-                    혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
-                    <br />
-                    홈트게더와 함께 사람들과 소통하며 재미있는 홈트를 시작해보세요.
-                  </div>
-                </ImgWrap>
-                <CloseBtn onClick={closeModal}>
-                  <img src={Close} />
-                </CloseBtn>
-                <Container>
-                  <div>
-                    <img src={lock} width="48px" height="50px" />
-                  </div>
-                  <div style={{ marginTop: '20px' }}>
-                    로그인 후에 확인할 수 있어요
-                    <br />
-                    3초 로그인하고 사람들과 함께 운동해볼까요?
-                  </div>
-                  <Kakao>
-                    <KakaoLogin />
-                  </Kakao>
-                  {/* <LoginBtn>카카오 계정으로 시작하기</LoginBtn> */}
-                </Container>
-              </DIV>
-            </ModalContainer>
-          </BackGround>
-        </div>
-      ) : null}
+      <div style={{ zIndex: "100" }}>
+        <BackGround onClick={closeModal}>
+          <ModalContainer>
+            <DIV onClick={(e) => e.stopPropagation()}>
+              <ImgWrap>
+                <img src={Frame} />
+                <div style={{ fontWeight: "bold", marginTop: "20px" }}>
+                  홈트게더와 함께하는 홈 트레이닝
+                </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    marginTop: "20px",
+                    color: "#aaa",
+                  }}
+                >
+                  혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
+                  <br />
+                  홈트게더와 함께 사람들과 소통하며 재미있는 홈트를
+                  시작해보세요.
+                </div>
+              </ImgWrap>
+              <CloseBtn onClick={closeModal}>
+                <img src={Close} />
+              </CloseBtn>
+              <Container>
+                <div>
+                  <img src={lock} width="48px" height="50px" />
+                </div>
+                <div style={{ marginTop: "20px" }}>
+                  로그인 후에 확인할 수 있어요
+                  <br />
+                  3초 로그인하고 사람들과 함께 운동해볼까요?
+                </div>
+                <Kakao>
+                  <KakaoLogin />
+                </Kakao>
+                {/* <LoginBtn>카카오 계정으로 시작하기</LoginBtn> */}
+              </Container>
+            </DIV>
+          </ModalContainer>
+        </BackGround>
+      </div>
     </React.Fragment>
   );
 };

@@ -1,21 +1,31 @@
 import React, { useEffect } from "react";
-import ReactPlayer from "react-player";
+
 import styled from "styled-components";
 import Player from "../components/Player";
 import Progress from "../components/Progress";
 import { useDispatch, useSelector } from "react-redux";
-
+import { actionCreators as roomActions } from "../redux/modules/room";
 function Detail(props) {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
   const [isStart, setIsStart] = React.useState();
+  const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    if (!roomInfo) {
+      dispatch(roomActions.getRoomDB());
+    }
+  }, []);
   return (
-    <Container>
-      <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
-      <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
-    </Container>
+    <>
+      {roomInfo && (
+        <Container>
+          <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+          <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
+        </Container>
+      )}
+    </>
   );
 }
 

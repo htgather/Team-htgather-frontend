@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import person from '../Images/CardIcon_person.png';
-import lock from '../Images/CardIcon_lock.png';
-import emoji from '../Images/RoomCardIcon_emoji.png';
+import person from "../Images/CardIcon_person.png";
+import lock from "../Images/CardIcon_lock.png";
+import emoji from "../Images/RoomCardIcon_emoji.png";
 
-import MakeRoomModal from './modals/MakeRoomModal';
-import RoomClickModal from './modals/RoomClickModal';
+import MakeRoomModal from "./modals/MakeRoomModal";
+import RoomClickModal from "./modals/RoomClickModal";
 
-import { history } from '../redux/configureStore';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as roomActions } from '../redux/modules/room';
+import { history } from "../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as roomActions } from "../redux/modules/room";
 
 const Card = (props) => {
   const { roomInfo } = props;
   const dispatch = useDispatch();
-  const [isModal, setIsModal] = React.useState();
-
-  const is_local = localStorage.getItem('isLogin') ? true : false;
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => {
-    setShowModal(true);
-    RoomClickModal();
-  };
+  const [isMakeModal, setIsMakeModal] = React.useState();
+  const is_local = localStorage.getItem("isLogin") ? true : false;
+  // const [showModal, setShowModal] = useState(false);
 
   // 카드 클릭시 방입장 함수
   function joinRoom() {
-    let result = window.confirm('들어갈래 나갈래');
+    if (!is_local) {
+      props.setIsLoginModal(true);
+      return;
+    }
+    if (roomInfo.isStart) {
+      return;
+    }
+    let result = window.confirm("들어갈래 나갈래");
     if (result) {
       history.push(`/room/${roomInfo.roomId}`);
       // dispatch(roomActions.joinRoomDB(roomInfo.roomId));
@@ -38,15 +40,32 @@ const Card = (props) => {
   if (props.last) {
     return (
       <>
-        {isModal && <MakeRoomModal setIsModal={setIsModal} isModal={isModal}></MakeRoomModal>}
-        <CardContainer last="last" style={{ fontWeight: 'bold', fontSize: '18px', lineHeight: '26px' }}>
-          <img src={emoji} alt="이모지 아이콘" style={{ marginBottom: '8px' }} />
+        {isMakeModal && (
+          <MakeRoomModal
+            setIsMakeModal={setIsMakeModal}
+            isMakeModal={isMakeModal}
+          ></MakeRoomModal>
+        )}
+        <CardContainer
+          last="last"
+          style={{ fontWeight: "bold", fontSize: "18px", lineHeight: "26px" }}
+        >
+          <img
+            src={emoji}
+            alt="이모지 아이콘"
+            style={{ marginBottom: "8px" }}
+          />
           <p>찾으시는 운동방이 없나요?</p>
           <p>직접 만들고 사람들을 모집해보세요!</p>
           <LastCardBtn
             onClick={() => {
-              setIsModal(true);
+              if (!is_local) {
+                props.setIsLoginModal(true);
+                return;
+              }
+              setIsMakeModal(true);
             }}
+            style={{ cursor: "pointer" }}
           >
             방만들기
           </LastCardBtn>
@@ -57,27 +76,29 @@ const Card = (props) => {
   // 방 카드
   return (
     <>
-      <CardContainer onClick={joinRoom}>
-        {props.locked && (
+      <CardContainer onClick={joinRoom} isStart={roomInfo.isStart}>
+        {roomInfo.isStart && (
           <CardLock>
             <img src={lock} alt="자물쇠 아이콘" />
             <p
               style={{
-                margin: '14px 0px 8px 0px',
-                fontSize: '20px',
-                fontWeight: 'bold',
+                margin: "14px 0px 8px 0px",
+                fontSize: "20px",
+                fontWeight: "bold",
               }}
             >
               이미 시작된 방이에요
             </p>
-            <p style={{ letterSpacing: '-0.28px', fontSize: '14px' }}>다음에 참여해보세요!</p>
+            <p style={{ letterSpacing: "-0.28px", fontSize: "14px" }}>
+              다음에 참여해보세요!
+            </p>
           </CardLock>
         )}
         <CardImgBox>
           <CardImg thumbnail={roomInfo.videoThumbnail}></CardImg>
           <CardHoverBox>
             <p>{roomInfo.videoTitle}</p>
-            <p style={{ textAlign: 'end' }}>{roomInfo.videoLength}</p>
+            <p style={{ textAlign: "end" }}>{roomInfo.videoLength}</p>
           </CardHoverBox>
         </CardImgBox>
         <CardContent>
@@ -89,7 +110,11 @@ const Card = (props) => {
           <CardInfo>
             <p>{roomInfo.videoStartAt} 시작</p>
             <div className="cardInfo_personBox">
-              <img src={person} alt="사람 아이콘" style={{ marginRight: '6px' }} />
+              <img
+                src={person}
+                alt="사람 아이콘"
+                style={{ marginRight: "6px" }}
+              />
               <p>{roomInfo.numberOfPeopleInRoom} / 5</p>
             </div>
           </CardInfo>
@@ -123,17 +148,24 @@ const CardContainer = styled.div`
   border-radius: 16px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(34, 37, 41, 0.12);
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0px 24px 0 rgba(34, 37, 41, 0.24);
-    transition: transform 0.4s, translateY ease-out;
-  }
   letter-spacing: -0.04em;
   position: relative;
-  &:hover > ${CardImgBox}> ${CardHoverBox} {
-    display: flex;
-  }
-  ${(props) => (props.last ? `display: flex; justify-content: center; align-items:center; flex-direction:column` : '')}
+  ${(props) => (props.isStart || props.last ? `` : `cursor:pointer;`)}
+  ${(props) =>
+    props.isStart
+      ? ``
+      : `&:hover > ${CardImgBox}> ${CardHoverBox} {
+        display: flex;
+      }
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0px 24px 0 rgba(34, 37, 41, 0.24);
+        transition: transform 0.4s, translateY ease-out;
+      }`}
+  ${(props) =>
+    props.last
+      ? `display: flex; justify-content: center; align-items:center; flex-direction:column`
+      : ""}
 `;
 const LastCardBtn = styled.div`
   font-weight: bold;

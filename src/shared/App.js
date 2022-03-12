@@ -10,8 +10,6 @@ import Detail from "../pages/Detail";
 import gyuDetail from "../pages/gyuDetail"; //뷰그리기용
 
 function App() {
-  const isLocal = localStorage.getItem("isLogin") ? true : false;
-
   return (
     <>
       <ThemeProvider theme={theme}>

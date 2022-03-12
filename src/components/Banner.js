@@ -87,7 +87,7 @@ const Banner = () => {
 // 컨테이너에서 화살표색, 배경색 지정
 const Container = styled.div`
   width: 315px;
-  height: 284px;
+  height: 136px;
   font-size: 34px;
   display: flex;
   align-items: center;
@@ -96,11 +96,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   position: relative;
-  margin-left: 20px;
   overflow-x: hidden;
-  @media screen and (max-width: 1360px) {
-    display: none;
-  }
 `;
 const Carousel = styled.div`
   display: flex;
@@ -113,7 +109,7 @@ const Carousel = styled.div`
 const ContentBox = styled.div`
   font-size: 22px;
   width: 315px;
-  height: 284px;
+  height: 136px;
   font-weight: 700;
   line-height: 60px;
   display: flex;
