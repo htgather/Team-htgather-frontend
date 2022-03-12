@@ -23,20 +23,14 @@ const MoreInfoModal = (props) => {
 
   const [showModal, setShowModal] = useState(false);
   const [nickname, setNickname] = useState('');
-  const [weeklyGoal, setWeeklyGoal] = useState(3);
+  const [selectGoal, setSelectGoal] = useState(3);
 
   //드롭다운
   const myDropdownList = [1, 2, 3, 4, 5, 6, 7];
 
-  // const [cntAWeek, setCntAWeek] = React.useState();
-
-  // React.useEffect(() => {
-  //   // dispatch~
-  // }, [cntAWeek]);
-
-  // const getCntAWeek = (cntAWeek) => {
-  //   setCntAWeek(cntAWeek);
-  // };
+  const changeGoal = (weeklyGoal) => {
+    setSelectGoal(weeklyGoal);
+  };
 
   //모달
   const setModal = () => {
@@ -47,17 +41,12 @@ const MoreInfoModal = (props) => {
     setNickname(e.target.value);
   };
 
-  const chooseGoal = (e) => {
-    setWeeklyGoal(e.target.value);
-    console.log(e.target.value);
-  };
-
   const onClickChange = () => {
     if (nickname === '') {
       window.alert('수정할 닉네임을 입력해주세요!');
       return;
     }
-    dispatch(userActions.userInfoChangeFB(nickname, weeklyGoal));
+    dispatch(userActions.userInfoChangeFB(nickname, selectGoal));
   };
 
   const onClickLogOut = () => {
@@ -81,13 +70,15 @@ const MoreInfoModal = (props) => {
               <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
             </NickName>
             <NickChange>
-              <NickInput type="text" placeholder="닉네임을 입력해주세요" onChange={NicknameChange} />
+              <NickInput type="text" placeholder={myNickname ? myNickname : '닉네임을 입력해주세요'} onChange={NicknameChange} />
             </NickChange>
             <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
             <GoalWrap>
               주
               <CategoryBox>
-                <Dropdown onChange={chooseGoal} dropdownList={myDropdownList} width="89px"></Dropdown>
+                <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px">
+                  {selectGoal}
+                </Dropdown>
               </CategoryBox>
               회
             </GoalWrap>
