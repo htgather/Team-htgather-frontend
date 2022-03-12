@@ -1,20 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
-import clap from '../Images/MySectionIcon_clap.png';
-import Banner from './Banner';
-import Calender from './Calender';
+import React from "react";
+import styled from "styled-components";
+import clap from "../Images/MySectionIcon_clap.png";
+import Banner from "./Banner";
+import Calender from "./Calender";
+import jwt_decode from "jwt-decode";
+import MyPart from "./MyPart";
+import MyRecord from "./MyRecord";
 const MySection = () => {
+  const nickName = localStorage.getItem("isLogin")
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
   return (
     <MySectionContainer>
       <MySectionTitle>
-        <img src={clap} alt="박수 아이콘" style={{ marginRight: '4px' }} />
-        안녕하세요 00님, 오늘도 함께 운동해요!
+        <img src={clap} alt="박수 아이콘" style={{ marginRight: "4px" }} />
+        안녕하세요 {nickName && `${nickName}님`} 오늘도 함께 운동해요!
       </MySectionTitle>
       <MySectionContent>
+        <MyPart></MyPart>
         <MyPage>
+          <MyRecord></MyRecord>
           <Calender></Calender>
         </MyPage>
-        <Banner></Banner>
+        <RightSection>
+          <MyCategoryRecord></MyCategoryRecord>
+          <Banner></Banner>
+        </RightSection>
       </MySectionContent>
     </MySectionContainer>
   );
@@ -29,6 +40,7 @@ const MySectionContainer = styled.div`
   @media screen and (max-width: 1360px) {
     width: 1000px;
   }
+  position: relative;
 `;
 
 const MySectionTitle = styled.div`
@@ -52,8 +64,22 @@ const MyPage = styled.div`
   background: white;
   display: flex;
   align-items: center;
-  padding: 24px;
-  // background-color: rgba(34, 37, 41, 0.8);
+  justify-content: space-evenly;
+  padding: 26px 34px;
 `;
-
+const RightSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  justify-content: space-between;
+  @media screen and (max-width: 1360px) {
+    display: none;
+  }
+`;
+const MyCategoryRecord = styled.div`
+  width: 315px;
+  height: 136px;
+  background: white;
+  border-radius: 12px;
+`;
 export default MySection;

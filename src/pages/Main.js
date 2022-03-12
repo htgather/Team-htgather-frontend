@@ -1,42 +1,51 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Buffer } from 'buffer';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { Buffer } from "buffer";
+import { useDispatch, useSelector } from "react-redux";
 
-import Header from '../components/Header';
-import RoomCard from '../components/Card';
-import RoomSectionTab from '../components/RoomSectionTab';
-import MySection from '../components/MySection';
-import MyPart from '../components/MyPart';
-import RoomClickModal from '../components/modals/RoomClickModal';
-import KakaoLogin from '../components/KakaoLogin';
-
-import { actionCreators as roomActions } from '../redux/modules/room';
+import Header from "../components/Header";
+import RoomCard from "../components/Card";
+import RoomSectionTab from "../components/RoomSectionTab";
+import MySection from "../components/MySection";
+import MyPart from "../components/MyPart";
+import RoomClickModal from "../components/modals/RoomClickModal";
+import KakaoLogin from "../components/KakaoLogin";
+import jwt_decode from "jwt-decode";
+import { actionCreators as roomActions } from "../redux/modules/room";
 
 const Main = () => {
-  const isLocal = localStorage.getItem('isLogin') ? true : false;
+  const nickName = localStorage.getItem("isLogin")
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
   const dispatch = useDispatch();
   const roomList = useSelector((state) => state.room.list);
   React.useEffect(() => {
     // 방정보 리스트 불러오기
     dispatch(roomActions.getRoomDB());
   }, []);
-  console.log(roomList);
+
+  const [isLoginModal, setIsLoginModal] = React.useState();
   return (
     <>
       <Header />
       <Container>
-        <DIV>
-          <RoomClickModal />
-        </DIV>
+        {isLoginModal && (
+          <DIV>
+            <RoomClickModal setIsLoginModal={setIsLoginModal} />
+          </DIV>
+        )}
         <MySection></MySection>
         <RoomSection>
-          <RoomSectionTab></RoomSectionTab>
+          <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
           <RoomCardList>
             {roomList.map((e, i) => (
-              <RoomCard key={i} roomInfo={e}></RoomCard>
+              <RoomCard
+                key={i}
+                roomInfo={e}
+                setIsLoginModal={setIsLoginModal}
+              ></RoomCard>
             ))}
-            <RoomCard last="last"></RoomCard>
+            <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
           </RoomCardList>
         </RoomSection>
       </Container>

@@ -5,8 +5,11 @@ import leftBtn from "../Images/CalenderLeftIcon.png";
 import rightBtn from "../Images/CalenderRightIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commonActions } from "../redux/modules/common";
-
+import CalenderCheckIcon from "../Images/CalenderCheckIcon.png";
+import CalenderTodayIcon from "../Images/CalenderTodayIcon.png";
+import CalenderStampIcon from "../Images/CalenderStampIcon.png";
 const Calender = () => {
+  const isLocal = localStorage.getItem("isLogin") ? true : false;
   const dispatch = useDispatch();
   // useState를 이용해 오늘 날짜를 관리
   const [getMoment, setMoment] = React.useState(moment());
@@ -14,7 +17,9 @@ const Calender = () => {
   // 체크된 날짜 받아오기
   const myRecords = useSelector((state) => state.common.calendarList);
   React.useEffect(() => {
-    dispatch(commonActions.getCalendarDB());
+    if (isLocal) {
+      dispatch(commonActions.getCalendarDB());
+    }
   }, []);
 
   // calendar generate logic
@@ -58,14 +63,16 @@ const Calender = () => {
                   ? "selected"
                   : "";
 
-              // 만약, 이번 달이 아닌 다른 달의 날짜라면 회색으로 표시하자
+              // 만약, 이번 달이 아닌 다른 달의 날짜라면 회색으로 표시
               let isGrayed =
                 current.format("MM") !== today.format("MM") ? "grayed" : "";
               // 돌고있는 달이 오늘이면 isToday는 트루
               let isToday =
-                current.format("YYYYMMDD") === today.format("YYYYMMDD")
+                current.format("YYYYMMDD") ===
+                moment().clone().format("YYYYMMDD")
                   ? "isToday"
                   : "";
+
               // if (
               //   endWeek + startWeek - 2 * week === -5 &&
               //   isGrayed === "grayed"
@@ -76,8 +83,35 @@ const Calender = () => {
               let isSixWeek = endWeek - startWeek === 5 ? "isSixWeek" : "";
               return (
                 <div className={`box  ${isGrayed} ${isSixWeek}`} key={i}>
-                  <div className={`${isToday}`}></div>
-                  <span className={`text ${isSelected}`}>
+                  {isSelected && isToday && (
+                    // 오늘 운동했을때
+                    <img
+                      src={CalenderStampIcon}
+                      alt="캘린더 출석"
+                      className="CalenderStampIcon"
+                    />
+                  )}
+                  {isSelected && !isToday && (
+                    // 운동한 날이면서 오늘은 아닐때
+                    <img
+                      src={CalenderCheckIcon}
+                      alt="캘린더 체크"
+                      className="CalenderCheckIcon"
+                    />
+                  )}
+                  {isToday && !isSelected && (
+                    // 오늘인데 운동안했을때
+                    <img
+                      src={CalenderTodayIcon}
+                      alt="캘린더 투데이"
+                      className="CalenderTodayIcon"
+                    />
+                  )}
+
+                  <span
+                    className={`text ${isSelected} ${isToday}`}
+                    style={{ zIndex: 2 }}
+                  >
                     {current.format("D")}
                   </span>
                 </div>
@@ -99,6 +133,7 @@ const Calender = () => {
             onClick={() => {
               setMoment(getMoment.clone().subtract(1, "month"));
             }}
+            style={{ cursor: "pointer" }}
           />
           <span>{today.format("YYYY 년 M 월")}</span>
           <img
@@ -107,6 +142,7 @@ const Calender = () => {
             onClick={() => {
               setMoment(getMoment.clone().add(1, "month"));
             }}
+            style={{ cursor: "pointer" }}
           />
         </CalenderTopBar>
         <CalenderBody>
@@ -119,18 +155,27 @@ const Calender = () => {
           </div>
           {generate()}
         </CalenderBody>
+        <CalenderText>
+          {myRecords && myRecords.includes(moment().clone().format("YYYY-M-D"))
+            ? "오늘 출석 도장이 찍혔어요!"
+            : "운동을 완료하고 출석 도장을 찍어보세요!"}
+        </CalenderText>
       </CalenderBox>
     </>
   );
 };
-const CalenderBox = styled.div``;
+const CalenderBox = styled.div`
+  height: 100%;
+`;
 const CalenderTopBar = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
   font-size: 16px;
   font-weight: bold;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
+  padding: 0px 8px;
 `;
 const CalenderBody = styled.div`
   font-size: 12px;
@@ -158,30 +203,38 @@ const CalenderBody = styled.div`
   .grayed {
     color: #aeb5bc;
   }
-  .selected {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #4a5056;
-    border-radius: 50%;
-    top: -2.5px;
-  }
+
   .isSixWeek {
     width: 38px;
-    height: 26.5px;
+    height: 26.6px;
   }
-  // .isToday {
-  //   position: absolute;
-  //   right: 8px;
-  //   top: -1px;
-  //   width: 4px;
-  //   height: 4px;
-  //   background-color: #4a5056;
-  //   border-radius: 50%;
-  // }
+  .isToday {
+    color: white;
+    font-weight: bold;
+  }
+
+  .CalenderCheckIcon {
+    position: absolute;
+    top: -5px;
+  }
+  .CalenderTodayIcon {
+    position: absolute;
+    top: -5px;
+    z-index: 1;
+  }
+  .CalenderStampIcon {
+    position: absolute;
+    z-index: 2;
+    top: -10px;
+    right: 1.05px;
+  }
+`;
+
+const CalenderText = styled.div`
+  font-size: 12px;
+  font-weight: 400;
+  color: #878e95;
+  text-align: center;
+  margin-top: 2px;
 `;
 export default Calender;

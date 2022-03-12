@@ -1,42 +1,70 @@
-import React from 'react';
-import styled from 'styled-components';
-import fire from '../Images/RoomSectionIcon_fire.png';
-import Reload from '../Images/RoomSectionIcon_Reload.png';
-import Dropdown from './Dropdown';
-import MakeRoomModal from './modals/MakeRoomModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as roomActions } from '../redux/modules/room';
+import React from "react";
+import styled from "styled-components";
+import fire from "../Images/RoomSectionIcon_fire.png";
+import Reload from "../Images/RoomSectionIcon_Reload.png";
+import Dropdown from "./Dropdown";
+import MakeRoomModal from "./modals/MakeRoomModal";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as roomActions } from "../redux/modules/room";
+import jwt_decode from "jwt-decode";
+const RoomSectionTop = (props) => {
+  // 닉네임여부로 로그인판단 아니면 false
+  const nickName = localStorage.getItem("isLogin")
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
 
-const RoomSectionTop = () => {
-  const DifficultyList = ['전체', '초급', '중급', '고급'];
+  const DifficultyList = ["전체", "초급", "중급", "고급"];
   const [clickedDifficulty, setClickedDifficulty] = React.useState(0);
-  const [isModal, setIsModal] = React.useState();
+  const [isMakeModal, setIsMakeModal] = React.useState();
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const dropdownList = ['전체', '스트레칭', '요가', '필라테스', '근력운동', '타바타'];
+  const dropdownList = [
+    "전체",
+    "스트레칭",
+    "요가",
+    "필라테스",
+    "근력운동",
+    "타바타",
+  ];
   const dispatch = useDispatch();
   const [clickedCategory, setClickedCategory] = React.useState();
 
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
   }, [clickedCategory, clickedDifficulty]);
-
+  const clickReload = () => {
+    dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
+  };
   const getCategory = (category) => {
     setClickedCategory(category);
   };
   return (
     <>
-      {isModal && <MakeRoomModal setIsModal={setIsModal} isModal={isModal}></MakeRoomModal>}
+      {isMakeModal && (
+        <MakeRoomModal
+          setIsMakeModal={setIsMakeModal}
+          isMakeModal={isMakeModal}
+        ></MakeRoomModal>
+      )}
       <RoomSectionTopContainer>
         <RoomSectionTitle>
-          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: '4px' }} />
-          00님을 기다리고 있는 방이에요, 참가해보세요!
-          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px' }} className="reload" />
+          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: "4px" }} />
+          {nickName
+            ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!`
+            : "참가해보세요!"}
+
+          <img
+            src={Reload}
+            alt="리로드 아이콘"
+            style={{ marginLeft: "12px", cursor: "pointer" }}
+            className="reload"
+            onClick={clickReload}
+          />
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
             <DifficultyBox>
-              <p style={{ marginRight: '4px' }}>난이도</p>
+              <p style={{ marginRight: "4px" }}>난이도</p>
               {DifficultyList.map((e, i) => (
                 <DB_EL
                   key={i}
@@ -44,8 +72,8 @@ const RoomSectionTop = () => {
                     setClickedDifficulty(i);
                   }}
                   style={{
-                    color: clickedDifficulty === i ? '#FFF' : '',
-                    background: clickedDifficulty === i ? '#222529' : '',
+                    color: clickedDifficulty === i ? "#FFF" : "",
+                    background: clickedDifficulty === i ? "#222529" : "",
                   }}
                 >
                   {e}
@@ -61,7 +89,11 @@ const RoomSectionTop = () => {
           </RoomSectionCategory>
           <MakeRoomBtn
             onClick={() => {
-              setIsModal(true);
+              if (!nickName) {
+                props.setIsLoginModal(true);
+                return;
+              }
+              setIsMakeModal(true);
             }}
           >
             방만들기
@@ -85,8 +117,8 @@ const RoomSectionTitle = styled.div`
   display: flex;
   align-items: center;
   .reload:hover {
-    transform: rotate(-110deg);
-    transition: transform 0.3s linear;
+    transform: rotate(80deg);
+    transition: transform 0.2s linear;
   }
 `;
 const RoomSectionContent = styled.div`
@@ -111,6 +143,7 @@ const DB_EL = styled.div`
   border-radius: 8px;
   background-color: #eaecef;
   color: #878e95;
+  cursor: pointer;
 `;
 const CategoryBox = styled.div`
   display: flex;
@@ -134,6 +167,7 @@ const MakeRoomBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   @media screen and (max-width: 1360px) {
     width: 221px;
   }

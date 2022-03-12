@@ -1,15 +1,15 @@
-import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from '../redux/configureStore';
-import Main from '../pages/Main';
-import Header from '../components/Header';
-import Detail from '../pages/Detail';
-import theme from './Theme';
+import React from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { Route, Switch } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configureStore";
+import Main from "../pages/Main";
+import Header from "../components/Header";
+import Detail from "../pages/Detail";
+import theme from "./Theme";
 
 function App() {
-  const isLocal = localStorage.getItem('isLogin') ? true : false;
+  const isLocal = localStorage.getItem("isLogin") ? true : false;
 
   return (
     <>

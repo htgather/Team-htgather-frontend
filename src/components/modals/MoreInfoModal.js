@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Close from '../../Images/Close.png';
-import KakaoLogin from '../../components/KakaoLogin';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Close from "../../Images/Close.png";
+import KakaoLogin from "../../components/KakaoLogin";
 
 const MyInfoModal = (props) => {
   const { openMyInfoModal } = props;
@@ -57,7 +57,7 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: '';
+    content: "";
     position: absolute;
     top: -10px;
     right: 24px;
