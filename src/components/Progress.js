@@ -17,6 +17,12 @@ export default function Timer(props) {
   const sec = parseInt(seconds);
   const progressBar = useRef();
 
+  // JavaScript에 미디어쿼리를 사용하는 matchMedia()
+  const NewMedia = window.matchMedia('screen and (max-width: 1360px)');
+  // console.log(NewMedia.media);
+  console.log('match는', NewMedia.matches);
+  //찍힌다요~
+
   useEffect(() => {
     if (props.roomInfo.videoLength.length > 3) {
       let temp = props.roomInfo.videoLength.split(':');
@@ -92,8 +98,7 @@ export default function Timer(props) {
         </div>
         <Contents>
           <ProgressWrap>
-            <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={647} />
-            {/* 983 */}
+            <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={NewMedia.matches ? 647 : 983} />
           </ProgressWrap>
           <TextWrap>
             {hours < 10 ? `0${hours}` : hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
@@ -104,16 +109,7 @@ export default function Timer(props) {
   );
 }
 
-const DIV = styled.div`
-  position: relative;
-  /* @media screen and (max-width: 1360px) {
-    width: 758px;
-    height: 85px;
-    display: flex;
-    float: left;
-    background-color: pink;
-  } */
-`;
+const DIV = styled.div``;
 const Container = styled.div`
   @media screen and (max-width: 1360px) {
     width: 758px;

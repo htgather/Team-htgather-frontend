@@ -18,6 +18,8 @@ function Player(props) {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(true);
 
+  const NewMedia = window.matchMedia('screen and (max-width: 1360px)');
+
   React.useEffect(() => {
     // 방입장시 동영상시작예정시간-현재시간을 setTimeout으로 계속 차이를 계산해서 타이머로 나타냄
     let getTimeInterval = setInterval(() => {
@@ -55,8 +57,8 @@ function Player(props) {
         <ReactPlayer
           url={roomInfo.videoUrl}
           controls
-          width="758px" //1096px
-          height="426px" //616px
+          width={NewMedia.matches ? '758px' : '1096px'} //"758px" //1096px
+          height={NewMedia.matches ? '426px' : '616px'} //"426px" //616px
           ref={player}
           playing={isPlaying}
           // 특정시점부터 시작

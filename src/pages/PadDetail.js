@@ -26,7 +26,6 @@ const PadDetail = (props) => {
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
   const roomTitle = roomInfo.roomTitle;
-  console.log(roomTitle);
   const [isStart, setIsStart] = React.useState();
 
   const [isClicked, setIsClicked] = useState(false);
@@ -149,6 +148,7 @@ const Background = styled.div`
 `;
 
 const BubbleWrap = styled.div`
+  z-index: 50;
   width: 245px;
   height: 40px;
   color: #f8f9fa;
