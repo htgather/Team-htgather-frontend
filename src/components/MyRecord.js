@@ -49,9 +49,12 @@ const MyRecord = (props) => {
 //   totalTimePerMonth: 40,
 // };
 const MyRecordBox = styled.div`
-  height: 100%;
+  height: 284px;
+  padding: 19px 24px;
+  // 피그마에는 height 284라서 맞췄어욥! 혹시 100%로 하신 이유가 있다면 되돌려주세요~
+  // height: 100%;
+  // padding: 0px 24px;
   width: 315px;
-  padding: 0px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;

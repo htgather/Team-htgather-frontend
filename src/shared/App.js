@@ -1,15 +1,16 @@
-import React from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { Route, Switch } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "../redux/configureStore";
-import Main from "../pages/Main";
-import Header from "../components/Header";
-import Detail from "../pages/Detail";
-import theme from "./Theme";
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../redux/configureStore';
+import Main from '../pages/Main';
+import Header from '../components/Header';
+import Detail from '../pages/Detail';
+import PadDetail from '../pages/PadDetail'; //반응형 뷰 그리기용
+import theme from './Theme';
 
 function App() {
-  const isLocal = localStorage.getItem("isLogin") ? true : false;
+  const isLocal = localStorage.getItem('isLogin') ? true : false;
 
   return (
     <>
@@ -17,7 +18,7 @@ function App() {
         <ConnectedRouter history={history}>
           {/* <Header /> */}
           <Route path="/" exact component={Main}></Route>
-          <Route path="/room/:roomId" exact component={Detail}></Route>
+          <Route path="/room/:roomId" exact component={PadDetail}></Route>
         </ConnectedRouter>
       </ThemeProvider>
     </>

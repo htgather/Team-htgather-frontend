@@ -79,6 +79,7 @@ const MyPage = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 26px 24px;
+  box-sizing: border-box;
 `;
 const RightSection = styled.div`
   display: flex;

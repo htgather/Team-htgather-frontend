@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import ReactPlayer from "react-player";
-import styled from "styled-components";
-import { HiVolumeUp } from "react-icons/hi";
-import { FaVolumeMute } from "react-icons/fa";
-import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
+import React, { useEffect } from 'react';
+import ReactPlayer from 'react-player';
+import styled from 'styled-components';
+import { HiVolumeUp } from 'react-icons/hi';
+import { FaVolumeMute } from 'react-icons/fa';
+import { getTimeStringSeconds, calCount } from './YoutubeDataAPI';
 
 function Player(props) {
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
@@ -40,7 +40,7 @@ function Player(props) {
           setCountTime(false);
         } else if (durationS && Math.abs(diffS) > durationS) {
           // durationS 비동기로 받아오는 값.
-          setCountTime("영상이 종료되었습니다");
+          setCountTime('영상이 종료되었습니다');
         }
       }
     }, 100);
@@ -50,13 +50,13 @@ function Player(props) {
 
   return (
     <Container>
-      <div style={{ pointerEvents: "none" }}>
+      <div style={{ pointerEvents: 'none' }}>
         {countTime && <Count>{countTime}</Count>}
         <ReactPlayer
           url={roomInfo.videoUrl}
           controls
-          width="1096px"
-          height="616px"
+          width="758px" //1096px
+          height="426px" //616px
           ref={player}
           playing={isPlaying}
           // 특정시점부터 시작
@@ -71,21 +71,21 @@ function Player(props) {
             props.setIsStart(true);
           }}
           onEnded={() => {
-            setCountTime("영상이 종료되었습니다");
+            setCountTime('영상이 종료되었습니다');
           }}
           muted={isMuted}
         />
       </div>
       {isMuted ? (
         <FaVolumeMute
-          style={{ color: "white", fontSize: "60px" }}
+          style={{ color: 'white', fontSize: '60px' }}
           onClick={() => {
             setIsMuted(!isMuted);
           }}
         />
       ) : (
         <HiVolumeUp
-          style={{ color: "white", fontSize: "60px" }}
+          style={{ color: 'white', fontSize: '60px' }}
           onClick={() => {
             setIsMuted(!isMuted);
           }}
@@ -106,6 +106,10 @@ const Container = styled.div`
     font-size: 0.6em;
     font-weight: 700;
   }
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 100%;
+  }
 `;
 
 const Count = styled.div`
@@ -119,5 +123,9 @@ const Count = styled.div`
   color: white;
   position: absolute;
   z-index: 2;
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 428px;
+  }
 `;
 export default Player;

@@ -85,25 +85,57 @@ export default function Timer(props) {
   }, [progress, props.isStart]);
 
   return (
-    <div className="App" style={{ color: 'black' }}>
-      <div style={{ margin: '3px 0px 8px' }}>
-        <TextWrap>{text}</TextWrap>
-      </div>
-      <Contents>
-        <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={983} />
-        <TextWrap>
-          {hours < 10 ? `0${hours}` : hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
-        </TextWrap>
-      </Contents>
-    </div>
+    <DIV>
+      <Container className="App" style={{ color: 'black' }}>
+        <div style={{ margin: '3px 0px 8px' }}>
+          <TextWrap>{text}</TextWrap>
+        </div>
+        <Contents>
+          <ProgressWrap>
+            <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={647} />
+            {/* 983 */}
+          </ProgressWrap>
+          <TextWrap>
+            {hours < 10 ? `0${hours}` : hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
+          </TextWrap>
+        </Contents>
+      </Container>
+    </DIV>
   );
 }
+
+const DIV = styled.div`
+  position: relative;
+  /* @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 85px;
+    display: flex;
+    float: left;
+    background-color: pink;
+  } */
+`;
+const Container = styled.div`
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 85px;
+  }
+`;
 
 const Contents = styled.div`
   width: 1096px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 50px;
+  }
+`;
+
+const ProgressWrap = styled.div`
+  /* @media screen and (max-width: 1360px) {
+    width: 500px;
+  } */
 `;
 
 const TextWrap = styled.div`

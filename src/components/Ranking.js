@@ -70,7 +70,7 @@ const Header = styled.div`
   font-weight: bold;
   font-size: 16px;
   color: #222529;
-  margin: 10px 0px 20px;
+  margin: 0px 0px 20px;
   letter-spacing: -0.64px;
 `;
 
