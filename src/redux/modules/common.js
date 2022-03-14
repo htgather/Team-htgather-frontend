@@ -1,10 +1,12 @@
-import { createAction, handleActions } from "redux-actions";
-import { produce } from "immer";
-import instance from "../../shared/Request";
+import { createAction, handleActions } from 'redux-actions';
+import { produce } from 'immer';
+import instance from '../../shared/Request';
+import axios from 'axios';
 
-const GET_CALENDAR = "GET_CALENDAR";
-const GET_RECORDS = "GET_RECORDS";
-const SET_RECORDS = "SET_RECORDS";
+const GET_CALENDAR = 'GET_CALENDAR';
+const GET_RECORDS = 'GET_RECORDS';
+const SET_RECORDS = 'SET_RECORDS';
+
 const getCalendar = createAction(GET_CALENDAR, (calenderList) => ({
   calenderList,
 }));
@@ -14,8 +16,10 @@ const getRecords = createAction(GET_RECORDS, (records) => ({
 const setRecords = createAction(SET_RECORDS, (weeklyGoal) => ({
   weeklyGoal,
 }));
+
 const initialState = {
   list: {},
+  myRecords: [],
 };
 
 // 사용자의 운동날짜 기록 가져오기
@@ -34,8 +38,12 @@ const getCalendarDB = () => {
 
 const getRecordsDB = () => {
   return function (dispatch, getState, { history }) {
-    instance
-      .get(`/myinfo/statistics`)
+    axios
+      .get('http://3.39.58.56:4000/myinfo/statistics', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('isLogin')}`,
+        },
+      })
       .then((response) => {
         dispatch(getRecords(response.data));
       })

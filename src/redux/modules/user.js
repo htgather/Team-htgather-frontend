@@ -13,7 +13,7 @@ const setWeeklyGoal = createAction(SET_WEEKLY_GOAL, (selectGoal) => ({ selectGoa
 const getRanking = createAction(GET_RANKING, (ranking) => ({ ranking }));
 
 const initialState = {
-  nickname: 'User의 Initial값',
+  nickname: '',
   ranking: [
     {
       rank: 1,
@@ -87,7 +87,7 @@ const getRankFB = (ranking) => {
       })
       .then((res) => {
         dispatch(getRanking(res.data.ranking));
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);

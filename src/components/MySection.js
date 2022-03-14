@@ -5,22 +5,25 @@ import clap from '../Images/MySectionIcon_clap.png';
 import Banner from './Banner';
 import Calender from './Calender';
 import jwt_decode from 'jwt-decode';
-import MyPart from './MyPart';
+import MyPart from './modals/MyPart';
 import MyRecord from './MyRecord';
 import MostExercised from './MostExercised';
 import Ranking from './Ranking';
 import { actionCreators as commonActions } from '../redux/modules/common';
 
 const MySection = () => {
-  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
-
   const dispatch = useDispatch();
   const myRecords = useSelector((state) => state.common.myRecords);
+
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+
   React.useEffect(() => {
     if (nickName) {
       dispatch(commonActions.getRecordsDB());
     }
   }, []);
+
   return (
     <MySectionContainer>
       <MySectionTitle>
