@@ -1,38 +1,54 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ProgressBar from '@ramonak/react-progress-bar';
-import styled from 'styled-components';
-import { duration } from 'moment';
-import { changeToSeconds } from './YoutubeDataAPI';
-
+import React, { useState, useEffect, useRef } from "react";
+import ProgressBar from "@ramonak/react-progress-bar";
+import styled from "styled-components";
+import { changeToSeconds } from "./YoutubeDataAPI";
+import { getTimeStringSeconds } from "./YoutubeDataAPI";
 export default function Timer(props) {
-  const videoLength = changeToSeconds(props.roomInfo.videoLength) - 2;
-
-  const [text, setText] = useState('오늘도 운동하는 여러분👍🏻');
+  const roomInfo = props.roomInfo;
+  const createdAt = new Date(roomInfo.createdAt);
+  const videoStartAfter = roomInfo.videoStartAfter;
+  const [videoLength, setVideoLength] = useState(120);
+  const [text, setText] = useState("오늘도 운동하는 여러분👍🏻");
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [progress, setProgress] = useState(0);
+
   const hour = parseInt(hours);
   const min = parseInt(minutes);
   const sec = parseInt(seconds);
   const progressBar = useRef();
 
   useEffect(() => {
-    if (props.roomInfo.videoLength.length > 3) {
-      let temp = props.roomInfo.videoLength.split(':');
-      if (temp.length === 3) {
-        setHours(temp[0]);
-        setMinutes(temp[1]);
-        setSeconds(temp[2]);
-      } else {
-        setMinutes(temp[0]);
-        setSeconds(temp[1]);
-      }
-    }
+    const now = Date.now();
+    const videoStart = createdAt.getTime() + videoStartAfter * 60000;
+    const diffMs = parseInt(videoStart - now);
+    const diffS = parseInt(diffMs / 1000);
+    setVideoLength(
+      diffS <= 0 && Math.abs(diffS) < changeToSeconds(roomInfo.videoLength)
+        ? changeToSeconds(roomInfo.videoLength) - parseFloat(Math.abs(diffS))
+        : changeToSeconds(roomInfo.videoLength) - 2
+    );
+    diffS < 0 ? setProgress(parseFloat(Math.abs(diffS))) : setProgress(0);
   }, []);
 
   useEffect(() => {
+    let temp = getTimeStringSeconds(videoLength).split(":");
+    if (temp.length === 3) {
+      setHours(temp[0]);
+      setMinutes(temp[1]);
+      setSeconds(temp[2]);
+    } else {
+      setMinutes(temp[0]);
+      setSeconds(temp[1]);
+    }
+  }, [videoLength]);
+
+  useEffect(() => {
     if (!props.isStart) return;
+    if (videoLength <= 0) {
+      clearInterval(countdown);
+    }
     const countdown = setInterval(() => {
       if (sec > 0) {
         setSeconds(sec - 1);
@@ -62,22 +78,23 @@ export default function Timer(props) {
 
   useEffect(() => {
     if (!props.isStart) return;
+
     const pg = parseInt(progress);
     const myProgressBar = setInterval(() => {
-      if (pg < videoLength) {
+      if (pg < changeToSeconds(roomInfo.videoLength)) {
         setProgress(pg + 1);
       }
-      if (pg >= videoLength * 0.25) {
-        setText('화이팅!');
+      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.25) {
+        setText("화이팅!");
       }
-      if (pg >= videoLength * 0.5) {
-        setText('벌써 절반이나 왔어요!');
+      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.5) {
+        setText("벌써 절반이나 왔어요!");
       }
-      if (pg >= videoLength * 0.75) {
-        setText('거의 다 왔습니다! 조금만 더 힘내요!');
+      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.75) {
+        setText("거의 다 왔습니다! 조금만 더 힘내요!");
       }
-      if (pg === videoLength) {
-        setText('👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!');
+      if (pg === changeToSeconds(roomInfo.videoLength)) {
+        setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
         clearInterval(myProgressBar);
       }
     }, 1000);
@@ -85,14 +102,21 @@ export default function Timer(props) {
   }, [progress, props.isStart]);
 
   return (
-    <div className="App" style={{ color: 'black' }}>
-      <div style={{ margin: '3px 0px 8px' }}>
+    <div className="App" style={{ color: "black" }}>
+      <div style={{ margin: "3px 0px 8px" }}>
         <TextWrap>{text}</TextWrap>
       </div>
       <Contents>
-        <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={videoLength} width={983} />
+        <ProgressBar
+          ref={progressBar}
+          completed={progress}
+          isLabelVisible={false}
+          maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
+          width="983px"
+        />
         <TextWrap>
-          {hours < 10 ? `0${hours}` : hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
+          {hours}:{String(minutes).length < 2 ? "0" + minutes : minutes}:
+          {String(seconds).length < 2 ? "0" + seconds : seconds}
         </TextWrap>
       </Contents>
     </div>

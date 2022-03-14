@@ -1,23 +1,31 @@
 import React, { useEffect } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
-import { HiVolumeUp } from "react-icons/hi";
-import { FaVolumeMute } from "react-icons/fa";
 import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commonActions } from "../redux/modules/common";
 
 function Player(props) {
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
-
+  const dispatch = useDispatch();
   const roomInfo = props.roomInfo;
-
+  const { isMuted, vol } = props;
   // 동영상 재생으로 관리될 변수들
   const createdAt = new Date(roomInfo.createdAt);
   const videoStartAfter = roomInfo.videoStartAfter;
   const player = React.useRef();
   const [countTime, setCountTime] = React.useState();
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [isMuted, setIsMuted] = React.useState(true);
 
+  const endVideo = () => {
+    const recordsData = {
+      workOutTime: Math.ceil(player.current.getDuration() / 60),
+      category: roomInfo.category,
+    };
+    setCountTime("영상이 종료되었습니다");
+    dispatch(commonActions.saveRecordsDB(recordsData));
+    props.setIsDone(true);
+  };
   React.useEffect(() => {
     // 방입장시 동영상시작예정시간-현재시간을 setTimeout으로 계속 차이를 계산해서 타이머로 나타냄
     let getTimeInterval = setInterval(() => {
@@ -53,8 +61,9 @@ function Player(props) {
       <div style={{ pointerEvents: "none" }}>
         {countTime && <Count>{countTime}</Count>}
         <ReactPlayer
+          style={{ borderRadius: "12px" }}
           url={roomInfo.videoUrl}
-          controls
+          // controls
           width="1096px"
           height="616px"
           ref={player}
@@ -70,27 +79,11 @@ function Player(props) {
           onStart={() => {
             props.setIsStart(true);
           }}
-          onEnded={() => {
-            setCountTime("영상이 종료되었습니다");
-          }}
+          onEnded={endVideo}
           muted={isMuted}
+          volume={vol / 20}
         />
       </div>
-      {isMuted ? (
-        <FaVolumeMute
-          style={{ color: "white", fontSize: "60px" }}
-          onClick={() => {
-            setIsMuted(!isMuted);
-          }}
-        />
-      ) : (
-        <HiVolumeUp
-          style={{ color: "white", fontSize: "60px" }}
-          onClick={() => {
-            setIsMuted(!isMuted);
-          }}
-        />
-      )}
     </Container>
   );
 }

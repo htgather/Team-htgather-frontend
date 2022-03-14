@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commonActions } from "../redux/modules/common";
@@ -15,18 +15,47 @@ const MyRecord = (props) => {
       totalTimePerMonth = 40,
     } = {},
   } = props;
-  const [percent, SetPercent] = React.useState(
-    (countPerWeek / weeklyGoal) * 100 >= 100
-      ? 100
-      : (countPerWeek / weeklyGoal) * 100
-  );
+  const percent = React.useRef();
+
+  // const myRecords = useSelector((state) => state.common.myRecords);
+  // React.useEffect(() => {
+  //   if (nickName) {
+  //     dispatch(commonActions.getRecordsDB());
+  //   }
+  // }, []);
+  // const [percent, SetPercent] = React.useState(
+  //   (countPerWeek / weeklyGoal) * 100 >= 100
+  //     ? 100
+  //     : (countPerWeek / weeklyGoal) * 100
+  // );
+  // const { myRecords } = props;
+  // const [countPerWeek, setCountPerWeek] = React.useState(1);
+  // const [weeklyGoal, setWeeklyGoal] = React.useState(3);
+  // const [daysInARow, setDaysInARow] = React.useState(38);
+  // const [totalTimePerMonth, setTotalTimePerMonth] = React.useState(40);
+  // const [percent, setPercent] = React.useState();
+  // React.useEffect(() => {
+  //   if (myRecords) {
+  //     setCountPerWeek(myRecords.countPerWeek);
+  //     setWeeklyGoal(myRecords.weeklyGoal);
+  //     setDaysInARow(myRecords.daysInARow);
+  //     setTotalTimePerMonth(myRecords.totalTimePerMonth);
+  //     setPercent(100);
+  //   }
+  // }, [myRecords]);
+
   // countPerWeek, weeklyGoal, daysInARow, totalTimePerMonth
   return (
     <MyRecordBox>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
         <Progress
-          percent={percent}
+          percent={
+            // (myRecords.countPerWeek / myRecords.weeklyGoal) * 100 >= 100
+            //   ? 100
+            //   : (myRecords.countPerWeek / myRecords.weeklyGoal) * 100
+            percent.current
+          }
           fillColor="#0028FA"
           emptyColor="#EAECEF"
           size={144}

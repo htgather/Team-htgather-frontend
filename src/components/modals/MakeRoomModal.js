@@ -30,7 +30,7 @@ const MakeRoomModal = (props) => {
   };
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const dropdownList = ["스트레칭", "요가", "필라테스", "근력운동", "타바타"];
+  const categoryList = ["스트레칭", "요가", "필라테스", "근력운동", "타바타"];
   const getCategory = (category) => {
     setClickedCategory(category);
   };
@@ -55,7 +55,7 @@ const MakeRoomModal = (props) => {
     const checkInputArray = [
       $RoomNameInput.current.value,
       difficultyList[clickedDifficulty],
-      dropdownList[clickedCategory],
+      categoryList[clickedCategory],
       $LinkInput.current.value,
       startTimeList[clickedStartTime],
     ];
@@ -89,7 +89,7 @@ const MakeRoomModal = (props) => {
           videoUrl: $LinkInput.current.value,
           videoTitle: v.title,
           videoStartAfter: +startTimeList[clickedStartTime].split("분")[0],
-          category: dropdownList[clickedCategory],
+          category: categoryList[clickedCategory],
           difficulty: difficultyList[clickedDifficulty],
         };
         dispatch(roomActions.addRoomDB(roomInfo));
@@ -152,7 +152,7 @@ const MakeRoomModal = (props) => {
             <p className="boldText" style={{ margin: "12px 0px" }}>
               카테고리
             </p>
-            <Dropdown dropdownList={dropdownList} getCategory={getCategory}>
+            <Dropdown dropdownList={categoryList} getCategory={getCategory}>
               운동 카테고리를 골라주세요
             </Dropdown>
           </CategoryBox>

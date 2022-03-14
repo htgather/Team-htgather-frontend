@@ -13,6 +13,7 @@ const MySection = () => {
   const nickName = localStorage.getItem("isLogin")
     ? jwt_decode(localStorage.getItem("isLogin")).nickName
     : false;
+
   const dispatch = useDispatch();
   const myRecords = useSelector((state) => state.common.myRecords);
   React.useEffect(() => {
