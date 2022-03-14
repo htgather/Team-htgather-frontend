@@ -11,22 +11,25 @@ import jwt_decode from 'jwt-decode';
 import { actionCreators as roomActions } from '../redux/modules/room';
 
 const Main = () => {
-  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
   const dispatch = useDispatch();
+
+  const [isLoginModal, setIsLoginModal] = React.useState();
+
   const roomList = useSelector((state) => state.room.list);
-  // console.log(roomList);
+
+  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+
   React.useEffect(() => {
     // 방정보 리스트 불러오기
     dispatch(roomActions.getRoomDB());
   }, []);
 
-  const [isLoginModal, setIsLoginModal] = React.useState();
   return (
     <>
       <Header />
       <Container>
         {isLoginModal && (
-          <DIV>
+          <DIV setIsLoginModal={setIsLoginModal}>
             <RoomClickModal setIsLoginModal={setIsLoginModal} />
           </DIV>
         )}
@@ -44,6 +47,13 @@ const Main = () => {
     </>
   );
 };
+
+const DIV = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  margin: auto;
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -64,12 +74,6 @@ const RoomCardList = styled.div`
   @media screen and (max-width: 1360px) {
     grid-template-columns: repeat(3, 315px);
   }
-`;
-
-const DIV = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  margin: auto;
 `;
 
 export default Main;
