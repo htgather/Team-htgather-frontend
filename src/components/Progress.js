@@ -12,6 +12,8 @@ export default function Timer(props) {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [abc, setAbc] = useState(983);
+
   const hour = parseInt(hours);
   const min = parseInt(minutes);
   const sec = parseInt(seconds);
@@ -21,7 +23,14 @@ export default function Timer(props) {
   const NewMedia = window.matchMedia('screen and (max-width: 1360px)');
   // console.log(NewMedia.media);
   console.log('match는', NewMedia.matches);
+  // window addEventListener
   //찍힌다요~
+
+  const test = () => {
+    if (NewMedia.matches) {
+      setAbc(647);
+    }
+  };
 
   useEffect(() => {
     if (props.roomInfo.videoLength.length > 3) {

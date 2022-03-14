@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ReactPlayer from "react-player";
-import styled from "styled-components";
-import { HiVolumeUp } from "react-icons/hi";
-import { FaVolumeMute } from "react-icons/fa";
-import DetailHeader from "../components/DetailHeader";
-import ExitModal from "../components/modals/ExitModal";
-import Timer from "../components/Progress";
-import Player from "../components/Player";
-import Progress from "../components/Progress";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ReactPlayer from 'react-player';
+import styled from 'styled-components';
+import { HiVolumeUp } from 'react-icons/hi';
+import { FaVolumeMute } from 'react-icons/fa';
+import DetailHeader from '../components/DetailHeader';
+import ExitModal from '../components/modals/ExitModal';
+import Timer from '../components/Progress';
+import Player from '../components/Player';
+import Progress from '../components/Progress';
 
-import Mute from "../Images/Mute.png";
-import Speaker from "../Images/Speaker.png";
-import Video from "../Images/Video.png";
-import Microphone from "../Images/Microphone.png";
-import Happy from "../Images/Happy.png";
-import People from "../Images/People.png";
-import Me from "../Images/Me.png";
-import NoVideo from "../Images/NoVideo.png";
-import Notmute from "../Images/Notmute.png";
-import { actionCreators as roomActions } from "../redux/modules/room";
+import Mute from '../Images/Mute.png';
+import Speaker from '../Images/Speaker.png';
+import Video from '../Images/Video.png';
+import Microphone from '../Images/Microphone.png';
+import Happy from '../Images/Happy.png';
+import People from '../Images/People.png';
+import Me from '../Images/Me.png';
+import NoVideo from '../Images/NoVideo.png';
+import Notmute from '../Images/Notmute.png';
+import { actionCreators as roomActions } from '../redux/modules/room';
 
-const Detail = (props) => {
+const PadDetail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
   const roomTitle = roomInfo.roomTitle;
-  console.log(roomTitle);
   const [isStart, setIsStart] = React.useState();
 
   const [isClicked, setIsClicked] = useState(false);
@@ -47,10 +46,10 @@ const Detail = (props) => {
   };
 
   const fighting = () => {
-    window.alert("💪🏻");
+    window.alert('💪🏻');
   };
   return (
-    <>
+    <Background>
       {roomInfo && (
         <>
           <DetailHeader roomTitle={roomTitle} />
@@ -62,13 +61,12 @@ const Detail = (props) => {
               </TimerWrap>
               <VideoWrap>
                 <MainVideo>
-                  {" "}
                   <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
                 </MainVideo>
                 <MemberWrap>
                   <MemberVideo>
                     <Circle>
-                      {" "}
+                      {' '}
                       <img src={Me} />
                     </Circle>
                   </MemberVideo>
@@ -83,7 +81,7 @@ const Detail = (props) => {
                 <div>
                   {isClicked ? (
                     <>
-                      <Btn onClick={setClicked} style={{ width: "236px" }}>
+                      <Btn onClick={setClicked} style={{ width: '236px' }}>
                         <img src={Speaker} alt="음량조절" />
                         <div>음량조절</div>
                         <div>음량수치</div>
@@ -140,11 +138,16 @@ const Detail = (props) => {
         </>
       )}
       ;
-    </>
+    </Background>
   );
 };
 
+const Background = styled.div`
+  margin: 0px auto;
+`;
+
 const BubbleWrap = styled.div`
+  z-index: 50;
   width: 245px;
   height: 40px;
   color: #f8f9fa;
@@ -161,7 +164,7 @@ const BubbleWrap = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 0px solid;
-    content: "";
+    content: '';
     position: absolute;
     bottom: -9px;
     left: 20px;
@@ -175,6 +178,7 @@ const DIV = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 const TimerWrap = styled.div`
@@ -183,6 +187,10 @@ const TimerWrap = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
+  @media screen and (max-width: 1360px) {
+    position: relative;
+    left: -110px;
+  }
 `;
 
 const VideoWrap = styled.div`
@@ -193,13 +201,22 @@ const VideoWrap = styled.div`
   position: relative;
   margin-top: 10px;
   box-sizing: border-box;
+  @media screen and (max-width: 1360px) {
+    width: 980px;
+    height: 605px;
+    margin: auto;
+  }
 `;
 
 const MainVideo = styled.div`
   width: 1096px;
   line-height: 616px;
   border-radius: 12px;
-  background-color: navy;
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 428px;
+    margin: 0px 0px 110px;
+  }
 `;
 
 const MemberWrap = styled.div`
@@ -207,6 +224,11 @@ const MemberWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media screen and (max-width: 1360px) {
+    position: absolute;
+    right: 0px;
+    top: -76px;
+  }
 `;
 
 const MemberVideo = styled.div`
@@ -215,6 +237,10 @@ const MemberVideo = styled.div`
   border-radius: 8px;
   background-color: skyblue;
   position: relative;
+  @media screen and (max-width: 1360px) {
+    width: 202px;
+    height: 113px;
+  }
 `;
 
 const Circle = styled.div`
@@ -229,6 +255,10 @@ const SoundBtn = styled.div`
   justify-content: space-between;
   margin-top: 13px;
   position: relative;
+  @media screen and (max-width: 1360px) {
+    width: 738px;
+    margin: -114px 0px 0px 65px;
+  }
 `;
 
 const BtnWrap = styled.div`
@@ -250,4 +280,4 @@ const Btn = styled.div`
   cursor: pointer;
 `;
 
-export default Detail;
+export default PadDetail;

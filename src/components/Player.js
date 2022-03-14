@@ -19,6 +19,7 @@ function Player(props) {
   const [isMuted, setIsMuted] = React.useState(true);
 
   const NewMedia = window.matchMedia('screen and (max-width: 1360px)');
+  // console.log('player match는', NewMedia.matches);
 
   React.useEffect(() => {
     // 방입장시 동영상시작예정시간-현재시간을 setTimeout으로 계속 차이를 계산해서 타이머로 나타냄
