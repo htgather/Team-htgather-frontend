@@ -8,7 +8,9 @@ import Category2 from '../Images/Category2.png';
 const MostExercised = (props) => {
   const { myRecords } = props;
 
+  console.log(myRecords);
   const records = props.myRecords.mostExercised;
+  console.log(records);
 
   React.useEffect(() => {}, []);
 
@@ -20,8 +22,10 @@ const MostExercised = (props) => {
           <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
         </MostExercisedHeader>
         <MostExercisedContentBox>
-          {records && (
+          {myRecords.length > 0 ? (
             <>
+              {/* {myRecords && (
+                <> */}
               <MostExercisedContent>
                 <img src={Category1} alt="" className="MostExercisedImg" />
                 <div className="MostExercisedContentTextBox">
@@ -36,6 +40,17 @@ const MostExercised = (props) => {
                   <div className="MostExercisedTimes">{records[1][1]}회</div>
                 </div>
               </MostExercisedContent>
+              {/* </> */}
+              {/* )} */}
+            </>
+          ) : (
+            <>
+              <Noti>
+                <div>
+                  아직 운동 기록이 없어요. <br />
+                  홈트게더와 함께 즐거운 운동을 경험해보세요!
+                </div>
+              </Noti>
             </>
           )}
         </MostExercisedContentBox>
@@ -91,5 +106,13 @@ const MostExercisedContent = styled.div`
     width: 40px;
     height: 40px;
   }
+`;
+
+const Noti = styled.div`
+  width: 255px;
+  height: 40px;
+  letter-spacing: -1.2px;
+  color: #aeb5bc;
+  margin-top: 10px;
 `;
 export default MostExercised;

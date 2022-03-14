@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import instance from '../../shared/Request';
+import axios from 'axios';
 
 const GET_CALENDAR = 'GET_CALENDAR';
 const GET_RECORDS = 'GET_RECORDS';
@@ -37,8 +38,12 @@ const getCalendarDB = () => {
 
 const getRecordsDB = () => {
   return function (dispatch, getState, { history }) {
-    instance
-      .get(`/myinfo/statistics`)
+    axios
+      .get('http://3.39.58.56:4000/myinfo/statistics', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('isLogin')}`,
+        },
+      })
       .then((response) => {
         dispatch(getRecords(response.data));
       })
