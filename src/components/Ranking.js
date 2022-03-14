@@ -43,7 +43,7 @@ const Ranking = (props) => {
                 <IsMeZero>
                   <Rank>{p.rank}</Rank>
                   <Name>{p.nickName}</Name>
-                  <Count>{p.countPerWeek}회</Count>
+                  <Count style={{ marginRight: p.countPerWeek < 10 ? '-10px' : null }}>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
             }
@@ -52,7 +52,7 @@ const Ranking = (props) => {
             <OneRank key={i} style={{ backgroundColor: p.isMe ? '#0028fa' : '', color: p.isMe ? '#fff' : '', fontWeight: p.isMe ? 'bold' : '' }}>
               <Rank>{p.rank === 1 ? '🥇' : p.rank && p.rank === 2 ? '🥈' : p.rank && p.rank === 3 ? '🥉' : p.rank}</Rank>
               <Name>{p.nickName}</Name>
-              <Count>{p.countPerWeek}회</Count>
+              <Count style={{ marginRight: p.countPerWeek < 10 ? '-10px' : null }}>{p.countPerWeek}회</Count>
             </OneRank>
           );
         })}
