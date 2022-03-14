@@ -9,10 +9,10 @@ const MostExercised = (props) => {
   const { myRecords } = props;
 
   console.log(myRecords);
-  const records = props.myRecords.mostExercised;
-  console.log(records);
+  const records = myRecords.mostExercised;
+  console.log(records); //length 있음
 
-  React.useEffect(() => {}, []);
+  // React.useEffect(() => {}, []);
 
   return (
     <>
@@ -22,26 +22,26 @@ const MostExercised = (props) => {
           <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
         </MostExercisedHeader>
         <MostExercisedContentBox>
-          {myRecords.length > 0 ? (
+          {records ? (
             <>
-              {/* {myRecords && (
-                <> */}
-              <MostExercisedContent>
-                <img src={Category1} alt="" className="MostExercisedImg" />
-                <div className="MostExercisedContentTextBox">
-                  <div className="MostExercisedTitle">{records[0][0]}</div>
-                  <div className="MostExercisedTimes">{records[0][1]}회</div>
-                </div>
-              </MostExercisedContent>
-              <MostExercisedContent>
-                <img src={Category2} alt="" className="MostExercisedImg" />
-                <div className="MostExercisedContentTextBox">
-                  <div className="MostExercisedTitle">{records[1][0]}</div>
-                  <div className="MostExercisedTimes">{records[1][1]}회</div>
-                </div>
-              </MostExercisedContent>
-              {/* </> */}
-              {/* )} */}
+              {records[0] && (
+                <MostExercisedContent>
+                  <img src={Category1} alt="" className="MostExercisedImg" />
+                  <div className="MostExercisedContentTextBox">
+                    <div className="MostExercisedTitle">{records[0][0]}</div>
+                    <div className="MostExercisedTimes">{records[0][1]}회</div>
+                  </div>
+                </MostExercisedContent>
+              )}
+              {records[1] && (
+                <MostExercisedContent>
+                  <img src={Category2} alt="" className="MostExercisedImg" />
+                  <div className="MostExercisedContentTextBox">
+                    <div className="MostExercisedTitle">{records[1][0]}</div>
+                    <div className="MostExercisedTimes">{records[1][1]}회</div>
+                  </div>
+                </MostExercisedContent>
+              )}
             </>
           ) : (
             <>

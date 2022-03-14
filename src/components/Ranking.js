@@ -37,7 +37,8 @@ const Ranking = (props) => {
           console.log(i);
           // 내 기록이 0회일 때 혹은 다른 사람 랭킹 수가 3 이하일 때
           if (p.isMe) {
-            if (p.countPerWeek === 0 || rankingList.length < 5) {
+            if (p.countPerWeek === 0 || p.rank > 4) {
+              // rankingList.length < 5
               return (
                 <IsMeZero>
                   <Rank>{p.rank}</Rank>
