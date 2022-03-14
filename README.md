@@ -36,6 +36,7 @@
    서버통신
    yarn add axios // 서버와의 통신을 위한 axios설치
    npm install buffer // 토큰값 해독을 위한 buffer 설치
+   "이건 조그마한 TEST 입니다"
 
    추가 사용 라이브러리
    아이콘 관련
