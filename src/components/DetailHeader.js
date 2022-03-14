@@ -27,7 +27,7 @@ const Header = (props) => {
           <HeaderBtn>
             <BtnContents>
               <img src={People} alt="인원수" />
-              <div style={{ color: "#aeb5bc" }}>1/5</div>
+              <div style={{ color: "#aeb5bc" }}>{props.numberOfUsers}</div>
             </BtnContents>
           </HeaderBtn>
         </BtnWrap>
