@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import lock from '../../Images/lock.png';
-import { LoginWithKakao } from '../KakaoLogin';
+import LoginWithKakao from '../KakaoLogin';
 
 const MyPart = () => {
   const is_local = localStorage.getItem('isLogin') ? true : false;
@@ -15,7 +15,7 @@ const MyPart = () => {
           <Container>
             <img src={lock} alt="자물쇠 아이콘" />
             <Text>로그인 후에 이용해주세요</Text>
-            <LoginBtn onClick={LoginWithKakao}>카카오 계정으로 시작하기</LoginBtn>
+            <LoginWithKakao />
           </Container>
         </DIV>
       )}
@@ -48,18 +48,6 @@ const Text = styled.div`
   color: #fff;
   font-size: 18px;
   font-weight: 500;
-`;
-const LoginBtn = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9e54d;
-  border-radius: 20px;
-  width: 316px;
-  height: 56px;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
 `;
 
 export default MyPart;

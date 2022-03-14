@@ -1,10 +1,11 @@
-import { createAction, handleActions } from "redux-actions";
-import { produce } from "immer";
-import instance from "../../shared/Request";
+import { createAction, handleActions } from 'redux-actions';
+import { produce } from 'immer';
+import instance from '../../shared/Request';
 
-const GET_CALENDAR = "GET_CALENDAR";
-const GET_RECORDS = "GET_RECORDS";
-const SET_RECORDS = "SET_RECORDS";
+const GET_CALENDAR = 'GET_CALENDAR';
+const GET_RECORDS = 'GET_RECORDS';
+const SET_RECORDS = 'SET_RECORDS';
+
 const getCalendar = createAction(GET_CALENDAR, (calenderList) => ({
   calenderList,
 }));
@@ -14,8 +15,10 @@ const getRecords = createAction(GET_RECORDS, (records) => ({
 const setRecords = createAction(SET_RECORDS, (weeklyGoal) => ({
   weeklyGoal,
 }));
+
 const initialState = {
   list: {},
+  myRecords: [],
 };
 
 // 사용자의 운동날짜 기록 가져오기

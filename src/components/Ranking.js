@@ -30,20 +30,6 @@ const Ranking = (props) => {
               </>
             );
           }
-          // 랭킹 수가 5미만일 때
-          if (i < 5) {
-            return (
-              <>
-                <OneRank key={i} style={{ backgroundColor: p.isMe ? '#0028fa' : '', color: p.isMe ? '#fff' : '', fontWeight: p.isMe ? 'bold' : '' }}>
-                  {/* {p.isMe === true ? '랄라' : ''} */}
-                  <Rank>{p.rank === 1 ? '🥇' : p.rank && p.rank === 2 ? '🥈' : p.rank && p.rank === 3 ? '🥉' : p.rank}</Rank>
-                  <Name>{p.nickName}</Name>
-                  <Count>{p.countPerWeek}회</Count>
-                </OneRank>
-              </>
-            );
-          }
-          //
           return (
             <OneRank key={i} style={{ backgroundColor: p.isMe ? '#0028fa' : '', color: p.isMe ? '#fff' : '', fontWeight: p.isMe ? 'bold' : '' }}>
               {/* {p.isMe === true ? '랄라' : ''} */}
