@@ -2,9 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commonActions } from '../redux/modules/common';
-import Progress from '@delowar/react-circle-progressbar';
+
+import { Progress } from 'antd';
+import 'antd/dist/antd.css';
+
 import fireIcon from '../Images/MyRecordIcon_Fire.png';
 import clockIcon from '../Images/MyRecordIcon_Clock.png';
+
 const MyRecord = (props) => {
   const {
     myRecords: {
@@ -15,7 +19,13 @@ const MyRecord = (props) => {
       totalTimePerMonth = 40,
     } = {},
   } = props;
+
   const percent = React.useRef();
+
+  const countAWeek = props.myRecords.countPerWeek;
+  const goal = props.myRecords.weeklyGoal;
+  const per = Math.floor((countAWeek / goal) * 100);
+  // console.log(percent);
 
   // const [percent, SetPercent] = React.useState((countPerWeek / weeklyGoal) * 100 >= 100 ? 100 : (countPerWeek / weeklyGoal) * 100);
 
@@ -47,28 +57,16 @@ const MyRecord = (props) => {
   // }, [myRecords]);
 
   // countPerWeek, weeklyGoal, daysInARow, totalTimePerMonth
+
   return (
     <MyRecordBox>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
-        <Progress
-          percent={
-            // (myRecords.countPerWeek / myRecords.weeklyGoal) * 100 >= 100
-            //   ? 100
-            //   : (myRecords.countPerWeek / myRecords.weeklyGoal) * 100
-            percent.current
-          }
-          fillColor="#0028FA"
-          emptyColor="#EAECEF"
-          size={144}
-          borderWidth={9}
-          borderBgWidth={9}
-        >
-          <div className="progressInTextBox">
-            <div className="countPerWeekText">{countPerWeek}일</div>
-            <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
-          </div>
-        </Progress>
+        <Progress type="circle" percent={per} showInfo={false} width={142} trailColor="#EAECEF" strokeColor="#0028FA" />
+        <div className="progressInTextBox">
+          <div className="countPerWeekText">{countPerWeek}일</div>
+          <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
+        </div>
         <BottomTextContainer>
           <div className="bottomTextBox">
             <img src={fireIcon} alt="불꽃 아이콘" style={{ marginRight: '2px' }} />
@@ -93,9 +91,6 @@ const MyRecord = (props) => {
 const MyRecordBox = styled.div`
   height: 284px;
   padding: 19px 24px;
-  // 피그마에는 height 284라서 맞췄어욥! 혹시 100%로 하신 이유가 있다면 되돌려주세요~
-  // height: 100%;
-  // padding: 0px 24px;
   width: 315px;
   display: flex;
   flex-direction: column;
@@ -107,7 +102,7 @@ const Header = styled.span`
   color: #222529;
   line-height: 1.5;
   letter-spacing: -0.64px;
-  margin-bottom: 16px;
+  margin-bottom: 19px;
   position: relative;
   right: 84px;
 `;
@@ -116,6 +111,7 @@ const MyRecordContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   * {
     font-size: 14px;
     font-weight: 400;
@@ -125,6 +121,8 @@ const MyRecordContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    margin-top: 40px;
   }
   .countPerWeekText {
     font-size: 24px;
@@ -145,9 +143,9 @@ const MyRecordContent = styled.div`
 `;
 
 const BottomTextContainer = styled.div`
-  margin-top: 12px;
+  margin-top: 10px;
   .bottomTextBox {
-    margin-bottom: 4px;
+    letter-spacing: -0.48px;
   }
 `;
 export default MyRecord;
