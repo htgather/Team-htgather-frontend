@@ -27,11 +27,11 @@ export default function Timer(props) {
   // window addEventListener
   //찍힌다요~
 
-  const test = () => {
-    if (NewMedia.matches) {
-      setAbc(647);
-    }
-  };
+  // const test = () => {
+  //   if (NewMedia.matches) {
+  //     setAbc(647);
+  //   }
+  // };
 
   useEffect(() => {
     const now = Date.now();
