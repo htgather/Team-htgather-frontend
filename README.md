@@ -45,3 +45,6 @@
    yarn add jwt-decode // jwt 디코딩
    npm install @ramonak/react-progress-bar //프로그레스바 라이브러리
    yarn add @delowar/react-circle-progressbar // 원형프로그래스바
+   "styled-components": "^5.3.3",
+
+   "web-vitals": "^2.1.4"

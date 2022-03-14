@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import ExitModal from '../components/modals/ExitModal';
-import People from '../Images/People.png';
-
-import { history } from '../redux/configureStore';
+import ExitModal from "../components/modals/ExitModal";
+import People from "../Images/People.png";
 
 const Header = (props) => {
-  const { roomTitle } = props;
+  const { roomTitle, roomId } = props.roomInfo;
 
   const [modalOn, setModalOn] = React.useState(false);
 
   const exitRoom = () => {
     setModalOn(!modalOn);
-    console.log(modalOn);
   };
 
   return (
@@ -24,14 +20,14 @@ const Header = (props) => {
         <BtnWrap>
           {/* 나가기 */}
           <HeaderBtn onClick={exitRoom}>
-            <BtnContents style={{ color: '#aeb5bc' }}>나가기</BtnContents>
-            {modalOn && <ExitModal exitRoom={exitRoom} />}
+            <BtnContents style={{ color: "#aeb5bc" }}>나가기</BtnContents>
+            {modalOn && <ExitModal exitRoom={exitRoom} roomId={roomId} />}
           </HeaderBtn>
           {/*  인원수*/}
           <HeaderBtn>
             <BtnContents>
               <img src={People} alt="인원수" />
-              <div style={{ color: '#aeb5bc' }}>1/5</div>
+              <div style={{ color: "#aeb5bc" }}>1/5</div>
             </BtnContents>
           </HeaderBtn>
         </BtnWrap>

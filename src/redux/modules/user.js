@@ -1,10 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import instance from '../../shared/Request';
-import { LoginWithKakao, logoutWithKakao } from '../../components/KakaoLogin';
 import axios from 'axios';
-import { Buffer } from 'buffer';
-import jwt_decode from 'jwt-decode';
+import { actionCreators as commonActions } from './common';
 
 const GET_NICKNAME = 'GET_NICKNAME';
 const SET_WEEKLY_GOAL = 'SET_WEEKLY_GOAL';
@@ -55,7 +53,7 @@ const userInfoChangeFB = (nickname, selectGoal) => {
     const access_token = localStorage.getItem('isLogin');
     axios
       .patch(
-        'http://3.39.58.56:4000/users',
+        'https://test.kimjeongho-server.com/users',
         {
           nickName: nickname,
           weeklyGoal: selectGoal + 1,
@@ -67,27 +65,13 @@ const userInfoChangeFB = (nickname, selectGoal) => {
         }
       )
       .then((response) => {
-        const myToken = jwt_decode(access_token);
-
+        localStorage.removeItem('isLogin');
+        localStorage.setItem('isLogin', response.data.token);
+        // const myToken = jwt_decode(access_token);
         dispatch(getNickname(nickname));
         dispatch(setWeeklyGoal(selectGoal + 1));
-        // 토큰값 업데이트를 위한 로그아웃 후 재로그인
-        localStorage.removeItem('isLogin');
-        axios
-          .post('http://3.39.58.56:4000/users/auth', {
-            nickName: nickname,
-            snsId: myToken.id,
-          })
-          .then((res) => {
-            dispatch(getNickname(myToken.nickName));
-            window.alert('회원 정보가 변경되었습니다');
-          })
-          .catch((error) => {
-            alert('카카오 로그인 에러', error.message);
-          });
-      })
-      .catch((error) => {
-        console.log(error.message);
+        dispatch(commonActions.setRecords(selectGoal + 1));
+        window.alert('회원 정보가 변경되었습니다');
       });
   };
 };

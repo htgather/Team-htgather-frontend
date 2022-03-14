@@ -4,12 +4,15 @@ import instance from "../../shared/Request";
 
 const GET_CALENDAR = "GET_CALENDAR";
 const GET_RECORDS = "GET_RECORDS";
-
+const SET_RECORDS = "SET_RECORDS";
 const getCalendar = createAction(GET_CALENDAR, (calenderList) => ({
   calenderList,
 }));
 const getRecords = createAction(GET_RECORDS, (records) => ({
   records,
+}));
+const setRecords = createAction(SET_RECORDS, (weeklyGoal) => ({
+  weeklyGoal,
 }));
 const initialState = {
   list: {},
@@ -42,6 +45,19 @@ const getRecordsDB = () => {
   };
 };
 
+const saveRecordsDB = (recordsData) => {
+  return function (dispatch, getState, { history }) {
+    instance
+      .post(`/myinfo/records`, recordsData)
+      .then((response) => {
+        // alert(response.data.message);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
 export default handleActions(
   {
     [GET_CALENDAR]: (state, action) =>
@@ -52,6 +68,13 @@ export default handleActions(
       produce(state, (draft) => {
         draft.myRecords = action.payload.records;
       }),
+    [SET_RECORDS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.myRecords = {
+          ...draft.myRecords,
+          weeklyGoal: action.payload.weeklyGoal,
+        };
+      }),
   },
   initialState
 );
@@ -59,6 +82,8 @@ export default handleActions(
 const actionCreators = {
   getCalendarDB,
   getRecordsDB,
+  setRecords,
+  saveRecordsDB,
 };
 
 export { actionCreators };

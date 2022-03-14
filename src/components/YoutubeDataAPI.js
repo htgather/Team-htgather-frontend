@@ -27,7 +27,6 @@ export async function _getVideoInfo(videoId) {
     const title = resData.items[0].snippet.title;
     const thumbnail = resData.items[0].snippet.thumbnails.high.url;
     let { duration } = resData.items[0].contentDetails;
-    console.log(duration, "바꾸기전");
     duration = changePlayTime(duration);
     return { title, thumbnail, duration }; //객체로 전달
   }
@@ -107,3 +106,6 @@ export function calCount(Time) {
   let result = m + ":" + s;
   return result;
 }
+
+// 재생불가 영상 https://www.youtube.com/watch?v=TeI6WkEhdyY
+// 방만들때 캐치하는법찾기

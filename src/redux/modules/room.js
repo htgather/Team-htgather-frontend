@@ -106,7 +106,7 @@ const exitRoomDB = (roomId) => {
     instance
       .post(`/rooms/exit/${roomId}`)
       .then((response) => {
-        console.log(11);
+        history.replace("/");
       })
       .catch((error) => {
         window.alert(error.response.data.message);

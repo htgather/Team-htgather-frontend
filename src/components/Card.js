@@ -6,9 +6,6 @@ import lock from "../Images/CardIcon_lock.png";
 import emoji from "../Images/RoomCardIcon_emoji.png";
 
 import MakeRoomModal from "./modals/MakeRoomModal";
-import RoomClickModal from "./modals/RoomClickModal";
-
-import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../redux/modules/room";
 
@@ -28,13 +25,10 @@ const Card = (props) => {
     if (roomInfo.isStart) {
       return;
     }
-    let result = window.confirm("들어갈래 나갈래");
-    if (result) {
-      history.push(`/room/${roomInfo.roomId}`);
-      // dispatch(roomActions.joinRoomDB(roomInfo.roomId));
-    } else {
-      dispatch(roomActions.exitRoomDB(roomInfo.roomId));
-    }
+    // let result = window.confirm("들어갈래 나갈래");
+    // if (result) {
+    // history.push(`/room/${roomInfo.roomId}`);
+    dispatch(roomActions.joinRoomDB(roomInfo.roomId));
   }
   // 마지막 카드
   if (props.last) {

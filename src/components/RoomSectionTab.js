@@ -1,22 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
-import fire from '../Images/RoomSectionIcon_fire.png';
-import Reload from '../Images/RoomSectionIcon_Reload.png';
-import Dropdown from './Dropdown';
-import MakeRoomModal from './modals/MakeRoomModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as roomActions } from '../redux/modules/room';
-import jwt_decode from 'jwt-decode';
+import React from "react";
+import styled from "styled-components";
+import fire from "../Images/RoomSectionIcon_fire.png";
+import Reload from "../Images/RoomSectionIcon_Reload.png";
+import Dropdown from "./Dropdown";
+import MakeRoomModal from "./modals/MakeRoomModal";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as roomActions } from "../redux/modules/room";
+
 const RoomSectionTop = (props) => {
   // 닉네임여부로 로그인판단 아니면 false
-  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
-  const DifficultyList = ['전체', '초급', '중급', '고급'];
+  const nickName = useSelector((state) => state.User.nickname);
+
+  const DifficultyList = ["전체", "초급", "중급", "고급"];
   const [clickedDifficulty, setClickedDifficulty] = React.useState(0);
   const [isMakeModal, setIsMakeModal] = React.useState();
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const dropdownList = ['전체', '스트레칭', '요가', '필라테스', '근력운동', '타바타'];
+  const categoryList = [
+    "전체",
+    "스트레칭",
+    "요가",
+    "필라테스",
+    "근력운동",
+    "타바타",
+  ];
   const dispatch = useDispatch();
   const [clickedCategory, setClickedCategory] = React.useState();
 
@@ -32,18 +40,31 @@ const RoomSectionTop = (props) => {
   };
   return (
     <>
-      {isMakeModal && <MakeRoomModal setIsMakeModal={setIsMakeModal} isMakeModal={isMakeModal}></MakeRoomModal>}
+      {isMakeModal && (
+        <MakeRoomModal
+          setIsMakeModal={setIsMakeModal}
+          isMakeModal={isMakeModal}
+        ></MakeRoomModal>
+      )}
       <RoomSectionTopContainer>
         <RoomSectionTitle>
-          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: '4px' }} />
-          {nickName ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가해보세요!'}
+          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: "4px" }} />
+          {nickName
+            ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!`
+            : "참가해보세요!"}
 
-          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer' }} className="reload" onClick={clickReload} />
+          <img
+            src={Reload}
+            alt="리로드 아이콘"
+            style={{ marginLeft: "12px", cursor: "pointer" }}
+            className="reload"
+            onClick={clickReload}
+          />
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
             <DifficultyBox>
-              <p style={{ marginRight: '4px' }}>난이도</p>
+              <p style={{ marginRight: "4px" }}>난이도</p>
               {DifficultyList.map((e, i) => (
                 <DB_EL
                   key={i}
@@ -51,8 +72,8 @@ const RoomSectionTop = (props) => {
                     setClickedDifficulty(i);
                   }}
                   style={{
-                    color: clickedDifficulty === i ? '#FFF' : '',
-                    background: clickedDifficulty === i ? '#222529' : '',
+                    color: clickedDifficulty === i ? "#FFF" : "",
+                    background: clickedDifficulty === i ? "#222529" : "",
                   }}
                 >
                   {e}
@@ -61,7 +82,7 @@ const RoomSectionTop = (props) => {
             </DifficultyBox>
             <CategoryBox>
               <p>운동종류</p>
-              <Dropdown dropdownList={dropdownList} getCategory={getCategory}>
+              <Dropdown dropdownList={categoryList} getCategory={getCategory}>
                 어떤 운동을 찾고 계신가요?
               </Dropdown>
             </CategoryBox>

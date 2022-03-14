@@ -15,13 +15,55 @@ const MyRecord = (props) => {
       totalTimePerMonth = 40,
     } = {},
   } = props;
-  const [percent, SetPercent] = React.useState((countPerWeek / weeklyGoal) * 100 >= 100 ? 100 : (countPerWeek / weeklyGoal) * 100);
+  const percent = React.useRef();
+
+  // const [percent, SetPercent] = React.useState((countPerWeek / weeklyGoal) * 100 >= 100 ? 100 : (countPerWeek / weeklyGoal) * 100);
+
+  // const myRecords = useSelector((state) => state.common.myRecords);
+  // React.useEffect(() => {
+  //   if (nickName) {
+  //     dispatch(commonActions.getRecordsDB());
+  //   }
+  // }, []);
+  // const [percent, SetPercent] = React.useState(
+  //   (countPerWeek / weeklyGoal) * 100 >= 100
+  //     ? 100
+  //     : (countPerWeek / weeklyGoal) * 100
+  // );
+  // const { myRecords } = props;
+  // const [countPerWeek, setCountPerWeek] = React.useState(1);
+  // const [weeklyGoal, setWeeklyGoal] = React.useState(3);
+  // const [daysInARow, setDaysInARow] = React.useState(38);
+  // const [totalTimePerMonth, setTotalTimePerMonth] = React.useState(40);
+  // const [percent, setPercent] = React.useState();
+  // React.useEffect(() => {
+  //   if (myRecords) {
+  //     setCountPerWeek(myRecords.countPerWeek);
+  //     setWeeklyGoal(myRecords.weeklyGoal);
+  //     setDaysInARow(myRecords.daysInARow);
+  //     setTotalTimePerMonth(myRecords.totalTimePerMonth);
+  //     setPercent(100);
+  //   }
+  // }, [myRecords]);
+
   // countPerWeek, weeklyGoal, daysInARow, totalTimePerMonth
   return (
     <MyRecordBox>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
-        <Progress percent={percent} fillColor="#0028FA" emptyColor="#EAECEF" size={144} borderWidth={9} borderBgWidth={9}>
+        <Progress
+          percent={
+            // (myRecords.countPerWeek / myRecords.weeklyGoal) * 100 >= 100
+            //   ? 100
+            //   : (myRecords.countPerWeek / myRecords.weeklyGoal) * 100
+            percent.current
+          }
+          fillColor="#0028FA"
+          emptyColor="#EAECEF"
+          size={144}
+          borderWidth={9}
+          borderBgWidth={9}
+        >
           <div className="progressInTextBox">
             <div className="countPerWeekText">{countPerWeek}일</div>
             <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>

@@ -1,39 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ReactPlayer from 'react-player';
-import styled from 'styled-components';
-
-import { history } from '../../redux/configureStore';
-import Close from '../../Images/Close.png';
-
-import { HiVolumeUp } from 'react-icons/hi';
-import { FaVolumeMute } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as roomActions } from "../../redux/modules/room";
+import styled from "styled-components";
+import Close from "../../Images/Close.png";
 
 const CompleteModal = (props) => {
-  const { exitRoom } = props;
+  const { exitRoom, roomId, isDone, setIsDone } = props;
+  const dispatch = useDispatch();
 
-  const [isDone, setIsDone] = React.useState(false);
-  const [closeModal, setCloseModal] = React.useState(false);
-
-  // onClick={exitModal}
-  // onClick={(e) => e.stopPropagation()}
   return (
     <>
       <BackGround>
         <ModalWrap>
-          <CloseBtn onClick={exitRoom}>
-            <img src={Close} alt="취소" />
-          </CloseBtn>
+          {!isDone && (
+            <CloseBtn onClick={exitRoom}>
+              <img src={Close} alt="취소" />
+            </CloseBtn>
+          )}
           <div onClick={(e) => e.stopPropagation()}>
             <ModalContents>
-              <div style={{ fontSize: '33px', fontWeight: 'bold', marginBottom: '20px' }}>{isDone ? '운동끝! 오늘도 해냈어요!' : '정말 나가시겠어요?'}</div>
-              <div style={{ fontSize: '16px', color: '#878E95' }}>{isDone ? '운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!' : '지금 운동을 종료하면 운동시간이 기록되지 않아요.'} </div>
-              <BtnWrap
-                onClick={() => {
-                  history.replace('/');
+              <div
+                style={{
+                  fontSize: "33px",
+                  fontWeight: "bold",
+                  marginBottom: "20px",
                 }}
               >
-                {isDone ? '운동시간 저장하기' : '운동 그만하기'}
+                {isDone ? "운동끝! 오늘도 해냈어요!" : "정말 나가시겠어요?"}
+              </div>
+              <div style={{ fontSize: "16px", color: "#878E95" }}>
+                {isDone
+                  ? "운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!"
+                  : "지금 운동을 종료하면 운동시간이 기록되지 않아요."}{" "}
+              </div>
+              <BtnWrap
+                onClick={() => {
+                  if (isDone) {
+                    setIsDone(false);
+                  } else {
+                    dispatch(roomActions.exitRoomDB(roomId));
+                  }
+                }}
+              >
+                {isDone ? "운동시간 저장하기" : "운동 그만하기"}
               </BtnWrap>
             </ModalContents>
           </div>

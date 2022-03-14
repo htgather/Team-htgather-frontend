@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactPlayer from 'react-player';
+
 import styled from 'styled-components';
-import { HiVolumeUp } from 'react-icons/hi';
-import { FaVolumeMute } from 'react-icons/fa';
+
 import DetailHeader from '../components/DetailHeader';
 import ExitModal from '../components/modals/ExitModal';
-import Timer from '../components/Progress';
+
 import Player from '../components/Player';
 import Progress from '../components/Progress';
 
@@ -15,26 +14,26 @@ import Speaker from '../Images/Speaker.png';
 import Video from '../Images/Video.png';
 import Microphone from '../Images/Microphone.png';
 import Happy from '../Images/Happy.png';
-import People from '../Images/People.png';
 import Me from '../Images/Me.png';
 import NoVideo from '../Images/NoVideo.png';
 import Notmute from '../Images/Notmute.png';
 import { actionCreators as roomActions } from '../redux/modules/room';
 
-const PadDetail = (props) => {
+const Detail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
-  const roomTitle = roomInfo.roomTitle;
-  const [isStart, setIsStart] = React.useState();
 
+  const [isStart, setIsStart] = React.useState();
+  const [isDone, setIsDone] = React.useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [videoOn, setVideoOn] = useState(false);
-  const [encourage, setEncourage] = useState(false);
-
+  const [vol, setVol] = React.useState(10);
+  const [isMuted, setIsMuted] = React.useState(true);
   const setClicked = () => {
     setIsClicked(!isClicked);
+    setIsMuted(!isMuted);
   };
 
   const setSound = () => {
@@ -48,12 +47,18 @@ const PadDetail = (props) => {
   const fighting = () => {
     window.alert('💪🏻');
   };
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    if (!roomInfo) {
+      dispatch(roomActions.getRoomDB());
+    }
+  }, []);
   return (
     <Background>
       {roomInfo && (
         <>
-          <DetailHeader roomTitle={roomTitle} />
-
+          {isDone && <ExitModal isDone={isDone} setIsDone={setIsDone}></ExitModal>}
+          <DetailHeader roomInfo={roomInfo} />
           <DIV>
             <div>
               <TimerWrap>
@@ -61,12 +66,11 @@ const PadDetail = (props) => {
               </TimerWrap>
               <VideoWrap>
                 <MainVideo>
-                  <Player roomInfo={roomInfo} setIsStart={setIsStart}></Player>
+                  <Player roomInfo={roomInfo} setIsStart={setIsStart} vol={vol} isMuted={isMuted} setIsDone={setIsDone}></Player>
                 </MainVideo>
                 <MemberWrap>
                   <MemberVideo>
                     <Circle>
-                      {' '}
                       <img src={Me} />
                     </Circle>
                   </MemberVideo>
@@ -81,10 +85,19 @@ const PadDetail = (props) => {
                 <div>
                   {isClicked ? (
                     <>
-                      <Btn onClick={setClicked} style={{ width: '236px' }}>
-                        <img src={Speaker} alt="음량조절" />
-                        <div>음량조절</div>
-                        <div>음량수치</div>
+                      <Btn style={{ width: '236px', justifyContent: 'flex-start' }}>
+                        <img src={Speaker} alt="음량조절" onClick={setClicked} />
+                        <VolInput
+                          type="range"
+                          min="0"
+                          max="20"
+                          value={vol}
+                          onChange={(e) => {
+                            setVol(e.target.value);
+                          }}
+                          style={{ margin: '8px' }}
+                        />
+                        <div>{vol}</div>
                       </Btn>
                     </>
                   ) : (
@@ -159,6 +172,7 @@ const BubbleWrap = styled.div`
   position: absolute;
   bottom: 55px;
   left: 35px;
+  z-index: 5;
   :after {
     border-top: 10px solid #0028fa;
     border-left: 10px solid transparent;
@@ -279,5 +293,25 @@ const Btn = styled.div`
   padding: 0px 10px;
   cursor: pointer;
 `;
-
-export default PadDetail;
+const VolInput = styled.input`
+  -webkit-appearance: none;
+  width: 160px;
+  position: relative;
+  &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 4px;
+    background-color: #4a5056;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  &::-webkit-slider-thumb {
+    cursor: pointer;
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: -4px;
+    background: #4a5056;
+  }
+`;
+export default Detail;

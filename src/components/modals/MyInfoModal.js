@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import KakaoLogin from '../KakaoLogin';
-import jwt_decode from 'jwt-decode';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import KakaoLogin from "../KakaoLogin";
+import jwt_decode from "jwt-decode";
 
-import lock from '../../Images/lock.png';
-import Close from '../../Images/Close.png';
-import Icon_Menu from '../../Images/Icon_Menu.png';
-import Dropdown from '../Dropdown';
+import lock from "../../Images/lock.png";
+import Close from "../../Images/Close.png";
+import Dropdown from "../Dropdown";
 
-import { logoutWithKakao } from '../../components/KakaoLogin';
-import { actionCreators as userActions } from '../../redux/modules/user';
+import { logoutWithKakao } from "../../components/KakaoLogin";
+import { actionCreators as userActions } from "../../redux/modules/user";
 
 const MoreInfoModal = (props) => {
   const { openMyInfoModal, width } = props;
 
   const dispatch = useDispatch();
 
-  const is_local = localStorage.getItem('isLogin');
-  const myToken = jwt_decode(localStorage.getItem('isLogin'));
-  const nickName = is_local ? myToken.nickName : false;
+  const is_local = localStorage.getItem("isLogin");
+  const myToken = jwt_decode(localStorage.getItem("isLogin"));
+  const nickName = is_local ? myToken.nickName : "";
   const Goal = is_local ? myToken.weeklyGoal : null;
-
-  console.log(myToken);
 
   //닉네임 변경
   const [showModal, setShowModal] = useState(false);
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState(nickName);
   const [selectGoal, setSelectGoal] = useState();
 
   const myDropdownList = [1, 2, 3, 4, 5, 6, 7];
@@ -41,16 +38,17 @@ const MoreInfoModal = (props) => {
   };
 
   const NicknameChange = (e) => {
-    if (e.target.value === '') {
-      setNickname(nickName);
-      return;
-    }
+    // if (e.target.value === "") {
+    //   setNickname(nickName);
+    //   return;
+    // }
     setNickname(e.target.value);
   };
 
   const onClickChange = () => {
-    if (nickname === '') {
-      dispatch(userActions.userInfoChangeFB(nickName, selectGoal));
+    if (nickname === "") {
+      // dispatch(userActions.userInfoChangeFB(nickName, selectGoal));
+      alert("닉네임을 입력해주세요");
       return;
     }
     dispatch(userActions.userInfoChangeFB(nickname, selectGoal));
@@ -59,7 +57,7 @@ const MoreInfoModal = (props) => {
   const onClickLogOut = () => {
     logoutWithKakao();
     setShowModal(false);
-    window.alert('다음에 또 만나요!');
+    window.alert("다음에 또 만나요!");
   };
 
   return (
@@ -68,29 +66,40 @@ const MoreInfoModal = (props) => {
         <CloseBtn>
           <img onClick={openMyInfoModal} src={Close} alt="closeBtn" />
         </CloseBtn>
-        <TextWrap style={{ fontSize: '25px' }}>마이페이지</TextWrap>
+        <TextWrap style={{ fontSize: "25px" }}>마이페이지</TextWrap>
         <Line />
         {is_local ? (
           <>
             <NickName>
-              <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
+              <TextWrap style={{ fontSize: "17px" }}>닉네임</TextWrap>
             </NickName>
             <NickChange>
-              <NickInput type="text" placeholder={nickName ? nickName : '닉네임을 입력해주세요'} onChange={NicknameChange} />
+              <NickInput
+                type="text"
+                placeholder={"닉네임을 입력해주세요"}
+                onChange={NicknameChange}
+                value={nickname}
+              />
               {/* onChange={NicknameChange ? NicknameChange : nickName} */}
             </NickChange>
-            <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
+            <TextWrap style={{ fontSize: "17px", margin: "25px 0px 15px" }}>
+              목표
+            </TextWrap>
             <GoalWrap>
               주
               <CategoryBox>
-                <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px">
+                <Dropdown
+                  changeGoal={changeGoal}
+                  myDropdownList={myDropdownList}
+                  width="89px"
+                >
                   {Goal}
                 </Dropdown>
               </CategoryBox>
-              회
+              회 운동
             </GoalWrap>
             {/* <NickBtn >변경하기</NickBtn> */}
-            <div style={{ display: 'inline-block' }}>
+            <div style={{ display: "inline-block" }}>
               <ChangeBtn onClick={onClickChange}>변경하기</ChangeBtn>
               <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
             </div>
@@ -100,7 +109,7 @@ const MoreInfoModal = (props) => {
             <div>
               <img src={lock} width="48px" height="50px" />
             </div>
-            <div style={{ marginTop: '20px' }}>로그인 후에 이용해주세요</div>
+            <div style={{ marginTop: "20px" }}>로그인 후에 이용해주세요</div>
             <Kakao>
               <KakaoLogin />
             </Kakao>
@@ -126,7 +135,7 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: '';
+    content: "";
     position: absolute;
     top: -10px;
     right: 24px;
@@ -178,7 +187,7 @@ const CloseBtn = styled.div`
 `;
 
 const GoalWrap = styled.div`
-  width: 140px;
+  width: 150px;
   display: flex;
   justify-content: space-around;
   align-items: center;
