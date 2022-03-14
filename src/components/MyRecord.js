@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as commonActions } from "../redux/modules/common";
-import Progress from "@delowar/react-circle-progressbar";
-import fireIcon from "../Images/MyRecordIcon_Fire.png";
-import clockIcon from "../Images/MyRecordIcon_Clock.png";
+import React from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as commonActions } from '../redux/modules/common';
+import Progress from '@delowar/react-circle-progressbar';
+import fireIcon from '../Images/MyRecordIcon_Fire.png';
+import clockIcon from '../Images/MyRecordIcon_Clock.png';
 const MyRecord = (props) => {
   const {
     myRecords: {
@@ -16,6 +16,8 @@ const MyRecord = (props) => {
     } = {},
   } = props;
   const percent = React.useRef();
+
+  // const [percent, SetPercent] = React.useState((countPerWeek / weeklyGoal) * 100 >= 100 ? 100 : (countPerWeek / weeklyGoal) * 100);
 
   // const myRecords = useSelector((state) => state.common.myRecords);
   // React.useEffect(() => {
@@ -69,21 +71,12 @@ const MyRecord = (props) => {
         </Progress>
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img
-              src={fireIcon}
-              alt="불꽃 아이콘"
-              style={{ marginRight: "2px" }}
-            />
+            <img src={fireIcon} alt="불꽃 아이콘" style={{ marginRight: '2px' }} />
             연속 <span className="bold">{daysInARow}</span>일째 운동중이에요
           </div>
           <div className="bottomTextBox">
-            <img
-              src={clockIcon}
-              alt="시계 아이콘"
-              style={{ marginRight: "2px" }}
-            />
-            이번 주에 <span className="bold">{totalTimePerMonth}</span>분
-            운동했어요
+            <img src={clockIcon} alt="시계 아이콘" style={{ marginRight: '2px' }} />
+            이번 주에 <span className="bold">{totalTimePerMonth}</span>분 운동했어요
           </div>
         </BottomTextContainer>
       </MyRecordContent>
@@ -98,9 +91,12 @@ const MyRecord = (props) => {
 //   totalTimePerMonth: 40,
 // };
 const MyRecordBox = styled.div`
-  height: 100%;
-  width: 284px;
-  padding: 0px 24px;
+  height: 284px;
+  padding: 19px 24px;
+  // 피그마에는 height 284라서 맞췄어욥! 혹시 100%로 하신 이유가 있다면 되돌려주세요~
+  // height: 100%;
+  // padding: 0px 24px;
+  width: 315px;
   display: flex;
   flex-direction: column;
   align-items: center;

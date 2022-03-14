@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import clap from "../Images/MySectionIcon_clap.png";
-import Banner from "./Banner";
-import Calender from "./Calender";
-import jwt_decode from "jwt-decode";
-import MyPart from "./MyPart";
-import MyRecord from "./MyRecord";
-import MostExercised from "./MostExercised";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as commonActions } from "../redux/modules/common";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import clap from '../Images/MySectionIcon_clap.png';
+import Banner from './Banner';
+import Calender from './Calender';
+import jwt_decode from 'jwt-decode';
+import MyPart from './MyPart';
+import MyRecord from './MyRecord';
+import MostExercised from './MostExercised';
+import Ranking from './Ranking';
+import { actionCreators as commonActions } from '../redux/modules/common';
+
 const MySection = () => {
-  const nickName = localStorage.getItem("isLogin")
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
   const dispatch = useDispatch();
   const myRecords = useSelector((state) => state.common.myRecords);
@@ -24,12 +24,13 @@ const MySection = () => {
   return (
     <MySectionContainer>
       <MySectionTitle>
-        <img src={clap} alt="박수 아이콘" style={{ marginRight: "4px" }} />
+        <img src={clap} alt="박수 아이콘" style={{ marginRight: '4px' }} />
         안녕하세요 {nickName && `${nickName}님`} 오늘도 함께 운동해요!
       </MySectionTitle>
       <MySectionContent>
         <MyPart></MyPart>
         <MyPage>
+          <Ranking />
           <MyRecord myRecords={myRecords}></MyRecord>
           <Calender></Calender>
         </MyPage>
@@ -66,7 +67,9 @@ const MySectionTitle = styled.div`
 `;
 
 const MySectionContent = styled.div`
+  /* width: 985px; */
   display: flex;
+  justify-content: space-around;
 `;
 const MyPage = styled.div`
   width: 985px;
@@ -75,8 +78,9 @@ const MyPage = styled.div`
   background: white;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  padding: 26px 34px;
+  justify-content: space-between;
+  padding: 26px 24px;
+  box-sizing: border-box;
 `;
 const RightSection = styled.div`
   display: flex;

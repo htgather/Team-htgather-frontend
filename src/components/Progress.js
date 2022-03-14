@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import ProgressBar from "@ramonak/react-progress-bar";
-import styled from "styled-components";
-import { changeToSeconds } from "./YoutubeDataAPI";
-import { getTimeStringSeconds } from "./YoutubeDataAPI";
+import React, { useState, useEffect, useRef } from 'react';
+import ProgressBar from '@ramonak/react-progress-bar';
+import styled from 'styled-components';
+import { changeToSeconds } from './YoutubeDataAPI';
+import { getTimeStringSeconds } from './YoutubeDataAPI';
+
 export default function Timer(props) {
   const roomInfo = props.roomInfo;
   const createdAt = new Date(roomInfo.createdAt);
   const videoStartAfter = roomInfo.videoStartAfter;
   const [videoLength, setVideoLength] = useState(120);
-  const [text, setText] = useState("오늘도 운동하는 여러분👍🏻");
+  const [text, setText] = useState('오늘도 운동하는 여러분👍🏻');
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -19,21 +20,32 @@ export default function Timer(props) {
   const sec = parseInt(seconds);
   const progressBar = useRef();
 
+  // JavaScript에 미디어쿼리를 사용하는 matchMedia()
+  const NewMedia = window.matchMedia('screen and (max-width: 1360px)');
+  // console.log(NewMedia.media);
+  console.log('match는', NewMedia.matches);
+  // window addEventListener
+  //찍힌다요~
+
+  // const test = () => {
+  //   if (NewMedia.matches) {
+  //     setAbc(647);
+  //   }
+  // };
+
   useEffect(() => {
     const now = Date.now();
     const videoStart = createdAt.getTime() + videoStartAfter * 60000;
     const diffMs = parseInt(videoStart - now);
     const diffS = parseInt(diffMs / 1000);
     setVideoLength(
-      diffS <= 0 && Math.abs(diffS) < changeToSeconds(roomInfo.videoLength)
-        ? changeToSeconds(roomInfo.videoLength) - parseFloat(Math.abs(diffS))
-        : changeToSeconds(roomInfo.videoLength) - 2
+      diffS <= 0 && Math.abs(diffS) < changeToSeconds(roomInfo.videoLength) ? changeToSeconds(roomInfo.videoLength) - parseFloat(Math.abs(diffS)) : changeToSeconds(roomInfo.videoLength) - 2
     );
     diffS < 0 ? setProgress(parseFloat(Math.abs(diffS))) : setProgress(0);
   }, []);
 
   useEffect(() => {
-    let temp = getTimeStringSeconds(videoLength).split(":");
+    let temp = getTimeStringSeconds(videoLength).split(':');
     if (temp.length === 3) {
       setHours(temp[0]);
       setMinutes(temp[1]);
@@ -85,16 +97,16 @@ export default function Timer(props) {
         setProgress(pg + 1);
       }
       if (pg >= changeToSeconds(roomInfo.videoLength) * 0.25) {
-        setText("화이팅!");
+        setText('화이팅!');
       }
       if (pg >= changeToSeconds(roomInfo.videoLength) * 0.5) {
-        setText("벌써 절반이나 왔어요!");
+        setText('벌써 절반이나 왔어요!');
       }
       if (pg >= changeToSeconds(roomInfo.videoLength) * 0.75) {
-        setText("거의 다 왔습니다! 조금만 더 힘내요!");
+        setText('거의 다 왔습니다! 조금만 더 힘내요!');
       }
       if (pg === changeToSeconds(roomInfo.videoLength)) {
-        setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
+        setText('👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!');
         clearInterval(myProgressBar);
       }
     }, 1000);
@@ -102,32 +114,43 @@ export default function Timer(props) {
   }, [progress, props.isStart]);
 
   return (
-    <div className="App" style={{ color: "black" }}>
-      <div style={{ margin: "3px 0px 8px" }}>
+    <div className="App" style={{ color: 'black' }}>
+      <div style={{ margin: '3px 0px 8px' }}>
         <TextWrap>{text}</TextWrap>
       </div>
       <Contents>
-        <ProgressBar
-          ref={progressBar}
-          completed={progress}
-          isLabelVisible={false}
-          maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
-          width="983px"
-        />
+        <ProgressBar ref={progressBar} completed={progress} isLabelVisible={false} maxCompleted={changeToSeconds(roomInfo.videoLength) - 2} width={NewMedia.matches ? 647 : 983} />
         <TextWrap>
-          {hours}:{String(minutes).length < 2 ? "0" + minutes : minutes}:
-          {String(seconds).length < 2 ? "0" + seconds : seconds}
+          {hours}:{String(minutes).length < 2 ? '0' + minutes : minutes}:{String(seconds).length < 2 ? '0' + seconds : seconds}
         </TextWrap>
       </Contents>
     </div>
   );
 }
 
+const DIV = styled.div``;
+const Container = styled.div`
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 85px;
+  }
+`;
+
 const Contents = styled.div`
   width: 1096px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 1360px) {
+    width: 758px;
+    height: 50px;
+  }
+`;
+
+const ProgressWrap = styled.div`
+  /* @media screen and (max-width: 1360px) {
+    width: 500px;
+  } */
 `;
 
 const TextWrap = styled.div`
