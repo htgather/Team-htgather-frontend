@@ -42,7 +42,7 @@ const initialState = {
       isMe: false,
     },
     {
-      rank: 9,
+      rank: 126,
       nickName: '먹은만큼 운동하자',
       countPerWeek: 5,
       isMe: true,

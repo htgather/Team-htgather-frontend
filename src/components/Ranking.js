@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';
+
 import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as commonActions } from '../redux/modules/common';
 
 import gold from '../Images/gold.png';
 import silver from '../Images/silver.png';
@@ -12,7 +15,13 @@ const Ranking = (props) => {
 
   const rankingList = useSelector((state) => state.User.ranking);
 
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+
   React.useEffect(() => {
+    if (nickName) {
+      dispatch(commonActions.getRecordsDB());
+    }
     dispatch(userActions.getRankFB());
   }, []);
 
@@ -42,9 +51,9 @@ const Ranking = (props) => {
             if (p.countPerWeek === 0 || p.rank > 4) {
               return (
                 <IsMeZero>
-                  <Rank>{p.rank}</Rank>
-                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.nickName}</Name>
-                  <Count style={{ paddingLeft: p.isMe ? ' 0px 9px' : null }}>{p.countPerWeek}회</Count>
+                  <Rank style={{ paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
+                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{nickName}</Name>
+                  <Count>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
             }
@@ -113,7 +122,7 @@ const OneRank = styled.div`
 `;
 
 const Rank = styled.div`
-  width: 20px;
+  width: 25px;
   font-size: 16px;
   text-align: center;
 `;
@@ -147,7 +156,6 @@ const IsMeZero = styled(OneRank)`
   color: #fff;
   position: absolute;
   bottom: 27px;
-  padding-left: 9px; // 세자리수일 때 확인 필요
 `;
 
 const TextWrap = styled.div`
