@@ -8,6 +8,7 @@ export default function Timer(props) {
   const roomInfo = props.roomInfo;
   const createdAt = new Date(roomInfo.createdAt);
   const videoStartAfter = roomInfo.videoStartAfter;
+
   const [videoLength, setVideoLength] = useState(120);
   const [text, setText] = useState('오늘도 운동하는 여러분👍🏻');
   const [hours, setHours] = useState(0);
@@ -96,13 +97,13 @@ export default function Timer(props) {
       if (pg < changeToSeconds(roomInfo.videoLength)) {
         setProgress(pg + 1);
       }
-      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.25) {
+      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.245) {
         setText('화이팅!');
       }
-      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.5) {
+      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.45) {
         setText('벌써 절반이나 왔어요!');
       }
-      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.75) {
+      if (pg >= changeToSeconds(roomInfo.videoLength) * 0.745) {
         setText('거의 다 왔습니다! 조금만 더 힘내요!');
       }
       if (pg === changeToSeconds(roomInfo.videoLength)) {
@@ -128,14 +129,6 @@ export default function Timer(props) {
   );
 }
 
-const DIV = styled.div``;
-const Container = styled.div`
-  @media screen and (max-width: 1360px) {
-    width: 758px;
-    height: 85px;
-  }
-`;
-
 const Contents = styled.div`
   width: 1096px;
   display: flex;
@@ -145,12 +138,6 @@ const Contents = styled.div`
     width: 758px;
     height: 50px;
   }
-`;
-
-const ProgressWrap = styled.div`
-  /* @media screen and (max-width: 1360px) {
-    width: 500px;
-  } */
 `;
 
 const TextWrap = styled.div`

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../../redux/modules/room";
 import styled from "styled-components";
 import Close from "../../Images/Close.png";
-
+import { history } from "../../redux/configureStore";
 const CompleteModal = (props) => {
   const { exitRoom, roomId, isDone, setIsDone } = props;
   const dispatch = useDispatch();
@@ -38,7 +38,8 @@ const CompleteModal = (props) => {
                   if (isDone) {
                     setIsDone(false);
                   } else {
-                    dispatch(roomActions.exitRoomDB(roomId));
+                    // dispatch(roomActions.exitRoomDB(roomId));
+                    history.replace("/");
                   }
                 }}
               >
