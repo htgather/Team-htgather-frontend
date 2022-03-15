@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as commonActions } from '../redux/modules/common';
+import React from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commonActions } from "../redux/modules/common";
 
-import { Progress } from 'antd';
-import 'antd/dist/antd.css';
+import { Progress } from "antd";
+import "antd/dist/antd.css";
 
-import fireIcon from '../Images/MyRecordIcon_Fire.png';
-import clockIcon from '../Images/MyRecordIcon_Clock.png';
+import fireIcon from "../Images/MyRecordIcon_Fire.png";
+import clockIcon from "../Images/MyRecordIcon_Clock.png";
 
 const MyRecord = (props) => {
   const {
@@ -62,19 +62,35 @@ const MyRecord = (props) => {
     <MyRecordBox>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
-        <Progress type="circle" percent={per} showInfo={false} width={142} trailColor="#EAECEF" strokeColor="#0028FA" />
+        <Progress
+          type="circle"
+          percent={per}
+          showInfo={false}
+          width={142}
+          trailColor="#EAECEF"
+          strokeColor="#0028FA"
+        />
         <div className="progressInTextBox">
           <div className="countPerWeekText">{countPerWeek}일</div>
           <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
         </div>
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img src={fireIcon} alt="불꽃 아이콘" style={{ marginRight: '2px' }} />
+            <img
+              src={fireIcon}
+              alt="불꽃 아이콘"
+              style={{ marginRight: "2px" }}
+            />
             연속 <span className="bold">{daysInARow}</span>일째 운동중이에요
           </div>
           <div className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" style={{ marginRight: '2px' }} />
-            이번 주에 <span className="bold">{totalTimePerMonth}</span>분 운동했어요
+            <img
+              src={clockIcon}
+              alt="시계 아이콘"
+              style={{ marginRight: "2px" }}
+            />
+            이번 주에 <span className="bold">{totalTimePerMonth}</span>분
+            운동했어요
           </div>
         </BottomTextContainer>
       </MyRecordContent>

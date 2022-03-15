@@ -15,8 +15,7 @@ const setWeeklyGoal = createAction(SET_WEEKLY_GOAL, (selectGoal) => ({
 const getRanking = createAction(GET_RANKING, (ranking) => ({ ranking }));
 
 const initialState = {
-
-  nickname: '',
+  nickname: "",
 
   ranking: [
     {
@@ -84,7 +83,7 @@ const getRankFB = (ranking) => {
   return function (dispatch, getState, { history }) {
     const access_token = localStorage.getItem("isLogin");
     axios
-      .get("http://3.39.58.56:4000/myinfo/ranking", {
+      .get("https://test.kimjeongho-server.com/myinfo/ranking", {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

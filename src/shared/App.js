@@ -5,6 +5,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import Main from "../pages/Main";
 import Detail from "../pages/Detail";
+import "./App.css";
 import theme from "./Theme";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";

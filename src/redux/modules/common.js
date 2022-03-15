@@ -1,11 +1,11 @@
-import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
-import instance from '../../shared/Request';
-import axios from 'axios';
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import instance from "../../shared/Request";
+import axios from "axios";
 
-const GET_CALENDAR = 'GET_CALENDAR';
-const GET_RECORDS = 'GET_RECORDS';
-const SET_RECORDS = 'SET_RECORDS';
+const GET_CALENDAR = "GET_CALENDAR";
+const GET_RECORDS = "GET_RECORDS";
+const SET_RECORDS = "SET_RECORDS";
 
 const getCalendar = createAction(GET_CALENDAR, (calenderList) => ({
   calenderList,
@@ -39,9 +39,9 @@ const getCalendarDB = () => {
 const getRecordsDB = () => {
   return function (dispatch, getState, { history }) {
     axios
-      .get('http://3.39.58.56:4000/myinfo/statistics', {
+      .get("https://test.kimjeongho-server.com/myinfo/statistics", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('isLogin')}`,
+          Authorization: `Bearer ${localStorage.getItem("isLogin")}`,
         },
       })
       .then((response) => {
