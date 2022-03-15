@@ -179,17 +179,17 @@ const CalenderBody = styled.div`
 
   .CalenderCheckIcon {
     position: absolute;
-    top: -6px;
+    top: -3px;
   }
   .CalenderTodayIcon {
     position: absolute;
-    top: -6px;
+    top: -3px;
     z-index: 1;
   }
   .CalenderStampIcon {
     position: absolute;
     z-index: 2;
-    top: -7px;
+    top: -8px;
     right: 1.01px;
   }
 `;
