@@ -113,6 +113,7 @@ const Noti = styled.div`
   height: 40px;
   letter-spacing: -1.2px;
   color: #aeb5bc;
-  margin-top: 8px;
+  margin-top: 5px;
+  z-index: 20px;
 `;
 export default MostExercised;
