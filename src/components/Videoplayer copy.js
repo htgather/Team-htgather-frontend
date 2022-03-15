@@ -16,7 +16,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const [Audio, setAduio] = useState([]);
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
-  const [reject, setReject] = useState(false);
+
   const videoGrid = useRef();
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
@@ -64,18 +64,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
     socket.emit("join_room", roomName, nickname);
 
     return () => {
-      // if (!reject) {
       LeaveRoom();
-      // }
     };
   }, []);
 
   //서버로부터 accept_join 받음
   socket.on("accept_join", async (userObjArr, socketIdformserver) => {
-    const length = userObjArr.length;
-
     //카메라, 마이크 가져오기
     await getMedia();
+    const length = userObjArr.length;
     setSocketID(socketIdformserver);
     console.log(peopleInRoom);
     changeNumberOfUsers(`${peopleInRoom}/5`);
@@ -214,7 +211,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       console.log(error);
     }
   }
-  // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯
+
   socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
     try {
       const newPC = makeConnection(remoteSocketId, remoteNickname);
@@ -261,9 +258,9 @@ const Videoplayer = React.forwardRef((props, ref) => {
   // 이후 참가한 방에 일어나는 일
 
   socket.on("reject_join", () => {
-    // setReject(true);
     alert("정원이 초과되었습니다.");
     history.replace("/");
+    window.location.reload();
   });
 
   //나가기를 누르면 나한테 벌어지는 일

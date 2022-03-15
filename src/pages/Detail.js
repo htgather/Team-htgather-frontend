@@ -54,7 +54,7 @@ const Detail = (props) => {
   };
 
   const fighting = () => {
-    window.alert("💪🏻");
+    childRef.current.showEmoji();
   };
   const dispatch = useDispatch();
   React.useEffect(() => {
