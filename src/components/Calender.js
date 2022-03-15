@@ -199,6 +199,6 @@ const CalenderText = styled.div`
   font-weight: 400;
   color: #878e95;
   text-align: center;
-  margin-top: 2px;
+  margin-top: -4px;
 `;
 export default Calender;

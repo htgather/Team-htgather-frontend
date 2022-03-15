@@ -65,12 +65,12 @@ const MyRecord = (props) => {
         </div>
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img src={fireIcon} alt="불꽃 아이콘" style={{ marginRight: '2px' }} />
-            연속 <span className="bold">{daysInARow}</span>일째 운동중이에요
+            <img src={fireIcon} alt="불꽃 아이콘" style={{ margin: '0px 2.5px 1px 0px' }} />
+            연속&nbsp;<span className="bold">{daysInARow}</span>일째 운동중이에요
           </div>
           <div className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" style={{ marginRight: '2px' }} />
-            이번 주에 <span className="bold">{totalTimePerMonth}</span>분 운동했어요
+            <img src={clockIcon} alt="시계 아이콘" style={{ margin: '0px 2.5px 2px 0px' }} />
+            이번 주에&nbsp;<span className="bold">{totalTimePerMonth}</span>분 운동했어요
           </div>
         </BottomTextContainer>
       </MyRecordContent>
@@ -78,12 +78,6 @@ const MyRecord = (props) => {
   );
 };
 
-// MyRecord.defaultProps = {
-//   countPerWeek: 1,
-//   weeklyGoal: 3,
-//   dayInARow: 38,
-//   totalTimePerMonth: 40,
-// };
 const MyRecordBox = styled.div`
   height: 284px;
   padding: 19px 24px;
@@ -140,8 +134,16 @@ const MyRecordContent = styled.div`
 
 const BottomTextContainer = styled.div`
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   .bottomTextBox {
     letter-spacing: -0.48px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
   }
 `;
+
 export default MyRecord;
