@@ -44,7 +44,7 @@ const Ranking = (props) => {
                 <IsMeZero>
                   <Rank>{p.rank}</Rank>
                   <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.nickName}</Name>
-                  <Count>{p.countPerWeek}회</Count>
+                  <Count style={{ paddingLeft: p.isMe ? ' 0px 9px' : null }}>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
             }
@@ -75,14 +75,13 @@ const DIV = styled.div`
   height: 284px;
   border-radius: 12px;
   padding: 20px 10px;
-  /* border: 1px solid #ddd; */
 `;
 
 const Header = styled.div`
   font-weight: bold;
   font-size: 16px;
   color: #222529;
-  margin: 0px 0px 20px;
+  margin: 0px 0px 15px;
   letter-spacing: -0.64px;
 `;
 
@@ -130,7 +129,6 @@ const Count = styled.div`
   width: 50px;
   font-size: 17px;
   font-weight: 600;
-  /* #4a5056; */
   text-align: right;
 `;
 
@@ -148,7 +146,8 @@ const IsMeZero = styled(OneRank)`
   background-color: #0028fa;
   color: #fff;
   position: absolute;
-  bottom: 22px;
+  bottom: 27px;
+  padding-left: 9px; // 세자리수일 때 확인 필요
 `;
 
 const TextWrap = styled.div`
