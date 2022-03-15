@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import jwt_decode from 'jwt-decode';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
 
-import { actionCreators as userActions } from '../redux/modules/user';
-import { actionCreators as commonActions } from '../redux/modules/common';
+import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators as commonActions } from "../redux/modules/common";
 
-import gold from '../Images/gold.png';
-import silver from '../Images/silver.png';
-import bronze from '../Images/bronze.png';
+import gold from "../Images/gold.png";
+import silver from "../Images/silver.png";
+import bronze from "../Images/bronze.png";
 
 const Ranking = (props) => {
   const dispatch = useDispatch();
 
   const rankingList = useSelector((state) => state.User.ranking);
+  // const rankingList = [
+  //   { rank: 1, nickName: "김승호", countPerWeek: 10, isMe: false },
+  //   { rank: 2, nickName: "감감감", countPerWeek: 1, isMe: false },
+  //   { rank: 3, nickName: "감감감", countPerWeek: 1, isMe: false },
+  //   { rank: 4, nickName: "감감감", countPerWeek: 0, isMe: true },
+  // ];
 
-  const is_local = localStorage.getItem('isLogin');
-  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+  const is_local = localStorage.getItem("isLogin");
+  const nickName = is_local
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
 
   React.useEffect(() => {
     if (nickName) {
@@ -51,8 +59,12 @@ const Ranking = (props) => {
             if (p.countPerWeek === 0 || p.rank > 4) {
               return (
                 <IsMeZero>
-                  <Rank style={{ paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
-                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
+                  <Rank style={{ paddingLeft: p.rank > 9 ? "" : "2px" }}>
+                    {p.rank}
+                  </Rank>
+                  <Name style={{ fontWeight: p.isMe ? "bold" : "" }}>
+                    {p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}
+                  </Name>
                   <Count>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
@@ -62,14 +74,24 @@ const Ranking = (props) => {
             <OneRank
               key={i}
               style={{
-                backgroundColor: p.isMe ? '#405EFB' : '',
-                color: p.isMe ? '#fff' : '',
+                backgroundColor: p.isMe ? "#405EFB" : "",
+                color: p.isMe ? "#fff" : "",
               }}
             >
               <Rank>
-                {p.rank === 1 ? <img src={gold} alt="금메달" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" /> : p.rank}
+                {p.rank === 1 ? (
+                  <img src={gold} alt="금메달" />
+                ) : p.rank && p.rank === 2 ? (
+                  <img src={silver} alt="은메달" />
+                ) : p.rank && p.rank === 3 ? (
+                  <img src={bronze} alt="동메달" />
+                ) : (
+                  p.rank
+                )}
               </Rank>
-              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
+              <Name style={{ fontWeight: p.isMe ? "bold" : "" }}>
+                {p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}
+              </Name>
               <Count>{p.countPerWeek}회</Count>
             </OneRank>
           );
