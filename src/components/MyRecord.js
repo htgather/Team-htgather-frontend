@@ -58,7 +58,7 @@ const MyRecord = (props) => {
     <MyRecordBox>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
-        <Progress type="circle" percent={per} showInfo={false} width={142} trailColor="#EAECEF" strokeColor="#0028FA" />
+        <Progress type="circle" percent={per} showInfo={false} width={142} trailColor="#EAECEF" strokeColor="#405EFB" />
         <div className="progressInTextBox">
           <div className="countPerWeekText">{countPerWeek}일</div>
           <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>

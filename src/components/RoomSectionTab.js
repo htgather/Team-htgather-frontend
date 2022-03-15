@@ -55,7 +55,7 @@ const RoomSectionTop = (props) => {
                   }}
                   style={{
                     color: clickedDifficulty === i ? '#FFF' : '',
-                    background: clickedDifficulty === i ? '#222529' : '',
+                    background: clickedDifficulty === i ? '#667EFC' : '',
                   }}
                 >
                   {e}
@@ -126,6 +126,9 @@ const DB_EL = styled.div`
   background-color: #eaecef;
   color: #878e95;
   cursor: pointer;
+  :hover {
+    background-color: #d9dffe;
+  }
 `;
 const CategoryBox = styled.div`
   display: flex;
@@ -140,9 +143,9 @@ const CategoryBox = styled.div`
 
 const MakeRoomBtn = styled.div`
   width: 315px;
-  height: 48px;
+  height: 44px;
   border-radius: 20px;
-  background-color: #222529;
+  background-color: #0028fa;
   font-size: 24px;
   font-weight: bold;
   color: white;

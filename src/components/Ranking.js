@@ -62,7 +62,7 @@ const Ranking = (props) => {
             <OneRank
               key={i}
               style={{
-                backgroundColor: p.isMe ? '#0028fa' : '',
+                backgroundColor: p.isMe ? '#405EFB' : '',
                 color: p.isMe ? '#fff' : '',
               }}
             >
@@ -152,7 +152,7 @@ const Noti = styled(OneRank)`
 `;
 
 const IsMeZero = styled(OneRank)`
-  background-color: #0028fa;
+  background-color: #405efb;
   color: #fff;
   position: absolute;
   bottom: 27px;

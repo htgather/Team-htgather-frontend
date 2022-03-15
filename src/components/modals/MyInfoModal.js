@@ -28,8 +28,6 @@ const MoreInfoModal = (props) => {
   const [nickname, setNickname] = useState(nickName);
   const [selectGoal, setSelectGoal] = useState(Goal);
 
-  // console.log('select', selectGoal);
-
   const myDropdownList = [1, 2, 3, 4, 5, 6, 7];
 
   const changeGoal = (weeklyGoal) => {
@@ -44,11 +42,6 @@ const MoreInfoModal = (props) => {
   const NicknameChange = (e) => {
     setNickname(e.target.value);
   };
-
-  // const dropChange = (e) => {
-  //   setSelectGoal(e.target.value);
-  //   console.log(selectGoal);
-  // };
 
   const onClickChange = () => {
     if (nickname === '') {
@@ -80,14 +73,14 @@ const MoreInfoModal = (props) => {
         </NickChange>
         <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
         <GoalWrap>
-          주
+          주&nbsp;&nbsp;
           <CategoryBox>
             <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px">
               {selectGoal}
               {/* {selectGoal ? selectGoal : Goal} */}
             </Dropdown>
           </CategoryBox>
-          회 운동
+          &nbsp;회 운동
         </GoalWrap>
         <div style={{ display: 'inline-block' }}>
           <ChangeBtn onClick={onClickChange}>변경하기</ChangeBtn>
@@ -165,10 +158,11 @@ const CloseBtn = styled.div`
 `;
 
 const GoalWrap = styled.div`
-  width: 150px;
+  width: 250px;
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
+  font-size: 16px;
 `;
 
 // const Dropdown = styled.div`

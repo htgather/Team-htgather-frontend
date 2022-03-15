@@ -180,6 +180,7 @@ const CalenderBody = styled.div`
   .CalenderCheckIcon {
     position: absolute;
     top: -3px;
+    right: -0.1px;
   }
   .CalenderTodayIcon {
     position: absolute;
@@ -190,7 +191,7 @@ const CalenderBody = styled.div`
     position: absolute;
     z-index: 2;
     top: -8px;
-    right: 1.01px;
+    right: -0.28px;
   }
 `;
 
