@@ -8,7 +8,7 @@ import lock from "../../Images/lock.png";
 import Close from "../../Images/Close.png";
 import Dropdown from "../Dropdown";
 
-import { logoutWithKakao } from "../../components/KakaoLogin";
+import { logoutWithKakao } from "../KakaoLogin";
 import { actionCreators as userActions } from "../../redux/modules/user";
 
 const MoreInfoModal = (props) => {
@@ -56,8 +56,8 @@ const MoreInfoModal = (props) => {
 
   const onClickLogOut = () => {
     logoutWithKakao();
-    setShowModal(false);
-    window.alert("다음에 또 만나요!");
+    openMyInfoModal(false);
+    // window.alert("다음에 또 만나요!");
   };
 
   return (

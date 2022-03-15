@@ -146,12 +146,12 @@ const Detail = (props) => {
                     {soundOn ? (
                       <>
                         <img src={Notmute} alt="음소거해제" />
-                        음소거해제
+                        마이크켜기
                       </>
                     ) : (
                       <>
                         <img src={Microphone} alt="음소거" />
-                        음소거
+                        마이크끄기
                       </>
                     )}
                   </Btn>

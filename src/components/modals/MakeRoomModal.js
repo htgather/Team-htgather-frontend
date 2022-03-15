@@ -30,7 +30,13 @@ const MakeRoomModal = (props) => {
   };
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const categoryList = ["스트레칭", "요가", "필라테스", "근력운동", "타바타"];
+  const categoryList = [
+    "근력 운동",
+    "유산소 운동",
+    "스트레칭",
+    "요가/필라테스",
+    "기타",
+  ];
   const getCategory = (category) => {
     setClickedCategory(category);
   };
@@ -224,7 +230,7 @@ const MakeRoomContainer = styled.div`
   height: 760px;
   background: #ffffff;
   border-radius: 12px;
-  padding: 52px 48px;
+  padding: 48px;
   font-size: 18px;
   color: #878e95;
   .boldText {
@@ -272,6 +278,7 @@ const RoomNameInput = styled.textarea`
 const MakeRoomOptionBox = styled.div`
   display: flex;
   align-items: center;
+  height: 96px;
 `;
 const SelectBox = styled.div`
   display: flex;
@@ -282,7 +289,7 @@ const SelectBox = styled.div`
 `;
 const DB_EL = styled.div`
   margin: 12px 20px 0 0;
-  padding: 8px 20px;
+  padding: 7px 20px;
   border-radius: 8px;
   background-color: #eaecef;
   color: #878e95;
@@ -321,7 +328,7 @@ const BtnBox = styled.div`
   align-items: center;
   font-size: 20px;
   justify-content: space-between;
-  margin-top: 48px;
+  margin-top: 36px;
 `;
 const CancelBtn = styled.div`
   padding: 13px 66px;
