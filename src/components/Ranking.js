@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as userActions } from "../redux/modules/user";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
+
+import gold from '../Images/gold.png';
+import silver from '../Images/silver.png';
+import bronze from '../Images/bronze.png';
 
 const Ranking = (props) => {
   const dispatch = useDispatch();
@@ -33,23 +37,14 @@ const Ranking = (props) => {
       <Header>이번 주 운동 랭킹</Header>
       <RankContainer>
         {rankingList.map((p, i) => {
-          console.log(p);
-          console.log(i);
           // 내 기록이 0회일 때 혹은 다른 사람 랭킹 수가 3 이하일 때
           if (p.isMe) {
             if (p.countPerWeek === 0 || p.rank > 4) {
-              // rankingList.length < 5
               return (
                 <IsMeZero>
                   <Rank>{p.rank}</Rank>
-                  <Name>{p.nickName}</Name>
-                  <Count
-                    style={{
-                      marginRight: p.countPerWeek < 10 ? "-10px" : null,
-                    }}
-                  >
-                    {p.countPerWeek}회
-                  </Count>
+                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.nickName}</Name>
+                  <Count>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
             }
@@ -58,26 +53,15 @@ const Ranking = (props) => {
             <OneRank
               key={i}
               style={{
-                backgroundColor: p.isMe ? "#0028fa" : "",
-                color: p.isMe ? "#fff" : "",
-                fontWeight: p.isMe ? "bold" : "",
+                backgroundColor: p.isMe ? '#0028fa' : '',
+                color: p.isMe ? '#fff' : '',
               }}
             >
               <Rank>
-                {p.rank === 1
-                  ? "🥇"
-                  : p.rank && p.rank === 2
-                  ? "🥈"
-                  : p.rank && p.rank === 3
-                  ? "🥉"
-                  : p.rank}
+                {p.rank === 1 ? <img src={gold} alt="금메달" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" /> : p.rank}
               </Rank>
-              <Name>{p.nickName}</Name>
-              <Count
-                style={{ marginRight: p.countPerWeek < 10 ? "-10px" : null }}
-              >
-                {p.countPerWeek}회
-              </Count>
+              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.nickName}</Name>
+              <Count>{p.countPerWeek}회</Count>
             </OneRank>
           );
         })}
@@ -108,7 +92,7 @@ const RankContainer = styled.div`
   display: grid;
   align-content: start;
   align-items: start;
-  row-gap: 5px;
+  row-gap: 4px;
 
   /* display: flex;
   flex-direction: column;
@@ -121,29 +105,33 @@ const OneRank = styled.div`
   height: 36px;
   border-radius: 8px;
   background-color: #f1f3f5;
-  padding: 8px 12px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   color: rgb(34, 37, 41);
   letter-spacing: -0.64px;
+  padding: 0px 8px;
 `;
 
 const Rank = styled.div`
-  /* color: #878e95; */
-  margin-left: 5px;
+  width: 20px;
+  font-size: 16px;
+  text-align: center;
 `;
 
 const Name = styled.div`
   width: 130px;
   display: flex;
   text-align: left;
+  font-size: 16px;
 `;
 
 const Count = styled.div`
-  width: 35px;
+  width: 50px;
   font-size: 17px;
   font-weight: 600;
   /* #4a5056; */
+  text-align: right;
 `;
 
 //집계 0일때
@@ -160,8 +148,7 @@ const IsMeZero = styled(OneRank)`
   background-color: #0028fa;
   color: #fff;
   position: absolute;
-  bottom: 24px;
-  font-weight: bold;
+  bottom: 22px;
 `;
 
 const TextWrap = styled.div`
