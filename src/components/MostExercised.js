@@ -22,39 +22,35 @@ const MostExercised = (props) => {
           <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
         </MostExercisedHeader>
         <MostExercisedContentBox>
-          {records && (
+          {records ? (
             <>
-              {records.length === 0 ? (
-                <>
-                  <Noti>
-                    <div>
-                      아직 운동 기록이 없어요. <br />
-                      홈트게더와 함께 즐거운 운동을 경험해보세요!
-                    </div>
-                  </Noti>
-                </>
-              ) : (
-                <>
-                  {records[0] && (
-                    <MostExercisedContent>
-                      <img src={Category1} alt="" className="MostExercisedImg" />
-                      <div className="MostExercisedContentTextBox">
-                        <div className="MostExercisedTitle">{records[0][0]}</div>
-                        <div className="MostExercisedTimes">{records[0][1]}회</div>
-                      </div>
-                    </MostExercisedContent>
-                  )}
-                  {records[1] && (
-                    <MostExercisedContent>
-                      <img src={Category2} alt="" className="MostExercisedImg" />
-                      <div className="MostExercisedContentTextBox">
-                        <div className="MostExercisedTitle">{records[1][0]}</div>
-                        <div className="MostExercisedTimes">{records[1][1]}회</div>
-                      </div>
-                    </MostExercisedContent>
-                  )}
-                </>
+              {records[0] && (
+                <MostExercisedContent>
+                  <img src={Category1} alt="" className="MostExercisedImg" />
+                  <div className="MostExercisedContentTextBox">
+                    <div className="MostExercisedTitle">{records[0][0]}</div>
+                    <div className="MostExercisedTimes">{records[0][1]}회</div>
+                  </div>
+                </MostExercisedContent>
               )}
+              {records[1] && (
+                <MostExercisedContent>
+                  <img src={Category2} alt="" className="MostExercisedImg" />
+                  <div className="MostExercisedContentTextBox">
+                    <div className="MostExercisedTitle">{records[1][0]}</div>
+                    <div className="MostExercisedTimes">{records[1][1]}회</div>
+                  </div>
+                </MostExercisedContent>
+              )}
+            </>
+          ) : (
+            <>
+              <Noti>
+                <div>
+                  아직 운동 기록이 없어요. <br />
+                  홈트게더와 함께 즐거운 운동을 경험해보세요!
+                </div>
+              </Noti>
             </>
           )}
         </MostExercisedContentBox>
@@ -77,6 +73,7 @@ const MostExercisedHeader = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  letter-spacing: -0.48px;
 `;
 
 const MostExercisedContentBox = styled.div`
@@ -116,9 +113,9 @@ const MostExercisedContent = styled.div`
 const Noti = styled.div`
   width: 255px;
   height: 40px;
-  letter-spacing: -1.2px;
+  letter-spacing: -0.96px;
   color: #aeb5bc;
-  margin-top: 5px;
-  z-index: 20px;
+  margin-top: 3px;
 `;
+
 export default MostExercised;

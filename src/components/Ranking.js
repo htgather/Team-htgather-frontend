@@ -46,13 +46,13 @@ const Ranking = (props) => {
       <Header>이번 주 운동 랭킹</Header>
       <RankContainer>
         {rankingList.map((p, i) => {
-          // 내 기록이 0회일 때 혹은 다른 사람 랭킹 수가 3 이하일 때
+          // 내 기록이 0회일 때 혹은 랭킹이 5위 초과일때
           if (p.isMe) {
             if (p.countPerWeek === 0 || p.rank > 4) {
               return (
                 <IsMeZero>
                   <Rank style={{ paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
-                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{nickName}</Name>
+                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
                   <Count>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
@@ -69,7 +69,7 @@ const Ranking = (props) => {
               <Rank>
                 {p.rank === 1 ? <img src={gold} alt="금메달" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" /> : p.rank}
               </Rank>
-              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? nickName : p.nickName}</Name>
+              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
               <Count>{p.countPerWeek}회</Count>
             </OneRank>
           );

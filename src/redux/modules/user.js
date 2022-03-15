@@ -15,7 +15,7 @@ const setWeeklyGoal = createAction(SET_WEEKLY_GOAL, (selectGoal) => ({
 const getRanking = createAction(GET_RANKING, (ranking) => ({ ranking }));
 
 const initialState = {
-  nickname: '',
+  nickname: '아자아자',
   ranking: [
     {
       rank: 1,

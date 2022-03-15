@@ -108,7 +108,8 @@ const ImgWrap = styled.div`
   background-color: #fff;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  padding: 70px;
+  padding: 80px 30px;
+  letter-spacing: -0.48px;
 `;
 
 const Container = styled.div`
