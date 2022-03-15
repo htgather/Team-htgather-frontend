@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/user';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Ranking = (props) => {
   const dispatch = useDispatch();
@@ -43,16 +43,41 @@ const Ranking = (props) => {
                 <IsMeZero>
                   <Rank>{p.rank}</Rank>
                   <Name>{p.nickName}</Name>
-                  <Count style={{ marginRight: p.countPerWeek < 10 ? '-10px' : null }}>{p.countPerWeek}회</Count>
+                  <Count
+                    style={{
+                      marginRight: p.countPerWeek < 10 ? "-10px" : null,
+                    }}
+                  >
+                    {p.countPerWeek}회
+                  </Count>
                 </IsMeZero>
               );
             }
           }
           return (
-            <OneRank key={i} style={{ backgroundColor: p.isMe ? '#0028fa' : '', color: p.isMe ? '#fff' : '', fontWeight: p.isMe ? 'bold' : '' }}>
-              <Rank>{p.rank === 1 ? '🥇' : p.rank && p.rank === 2 ? '🥈' : p.rank && p.rank === 3 ? '🥉' : p.rank}</Rank>
+            <OneRank
+              key={i}
+              style={{
+                backgroundColor: p.isMe ? "#0028fa" : "",
+                color: p.isMe ? "#fff" : "",
+                fontWeight: p.isMe ? "bold" : "",
+              }}
+            >
+              <Rank>
+                {p.rank === 1
+                  ? "🥇"
+                  : p.rank && p.rank === 2
+                  ? "🥈"
+                  : p.rank && p.rank === 3
+                  ? "🥉"
+                  : p.rank}
+              </Rank>
               <Name>{p.nickName}</Name>
-              <Count style={{ marginRight: p.countPerWeek < 10 ? '-10px' : null }}>{p.countPerWeek}회</Count>
+              <Count
+                style={{ marginRight: p.countPerWeek < 10 ? "-10px" : null }}
+              >
+                {p.countPerWeek}회
+              </Count>
             </OneRank>
           );
         })}

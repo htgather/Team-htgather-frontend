@@ -24,7 +24,7 @@ export const LoginWithKakao = () => {
           const _id = response.id;
           const { profile } = response.kakao_account;
           axios
-            .post("http://3.39.58.56:4000/users/auth", {
+            .post("https://test.kimjeongho-server.com/users/auth", {
               nickName: profile.nickname,
               snsId: _id,
             })
@@ -58,10 +58,12 @@ export const LoginWithKakao = () => {
 };
 
 export const logoutWithKakao = () => {
-  if (!Kakao.Auth.getAccessToken()) {
-    console.log("로그인되어 있지 않습니다.");
-    return;
-  }
+  // if (!Kakao.Auth.getAccessToken()) {
+  //   console.log("로그인되어 있지 않습니다.");
+  //   localStorage.clear();
+  //   window.location.reload("/");
+  //   return;
+  // }
   Kakao.Auth.logout();
   localStorage.clear();
   window.location.reload("/");

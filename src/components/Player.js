@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import ReactPlayer from 'react-player';
-import styled from 'styled-components';
-import { getTimeStringSeconds, calCount } from './YoutubeDataAPI';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as commonActions } from '../redux/modules/common';
+import React, { useEffect } from "react";
+import ReactPlayer from "react-player";
+import styled from "styled-components";
+import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commonActions } from "../redux/modules/common";
 
 function Player(props) {
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
@@ -17,7 +17,7 @@ function Player(props) {
   const [countTime, setCountTime] = React.useState();
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  const NewMedia = window.matchMedia('screen and (max-width: 1360px)');
+  const NewMedia = window.matchMedia("screen and (max-width: 1360px)");
   // console.log('player match는', NewMedia.matches);
 
   const endVideo = () => {
@@ -25,7 +25,7 @@ function Player(props) {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
       category: roomInfo.category,
     };
-    setCountTime('영상이 종료되었습니다');
+    setCountTime("영상이 종료되었습니다");
     dispatch(commonActions.saveRecordsDB(recordsData));
     props.setIsDone(true);
   };
@@ -52,7 +52,7 @@ function Player(props) {
           setCountTime(false);
         } else if (durationS && Math.abs(diffS) > durationS) {
           // durationS 비동기로 받아오는 값.
-          setCountTime('영상이 종료되었습니다');
+          setCountTime("영상이 종료되었습니다");
         }
       }
     }, 100);
@@ -62,13 +62,13 @@ function Player(props) {
 
   return (
     <Container>
-      <div style={{ pointerEvents: 'none' }}>
+      <div style={{ pointerEvents: "none" }}>
         {countTime && <Count>{countTime}</Count>}
         <ReactPlayer
-          style={{ borderRadius: '12px' }}
+          style={{ borderRadius: "12px" }}
           url={roomInfo.videoUrl}
-          width={NewMedia.matches ? '758px' : '1096px'} //"758px" //1096px
-          height={NewMedia.matches ? '426px' : '616px'} //"426px" //616px
+          width={NewMedia.matches ? "758px" : "1096px"} //"758px" //1096px
+          height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
           ref={player}
           playing={isPlaying}
           // 특정시점부터 시작
