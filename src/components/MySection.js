@@ -1,24 +1,22 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import clap from "../Images/MySectionIcon_clap.png";
-import Banner from "./Banner";
-import Calender from "./Calender";
-import jwt_decode from "jwt-decode";
-import MyPart from "./modals/MyPart";
-import MyRecord from "./MyRecord";
-import MostExercised from "./MostExercised";
-import Ranking from "./Ranking";
-import { actionCreators as commonActions } from "../redux/modules/common";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import clap from '../Images/MySectionIcon_clap.png';
+import Banner from './Banner';
+import Calender from './Calender';
+import jwt_decode from 'jwt-decode';
+import MyPart from './modals/MyPart';
+import MyRecord from './MyRecord';
+import MostExercised from './MostExercised';
+import Ranking from './Ranking';
+import { actionCreators as commonActions } from '../redux/modules/common';
 
 const MySection = () => {
   const dispatch = useDispatch();
   const myRecords = useSelector((state) => state.common.myRecords);
 
-  const is_local = localStorage.getItem("isLogin");
-  const nickName = is_local
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
   React.useEffect(() => {
     if (nickName) {
@@ -29,8 +27,8 @@ const MySection = () => {
   return (
     <MySectionContainer>
       <MySectionTitle>
-        <img src={clap} alt="박수 아이콘" style={{ marginRight: "4px" }} />
-        안녕하세요 {nickName && `${nickName}님`} 오늘도 함께 운동해요!
+        <img src={clap} alt="박수 아이콘" style={{ marginRight: '4px' }} />
+        {nickName ? `안녕하세요 ${nickName}님 오늘도 함께 운동해요!` : '홈트게더와 함께 운동해보세요!'}
       </MySectionTitle>
       <MySectionContent>
         <MyPart></MyPart>
