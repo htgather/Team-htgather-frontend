@@ -128,5 +128,9 @@ const DdEl = styled.div`
   font-weight: 500;
   font-size: 13px;
   cursor: pointer;
+  :hover {
+    background-color: #d9dffe;
+    border-radius: 8px;
+  }
 `;
 export default Dropdown;

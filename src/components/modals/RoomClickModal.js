@@ -20,11 +20,11 @@ const RoomClickModal = (props) => {
           <DIV onClick={(e) => e.stopPropagation()}>
             <ImgWrap>
               <img src={Frame} />
-              <div style={{ fontWeight: 'bold', marginTop: '20px' }}>홈트게더와 함께하는 홈 트레이닝</div>
+              <div style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '20px' }}>홈트게더와 함께하는 홈 트레이닝</div>
               <div
                 style={{
                   fontSize: '14px',
-                  marginTop: '20px',
+                  marginTop: '10px',
                   color: '#aaa',
                 }}
               >
@@ -40,7 +40,7 @@ const RoomClickModal = (props) => {
               <div>
                 <img src={lock} width="48px" height="50px" />
               </div>
-              <div style={{ marginTop: '20px' }}>
+              <div style={{ marginTop: '20px', fontSize: '16px' }}>
                 로그인 후에 확인할 수 있어요
                 <br />
                 3초 로그인하고 사람들과 함께 운동해볼까요?
@@ -108,11 +108,12 @@ const ImgWrap = styled.div`
   background-color: #fff;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  padding: 70px;
+  padding: 75px 30px;
+  letter-spacing: -0.48px;
 `;
 
 const Container = styled.div`
-  margin: auto;
+  margin: 155px auto;
   text-align: center;
 `;
 

@@ -73,6 +73,7 @@ const MostExercisedHeader = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  letter-spacing: -0.48px;
 `;
 
 const MostExercisedContentBox = styled.div`
@@ -81,19 +82,20 @@ const MostExercisedContentBox = styled.div`
 `;
 
 const MostExercisedContent = styled.div`
-  width: 124px;
+  width: 130px;
   height: 56px;
   border-radius: 6px;
   background-color: #f1f3f5;
   display: flex;
   align-items: center;
-  padding: 8px 10px;
+  padding: 8px 6px;
+  letter-spacing: -0.96px;
 
   .MostExercisedContentTextBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 12px;
+    margin-left: 5px;
   }
   .MostExercisedTitle {
     font-size: 14px;
@@ -111,8 +113,9 @@ const MostExercisedContent = styled.div`
 const Noti = styled.div`
   width: 255px;
   height: 40px;
-  letter-spacing: -1.2px;
+  letter-spacing: -0.96px;
   color: #aeb5bc;
-  margin-top: 8px;
+  margin-top: 3px;
 `;
+
 export default MostExercised;

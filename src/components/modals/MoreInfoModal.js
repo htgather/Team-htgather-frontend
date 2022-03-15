@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Close from "../../Images/Close.png";
-import KakaoLogin from "../../components/KakaoLogin";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Close from '../../Images/Close.png';
+import KakaoLogin from '../../components/KakaoLogin';
 
 const MyInfoModal = (props) => {
   const { openMyInfoModal } = props;
@@ -9,46 +9,42 @@ const MyInfoModal = (props) => {
   const is_local = localStorage.getItem('isLogin') ? true : false;
   const [MyModal, setMyModal] = useState(false);
 
+  const onClickClose = () => {
+    setMyModal(false);
+  };
+
   return (
-    <React.Fragment>
-      {is_local ? (
-        <DIV onClick={openMyInfoModal}>
-          <CloseBtn>
-            <img src={Close} alt="closeBtn" />
-          </CloseBtn>
+    <div style={{ position: 'relative' }}>
+      <DIV style={{ height: is_local ? '290px' : '350px' }}>
+        <CloseBtn>
+          <img src={Close} alt="closeBtn" onClick={onClickClose} />
+        </CloseBtn>
+        <div onClick={(e) => e.stopPropagation()}>
           <TextWrap style={{ fontSize: '24px' }}>더보기</TextWrap>
           <Line />
-          <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
-          <div style={{ marginTop: '15px' }}>✍️홈트게더 이용 후기 남기기</div>
-          <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
-        </DIV>
-      ) : (
-        <DIV height="350px">
-          <CloseBtn>
-            <img src={Close} alt="closeBtn" />
-          </CloseBtn>
-          <TextWrap style={{ fontSize: '24px' }}>더보기</TextWrap>
-          <Line />
-          <TextWrap style={{ fontSize: '17px' }}>고객 지원</TextWrap>
-          <div style={{ marginTop: '15px' }}>✍️홈트게더 이용 후기 남기기</div>
-          <div style={{ marginTop: '10px' }}>😱오류, 버그 신고하기</div>
-          <Login>
-            <KakaoLogin />
-          </Login>
-        </DIV>
-      )}
-    </React.Fragment>
+          <TextWrap>고객 지원</TextWrap>
+          <DESC>
+            ✍️&nbsp;홈트게더 이용 후기 남기기
+            <br />
+            😱&nbsp;오류, 버그 신고하기
+          </DESC>
+          {is_local ? null : (
+            <Login>
+              <KakaoLogin />
+            </Login>
+          )}
+        </div>
+      </DIV>
+    </div>
   );
 };
 
 const DIV = styled.div`
   background-color: #fff;
-  z-index: 999;
+  z-index: 50;
   width: 400px;
-  ${(props) => (props.height ? `height: ${props.height};` : 300)};
-  /* height: 350px; */
   border-radius: 12px;
-  top: 45px;
+  top: 20px;
   right: -20px;
   padding: 50px;
   position: absolute;
@@ -57,21 +53,11 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: "";
+    content: '';
     position: absolute;
     top: -10px;
     right: 24px;
   }
-  /* :after {
-    border-top: 0px solid;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #ddd;
-    content: '';
-    position: absolute;
-    top: -10px;
-    right: 100px;
-  } */
   box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 15px 0px;
 `;
 
@@ -85,11 +71,19 @@ const Line = styled.div`
 const TextWrap = styled.div`
   vertical-align: middle;
   font-weight: bold;
+  font-size: large;
+`;
+
+const DESC = styled.div`
+  font-size: 16px;
+  margin-top: 8px;
+  height: 30px;
+  line-height: 30px;
 `;
 
 const Login = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 33px;
   display: flex;
   left: 75px;
 `;
