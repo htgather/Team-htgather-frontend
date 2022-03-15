@@ -69,7 +69,7 @@ const Ranking = (props) => {
               <Rank>
                 {p.rank === 1 ? <img src={gold} alt="금메달" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" /> : p.rank}
               </Rank>
-              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.nickName}</Name>
+              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? nickName : p.nickName}</Name>
               <Count>{p.countPerWeek}회</Count>
             </OneRank>
           );

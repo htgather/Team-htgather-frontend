@@ -58,7 +58,7 @@ const userInfoChangeFB = (nickname, selectGoal) => {
         'https://test.kimjeongho-server.com/users',
         {
           nickName: nickname,
-          // weeklyGoal:selectGoal + 1,
+          // weeklyGoal: selectGoal + 1,
           weeklyGoal: selectGoal,
         },
         {
@@ -72,7 +72,7 @@ const userInfoChangeFB = (nickname, selectGoal) => {
         localStorage.setItem('isLogin', response.data.token);
         // const myToken = jwt_decode(access_token);
         dispatch(getNickname(nickname));
-        dispatch(setWeeklyGoal(selectGoal + 1));
+        dispatch(setWeeklyGoal(selectGoal));
         dispatch(commonActions.setRecords(selectGoal));
         window.alert('회원 정보가 변경되었습니다');
       });

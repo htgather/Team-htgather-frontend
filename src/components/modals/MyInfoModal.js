@@ -21,14 +21,14 @@ const MoreInfoModal = (props) => {
   const nickName = is_local ? myToken.nickName : '';
   const Goal = is_local ? myToken.weeklyGoal : null;
 
-  console.log(Goal);
+  console.log('토큰', Goal);
 
   //닉네임 변경
   const [showModal, setShowModal] = useState(false);
   const [nickname, setNickname] = useState(nickName);
   const [selectGoal, setSelectGoal] = useState(Goal);
 
-  console.log('select', selectGoal);
+  // console.log('select', selectGoal);
 
   const myDropdownList = [1, 2, 3, 4, 5, 6, 7];
 
@@ -45,12 +45,17 @@ const MoreInfoModal = (props) => {
     setNickname(e.target.value);
   };
 
+  // const dropChange = (e) => {
+  //   setSelectGoal(e.target.value);
+  //   console.log(selectGoal);
+  // };
+
   const onClickChange = () => {
     if (nickname === '') {
       alert('닉네임을 입력해주세요');
       return;
     }
-    dispatch(userActions.userInfoChangeFB(nickname, selectGoal));
+    dispatch(userActions.userInfoChangeFB(nickname, Goal !== selectGoal ? selectGoal + 1 : Goal));
   };
 
   const onClickLogOut = () => {
@@ -78,12 +83,12 @@ const MoreInfoModal = (props) => {
           주
           <CategoryBox>
             <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px">
-              {Goal}
+              {selectGoal}
+              {/* {selectGoal ? selectGoal : Goal} */}
             </Dropdown>
           </CategoryBox>
           회 운동
         </GoalWrap>
-        {/* <NickBtn >변경하기</NickBtn> */}
         <div style={{ display: 'inline-block' }}>
           <ChangeBtn onClick={onClickChange}>변경하기</ChangeBtn>
           <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
