@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import MyCategoryRecordIcon from "../Images/MyCategoryRecordIcon.png";
-import Category1 from "../Images/Category1.png";
-import Category2 from "../Images/Category2.png";
+import MyCategoryRecordIcon from '../Images/MyCategoryRecordIcon.png';
+import Category1 from '../Images/Category1.png';
+import Category2 from '../Images/Category2.png';
 
 const MostExercised = (props) => {
   const { myRecords } = props;
@@ -17,11 +17,7 @@ const MostExercised = (props) => {
       <MostExercisedContainer>
         <MostExercisedHeader>
           이런 운동을 많이 했어요
-          <img
-            src={MyCategoryRecordIcon}
-            alt="팔 아이콘"
-            style={{ marginLeft: "2px" }}
-          />
+          <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
         </MostExercisedHeader>
         <MostExercisedContentBox>
           {records ? (
@@ -67,20 +63,23 @@ const MostExercisedContainer = styled.div`
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  padding: 24px 24px 20px 24px;
+  letter-spacing: -0.48px;
 `;
 const MostExercisedHeader = styled.div`
   font-size: 16px;
   font-weight: bold;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
-  letter-spacing: -0.48px;
+  margin: 24px 0px 12px 24px;
+  line-height: 24px;
 `;
 
 const MostExercisedContentBox = styled.div`
+  width: 267px;
+  height: 56px;
   display: flex;
   justify-content: space-between;
+  margin: 0px 24px 20px 24px;
 `;
 
 const MostExercisedContent = styled.div`

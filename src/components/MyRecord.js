@@ -21,105 +21,86 @@ const MyRecord = (props) => {
   } = props;
 
   const per = Math.floor((countPerWeek / weeklyGoal) * 100);
-  // console.log(percent);
-
-  // const [percent, SetPercent] = React.useState((countPerWeek / weeklyGoal) * 100 >= 100 ? 100 : (countPerWeek / weeklyGoal) * 100);
-
-  // const myRecords = useSelector((state) => state.common.myRecords);
-  // React.useEffect(() => {
-  //   if (nickName) {
-  //     dispatch(commonActions.getRecordsDB());
-  //   }
-  // }, []);
-  // const [percent, SetPercent] = React.useState(
-  //   (countPerWeek / weeklyGoal) * 100 >= 100
-  //     ? 100
-  //     : (countPerWeek / weeklyGoal) * 100
-  // );
-  // const { myRecords } = props;
-  // const [countPerWeek, setCountPerWeek] = React.useState(1);
-  // const [weeklyGoal, setWeeklyGoal] = React.useState(3);
-  // const [daysInARow, setDaysInARow] = React.useState(38);
-  // const [totalTimePerMonth, setTotalTimePerMonth] = React.useState(40);
-  // const [percent, setPercent] = React.useState();
-  // React.useEffect(() => {
-  //   if (myRecords) {
-  //     setCountPerWeek(myRecords.countPerWeek);
-  //     setWeeklyGoal(myRecords.weeklyGoal);
-  //     setDaysInARow(myRecords.daysInARow);
-  //     setTotalTimePerMonth(myRecords.totalTimePerMonth);
-  //     setPercent(100);
-  //   }
-  // }, [myRecords]);
-
-  // countPerWeek, weeklyGoal, daysInARow, totalTimePerMonth
 
   return (
-    <MyRecordBox>
+    <DIV>
       <Header>이만큼 운동했어요</Header>
+
       <MyRecordContent>
-        <Progress type="circle" percent={per} showInfo={false} width={142} trailColor="#EAECEF" strokeColor="#405EFB" />
+        <div></div>
+        <Progress type="circle" percent={per} showInfo={false} width={144} trailColor="#EAECEF" strokeColor="#405EFB" />
         <div className="progressInTextBox">
           <div className="countPerWeekText">{countPerWeek}일</div>
           <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
         </div>
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img src={fireIcon} alt="불꽃 아이콘" style={{ margin: '0px 2.5px 1px 0px' }} />
-            연속&nbsp;<span className="bold">{daysInARow}</span>일째 운동중이에요
+            <img src={fireIcon} alt="불꽃 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
+            <div>
+              연속&nbsp; <span className="bold">{daysInARow}</span>일째 운동중이에요
+            </div>
           </div>
-          <div className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" style={{ margin: '0px 2.5px 2px 0px' }} />
+
+          <div style={{ marginTop: '4px' }} className="bottomTextBox">
+            <img src={clockIcon} alt="시계 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
+
+            <div>
+              이번 주에&nbsp;<span className="bold">{totalTimePerMonth}</span>분 운동했어요
+            </div>
+          </div>
+          {/* <div className="bottomTextBox">
+            <img src={clockIcon} alt="시계 아이콘" />
             이번 주에&nbsp;<span className="bold">{totalTimePerMonth}</span>분 운동했어요
-          </div>
+          </div> */}
         </BottomTextContainer>
       </MyRecordContent>
-    </MyRecordBox>
+    </DIV>
   );
 };
 
-const MyRecordBox = styled.div`
-  height: 284px;
-  padding: 19px 24px;
+const DIV = styled.div`
   width: 315px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 284px;
+  border-radius: 12px;
 `;
-const Header = styled.span`
+
+const Header = styled.div`
   font-weight: bold;
   font-size: 16px;
   color: #222529;
-  line-height: 1.5;
+  margin: 24px 0px 16px 24px;
   letter-spacing: -0.64px;
-  margin-bottom: 19px;
-  position: relative;
-  right: 84px;
+  line-height: 24px;
 `;
 
 const MyRecordContent = styled.div`
+  width: 159px;
+  height: 200px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  margin: 0px 77px 20px 79px;
+  /* position: relative; */
   * {
     font-size: 14px;
     font-weight: 400;
     color: #4a5056;
   }
   .progressInTextBox {
+    width: 72px;
+    height: 54px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    margin-top: 40px;
+    margin: 42px 28px 32px 28px;
   }
   .countPerWeekText {
     font-size: 24px;
     letter-spacing: -0.96px;
     color: #222529;
     font-weight: bold;
-    margin-bottom: 4px;
   }
   .weeklyGoalText {
     font-size: 12px;
@@ -133,15 +114,18 @@ const MyRecordContent = styled.div`
 `;
 
 const BottomTextContainer = styled.div`
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  text-align: center;
+  margin-top: 12px;
   .bottomTextBox {
-    letter-spacing: -0.48px;
+    width: 159px;
+    height: 20px;
+    letter-spacing: -1.1px;
+    line-height: 20px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
   }
 `;

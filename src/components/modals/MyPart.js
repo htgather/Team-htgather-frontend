@@ -24,7 +24,7 @@ const MyPart = () => {
 };
 
 const DIV = styled.div`
-  width: 984px;
+  width: 965px;
   height: 284px;
   background-color: rgba(34, 37, 41, 0.8);
   border-radius: 12px;

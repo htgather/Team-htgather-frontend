@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MoreInfoModal from '../components/modals/MoreInfoModal';
 import MyInfoModal from '../components/modals/MyInfoModal';
+import Logo from '../Images/Logo.svg';
 import Icon_Menu from '../Images/Icon_Menu.png';
 import CardIcon_person from '../Images/CardIcon_person.png';
 import { history } from '../redux/configureStore';
@@ -31,13 +32,14 @@ const Header = (props) => {
   return (
     <HeaderContainer>
       <HeaderGrid>
-        <p
+        <img
+          src={Logo}
+          alt="홈트게더 로고"
+          style={{ width: '130px', height: '32px' }}
           onClick={() => {
             history.push('/');
           }}
-        >
-          홈트게더
-        </p>
+        />
 
         <div
           style={{
