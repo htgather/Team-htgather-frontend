@@ -1,14 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Header from "../components/Header";
-import RoomCard from "../components/Card";
-import RoomSectionTab from "../components/RoomSectionTab";
-import MySection from "../components/MySection";
-import RoomClickModal from "../components/modals/RoomClickModal";
-import jwt_decode from "jwt-decode";
-import { actionCreators as roomActions } from "../redux/modules/room";
+import Header from '../components/Header';
+import RoomCard from '../components/Card';
+import RoomSectionTab from '../components/RoomSectionTab';
+import MySection from '../components/MySection';
+import RoomClickModal from '../components/modals/RoomClickModal';
+// import ScrollToTop from '../components/ScrollToTop';
+import toTop from '../Images/toTop.png';
+import jwt_decode from 'jwt-decode';
+import { actionCreators as roomActions } from '../redux/modules/room';
+import { Socket } from 'socket.io-client';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -17,12 +20,35 @@ const Main = () => {
 
   const roomList = useSelector((state) => state.room.list);
 
-  const nickName = localStorage.getItem("isLogin")
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
+  // 위로가기 버튼 관련
+  const [ScrollY, setScrollY] = useState(0);
+  const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
+
+  const handleFollow = () => {
+    setScrollY(window.pageYOffset);
+    ScrollY > 120 ? setBtnStatus(true) : setBtnStatus(false);
+  };
+
+  const moveToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setScrollY(0); // ScrollY 의 값을 초기화
+    setBtnStatus(false); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
+  };
+
+  useEffect(() => {
+    const watch = () => {
+      window.addEventListener('scroll', handleFollow);
+    };
+    watch();
+    return () => {
+      window.removeEventListener('scroll', handleFollow);
+    };
+  });
+
+  // 방정보 리스트 불러오기
   React.useEffect(() => {
-    // 방정보 리스트 불러오기
     dispatch(roomActions.getRoomDB());
   }, []);
 
@@ -40,15 +66,14 @@ const Main = () => {
           <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
           <RoomCardList>
             {roomList.map((e, i) => (
-              <RoomCard
-                key={i}
-                roomInfo={e}
-                setIsLoginModal={setIsLoginModal}
-              ></RoomCard>
+              <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
             ))}
             <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
           </RoomCardList>
         </RoomSection>
+        <ToTopBtn onClick={moveToTop}>
+          <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+        </ToTopBtn>
       </Container>
     </>
   );
@@ -82,4 +107,23 @@ const RoomCardList = styled.div`
   }
 `;
 
+const ToTopBtn = styled.div`
+  position: fixed;
+  right: 3.8rem;
+  bottom: 30px;
+  /* box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.3); */
+  .topBtn {
+    opacity: 0;
+    transition: opacity 0.17s ease-in;
+  }
+
+  .topBtn.active {
+    z-index: 10;
+    opacity: 1;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 1360px) {
+    display: none;
+  }
+`;
 export default Main;
