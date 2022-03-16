@@ -17,6 +17,7 @@ const Calender = () => {
   // useState를 이용해 오늘 날짜를 관리
   const [getMoment, setMoment] = React.useState(moment());
   const today = getMoment; // 오늘
+  console.log(today);
   // 체크된 날짜 받아오기
   const myRecords = useSelector((state) => state.common.calendarList);
   React.useEffect(() => {
@@ -75,7 +76,7 @@ const Calender = () => {
                   )}
                   {isSelected && !isToday && (
                     // 운동한 날이면서 오늘은 아닐때
-                    <img src={CalenderCheckIcon} alt="캘린더 체크" className="CalenderCheckIcon" />
+                    <img src={CalenderCheckIcon} alt="캘린더 체크" className="CalenderCheckIcon" /> // style={right: ? '6px' : }
                   )}
                   {isToday && !isSelected && (
                     // 오늘인데 운동안했을때
@@ -91,6 +92,7 @@ const Calender = () => {
         </div>
       );
     }
+    console.log(calendar);
     return calendar;
   }
 
@@ -183,13 +185,12 @@ const CalenderBody = styled.div`
   .CalenderCheckIcon {
     position: absolute;
     top: -3px;
-    right: 6px;
+    right: 6.75px;
   }
   .CalenderTodayIcon {
     position: absolute;
     top: -3px;
     right: 6px;
-    /* right: px; */
     z-index: 1;
   }
   .CalenderStampIcon {
