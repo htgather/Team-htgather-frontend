@@ -12,7 +12,7 @@ import { logoutWithKakao } from '../KakaoLogin';
 import { actionCreators as userActions } from '../../redux/modules/user';
 
 const MoreInfoModal = (props) => {
-  const { openMyInfoModal, width } = props;
+  const { openMyInfoModal, width, background, fontcolor } = props;
 
   const dispatch = useDispatch();
 
@@ -75,9 +75,8 @@ const MoreInfoModal = (props) => {
         <GoalWrap>
           주&nbsp;&nbsp;
           <CategoryBox>
-            <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px">
+            <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px" background="#0028FA" fontcolor="#F8F9FA">
               {selectGoal}
-              {/* {selectGoal ? selectGoal : Goal} */}
             </Dropdown>
           </CategoryBox>
           &nbsp;회 운동

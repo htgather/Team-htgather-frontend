@@ -10,7 +10,7 @@ import { actionCreators as roomActions } from '../redux/modules/room';
 const RoomSectionTop = (props) => {
   const dispatch = useDispatch();
 
-  const { background } = props;
+  const { background, fontcolor } = props;
 
   const is_local = localStorage.getItem('isLogin');
   const nickName = useSelector((state) => state.User.nickname);
@@ -66,7 +66,7 @@ const RoomSectionTop = (props) => {
             </DifficultyBox>
             <CategoryBox>
               <p>운동종류</p>
-              <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#d9dffe">
+              <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
                 어떤 운동을 찾고 계신가요?
               </Dropdown>
             </CategoryBox>

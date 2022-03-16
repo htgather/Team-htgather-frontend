@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { actionCreators as commonActions } from '../redux/modules/common';
+
 import leftBtn from '../Images/CalenderLeftIcon.png';
 import rightBtn from '../Images/CalenderRightIcon.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as commonActions } from '../redux/modules/common';
 import CalenderCheckIcon from '../Images/CalenderCheckIcon.png';
 import CalenderTodayIcon from '../Images/CalenderTodayIcon.png';
 import CalenderStampIcon from '../Images/CalenderStampIcon.png';
+
 const Calender = () => {
   const isLocal = localStorage.getItem('isLogin') ? true : false;
   const dispatch = useDispatch();
@@ -72,7 +75,7 @@ const Calender = () => {
                   )}
                   {isSelected && !isToday && (
                     // 운동한 날이면서 오늘은 아닐때
-                    <img src={CalenderCheckIcon} alt="캘린더 체크" className="CalenderCheckIcon" />
+                    <img src={CalenderCheckIcon} alt="캘린더 체크" className="CalenderCheckIcon" /> // style={right: ? '6px' : }
                   )}
                   {isToday && !isSelected && (
                     // 오늘인데 운동안했을때
@@ -180,13 +183,12 @@ const CalenderBody = styled.div`
   .CalenderCheckIcon {
     position: absolute;
     top: -3px;
-    right: 6px;
+    right: 6.75px;
   }
   .CalenderTodayIcon {
     position: absolute;
     top: -3px;
     right: 6px;
-    /* right: px; */
     z-index: 1;
   }
   .CalenderStampIcon {
