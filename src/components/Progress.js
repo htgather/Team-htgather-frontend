@@ -123,16 +123,18 @@ export default function Timer(props) {
       </div>
 
       <Contents style={{ justifyContent: NewMedia.matches ? "center" : "" }}>
-        <ProgressBar
-          ref={progressBar}
-          completed={progress}
-          isLabelVisible={false}
-          maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
-          // width="983px"
-          width={NewMedia.matches ? 634 : 983}
-          height="12px"
-          bgColor="#0028fa"
-        />
+        <ProgressWrap>
+          <ProgressBar
+            ref={progressBar}
+            completed={progress}
+            isLabelVisible={false}
+            maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
+            // width="983px"
+            // width={NewMedia.matches ? 634 : 983}
+            height="12px"
+            bgColor="#0028fa"
+          />
+        </ProgressWrap>
         <TextWrap style={{ marginLeft: NewMedia.matches ? "10px" : "" }}>
           {String(hours) === "00" ? "" : hours + ":"}
           {String(minutes).length < 2 ? "0" + minutes : minutes}:
@@ -152,6 +154,12 @@ const Contents = styled.div`
     width: 758px;
     height: 50px;
   }
+`;
+
+const ProgressWrap = styled.div`
+  position: relative;
+  width: 100%;
+  margin-right: 10px;
 `;
 
 const TextWrap = styled.div`
