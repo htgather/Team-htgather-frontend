@@ -28,7 +28,7 @@ const Main = () => {
 
   const handleFollow = () => {
     setScrollY(window.pageYOffset);
-    ScrollY > 120 ? setBtnStatus(true) : setBtnStatus(false);
+    ScrollY > 240 ? setBtnStatus(true) : setBtnStatus(false);
   };
 
   const moveToTop = () => {

@@ -4,12 +4,12 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Dropdown = (props) => {
   // props로 리스트목록을 받아오고, useState로 모달 및 클릭 관리
-  const { dropdownList, myDropdownList, width, background, fontcolor } = props;
+  const { dropdownList, myDropdownList, width, background, fontcolor, topleft, topright, bottomleft, bottomright, isDrop } = props;
 
   const [isDropdown, setIsDropdown] = React.useState();
   const [clickedDropdown, setClickedDropdown] = React.useState();
 
-  const styles = { width, background, fontcolor };
+  const styles = { width, background, fontcolor, topleft, topright, bottomleft, bottomright, isDrop };
 
   // 드롭다운 바깥쪽 클릭시 창닫기 구현
   const handleClose = (e) => {
@@ -45,6 +45,7 @@ const Dropdown = (props) => {
                   length={dropdownList.length}
                   onClick={() => {
                     setClickedDropdown(i);
+                    props.getCategory(i);
                   }}
                   {...styles}
                 >
@@ -87,6 +88,11 @@ Dropdown.defaultProps = {
   width: '285px',
   background: '',
   fontcolor: '',
+  topleft: '',
+  topright: '',
+  bottomleft: '',
+  bottomright: '',
+  isDrop: false,
 };
 
 const DropdownBtn = styled.div`
@@ -134,7 +140,16 @@ const DdEl = styled.div`
   :hover {
     background-color: ${(props) => props.background};
     color: ${(props) => props.fontcolor};
-    border-radius: 8px;
+    /* border-radius: 8px; */
+    //처음
+    border-top-left-radius: ${(props) => props.topleft};
+    border-top-right-radius: ${(props) => props.topright};
+    // 마지막
+    border-bottom-left-radius: ${(props) => props.bottomleft};
+    border-bottom-right-radius: ${(props) => props.bottomright};
+
+    ${(props) => (props.isDrop ? `border-top-radius: 8px; border-top-right-radius: 8px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;` : '')}
   }
 `;
+
 export default Dropdown;
