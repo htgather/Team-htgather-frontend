@@ -366,7 +366,7 @@ const MemberWrap = styled.div`
     top: -76px;
   }
   .memberVideo {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     width: 200px;
     height: 112px;
     border-radius: 8px;
