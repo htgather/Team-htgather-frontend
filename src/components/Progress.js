@@ -128,7 +128,9 @@ export default function Timer(props) {
           completed={progress}
           isLabelVisible={false}
           maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
+          // width="983px"
           width={NewMedia.matches ? 634 : 983}
+          height="12px"
           bgColor="#0028fa"
         />
         <TextWrap style={{ marginLeft: NewMedia.matches ? "10px" : "" }}>
