@@ -65,7 +65,6 @@ const Card = (props) => {
       </>
     );
   }
-
   // 방 카드
   return (
     <>
