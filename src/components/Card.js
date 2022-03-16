@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import person from "../Images/CardIcon_person.png";
+import User from "../Images/User.png";
 import lock from "../Images/CardIcon_lock.png";
 import emoji from "../Images/RoomCardIcon_emoji.png";
 
 import MakeRoomModal from "./modals/MakeRoomModal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../redux/modules/room";
+import { history } from "../redux/configureStore";
 
 const Card = (props) => {
   const { roomInfo } = props;
@@ -98,18 +99,25 @@ const Card = (props) => {
         <CardContent>
           <div>
             <CardTag>{roomInfo.difficulty}</CardTag>
-            <CardTag>{roomInfo.category}</CardTag>
+            <CardTag style={{ background: "#FEEFDD" }}>
+              {roomInfo.category}
+            </CardTag>
           </div>
           <CardTitle>{roomInfo.roomTitle}</CardTitle>
           <CardInfo>
             <p>{roomInfo.videoStartAt} 시작</p>
             <div className="cardInfo_personBox">
               <img
-                src={person}
+                src={User}
                 alt="사람 아이콘"
                 style={{ marginRight: "6px" }}
               />
-              <p>{roomInfo.numberOfPeopleInRoom} / 5</p>
+              <p>
+                {roomInfo.numberOfPeopleInRoom > 5
+                  ? 5
+                  : roomInfo.numberOfPeopleInRoom}
+                / 5
+              </p>
             </div>
           </CardInfo>
         </CardContent>
@@ -166,7 +174,7 @@ const LastCardBtn = styled.div`
   font-size: 24px;
   color: white;
   padding: 11px 84px;
-  background: black;
+  background: #667efc;
   border-radius: 20px;
   position: relative;
   top: 54px;
@@ -192,7 +200,7 @@ const CardContent = styled.div`
 const CardTag = styled.div`
   display: inline-block;
   padding: 4px 8px;
-  background: #eaecef;
+  background: #f2f4ff;
   color: #4a5056;
   border-radius: 4px;
   margin-right: 12px;
@@ -204,17 +212,22 @@ const CardTitle = styled.div`
   margin: 12px 0px;
   height: 48px;
   line-height: 24px;
+  color: rgb(34, 37, 41);
 `;
 const CardInfo = styled.div`
   font-size: 14px;
-  margin-top: 28px;
+  margin-top: 26px;
   display: flex;
   justify-content: space-between;
-  color: #000000;
+  align-items: center;
+  color: #aeb5bc;
   font-weight: 400;
   .cardInfo_personBox {
+    height: 16px;
     display: flex;
-    color: #4a5056;
+    align-items: center;
+    color: #aeb5bc;
+  }
 `;
 
 const CardLock = styled.div`

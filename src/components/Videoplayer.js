@@ -16,7 +16,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const [Audio, setAduio] = useState([]);
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
-  const [reject, setReject] = useState(false);
+
   const videoGrid = useRef();
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
@@ -26,26 +26,9 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
   const mystream = useRef();
-  // const { videoOn } = props;
-  let nicknames = [
-    "아프리카청춘이다",
-    "벼량위의포뇨",
-    "돈들어손내놔",
-    "닮은살걀",
-    "아무리생각해도난마늘",
-    "신밧드의보험",
-    "오즈의맙소사",
-    "달려야하니",
-    "흔들린우동",
-    "축구싶냐농구있네",
-  ];
-  let nick = [];
-  let nickname;
 
-  function randomItem(a) {
-    let Arr = a[Math.floor(Math.random() * a.length)];
-    nick.push(Arr);
-  }
+  let nickname = props.nickname;
+
   let myPeerConnection;
   let myStream;
   let pcObj = {};
@@ -58,34 +41,26 @@ const Videoplayer = React.forwardRef((props, ref) => {
   //페이지가 마운트되고 "join_room" Event 함수 실행 1
   useEffect(() => {
     const name = document.getElementById("name");
-    randomItem(nicknames);
-    nickname = nick[0];
-    name.innerText = `${nick[0]}`;
+    name.innerText = `${nickname}`;
     socket.emit("join_room", roomName, nickname);
 
     return () => {
-      // if (!reject) {
       LeaveRoom();
-      // }
     };
   }, []);
 
   //서버로부터 accept_join 받음
   socket.on("accept_join", async (userObjArr, socketIdformserver) => {
     const length = userObjArr.length;
-
     //카메라, 마이크 가져오기
     await getMedia();
     setSocketID(socketIdformserver);
-    console.log(peopleInRoom);
     changeNumberOfUsers(`${peopleInRoom}/5`);
     // const title = document.getElementById("numberOfusers");
     // title.innerText = `현재인원 : ${peopleInRoom}`;
-
     if (length === 1) {
       return;
     }
-
     for (let i = 0; i < length - 1; i++) {
       //가장 최근 들어온 브라우저 제외
       try {
@@ -266,9 +241,14 @@ const Videoplayer = React.forwardRef((props, ref) => {
     history.replace("/");
   });
 
+  socket.on("exception", () => {
+    peopleInRoom++;
+    changeNumberOfUsers(`5/5`);
+  });
+
   //나가기를 누르면 나한테 벌어지는 일
   function LeaveRoom() {
-    dispatch(roomActions.exitRoomDB(roomName));
+    // dispatch(roomActions.exitRoomDB(roomName));
     socket.disconnect();
     myStream.getTracks().forEach((track) => track.stop());
     clearAllVideos();
