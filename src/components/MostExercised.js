@@ -28,7 +28,7 @@ const MostExercised = (props) => {
             <>
               {records[0] && (
                 <MostExercisedContent>
-                  <img src={Category1} alt="" className="MostExercisedImg" />
+                  <img src={records[0][2]} alt="" className="MostExercisedImg" />
                   <div className="MostExercisedContentTextBox">
                     <div className="MostExercisedTitle">{records[0][0]}</div>
                     <div className="MostExercisedTimes">{records[0][1]}회</div>
@@ -37,7 +37,7 @@ const MostExercised = (props) => {
               )}
               {records[1] && (
                 <MostExercisedContent>
-                  <img src={Category2} alt="" className="MostExercisedImg" />
+                  <img src={records[1][2]} alt="" className="MostExercisedImg" />
                   <div className="MostExercisedContentTextBox">
                     <div className="MostExercisedTitle">{records[1][0]}</div>
                     <div className="MostExercisedTimes">{records[1][1]}회</div>
@@ -109,6 +109,7 @@ const MostExercisedContent = styled.div`
   .MostExercisedImg {
     width: 40px;
     height: 40px;
+    border-radius: 4px;
   }
 `;
 
