@@ -121,20 +121,20 @@ export default function Timer(props) {
       <div style={{ margin: "3px 0px 8px" }}>
         <TextWrap>{text}</TextWrap>
       </div>
-      <Contents>
+
+      <Contents style={{ justifyContent: NewMedia.matches ? "center" : "" }}>
         <ProgressBar
           ref={progressBar}
           completed={progress}
           isLabelVisible={false}
           maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
-          width={NewMedia.matches ? 647 : 983}
+          width={NewMedia.matches ? 634 : 983}
+          bgColor="#0028fa"
         />
-        <TextWrap>
+        <TextWrap style={{ marginLeft: NewMedia.matches ? "10px" : "" }}>
           {String(hours) === "00" ? "" : hours + ":"}
           {String(minutes).length < 2 ? "0" + minutes : minutes}:
           {String(seconds).length < 2 ? "0" + seconds : seconds}
-          {/* {hours}:{String(minutes).length < 2 ? "0" + minutes : minutes}:
-          {String(seconds).length < 2 ? "0" + seconds : seconds} */}
         </TextWrap>
       </Contents>
     </div>
