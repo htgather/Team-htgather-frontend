@@ -20,6 +20,7 @@ import Notmute from "../Images/Notmute.png";
 import { actionCreators as roomActions } from "../redux/modules/room";
 import Videoplayer from "../components/Videoplayer";
 import jwt_decode from "jwt-decode";
+import CompleteModal from "../components/modals/CompleteModal";
 const Detail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
@@ -67,9 +68,14 @@ const Detail = (props) => {
       {roomInfo && (
         <>
           {isDone && (
-            <ExitModal isDone={isDone} setIsDone={setIsDone}></ExitModal>
+            // <DoneScreen />
+            <CompleteModal isDone={isDone}></CompleteModal>
           )}
-          <DetailHeader roomInfo={roomInfo} numberOfUsers={numberOfUsers} />
+          <DetailHeader
+            roomInfo={roomInfo}
+            numberOfUsers={numberOfUsers}
+            isDone={isDone}
+          />
           <DIV>
             <div>
               <TimerWrap>

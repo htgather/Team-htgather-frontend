@@ -11,7 +11,7 @@ const MakeRoomModal = (props) => {
   const dispatch = useDispatch();
 
   // 모달창
-  const { setIsMakeModal, isMakeModal } = props;
+  const { setIsMakeModal, isMakeModal, background, fontcolor } = props;
   const modal = React.useRef();
   // 셀렉트탭
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
@@ -134,7 +134,7 @@ const MakeRoomModal = (props) => {
             <p className="boldText" style={{ margin: '12px 0px' }}>
               카테고리
             </p>
-            <Dropdown dropdownList={categoryList} getCategory={getCategory}>
+            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
               운동 카테고리를 골라주세요
             </Dropdown>
           </CategoryBox>
