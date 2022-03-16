@@ -4,8 +4,9 @@ import instance from "../../shared/Request";
 
 const GET_ROOM = "GET_ROOM";
 const ADD_ROOM = "ADD_ROOM";
-const getRoom = createAction(GET_ROOM, (roomList) => ({
+const getRoom = createAction(GET_ROOM, (roomList, searchIdxObj) => ({
   roomList,
+  searchIdxObj,
 }));
 const addRoom = createAction(ADD_ROOM, (room) => ({
   room,
@@ -16,6 +17,7 @@ const initialState = {
 
 // 게시물 정보 불러오기 axios 요청 _ 카테고리가 있을 경우 그에 따라 다른 요청
 const getRoomDB = (difficulty, category) => {
+  const searchIndexObj = { difficulty, category };
   const difficultyList = ["전체", "초급", "중급", "고급"];
   const categoryList = [
     "전체",
@@ -31,7 +33,7 @@ const getRoomDB = (difficulty, category) => {
       instance
         .get(`/rooms?category=${categoryList[category]}`)
         .then((response) => {
-          dispatch(getRoom(response.data.rooms));
+          dispatch(getRoom(response.data.rooms, searchIndexObj));
         })
         .catch((error) => {
           console.error(error);
@@ -43,7 +45,7 @@ const getRoomDB = (difficulty, category) => {
       instance
         .get(`/rooms?difficulty=${difficultyList[difficulty]}`)
         .then((response) => {
-          dispatch(getRoom(response.data.rooms));
+          dispatch(getRoom(response.data.rooms, searchIndexObj));
         })
         .catch((error) => {
           console.error(error);
@@ -57,7 +59,7 @@ const getRoomDB = (difficulty, category) => {
           `/rooms?category=${categoryList[category]}&difficulty=${difficultyList[difficulty]}`
         )
         .then((response) => {
-          dispatch(getRoom(response.data.rooms));
+          dispatch(getRoom(response.data.rooms, searchIndexObj));
         })
         .catch((error) => {
           console.error(error);
@@ -69,7 +71,7 @@ const getRoomDB = (difficulty, category) => {
       instance
         .get("/rooms")
         .then((response) => {
-          dispatch(getRoom(response.data.rooms));
+          dispatch(getRoom(response.data.rooms, searchIndexObj));
         })
         .catch((error) => {
           console.error(error);
@@ -103,7 +105,9 @@ const joinRoomDB = (roomId) => {
         history.push(`/room/${roomId}`);
       })
       .catch((error) => {
-        // history.replace(`/`);
+        // 카테고리 리스트에 맞춰서 다시 db요청
+        const { difficulty, category } = getState().room.searchIdxObj;
+        dispatch(getRoomDB(difficulty, category));
         window.alert(error.response.data.message);
       });
   };
@@ -127,6 +131,7 @@ export default handleActions(
     [GET_ROOM]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.roomList.reverse();
+        draft.searchIdxObj = action.payload.searchIdxObj;
       }),
     [ADD_ROOM]: (state, action) =>
       produce(state, (draft) => {

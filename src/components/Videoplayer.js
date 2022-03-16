@@ -5,11 +5,7 @@ import HiFive from "../Images/Videoplayer_emoji.png";
 //Style
 import styled from "styled-components";
 
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as roomActions } from "../redux/modules/room";
-
 const Videoplayer = React.forwardRef((props, ref) => {
-  const dispatch = useDispatch();
   const roomName = props.roomId;
   const [muted, setMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);

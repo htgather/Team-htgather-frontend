@@ -24,6 +24,10 @@ export async function _getVideoInfo(videoId) {
   let resOk = res && res.ok;
   if (resOk) {
     const resData = await res.json();
+    // 외부에서 불러올수 없게 설정해놓은 영상 리턴처리
+    if (!resData.items[0].status.embeddable) {
+      return;
+    }
     const title = resData.items[0].snippet.title;
     const thumbnail = resData.items[0].snippet.thumbnails.high.url;
     let { duration } = resData.items[0].contentDetails;

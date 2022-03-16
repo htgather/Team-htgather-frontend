@@ -4,8 +4,7 @@ import { actionCreators as roomActions } from "../../redux/modules/room";
 import styled from "styled-components";
 import Close from "../../Images/Close.png";
 import { history } from "../../redux/configureStore";
-const ExitModal = (props) => {
-  const { isDone } = props;
+const CompleteModal = (props) => {
   const [isOpen, setIsOpen] = React.useState(true);
   const closeModal = () => {
     setIsOpen(false);
@@ -28,19 +27,17 @@ const ExitModal = (props) => {
                     marginBottom: "20px",
                   }}
                 >
-                  정말 나가시겠어요?
+                  운동끝! 오늘도 해냈어요!
                 </div>
                 <div style={{ fontSize: "16px", color: "#878E95" }}>
-                  {isDone
-                    ? ""
-                    : "지금 운동을 종료하면 운동시간이 기록되지 않아요."}
+                  운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!
                 </div>
                 <BtnWrap
                   onClick={() => {
-                    history.replace("/");
+                    closeModal();
                   }}
                 >
-                  {isDone ? "홈으로 돌아가기" : "운동 그만하기"}
+                  운동시간 저장하기
                 </BtnWrap>
               </ModalContents>
             </div>
@@ -126,4 +123,4 @@ const ModalContainer = styled.div`
   /* } */
 `;
 
-export default ExitModal;
+export default CompleteModal;

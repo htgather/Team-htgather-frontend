@@ -26,9 +26,6 @@ const Card = (props) => {
     if (roomInfo.isStart) {
       return;
     }
-    // let result = window.confirm("들어갈래 나갈래");
-    // if (result) {
-    // history.push(`/room/${roomInfo.roomId}`);
     dispatch(roomActions.joinRoomDB(roomInfo.roomId));
   }
   // 마지막 카드

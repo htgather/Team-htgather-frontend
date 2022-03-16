@@ -1,16 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import MyCategoryRecordIcon from '../Images/MyCategoryRecordIcon.png';
-import Category1 from '../Images/Category1.png';
-import Category2 from '../Images/Category2.png';
+import MyCategoryRecordIcon from "../Images/MyCategoryRecordIcon.png";
+import Category1 from "../Images/Category1.png";
+import Category2 from "../Images/Category2.png";
 
 const MostExercised = (props) => {
   const { myRecords } = props;
 
-  console.log(myRecords);
   const records = myRecords.mostExercised;
-  console.log(records); //length 있음
 
   // React.useEffect(() => {}, []);
 
@@ -19,7 +17,11 @@ const MostExercised = (props) => {
       <MostExercisedContainer>
         <MostExercisedHeader>
           이런 운동을 많이 했어요
-          <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
+          <img
+            src={MyCategoryRecordIcon}
+            alt="팔 아이콘"
+            style={{ marginLeft: "2px" }}
+          />
         </MostExercisedHeader>
         <MostExercisedContentBox>
           {records ? (

@@ -6,7 +6,7 @@ import People from "../Images/People.png";
 
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
-
+  const { isDone } = props;
   const [modalOn, setModalOn] = React.useState(false);
 
   const exitRoom = () => {
@@ -21,7 +21,7 @@ const Header = (props) => {
           {/* 나가기 */}
           <HeaderBtn onClick={exitRoom}>
             <BtnContents style={{ color: "#aeb5bc" }}>나가기</BtnContents>
-            {modalOn && <ExitModal exitRoom={exitRoom} roomId={roomId} />}
+            {modalOn && <ExitModal roomId={roomId} isDone={isDone} />}
           </HeaderBtn>
           {/*  인원수*/}
           <HeaderBtn>
