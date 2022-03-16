@@ -10,7 +10,7 @@ import { actionCreators as roomActions } from '../redux/modules/room';
 const RoomSectionTop = (props) => {
   const dispatch = useDispatch();
 
-  const { background, fontcolor } = props;
+  const { background, fontcolor, topleft, topright, bottomleft, bottomright, isDrop } = props;
 
   const is_local = localStorage.getItem('isLogin');
   const nickName = useSelector((state) => state.User.nickname);
@@ -58,6 +58,7 @@ const RoomSectionTop = (props) => {
                   style={{
                     color: clickedDifficulty === i ? '#FFF' : '',
                     background: clickedDifficulty === i ? '#667EFC' : '',
+                    // topleft: clickedDifficulty === DifficultyList[0] ? topright, bottomleft, bottomright
                   }}
                 >
                   {e}
