@@ -17,7 +17,6 @@ const Calender = () => {
   // useState를 이용해 오늘 날짜를 관리
   const [getMoment, setMoment] = React.useState(moment());
   const today = getMoment; // 오늘
-  console.log(today);
   // 체크된 날짜 받아오기
   const myRecords = useSelector((state) => state.common.calendarList);
   React.useEffect(() => {
@@ -92,7 +91,6 @@ const Calender = () => {
         </div>
       );
     }
-    console.log(calendar);
     return calendar;
   }
 
