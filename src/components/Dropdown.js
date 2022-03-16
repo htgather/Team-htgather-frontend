@@ -4,12 +4,12 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Dropdown = (props) => {
   // props로 리스트목록을 받아오고, useState로 모달 및 클릭 관리
-  const { dropdownList, myDropdownList, width } = props;
+  const { dropdownList, myDropdownList, width, background } = props;
 
   const [isDropdown, setIsDropdown] = React.useState();
   const [clickedDropdown, setClickedDropdown] = React.useState();
 
-  const styles = { width };
+  const styles = { width, background };
 
   // 드롭다운 바깥쪽 클릭시 창닫기 구현
   const handleClose = (e) => {
@@ -48,6 +48,7 @@ const Dropdown = (props) => {
                     props.getCategory(i);
                     // props.changeGoal(i);
                   }}
+                  {...styles}
                 >
                   {e}
                 </DdEl>
@@ -56,6 +57,7 @@ const Dropdown = (props) => {
           </>
         ) : (
           <>
+            {/* 회원정보 드롭다운일 떄 */}
             <DropdownInput>
               <div>{myDropdownList[clickedDropdown] ? myDropdownList[clickedDropdown] : props.children}</div>
               <IoMdArrowDropdown style={{ color: '#4a5056' }}></IoMdArrowDropdown>
@@ -84,6 +86,7 @@ const Dropdown = (props) => {
 
 Dropdown.defaultProps = {
   width: '285px',
+  background: '',
 };
 
 const DropdownBtn = styled.div`
@@ -129,7 +132,7 @@ const DdEl = styled.div`
   font-size: 13px;
   cursor: pointer;
   :hover {
-    background-color: #d9dffe;
+    background-color: ${(props) => props.background};
     border-radius: 8px;
   }
 `;

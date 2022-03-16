@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import MoreInfoModal from "../components/modals/MoreInfoModal";
-import MyInfoModal from "../components/modals/MyInfoModal";
-import Icon_Menu from "../Images/Icon_Menu.png";
-import User from "../Images/User.png";
-import { history } from "../redux/configureStore";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import MoreInfoModal from '../components/modals/MoreInfoModal';
+import MyInfoModal from '../components/modals/MyInfoModal';
+import Icon_Menu from '../Images/Icon_Menu.png';
+import CardIcon_person from '../Images/CardIcon_person.png';
+import { history } from '../redux/configureStore';
 
 const Header = (props) => {
-  const isLocal = localStorage.getItem("isLogin") ? true : false;
+  const isLocal = localStorage.getItem('isLogin') ? true : false;
 
   const [showModal, setShowModal] = React.useState(false);
   const [myModal, setMyModal] = React.useState(false);
@@ -33,7 +33,7 @@ const Header = (props) => {
       <HeaderGrid>
         <p
           onClick={() => {
-            history.push("/");
+            history.push('/');
           }}
         >
           홈트게더
@@ -41,17 +41,14 @@ const Header = (props) => {
 
         <div
           style={{
-            width: "80px",
-            display: "flex",
-            justifyContent: "space-between",
-            position: "relative",
-            flexDirection: "row-reverse",
+            width: '80px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            position: 'relative',
+            flexDirection: 'row-reverse',
           }}
         >
-          <div
-            onClick={openModal}
-            style={{ cursor: "pointer", position: "relative" }}
-          >
+          <div onClick={openModal} style={{ cursor: 'pointer', position: 'relative' }}>
             <div>
               <img src={Icon_Menu} />
             </div>
@@ -61,11 +58,8 @@ const Header = (props) => {
           {isLocal ? (
             <div>
               <div>
-                <div
-                  onClick={openMyInfoModal}
-                  style={{ cursor: "pointer", position: "relative" }}
-                >
-                  <img src={User} />
+                <div onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }}>
+                  <img src={CardIcon_person} />
                 </div>
                 {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
               </div>

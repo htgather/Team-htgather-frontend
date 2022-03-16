@@ -41,7 +41,7 @@ const MyInfoModal = (props) => {
 
 const DIV = styled.div`
   background-color: #fff;
-  z-index: 50;
+  z-index: 30;
   width: 400px;
   border-radius: 12px;
   top: 20px;

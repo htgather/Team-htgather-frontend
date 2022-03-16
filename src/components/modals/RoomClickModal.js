@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import KakaoLogin from '../KakaoLogin';
+import loginImg from '../../Images/loginImg.png';
 import lock from '../../Images/lock.png';
 import Close from '../../Images/Close.png';
 import Frame from '../../Images/Frame.png';
@@ -19,7 +20,7 @@ const RoomClickModal = (props) => {
         <ModalContainer>
           <DIV onClick={(e) => e.stopPropagation()}>
             <ImgWrap>
-              <img src={Frame} />
+              <img src={loginImg} />
               <div style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '20px' }}>홈트게더와 함께하는 홈 트레이닝</div>
               <div
                 style={{
