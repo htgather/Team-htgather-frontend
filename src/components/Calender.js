@@ -180,11 +180,13 @@ const CalenderBody = styled.div`
   .CalenderCheckIcon {
     position: absolute;
     top: -3px;
-    right: -0.1px;
+    right: 6px;
   }
   .CalenderTodayIcon {
     position: absolute;
     top: -3px;
+    right: 6px;
+    /* right: px; */
     z-index: 1;
   }
   .CalenderStampIcon {

@@ -93,7 +93,7 @@ const MoreInfoModal = (props) => {
 
 const DIV = styled.div`
   background-color: #fff;
-  z-index: 999;
+  z-index: 30;
   width: 400px;
   height: 500px;
   border-radius: 12px;
