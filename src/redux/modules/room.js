@@ -103,6 +103,7 @@ const joinRoomDB = (roomId) => {
         history.push(`/room/${roomId}`);
       })
       .catch((error) => {
+        // history.replace(`/`);
         window.alert(error.response.data.message);
       });
   };

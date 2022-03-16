@@ -19,12 +19,12 @@ import NoVideo from "../Images/NoVideo.png";
 import Notmute from "../Images/Notmute.png";
 import { actionCreators as roomActions } from "../redux/modules/room";
 import Videoplayer from "../components/Videoplayer";
-
+import jwt_decode from "jwt-decode";
 const Detail = (props) => {
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
-
+  const nickname = jwt_decode(localStorage.getItem("isLogin")).nickName;
   const [isStart, setIsStart] = React.useState();
   const [isDone, setIsDone] = React.useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -97,6 +97,7 @@ const Detail = (props) => {
                   <MemberVideo />
                 </MemberWrap> */}
                 <Videoplayer
+                  nickname={nickname}
                   roomId={roomId}
                   changeNumberOfUsers={changeNumberOfUsers}
                   ref={childRef}

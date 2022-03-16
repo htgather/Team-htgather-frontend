@@ -8,6 +8,7 @@ import emoji from "../Images/RoomCardIcon_emoji.png";
 import MakeRoomModal from "./modals/MakeRoomModal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../redux/modules/room";
+import { history } from "../redux/configureStore";
 
 const Card = (props) => {
   const { roomInfo } = props;
@@ -109,7 +110,12 @@ const Card = (props) => {
                 alt="사람 아이콘"
                 style={{ marginRight: "6px" }}
               />
-              <p>{roomInfo.numberOfPeopleInRoom} / 5</p>
+              <p>
+                {roomInfo.numberOfPeopleInRoom > 5
+                  ? 5
+                  : roomInfo.numberOfPeopleInRoom}
+                / 5
+              </p>
             </div>
           </CardInfo>
         </CardContent>

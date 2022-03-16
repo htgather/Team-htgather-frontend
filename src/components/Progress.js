@@ -130,8 +130,11 @@ export default function Timer(props) {
           width={NewMedia.matches ? 647 : 983}
         />
         <TextWrap>
-          {hours}:{String(minutes).length < 2 ? "0" + minutes : minutes}:
+          {String(hours) === "00" ? "" : hours + ":"}
+          {String(minutes).length < 2 ? "0" + minutes : minutes}:
           {String(seconds).length < 2 ? "0" + seconds : seconds}
+          {/* {hours}:{String(minutes).length < 2 ? "0" + minutes : minutes}:
+          {String(seconds).length < 2 ? "0" + seconds : seconds} */}
         </TextWrap>
       </Contents>
     </div>
