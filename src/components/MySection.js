@@ -27,6 +27,7 @@ const MySection = () => {
   return (
     <MySectionContainer>
       <MySectionTitle>
+
         <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
           <img src={clap} alt="박수 아이콘" />
         </div>
