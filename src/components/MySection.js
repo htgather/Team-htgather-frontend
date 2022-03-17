@@ -31,7 +31,7 @@ const MySection = () => {
       <MySectionTitle>
         <img src={clap} alt="박수 아이콘" style={{ marginRight: "4px" }} />
         {nickName
-          ? `안녕하세요211 ${nickName}님 오늘도 함께 운동해요!`
+          ? `안녕하세요311 ${nickName}님 오늘도 함께 운동해요!`
           : "홈트게더11와 함께 운동해보세요!"}
       </MySectionTitle>
       <MySectionContent>
