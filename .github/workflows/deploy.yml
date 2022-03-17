@@ -39,13 +39,11 @@ jobs:
       # Install packages
       - name: Install packages
         run: |
-          cd sample-app
           npm install
       # Build an optimized production build
       - name: Production build
         run: |
           unset CI
-          cd sample-app
           npm run build
       # Deploy to the S3 server
       - name: Deploy to S3
