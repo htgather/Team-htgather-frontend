@@ -116,10 +116,10 @@ const OneRank = styled.div`
   border-radius: 8px;
   background-color: #f1f3f5;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; //space-around;
   align-items: center;
   color: rgb(34, 37, 41);
-  letter-spacing: -0.64px;
+  letter-spacing: -0.48px;
   /* padding: 0px 8px; */
 `;
 
@@ -137,7 +137,7 @@ const Name = styled.div`
   text-align: left;
   font-size: 14px;
   line-height: 20px;
-  margin-left: 23px;
+  margin-left: 17px;
 `;
 
 const Count = styled.div`
