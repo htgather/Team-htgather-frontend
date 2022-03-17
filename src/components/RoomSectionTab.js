@@ -40,8 +40,11 @@ const RoomSectionTop = (props) => {
       {isMakeModal && <MakeRoomModal setIsMakeModal={setIsMakeModal} isMakeModal={isMakeModal}></MakeRoomModal>}
       <RoomSectionTopContainer>
         <RoomSectionTitle>
-          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: '4px', height: '34px' }} />
-          {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가해보세요!'}
+          <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
+            <img src={fire} alt="불꽃 아이콘" />
+          </div>
+
+          {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가를 기다리고 있는 방이에요, 로그인 후 함께해요!'}
 
           <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '34px' }} className="reload" onClick={clickReload} />
         </RoomSectionTitle>
