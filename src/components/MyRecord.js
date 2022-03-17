@@ -10,6 +10,7 @@ import fireIcon from "../Images/MyRecordIcon_Fire.png";
 import clockIcon from "../Images/MyRecordIcon_Clock.png";
 
 const MyRecord = (props) => {
+  console.log(props);
   const {
     myRecords: {
       // 각 값의 디폴트값_ 구조분해할당
