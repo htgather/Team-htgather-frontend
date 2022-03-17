@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Git Checkout # 깃헙에 업로드된 소스 코드 가져오기
-        uses: actions/checkout@v2
+        uses: actions/checkout
 
       - name: Use Node.js version 14.x #노드를 가상 인스턴스에 설치
-        uses: actions/setup-node@v1
+        uses: actions/setup-node
         with:
           node-version: 14.x
 
@@ -22,7 +22,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn build
       - name: Configure AWS credentials #가상인스턴스에서 aws cli를 통해 필요한 서비스를 접근할 수 있게 사용자를 등록
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
