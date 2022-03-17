@@ -185,13 +185,13 @@ const Detail = (props) => {
           </DIV>
         </>
       )}
-      ;
     </Background>
   );
 };
 
 const Background = styled.div`
   margin: 0px auto;
+  ${"" /* overflow-y: hidden; */}
 `;
 
 const BubbleWrap = styled.div`
@@ -222,7 +222,8 @@ const BubbleWrap = styled.div`
 
 const DIV = styled.div`
   width: 100%;
-  height: 1000px;
+  height: 100vh;
+  padding-top: 64px;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
@@ -232,7 +233,7 @@ const DIV = styled.div`
 
 const TimerWrap = styled.div`
   width: 1096px;
-  margin: 15px 0px;
+  margin: 40px 0px 0px 0px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -302,7 +303,7 @@ const SoundBtn = styled.div`
   width: 740px;
   display: flex;
   justify-content: space-between;
-  margin-top: 13px;
+  margin-top: 32px;
   position: relative;
   @media screen and (max-width: 1360px) {
     width: 738px;

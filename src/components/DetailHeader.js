@@ -44,6 +44,8 @@ const HeaderContainer = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
+  position: absolute;
+  width: 100vw;
 `;
 const HeaderGrid = styled.div`
   display: flex;

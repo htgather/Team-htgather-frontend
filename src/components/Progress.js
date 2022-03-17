@@ -118,7 +118,7 @@ export default function Timer(props) {
 
   return (
     <div className="App" style={{ color: "black" }}>
-      <div style={{ margin: "3px 0px 8px" }}>
+      <div style={{ margin: "0px 0px 1px 0px" }}>
         <TextWrap>{text}</TextWrap>
       </div>
 
@@ -154,6 +154,7 @@ const Contents = styled.div`
     width: 758px;
     height: 50px;
   }
+  margin-bottom: 24px;
 `;
 
 const ProgressWrap = styled.div`
@@ -163,7 +164,8 @@ const ProgressWrap = styled.div`
 `;
 
 const TextWrap = styled.div`
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 500;
-  color: rgb(34, 37, 41);
+  line-height: 1.4;
+  ${"" /* color: rgb(34, 307, 41); */}
 `;
