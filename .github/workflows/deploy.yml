@@ -1,70 +1,70 @@
-name: deploy workflows
+# This is a basic workflow to help you get started with Actions
 
+name: CI
+
+# Controls when the action will run.
 on:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  continuous-deployment:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    steps:
-      - name: Git Checkout # 깃헙에 업로드된 소스 코드 가져오기
-        uses: actions/checkout@v2
 
-      - name: Use Node.js version 14.15.1 #노드를 가상 인스턴스에 설치
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Use the node version specified in the strategy
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 14.15.1
+          node-version: ${{ matrix.node-version }}
 
-      - name: Build #React build
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      # Install packages
+      - name: Install packages
         run: |
-          npm install -g yarn
-          yarn install --frozen-lockfile
-          yarn build
-      - name: Configure AWS credentials #가상인스턴스에서 aws cli를 통해 필요한 서비스를 접근할 수 있게 사용자를 등록
-        uses: aws-actions/configure-aws-credentials
+          cd sample-app
+          npm install
+      # Build an optimized production build
+      - name: Production build
+        run: |
+          unset CI
+          cd sample-app
+          npm run build
+      # Deploy to the S3 server
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          args: --acl public-read --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_PRODUCTION_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE_DIR: "sample-app/build"
 
-      - name: Deploy to S3 #빌드된 파일 및 폴더를 s3서비스에 업로드
-        run: aws s3 sync ./${{ secrets.BUILD_DIRECTORY }} ${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read --delete
-
-      - name: CloudFront Invalidate Cache # 기존 배포한 콘텐츠(캐시)를 삭제하고 s3에 새로 배포된 콘텐츠를 연결
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
-# name: development deployment
-
-# on:
-#   push:
-#     branches: [main]
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-versions: [14.x]
-#     steps:
-#       - name: Checkout source code.
-#         uses: actions/checkout@v2
-
-#       - name: Install Dependencies
-#         run: yarn
-
-#       - name: Build
-#         run: yarn build
-
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: ${{ secrets.AWS_REGION }}
-
-#       - name: Deploy to S3
-#         run: aws s3 sync ./dist s3://${{secrets.AWS_S3_BUCKET_NAME}} --delete
-
-#       - name: Invalidate CloudFront Cache
-#         run: aws cloudfront create-invalidation --distribution-id ${{secrets.AWS_CLOUDFRONT_DISTRIBUTION_I}} --paths "/*"
-
+      # Invalidate Cloudfront (this action)
+      - name: invalidate
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: "/*"
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
