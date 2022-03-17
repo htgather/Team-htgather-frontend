@@ -1,22 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as commonActions } from '../redux/modules/common';
+import React from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commonActions } from "../redux/modules/common";
 
-import { Progress } from 'antd';
-import 'antd/dist/antd.css';
+import { Progress } from "antd";
+import "antd/dist/antd.css";
 
-import fireIcon from '../Images/MyRecordIcon_Fire.png';
-import clockIcon from '../Images/MyRecordIcon_Clock.png';
+import fireIcon from "../Images/MyRecordIcon_Fire.png";
+import clockIcon from "../Images/MyRecordIcon_Clock.png";
 
 const MyRecord = (props) => {
+  console.log(props);
   const {
     myRecords: {
       // 각 값의 디폴트값_ 구조분해할당
       countPerWeek = 1,
       weeklyGoal = 3,
       daysInARow = 38,
-      totalTimePerMonth = 40,
+      totalTimePerWeek = 40,
     } = {},
   } = props;
 
@@ -28,24 +29,41 @@ const MyRecord = (props) => {
 
       <MyRecordContent>
         <div></div>
-        <Progress type="circle" percent={per} showInfo={false} width={144} trailColor="#EAECEF" strokeColor="#405EFB" />
+        <Progress
+          type="circle"
+          percent={per}
+          showInfo={false}
+          width={144}
+          trailColor="#EAECEF"
+          strokeColor="#405EFB"
+        />
         <div className="progressInTextBox">
           <div className="countPerWeekText">{countPerWeek}일</div>
           <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
         </div>
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img src={fireIcon} alt="불꽃 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
+            <img
+              src={fireIcon}
+              alt="불꽃 아이콘"
+              style={{ margin: "0px 2px 1px 0px" }}
+            />
             <div>
-              연속&nbsp; <span className="bold">{daysInARow}</span>일째 운동중이에요
+              연속&nbsp; <span className="bold">{daysInARow}</span>일째
+              운동중이에요
             </div>
           </div>
 
-          <div style={{ marginTop: '4px' }} className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
+          <div style={{ marginTop: "4px" }} className="bottomTextBox">
+            <img
+              src={clockIcon}
+              alt="시계 아이콘"
+              style={{ margin: "0px 2px 1px 0px" }}
+            />
 
             <div>
-              이번 주에&nbsp;<span className="bold">{totalTimePerMonth}</span>분 운동했어요
+              이번 주에&nbsp;<span className="bold">{totalTimePerWeek}</span>분
+              운동했어요
             </div>
           </div>
           {/* <div className="bottomTextBox">

@@ -1,0 +1,35 @@
+name: deploy workflows
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  continuous-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout # 깃헙에 업로드된 소스 코드 가져오기
+        uses: actions/checkout@v2
+
+      - name: Use Node.js version 14.x #노드를 가상 인스턴스에 설치
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Build #React build
+        run: |
+          npm install -g yarn
+          yarn install --frozen-lockfile
+          yarn build
+      - name: Configure AWS credentials #가상인스턴스에서 aws cli를 통해 필요한 서비스를 접근할 수 있게 사용자를 등록
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3 #빌드된 파일 및 폴더를 s3서비스에 업로드
+        run: aws s3 sync ./${{ secrets.BUILD_DIRECTORY }} ${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read --delete
+
+      - name: CloudFront Invalidate Cache # 기존 배포한 콘텐츠(캐시)를 삭제하고 s3에 새로 배포된 콘텐츠를 연결
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
