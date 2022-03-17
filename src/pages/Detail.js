@@ -191,7 +191,7 @@ const Detail = (props) => {
 
 const Background = styled.div`
   margin: 0px auto;
-  ${"" /* overflow-y: hidden; */}
+  overflow-y: hidden;
 `;
 
 const BubbleWrap = styled.div`
@@ -224,11 +224,14 @@ const DIV = styled.div`
   width: 100%;
   height: 100vh;
   padding-top: 64px;
-  margin: 0px auto;
+  margin: 0px 0px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  @media screen and (max-width: 1360px) {
+    padding-top: 56px;
+  }
 `;
 
 const TimerWrap = styled.div`
@@ -238,6 +241,10 @@ const TimerWrap = styled.div`
   justify-content: center;
   text-align: center;
   @media screen and (max-width: 1360px) {
+    position: relative;
+    left: -110px;
+  }
+  @media screen and (max-width: 1194px) {
     position: relative;
     left: -110px;
   }
@@ -264,7 +271,12 @@ const MainVideo = styled.div`
   border-radius: 12px;
   @media screen and (max-width: 1360px) {
     width: 758px;
-    height: 428px;
+    height: 426px;
+    margin: 0px 0px 110px;
+  }
+  @media screen and (max-width: 1194px) {
+    width: 758px;
+    height: 426px;
     margin: 0px 0px 110px;
   }
 `;
@@ -306,8 +318,12 @@ const SoundBtn = styled.div`
   margin-top: 32px;
   position: relative;
   @media screen and (max-width: 1360px) {
-    width: 738px;
-    margin: -114px 0px 0px 65px;
+    width: 758px;
+    margin: -114px 0px 0px 54px;
+  }
+  @media screen and (max-width: 1194px) {
+    width: 758px;
+    margin: -140px 0px 0px 54px;
   }
 `;
 
