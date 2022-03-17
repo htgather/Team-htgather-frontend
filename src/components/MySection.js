@@ -1,24 +1,22 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import clap from "../Images/MySectionIcon_clap.png";
-import Banner from "./Banner";
-import Calender from "./Calender";
-import jwt_decode from "jwt-decode";
-import MyPart from "./modals/MyPart"; //로그인 안했을 때 가리는 모달
-import MyRecord from "./MyRecord";
-import MostExercised from "./MostExercised";
-import Ranking from "./Ranking";
-import { actionCreators as commonActions } from "../redux/modules/common";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import clap from '../Images/MySectionIcon_clap.png';
+import Banner from './Banner';
+import Calender from './Calender';
+import jwt_decode from 'jwt-decode';
+import MyPart from './modals/MyPart'; //로그인 안했을 때 가리는 모달
+import MyRecord from './MyRecord';
+import MostExercised from './MostExercised';
+import Ranking from './Ranking';
+import { actionCreators as commonActions } from '../redux/modules/common';
 
 const MySection = () => {
   const dispatch = useDispatch();
   const myRecords = useSelector((state) => state.common.myRecords);
 
-  const is_local = localStorage.getItem("isLogin");
-  const nickName = is_local
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
   React.useEffect(() => {
     if (nickName) {
@@ -29,10 +27,11 @@ const MySection = () => {
   return (
     <MySectionContainer>
       <MySectionTitle>
-        <img src={clap} alt="박수 아이콘" style={{ marginRight: "4px" }} />
-        {nickName
-          ? `안녕하세요 ${nickName}님 오늘도 함께 운동해요!`
-          : "홈트게더와 함께 운동해보세요!"}
+
+        <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
+          <img src={clap} alt="박수 아이콘" />
+        </div>
+        <div>{nickName ? `안녕하세요 ${nickName}님 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
       </MySectionTitle>
       <MySectionContent>
         <MyPart />
@@ -58,6 +57,7 @@ const MySectionContainer = styled.div`
   margin: 56px 0 64px 0;
   @media screen and (max-width: 1360px) {
     width: 1000px;
+    justify-content: center;
   }
   position: relative;
 `;
@@ -87,6 +87,10 @@ const MyPage = styled.div`
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  @media screen and (max-width: 1360px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 const RightSection = styled.div`
   display: flex;
