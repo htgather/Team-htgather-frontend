@@ -106,7 +106,7 @@ const Calender = () => {
             }}
             style={{ cursor: 'pointer' }}
           />
-          <span>{today.format('YYYY 년 M 월')}</span>
+          <span style={{ width: '77px', height: '24px', lineHeight: '24px', letterSpacing: '-0.98px' }}>{today.format('YYYY년 M월')}</span>
           <img
             src={rightBtn}
             alt="오른쪽버튼"
@@ -132,21 +132,29 @@ const Calender = () => {
   );
 };
 const CalenderBox = styled.div`
-  height: 100%;
+  width: 315px;
+  height: 284px;
+  /* height: 100%; */
 `;
+
 const CalenderTopBar = styled.div`
   display: flex;
-  width: 100%;
+  width: 271px;
+  height: 18px;
   align-items: center;
   font-size: 16px;
   font-weight: bold;
   justify-content: space-between;
-  margin-bottom: 14px;
-  padding: 0px 8px;
+  margin: 27px 22px 15px 22px;
+  line-height: 18px;
 `;
+
 const CalenderBody = styled.div`
+  width: 261px;
+  height: 184px;
   font-size: 12px;
   color: #222529;
+  margin: 0px 27px 8px 27px;
   .row {
     display: flex;
   }
@@ -182,12 +190,12 @@ const CalenderBody = styled.div`
 
   .CalenderCheckIcon {
     position: absolute;
-    top: -3px;
-    right: 6.75px;
+    top: -3.2px;
+    right: 6.12px;
   }
   .CalenderTodayIcon {
     position: absolute;
-    top: -3px;
+    top: -2.5px;
     right: 6px;
     z-index: 1;
   }
@@ -204,6 +212,6 @@ const CalenderText = styled.div`
   font-weight: 400;
   color: #878e95;
   text-align: center;
-  margin-top: -4px;
+  margin-bottom: 0px 66px 12px 67px;
 `;
 export default Calender;

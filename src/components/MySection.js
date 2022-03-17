@@ -5,7 +5,7 @@ import clap from '../Images/MySectionIcon_clap.png';
 import Banner from './Banner';
 import Calender from './Calender';
 import jwt_decode from 'jwt-decode';
-import MyPart from './modals/MyPart';
+import MyPart from './modals/MyPart'; //로그인 안했을 때 가리는 모달
 import MyRecord from './MyRecord';
 import MostExercised from './MostExercised';
 import Ranking from './Ranking';
@@ -31,7 +31,7 @@ const MySection = () => {
         {nickName ? `안녕하세요 ${nickName}님 오늘도 함께 운동해요!` : '홈트게더와 함께 운동해보세요!'}
       </MySectionTitle>
       <MySectionContent>
-        <MyPart></MyPart>
+        <MyPart />
         <MyPage>
           <Ranking />
           <MyRecord myRecords={myRecords}></MyRecord>
@@ -66,29 +66,28 @@ const MySectionTitle = styled.div`
   width: 100%;
   justify-content: start;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
 `;
 
 const MySectionContent = styled.div`
-  /* width: 985px; */
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: end;
 `;
 const MyPage = styled.div`
-  width: 985px;
+  width: 965px;
   height: 284px;
   border-radius: 12px;
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 26px 24px;
   box-sizing: border-box;
 `;
 const RightSection = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 24px;
+  margin-left: 20px;
   justify-content: space-between;
   @media screen and (max-width: 1360px) {
     display: none;
