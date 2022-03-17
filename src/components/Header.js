@@ -93,7 +93,7 @@ const HeaderGrid = styled.div`
     font-weight: bold;
   }
   @media screen and (max-width: 1360px) {
-    width: 980px;
+    width: 990px;
   }
 `;
 export default Header;
