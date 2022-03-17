@@ -156,6 +156,7 @@ const MakeRoomModal = (props) => {
                   padding: '8px 15px',
                   color: clickedStartTime === i ? '#FFF' : '',
                   background: clickedStartTime === i ? '#0028fa' : '',
+                  fontWeight: clickedStartTime === i ? '500' : '',
                 }}
               >
                 {e}

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import jwt_decode from "jwt-decode";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
-import { actionCreators as userActions } from "../redux/modules/user";
-import { actionCreators as commonActions } from "../redux/modules/common";
+import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as commonActions } from '../redux/modules/common';
 
-import gold from "../Images/gold.png";
-import silver from "../Images/silver.png";
-import bronze from "../Images/bronze.png";
+import gold from '../Images/gold.png';
+import silver from '../Images/silver.png';
+import bronze from '../Images/bronze.png';
 
 const Ranking = (props) => {
   const dispatch = useDispatch();
@@ -21,10 +21,8 @@ const Ranking = (props) => {
   //   { rank: 4, nickName: "감감감", countPerWeek: 0, isMe: true },
   // ];
 
-  const is_local = localStorage.getItem("isLogin");
-  const nickName = is_local
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
   React.useEffect(() => {
     if (nickName) {
@@ -59,12 +57,8 @@ const Ranking = (props) => {
             if (p.countPerWeek === 0 || p.rank > 4) {
               return (
                 <IsMeZero>
-                  <Rank style={{ paddingLeft: p.rank > 9 ? "" : "2px" }}>
-                    {p.rank}
-                  </Rank>
-                  <Name style={{ fontWeight: p.isMe ? "bold" : "" }}>
-                    {p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}
-                  </Name>
+                  <Rank style={{ paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
+                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
                   <Count>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
@@ -74,24 +68,14 @@ const Ranking = (props) => {
             <OneRank
               key={i}
               style={{
-                backgroundColor: p.isMe ? "#405EFB" : "",
-                color: p.isMe ? "#fff" : "",
+                backgroundColor: p.isMe ? '#405EFB' : '',
+                color: p.isMe ? '#fff' : '',
               }}
             >
               <Rank>
-                {p.rank === 1 ? (
-                  <img src={gold} alt="금메달" />
-                ) : p.rank && p.rank === 2 ? (
-                  <img src={silver} alt="은메달" />
-                ) : p.rank && p.rank === 3 ? (
-                  <img src={bronze} alt="동메달" />
-                ) : (
-                  p.rank
-                )}
+                {p.rank === 1 ? <img src={gold} alt="금메달" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" /> : p.rank}
               </Rank>
-              <Name style={{ fontWeight: p.isMe ? "bold" : "" }}>
-                {p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}
-              </Name>
+              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
               <Count>{p.countPerWeek}회</Count>
             </OneRank>
           );
@@ -105,29 +89,25 @@ const DIV = styled.div`
   width: 315px;
   height: 284px;
   border-radius: 12px;
-  padding: 20px 10px;
 `;
 
 const Header = styled.div`
   font-weight: bold;
   font-size: 16px;
+  line-height: 24px;
   color: #222529;
-  margin: 0px 0px 15px;
+  margin: 24px 0px 16px 24px;
   letter-spacing: -0.64px;
 `;
 
 const RankContainer = styled.div`
   width: 267px;
-  height: 196px;
+  height: 192px;
   display: grid;
   align-content: start;
   align-items: start;
   row-gap: 4px;
-
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative; */
+  margin: 0px 24px 24px 24px;
 `;
 
 const OneRank = styled.div`
@@ -140,27 +120,32 @@ const OneRank = styled.div`
   align-items: center;
   color: rgb(34, 37, 41);
   letter-spacing: -0.64px;
-  padding: 0px 8px;
+  /* padding: 0px 8px; */
 `;
 
 const Rank = styled.div`
   width: 25px;
   font-size: 16px;
   text-align: center;
+  margin: 4px 0px 4px 15px;
 `;
 
 const Name = styled.div`
   width: 130px;
+  height: 20px;
   display: flex;
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  margin-left: 23px;
 `;
 
 const Count = styled.div`
   width: 50px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   text-align: right;
+  margin: 7px 12px 7px 0px;
 `;
 
 //집계 0일때

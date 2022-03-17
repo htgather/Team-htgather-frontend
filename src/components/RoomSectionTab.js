@@ -10,7 +10,7 @@ import { actionCreators as roomActions } from '../redux/modules/room';
 const RoomSectionTop = (props) => {
   const dispatch = useDispatch();
 
-  const { background, fontcolor, topleft, topright, bottomleft, bottomright, isDrop } = props;
+  const { background, fontcolor } = props;
 
   const is_local = localStorage.getItem('isLogin');
   const nickName = useSelector((state) => state.User.nickname);
@@ -40,10 +40,10 @@ const RoomSectionTop = (props) => {
       {isMakeModal && <MakeRoomModal setIsMakeModal={setIsMakeModal} isMakeModal={isMakeModal}></MakeRoomModal>}
       <RoomSectionTopContainer>
         <RoomSectionTitle>
-          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: '4px' }} />
+          <img src={fire} alt="불꽃 아이콘" style={{ marginRight: '4px', height: '34px' }} />
           {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가해보세요!'}
 
-          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer' }} className="reload" onClick={clickReload} />
+          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '34px' }} className="reload" onClick={clickReload} />
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
@@ -58,7 +58,6 @@ const RoomSectionTop = (props) => {
                   style={{
                     color: clickedDifficulty === i ? '#FFF' : '',
                     background: clickedDifficulty === i ? '#667EFC' : '',
-                    // topleft: clickedDifficulty === DifficultyList[0] ? topright, bottomleft, bottomright
                   }}
                 >
                   {e}
@@ -97,6 +96,8 @@ const RoomSectionTopContainer = styled.div`
 `;
 const RoomSectionTitle = styled.div`
   color: #222529;
+  /* width: 445px;
+  height: 34px; */
   font-size: 24px;
   font-weight: 700;
   display: flex;
@@ -112,7 +113,7 @@ const RoomSectionContent = styled.div`
   font-size: 18px;
   font-weight: 500;
   justify-content: space-between;
-  margin: 28px 0px 35px 0;
+  margin: 24px 0px;
 `;
 const RoomSectionCategory = styled.div`
   display: flex;

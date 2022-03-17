@@ -5,7 +5,6 @@ import KakaoLogin from '../KakaoLogin';
 import loginImg from '../../Images/loginImg.png';
 import lock from '../../Images/lock.png';
 import Close from '../../Images/Close.png';
-import Frame from '../../Images/Frame.png';
 
 const RoomClickModal = (props) => {
   const is_local = localStorage.getItem('isLogin') ? true : false;
@@ -19,37 +18,43 @@ const RoomClickModal = (props) => {
       <BackGround onClick={closeModal}>
         <ModalContainer>
           <DIV onClick={(e) => e.stopPropagation()}>
-            <ImgWrap>
-              <img src={loginImg} />
-              <div style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '20px' }}>홈트게더와 함께하는 홈 트레이닝</div>
-              <div
-                style={{
-                  fontSize: '14px',
-                  marginTop: '10px',
-                  color: '#aaa',
-                }}
-              >
-                혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
-                <br />
-                홈트게더와 함께 사람들과 소통하며 재미있는 홈트를 시작해보세요.
-              </div>
-            </ImgWrap>
             <CloseBtn onClick={closeModal}>
               <img src={Close} />
             </CloseBtn>
-            <Container>
-              <div>
-                <img src={lock} width="48px" height="50px" />
-              </div>
-              <div style={{ marginTop: '20px', fontSize: '16px' }}>
-                로그인 후에 확인할 수 있어요
-                <br />
-                3초 로그인하고 사람들과 함께 운동해볼까요?
-              </div>
-              <Kakao>
-                <KakaoLogin />
-              </Kakao>
-            </Container>
+            <LeftSide>
+              <ImgWrap>
+                <div style={{ width: '274px', height: '208px' }}>
+                  <img src={loginImg} />
+                </div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '22px' }}>홈트게더와 함께하는 홈 트레이닝</div>
+                <div
+                  style={{
+                    fontSize: '16px',
+                    marginTop: '28px',
+                    color: '#aaa',
+                  }}
+                >
+                  혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
+                  <br />
+                  홈트게더와 함께 사람들과 소통하며 재미있는 홈트를 시작해보세요.
+                </div>
+              </ImgWrap>
+            </LeftSide>
+            <RightSide>
+              <Container>
+                <div style={{ width: '96px', height: '80px' }}>
+                  <img src={lock} alt="자물쇠 아이콘" />
+                </div>
+                <div style={{ margin: '16px auto 28px', fontSize: '18px' }}>
+                  로그인 후에 확인할 수 있어요
+                  <br />
+                  3초 로그인하고 사람들과 함께 운동해볼까요?
+                </div>
+                <Kakao>
+                  <KakaoLogin />
+                </Kakao>
+              </Container>
+            </RightSide>
           </DIV>
         </ModalContainer>
       </BackGround>
@@ -88,12 +93,47 @@ const DIV = styled.div`
   background-color: #f1f3f5;
   border-radius: 12px;
   margin: auto;
-  width: 880px;
+  width: 960px;
   height: 480px;
   display: flex;
   justify-content: space-evenly;
   position: relative;
 `;
+
+const LeftSide = styled.div`
+  width: 480px;
+  height: 480px;
+  background-color: #fff;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+`;
+
+const ImgWrap = styled.div`
+  width: 397px;
+  height: 340px;
+  letter-spacing: -0.96px;
+  margin: 60px auto 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const RightSide = styled.div`
+  width: 480px;
+  height: 480px;
+  letter-spacing: -0.96px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 305px; // 글씨기준 width. 원래 전체 div는 259px;
+  height: 224px;
+  margin: 128px 88px;
+`;
+
+const Kakao = styled.div``;
 
 const CloseBtn = styled.div`
   width: 30px;
@@ -104,32 +144,4 @@ const CloseBtn = styled.div`
   cursor: pointer;
 `;
 
-const ImgWrap = styled.div`
-  width: 440px;
-  background-color: #fff;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  padding: 75px 30px;
-  letter-spacing: -0.48px;
-`;
-
-const Container = styled.div`
-  margin: 155px auto;
-  text-align: center;
-`;
-
-const Kakao = styled.div`
-  margin-top: 30px;
-`;
-
-// const LoginBtn = styled.div`
-//   display: inline-flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: #ddd;
-//   border-radius: 20px;
-//   width: 316px;
-//   height: 56px;
-//   margin-top: 30px;
-// `;
 export default RoomClickModal;
