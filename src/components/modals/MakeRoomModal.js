@@ -108,8 +108,13 @@ const MakeRoomModal = (props) => {
   };
 
   return (
-    <Background>
-      <MakeRoomContainer ref={modal}>
+    <Background
+      onClick={() => {
+        setIsMakeModal(false);
+        document.body.style.overflow = 'unset';
+      }}
+    >
+      <MakeRoomContainer ref={modal} onClick={(e) => e.stopPropagation()}>
         <MakeRoomHeader className="boldText">
           방 만들기
           <img
@@ -117,6 +122,7 @@ const MakeRoomModal = (props) => {
             alt="엑스 아이콘"
             onClick={() => {
               setIsMakeModal(false);
+              document.body.style.overflow = 'unset';
             }}
             style={{ cursor: "pointer" }}
           />
@@ -202,6 +208,7 @@ const MakeRoomModal = (props) => {
           <CancelBtn
             onClick={() => {
               setIsMakeModal(false);
+              document.body.style.overflow = 'unset';
             }}
           >
             취소하기

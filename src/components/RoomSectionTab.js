@@ -84,6 +84,7 @@ const RoomSectionTop = (props) => {
                 return;
               }
               setIsMakeModal(true);
+              document.body.style.overflow = 'hidden';
             }}
           >
             방만들기
