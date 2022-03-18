@@ -40,8 +40,17 @@ const Videoplayer = React.forwardRef((props, ref) => {
   useEffect(() => {
     const name = document.getElementById("name");
     name.innerText = `${nickname}`;
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then(() => {
+        socket.emit("join_room", roomName, nickname);
+      })
+      .catch(() => {
+        window.alert("카메라 또는 마이크 장치를 확인 후 다시 입장해주세요");
+        history.push("/");
+        window.location.reload();
+      });
 
-    socket.emit("join_room", roomName, nickname);
     return () => {
       LeaveRoom();
     };
@@ -167,7 +176,8 @@ const Videoplayer = React.forwardRef((props, ref) => {
     try {
       const videoGrid = document.querySelector("#video-grid");
       const video = document.createElement("video");
-      const peername = document.createElement("h3");
+      const nickNameContainer = document.createElement("div");
+      const peername = document.createElement("div");
       const div = document.createElement("div");
       div.id = id;
       video.autoplay = true;
@@ -175,10 +185,12 @@ const Videoplayer = React.forwardRef((props, ref) => {
       video.srcObject = peerStream;
       peername.innerText = `${remoteNickname}`;
       peername.style.color = "white";
-      div.appendChild(peername);
+      nickNameContainer.appendChild(peername);
+      div.appendChild(nickNameContainer);
       div.appendChild(video);
       video.className = "memberVideo";
-      peername.className = "nickNameBox";
+      peername.className = "nickName";
+      nickNameContainer.className = "nickNameContainer";
       div.className = "videoBox";
       videoGrid.appendChild(div);
     } catch (error) {
@@ -285,27 +297,33 @@ const Videoplayer = React.forwardRef((props, ref) => {
     handleCameraClick: () => {
       Video.forEach((track) => (track.enabled = !track.enabled));
       if (cameraOff === false) {
-        // 비디오 켜진걸 끄면서 실행
+        // 카메라 오프가 false이면 켜진상태
         setCameraOff(true);
         // 스크린 세이버 온 오프
         socket.emit("screensaver", roomName, socketID, true);
-        // let screensaver = document.querySelector(".screensaver");
-        // screensaver.style.display = "block";
+        let screensaver = document.querySelector("#myscreensaver");
+        screensaver.style.display = "flex";
       } else if (cameraOff === true) {
         setCameraOff(false);
-        // let screensaver = document.querySelector(".screensaver");
-        // screensaver.style.display = "none";
+        let screensaver = document.querySelector("#myscreensaver");
+        screensaver.style.display = "none";
         socket.emit("screensaver", roomName, socketID, false);
       }
     },
     handleMuteClick: () => {
       Audio.forEach((track) => (track.enabled = !track.enabled));
+      const nickNameContainer = document.querySelector("#nickNameContainer");
       if (muted === false) {
         setMuted(true);
-        // socket.emit("micCheck", roomName, socketID, true);
+        const muteIcon = document.createElement("div");
+        muteIcon.className = "muteIcon";
+        nickNameContainer.prepend(muteIcon);
+        socket.emit("mic_check", roomName, socketID, true);
       } else if (muted === true) {
         setMuted(false);
-        socket.emit("micCheck", roomName, socketID, false);
+        const muteIcon = nickNameContainer.querySelector(".muteIcon");
+        nickNameContainer.removeChild(muteIcon);
+        socket.emit("mic_check", roomName, socketID, false);
       }
     },
 
@@ -349,24 +367,22 @@ const Videoplayer = React.forwardRef((props, ref) => {
       screensaver.className = "screensaver";
       remoteDiv.appendChild(screensaver);
     } else {
-      const screensaver = document.getElementById(`screensaver`);
-      remoteDiv.removeChild(screensaver);
+      const screensaver = remoteDiv.querySelector(".screensaver");
+      setTimeout(() => {
+        remoteDiv.removeChild(screensaver);
+      }, 100);
     }
   });
 
-  socket.on("micCheck", (remoteSocketId, remoteNickname, boolean) => {
+  socket.on("mic_check", (remoteSocketId, boolean) => {
     const remoteDiv = document.getElementById(`${remoteSocketId}`);
-    const nickNameContainer = [...remoteDiv.children].filter(
-      (child) => child === document.querySelector(".nickNameContainer")
-    );
+    const nickNameContainer = remoteDiv.querySelector(".nickNameContainer");
     if (boolean) {
       const muteIcon = document.createElement("div");
       muteIcon.className = "muteIcon";
-      nickNameContainer.appendChild(muteIcon);
+      nickNameContainer.prepend(muteIcon);
     } else {
-      const muteIcon = [...nickNameContainer.children].filter(
-        (child) => child === document.querySelector(".muteIcon")
-      );
+      const muteIcon = remoteDiv.querySelector(".muteIcon");
       nickNameContainer.removeChild(muteIcon);
     }
   });
@@ -382,10 +398,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
             id="myvideo"
             className="memberVideo myVideo"
           ></video>
-          {/* <div className="nickNameContainer">
-            <div className="muteIcon" /> */}
-          <div id="name" className="nickNameBox"></div>
-          {/* </div> */}
+          <div id="nickNameContainer" className="nickNameContainer">
+            {/* <div className="mutedIcon" /> */}
+            <div id="name" className="nickName"></div>
+          </div>
+          <div
+            id="myscreensaver"
+            style={{ display: "none" }}
+            className="screensaver"
+          ></div>
         </div>
       </MemberWrap>
     </>
@@ -418,32 +439,20 @@ const MemberWrap = styled.div`
       height: 113px;
     }
   }
-  // .nickNameContainer {
-  //   display: flex;
-  //   position: absolute;
-  //   background-color: rgba(0, 0, 0, 0.3);
-  //   color: white;
-  //   padding: 5px 8px;
-  //   border-radius: 4px;
-  //   z-index: 2;
-  //   font-size: 13px;
-  //   font-weight: bold;
-  //   letter-spacing: -0.26px;
-  //   align-items: center;
-  // }
-
-  .nickNameBox {
-    display: inline-block;
+  .nickNameContainer {
+    display: flex;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
     padding: 5px 8px;
     border-radius: 4px;
-    z-index: 2;
+    z-index: 3;
     font-size: 13px;
     font-weight: bold;
     letter-spacing: -0.26px;
+    align-items: center;
   }
+
   .videoBox {
     position: relative;
   }
@@ -461,20 +470,22 @@ const MemberWrap = styled.div`
     transform: scaleX(-1);
   }
   .screensaver {
+    display: flex;
     position: absolute;
     background-image: url(${Screensaver});
     width: 200px;
     height: 112px;
     z-index: 2;
+    top: 0px;
   }
 
-  // .muteIcon {
-  //   background-image: url(${Mute});
-  //   z-index: 3;
-  //   width: 12px;
-  //   height: 12px;
-  //   margin-right: 4px;
-  // }
+  .muteIcon {
+    background-image: url(${Mute});
+    z-index: 3;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+  }
 `;
 
 const Circle = styled.div`
