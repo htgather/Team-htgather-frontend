@@ -74,6 +74,7 @@ const Header = (props) => {
 };
 
 const HeaderContainer = styled.div`
+  width: 100vw;
   height: 64px;
   background: #f8f9fa;
   border-bottom: 1px solid #eaecef;

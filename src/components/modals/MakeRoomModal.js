@@ -123,6 +123,7 @@ const MakeRoomModal = (props) => {
                   style={{
                     color: clickedDifficulty === i ? '#FFF' : '',
                     background: clickedDifficulty === i ? '#0028fa' : '',
+                    fontWeight: clickedDifficulty === i ? '500' : '',
                   }}
                 >
                   {e}
@@ -134,7 +135,7 @@ const MakeRoomModal = (props) => {
             <p className="boldText" style={{ margin: '12px 0px' }}>
               카테고리
             </p>
-            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
+            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#D9DFFE" fontcolor="#878E95">
               운동 카테고리를 골라주세요
             </Dropdown>
           </CategoryBox>

@@ -46,7 +46,7 @@ const RoomSectionTop = (props) => {
 
           {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가를 기다리고 있는 방이에요, 로그인 후 함께해요!'}
 
-          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '34px' }} className="reload" onClick={clickReload} />
+          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '48px' }} className="reload" onClick={clickReload} />
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
@@ -69,7 +69,7 @@ const RoomSectionTop = (props) => {
             </DifficultyBox>
             <CategoryBox>
               <p>운동종류</p>
-              <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
+              <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#D9DFFE" fontcolor="#878E95">
                 어떤 운동을 찾고 계신가요?
               </Dropdown>
             </CategoryBox>

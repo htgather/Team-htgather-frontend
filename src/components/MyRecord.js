@@ -10,7 +10,6 @@ import fireIcon from '../Images/MyRecordIcon_Fire.png';
 import clockIcon from '../Images/MyRecordIcon_Clock.png';
 
 const MyRecord = (props) => {
-  console.log(props);
   const {
     myRecords: {
       // 각 값의 디폴트값_ 구조분해할당
@@ -26,7 +25,6 @@ const MyRecord = (props) => {
   return (
     <DIV>
       <Header>이만큼 운동했어요</Header>
-
       <MyRecordContent>
         <div></div>
         <Progress type="circle" percent={per} showInfo={false} width={144} trailColor="#EAECEF" strokeColor="#405EFB" />
@@ -44,7 +42,6 @@ const MyRecord = (props) => {
 
           <div style={{ marginTop: '4px' }} className="bottomTextBox">
             <img src={clockIcon} alt="시계 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
-
             <div>
               이번 주에&nbsp;<span className="bold">{totalTimePerWeek}</span>분 운동했어요
             </div>
