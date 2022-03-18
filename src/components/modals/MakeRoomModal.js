@@ -135,7 +135,9 @@ const MakeRoomModal = (props) => {
             <p className="boldText" style={{ margin: '12px 0px' }}>
               카테고리
             </p>
-            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA" 운동 카테고리를 골라주세요></Dropdown>
+            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
+              운동 카테고리를 골라주세요
+            </Dropdown>
           </CategoryBox>
         </MakeRoomOptionBox>
         <LinkInputBox>

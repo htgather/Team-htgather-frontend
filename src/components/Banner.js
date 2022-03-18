@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+
 import banner1 from '../Images/banner1.png';
 import banner2 from '../Images/banner2.png';
 
@@ -9,7 +10,7 @@ const Banner = () => {
   const [bannerIndex, setBannerIndex] = React.useState(0);
 
   // map 돌리기 위한 배너 갯수만큼의 배열
-  const circleArray = [0, 0, 0];
+  const circleArray = [0, 0];
 
   // 이전 버튼 클릭시 배너의 인덱스를 -1, 인덱스가 처음이면 마지막으로 돌아가기.
   const clickPrev = () => {
@@ -41,19 +42,10 @@ const Banner = () => {
 
   return (
     <Container>
-      <GrFormPrevious
-        onClick={clickPrev}
-        style={{
-          position: 'absolute',
-          left: '20px',
-          zIndex: 1,
-          cursor: 'pointer',
-        }}
-      />
       <Carousel bannerIndex={bannerIndex}>
         {circleArray.map((e, i) => (
           <ContentBox style={{ display: 'flex' }} index={i} key={i}>
-            <Content style={{ display: 'flex' }}></Content>
+            {bannerIndex === 1 ? <img src={banner1} alt="사용후기 배너" /> : <img src={banner2} alt="오류제보 배너" />}
           </ContentBox>
         ))}
       </Carousel>
@@ -72,7 +64,6 @@ const Banner = () => {
           ></Circle>
         ))}
       </CircleBox>
-      <GrFormNext onClick={clickNext} style={{ position: 'absolute', right: '20px', cursor: 'pointer' }} />
     </Container>
   );
 };
@@ -110,10 +101,7 @@ const ContentBox = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 12px;
-  background-color: ${(props) => (props.index === 1 ? 'orange' : props.index === 2 ? 'blue' : 'pink')};
 `;
-
-const Content = styled.div``;
 const CircleBox = styled.div`
   width: auto;
   display: flex;
@@ -125,7 +113,7 @@ const CircleBox = styled.div`
 const Circle = styled.div`
   width: 8px;
   height: 8px;
-  background: #dedede;
+  background: #353a3f;
   border-radius: 100%;
   margin: 0px 5px;
   cursor: pointer;

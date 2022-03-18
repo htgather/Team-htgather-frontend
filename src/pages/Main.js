@@ -89,7 +89,7 @@ const DIV = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   /* height: 100%; */
   background-color: #f8f9fa;
   display: flex;
