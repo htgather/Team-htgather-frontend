@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import clap from '../Images/MySectionIcon_clap.png';
+import clap from '../Images/clap.png';
+
 import Banner from './Banner';
 import Calender from './Calender';
 import jwt_decode from 'jwt-decode';
@@ -28,7 +29,7 @@ const MySection = () => {
     <MySectionContainer>
       <MySectionTitle>
         <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
-          <img src={clap} alt="박수 아이콘" />
+          <img src={clap} alt="박수 아이콘" width="24" />
         </div>
         <div>{nickName ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
       </MySectionTitle>
@@ -71,12 +72,18 @@ const MySectionTitle = styled.div`
   align-items: center;
   margin-bottom: 30px;
   letter-spacing: -0.48px;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    padding: 0rem 7.6rem;
+  }
 `;
 
 const MySectionContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    padding: 0rem 7.6rem;
+  }
 `;
 const MyPage = styled.div`
   width: 965px;

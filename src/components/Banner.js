@@ -36,7 +36,7 @@ const Banner = () => {
 
   // useEffect와 setInterval을 활용해 일정시간마다 자동으로 슬라이더가 넘어가기 구현
   React.useEffect(() => {
-    const slider = setInterval(() => setBannerIndex((value) => (value === circleArray.length - 1 ? 0 : value + 1)), 3000);
+    const slider = setInterval(() => setBannerIndex((value) => (value === circleArray.length - 1 ? 0 : value + 1)), 5000);
     return () => clearInterval(slider);
   }, []);
 
@@ -45,7 +45,8 @@ const Banner = () => {
       <Carousel bannerIndex={bannerIndex}>
         {circleArray.map((e, i) => (
           <ContentBox style={{ display: 'flex' }} index={i} key={i}>
-            {bannerIndex === 1 ? <img src={banner1} alt="사용후기 배너" /> : <img src={banner2} alt="오류제보 배너" />}
+            {bannerIndex === 1 ? <img src={banner1} alt="사용후기 배너" width="315px" /> : <img src={banner2} alt="오류제보 배너" width="315px" />}
+            <div className="banner" />
           </ContentBox>
         ))}
       </Carousel>
@@ -92,7 +93,7 @@ const Carousel = styled.div`
 `;
 const ContentBox = styled.div`
   font-size: 22px;
-  width: 315px;
+  /* width: 315px; */
   height: 136px;
   font-weight: 700;
   line-height: 60px;
@@ -101,6 +102,12 @@ const ContentBox = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 12px;
+  /* background: url('../Images/banner1.png');
+  background-repeat: no-repeat; */
+  .banner {
+    background: url('../Images/Banner1.png');
+    background-repeat: no-repeat;
+  }
 `;
 const CircleBox = styled.div`
   width: auto;

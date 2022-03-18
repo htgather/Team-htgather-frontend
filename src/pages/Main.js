@@ -56,7 +56,7 @@ const Main = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <Header />
       <Container>
         {isLoginModal && (
@@ -78,7 +78,7 @@ const Main = () => {
           <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
         </ToTopBtn>
       </Container>
-    </>
+    </div>
   );
 };
 

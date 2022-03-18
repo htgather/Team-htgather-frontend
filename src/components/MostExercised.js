@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import MyCategoryRecordIcon from '../Images/MyCategoryRecordIcon.png';
-import Category1 from '../Images/Category1.png';
-import Category2 from '../Images/Category2.png';
+import fighting from '../Images/fighting.png';
 
 const MostExercised = (props) => {
   const { myRecords } = props;
@@ -16,7 +14,7 @@ const MostExercised = (props) => {
       <MostExercisedContainer>
         <MostExercisedHeader>
           이런 운동을 많이 했어요
-          <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
+          <img src={fighting} alt="팔 아이콘" style={{ marginLeft: '2px' }} width="16" />
         </MostExercisedHeader>
         <MostExercisedContentBox>
           {isRecords ? (

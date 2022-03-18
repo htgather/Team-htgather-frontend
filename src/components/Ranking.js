@@ -9,6 +9,9 @@ import { actionCreators as commonActions } from '../redux/modules/common';
 import gold from '../Images/gold.png';
 import silver from '../Images/silver.png';
 import bronze from '../Images/bronze.png';
+import clap from '../Images/clap.png';
+import fire from '../Images/fire.png';
+import fighting from '../Images/fighting.png';
 
 const Ranking = (props) => {
   const dispatch = useDispatch();
@@ -73,7 +76,15 @@ const Ranking = (props) => {
               }}
             >
               <Rank>
-                {p.rank === 1 ? <img src={gold} alt="금메달" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" /> : p.rank}
+                {p.rank === 1 ? (
+                  <img src={gold} alt="금메달" width="20" />
+                ) : p.rank && p.rank === 2 ? (
+                  <img src={silver} alt="은메달" width="20" />
+                ) : p.rank && p.rank === 3 ? (
+                  <img src={bronze} alt="동메달" width="20" />
+                ) : (
+                  p.rank
+                )}
               </Rank>
               <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
               <Count>{p.countPerWeek}회</Count>
