@@ -17,7 +17,7 @@ function Player(props) {
   const [countTime, setCountTime] = React.useState();
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  const NewMedia = window.matchMedia("screen and (max-width: 1360px)");
+  const NewMedia = window.matchMedia("screen and (max-width: 1440px)");
   // console.log('player match는', NewMedia.matches);
 
   const endVideo = () => {
@@ -102,7 +102,7 @@ const Container = styled.div`
     font-size: 0.6em;
     font-weight: 700;
   }
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     width: 758px;
     height: 100%;
   }
@@ -119,7 +119,7 @@ const Count = styled.div`
   color: white;
   position: absolute;
   z-index: 2;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     width: 758px;
     height: 428px;
   }

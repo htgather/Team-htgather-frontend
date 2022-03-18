@@ -195,7 +195,7 @@ const Detail = (props) => {
 
 const Background = styled.div`
   margin: 0px auto;
-  // overflow-y: hidden;
+  overflow-y: hidden;
 `;
 
 const BubbleWrap = styled.div`
@@ -233,7 +233,7 @@ const DIV = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     padding-top: 56px;
   }
 `;
@@ -244,7 +244,7 @@ const TimerWrap = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     position: relative;
     left: -110px;
   }
@@ -262,7 +262,7 @@ const VideoWrap = styled.div`
   position: relative;
   margin-top: 10px;
   box-sizing: border-box;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     width: 980px;
     height: 605px;
     margin: auto;
@@ -273,7 +273,7 @@ const MainVideo = styled.div`
   width: 1096px;
   line-height: 616px;
   border-radius: 12px;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     width: 758px;
     height: 426px;
     margin: 0px 0px 110px;
@@ -321,7 +321,7 @@ const SoundBtn = styled.div`
   justify-content: space-between;
   margin-top: 32px;
   position: relative;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     width: 758px;
     margin: -114px 0px 0px 54px;
   }
