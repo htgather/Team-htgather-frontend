@@ -122,7 +122,7 @@ const MakeRoomModal = (props) => {
                   }}
                   style={{
                     color: clickedDifficulty === i ? '#FFF' : '',
-                    background: clickedDifficulty === i ? '#0028fa' : '',
+                    background: clickedDifficulty === i ? '#667EFC' : '',
                     fontWeight: clickedDifficulty === i ? '600' : '',
                   }}
                 >
@@ -156,7 +156,7 @@ const MakeRoomModal = (props) => {
                 style={{
                   padding: '8px 15px',
                   color: clickedStartTime === i ? '#FFF' : '',
-                  background: clickedStartTime === i ? '#0028fa' : '',
+                  background: clickedStartTime === i ? '#667EFC' : '',
                   fontWeight: clickedStartTime === i ? '600' : '',
                 }}
               >
