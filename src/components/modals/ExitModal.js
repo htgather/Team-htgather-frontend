@@ -5,48 +5,43 @@ import styled from "styled-components";
 import Close from "../../Images/Close.png";
 import { history } from "../../redux/configureStore";
 const ExitModal = (props) => {
-  const { isDone } = props;
-  const [isOpen, setIsOpen] = React.useState(true);
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  const { isDone, exitRoom } = props;
+
   return (
     <>
-      {isOpen && (
-        <BackGround>
-          <ModalWrap>
-            <CloseBtn onClick={closeModal}>
-              <img src={Close} alt="취소" />
-            </CloseBtn>
+      <BackGround>
+        <ModalWrap>
+          <CloseBtn onClick={exitRoom}>
+            <img src={Close} alt="취소" />
+          </CloseBtn>
 
-            <div onClick={(e) => e.stopPropagation()}>
-              <ModalContents>
-                <div
-                  style={{
-                    fontSize: "33px",
-                    fontWeight: "bold",
-                    marginBottom: "20px",
-                  }}
-                >
-                  정말 나가시겠어요?
-                </div>
-                <div style={{ fontSize: "16px", color: "#878E95" }}>
-                  {isDone
-                    ? ""
-                    : "지금 운동을 종료하면 운동시간이 기록되지 않아요."}
-                </div>
-                <BtnWrap
-                  onClick={() => {
-                    history.replace("/");
-                  }}
-                >
-                  {isDone ? "홈으로 돌아가기" : "운동 그만하기"}
-                </BtnWrap>
-              </ModalContents>
-            </div>
-          </ModalWrap>
-        </BackGround>
-      )}
+          <div onClick={(e) => e.stopPropagation()}>
+            <ModalContents>
+              <div
+                style={{
+                  fontSize: "33px",
+                  fontWeight: "bold",
+                  marginBottom: "20px",
+                }}
+              >
+                정말 나가시겠어요?
+              </div>
+              <div style={{ fontSize: "16px", color: "#878E95" }}>
+                {isDone
+                  ? "나가기 버튼을 누르면, 이 방에 다시 들어올 수 없어요"
+                  : "운동이 진행중이에요, 지금 운동을 종료하면 운동 시간이 기록되지 않아요"}
+              </div>
+              <BtnWrap
+                onClick={() => {
+                  history.replace("/");
+                }}
+              >
+                메인페이지로 가기
+              </BtnWrap>
+            </ModalContents>
+          </div>
+        </ModalWrap>
+      </BackGround>
     </>
   );
 };
@@ -63,8 +58,8 @@ const BackGround = styled.div`
 
 const ModalWrap = styled.div`
   background-color: #fff;
-  width: 661px;
-  height: 358px;
+  width: 660px;
+  height: 340px;
   border-radius: 12px;
   position: fixed;
   text-align: center;
@@ -80,8 +75,8 @@ const CloseBtn = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 32px;
+  top: 32px;
   z-index: 15;
   cursor: pointer;
 `;
@@ -120,7 +115,6 @@ const ModalContainer = styled.div`
   height: 480px;
   text-align: center;
   z-index: 999;
-
   /* @media ${(props) => props.theme.device.MobileLandscape} {
     width: 90%; */
   /* } */

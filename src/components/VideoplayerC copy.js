@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { history } from "../redux/configureStore";
 import HiFive from "../Images/Videoplayer_emoji.png";
+import Screensaver from "../Images/Videoplayer_screensaver.png";
+import Mute from "../Images/Videoplayer_mute.png";
 //Style
 import styled from "styled-components";
 
@@ -9,7 +11,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const roomName = props.roomId;
   const [muted, setMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);
-  const [Audio, setAduio] = useState([]);
+  const [Audio, setAudio] = useState([]);
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
 
@@ -38,8 +40,8 @@ const Videoplayer = React.forwardRef((props, ref) => {
   useEffect(() => {
     const name = document.getElementById("name");
     name.innerText = `${nickname}`;
-    socket.emit("join_room", roomName, nickname);
 
+    socket.emit("join_room", roomName, nickname);
     return () => {
       LeaveRoom();
     };
@@ -92,7 +94,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       mystream.current.append(myvideo.current);
       videoGrid.current.append(mystream.current);
       myvideo.current.muted = true;
-      setAduio(myStream.getAudioTracks());
+      setAudio(myStream.getAudioTracks());
       setVideo(myStream.getVideoTracks());
       if (!deviceId) {
         await getCameras();
@@ -171,10 +173,8 @@ const Videoplayer = React.forwardRef((props, ref) => {
       video.autoplay = true;
       video.playsInline = true;
       video.srcObject = peerStream;
-
       peername.innerText = `${remoteNickname}`;
       peername.style.color = "white";
-
       div.appendChild(peername);
       div.appendChild(video);
       video.className = "memberVideo";
@@ -285,17 +285,27 @@ const Videoplayer = React.forwardRef((props, ref) => {
     handleCameraClick: () => {
       Video.forEach((track) => (track.enabled = !track.enabled));
       if (cameraOff === false) {
+        // 비디오 켜진걸 끄면서 실행
         setCameraOff(true);
+        // 스크린 세이버 온 오프
+        socket.emit("screensaver", roomName, socketID, true);
+        // let screensaver = document.querySelector(".screensaver");
+        // screensaver.style.display = "block";
       } else if (cameraOff === true) {
         setCameraOff(false);
+        // let screensaver = document.querySelector(".screensaver");
+        // screensaver.style.display = "none";
+        socket.emit("screensaver", roomName, socketID, false);
       }
     },
     handleMuteClick: () => {
       Audio.forEach((track) => (track.enabled = !track.enabled));
       if (muted === false) {
         setMuted(true);
+        // socket.emit("micCheck", roomName, socketID, true);
       } else if (muted === true) {
         setMuted(false);
+        socket.emit("micCheck", roomName, socketID, false);
       }
     },
 
@@ -331,6 +341,36 @@ const Videoplayer = React.forwardRef((props, ref) => {
     }
   });
 
+  // 여긴 다른 사람들에게 띄우는 부분
+  socket.on("screensaver", (remoteSocketId, boolean) => {
+    const remoteDiv = document.getElementById(`${remoteSocketId}`);
+    if (boolean) {
+      const screensaver = document.createElement("div");
+      screensaver.className = "screensaver";
+      remoteDiv.appendChild(screensaver);
+    } else {
+      const screensaver = document.getElementById(`screensaver`);
+      remoteDiv.removeChild(screensaver);
+    }
+  });
+
+  socket.on("micCheck", (remoteSocketId, remoteNickname, boolean) => {
+    const remoteDiv = document.getElementById(`${remoteSocketId}`);
+    const nickNameContainer = [...remoteDiv.children].filter(
+      (child) => child === document.querySelector(".nickNameContainer")
+    );
+    if (boolean) {
+      const muteIcon = document.createElement("div");
+      muteIcon.className = "muteIcon";
+      nickNameContainer.appendChild(muteIcon);
+    } else {
+      const muteIcon = [...nickNameContainer.children].filter(
+        (child) => child === document.querySelector(".muteIcon")
+      );
+      nickNameContainer.removeChild(muteIcon);
+    }
+  });
+
   return (
     <>
       <MemberWrap ref={videoGrid} id="video-grid">
@@ -342,7 +382,10 @@ const Videoplayer = React.forwardRef((props, ref) => {
             id="myvideo"
             className="memberVideo myVideo"
           ></video>
-          <h3 id="name" className="nickNameBox "></h3>
+          {/* <div className="nickNameContainer">
+            <div className="muteIcon" /> */}
+          <div id="name" className="nickNameBox"></div>
+          {/* </div> */}
         </div>
       </MemberWrap>
     </>
@@ -355,11 +398,13 @@ const MemberWrap = styled.div`
   height: 616px;
   display: flex;
   flex-direction: column;
+
   @media screen and (max-width: 1360px) {
     position: absolute;
     right: 0px;
     top: -76px;
   }
+
   .memberVideo {
     margin-bottom: 8px;
     width: 200px;
@@ -367,11 +412,26 @@ const MemberWrap = styled.div`
     border-radius: 8px;
     position: relative;
     object-fit: cover;
+
     @media screen and (max-width: 1360px) {
       width: 202px;
       height: 113px;
     }
   }
+  // .nickNameContainer {
+  //   display: flex;
+  //   position: absolute;
+  //   background-color: rgba(0, 0, 0, 0.3);
+  //   color: white;
+  //   padding: 5px 8px;
+  //   border-radius: 4px;
+  //   z-index: 2;
+  //   font-size: 13px;
+  //   font-weight: bold;
+  //   letter-spacing: -0.26px;
+  //   align-items: center;
+  // }
+
   .nickNameBox {
     display: inline-block;
     position: absolute;
@@ -400,10 +460,24 @@ const MemberWrap = styled.div`
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
   }
+  .screensaver {
+    position: absolute;
+    background-image: url(${Screensaver});
+    width: 200px;
+    height: 112px;
+    z-index: 2;
+  }
+
+  // .muteIcon {
+  //   background-image: url(${Mute});
+  //   z-index: 3;
+  //   width: 12px;
+  //   height: 12px;
+  //   margin-right: 4px;
+  // }
 `;
 
 const Circle = styled.div`
-  position: absolute;
   bottom: 3px;
   right: 3px;
 `;
