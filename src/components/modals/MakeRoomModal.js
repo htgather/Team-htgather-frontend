@@ -123,7 +123,7 @@ const MakeRoomModal = (props) => {
                   style={{
                     color: clickedDifficulty === i ? '#FFF' : '',
                     background: clickedDifficulty === i ? '#0028fa' : '',
-                    fontWeight: clickedDifficulty === i ? '500' : '',
+                    fontWeight: clickedDifficulty === i ? '600' : '',
                   }}
                 >
                   {e}
@@ -135,7 +135,7 @@ const MakeRoomModal = (props) => {
             <p className="boldText" style={{ margin: '12px 0px' }}>
               카테고리
             </p>
-            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
+            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#D9DFFE" fontcolor="#878E95">
               운동 카테고리를 골라주세요
             </Dropdown>
           </CategoryBox>
@@ -157,7 +157,7 @@ const MakeRoomModal = (props) => {
                   padding: '8px 15px',
                   color: clickedStartTime === i ? '#FFF' : '',
                   background: clickedStartTime === i ? '#0028fa' : '',
-                  fontWeight: clickedStartTime === i ? '500' : '',
+                  fontWeight: clickedStartTime === i ? '600' : '',
                 }}
               >
                 {e}
