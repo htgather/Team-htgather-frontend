@@ -69,7 +69,6 @@ const Detail = (props) => {
       {roomInfo && (
         <>
           {isDone && isDoneModal && (
-            // <DoneScreen />
             <CompleteModal
               isDone={isDone}
               setIsDoneModal={setIsDoneModal}
@@ -211,7 +210,7 @@ const BubbleWrap = styled.div`
   position: absolute;
   bottom: 55px;
   left: 35px;
-  z-index: 5;
+  z-index: 4;
   :after {
     border-top: 10px solid #0028fa;
     border-left: 10px solid transparent;

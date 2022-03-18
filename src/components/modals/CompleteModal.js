@@ -4,6 +4,9 @@ import { actionCreators as roomActions } from "../../redux/modules/room";
 import styled from "styled-components";
 import Close from "../../Images/Close.png";
 import { history } from "../../redux/configureStore";
+import Lottie from "react-lottie";
+import Trophy from "../../Images/Trophy.json";
+
 const CompleteModal = (props) => {
   //https://www.youtube.com/watch?v=LCetNA5tUTE
   const [isOpen, setIsOpen] = React.useState(true);
@@ -12,6 +15,17 @@ const CompleteModal = (props) => {
     setIsOpen(false);
   };
 
+  const lottieOptions = {
+    animationData: Trophy,
+    loop: true,
+    autoplay: true,
+    background: "transparent",
+    speed: 0.5,
+    rendererSettings: {
+      className: "animation", // svg에 적용
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   React.useEffect(() => {
     const timeout = setInterval(() => {
       setCount((count) => count - 1);
@@ -33,30 +47,20 @@ const CompleteModal = (props) => {
             <CloseBtn onClick={closeModal}>
               <img src={Close} alt="취소" />
             </CloseBtn>
-
-            <div onClick={(e) => e.stopPropagation()}>
-              <ModalContents>
-                <div
-                  style={{
-                    fontSize: "33px",
-                    fontWeight: "bold",
-                    marginBottom: "20px",
-                  }}
-                >
-                  운동끝! 오늘도 해냈어요!
-                </div>
-                <div style={{ fontSize: "16px", color: "#878E95" }}>
-                  운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!
-                </div>
-                {/* <BtnWrap
-                  onClick={() => {
-                    closeModal();
-                  }}
-                > */}
-                {count}
-                {/* </BtnWrap> */}
-              </ModalContents>
-            </div>
+            <Lottie
+              options={lottieOptions}
+              style={{ width: "400px", height: "400px" }}
+            ></Lottie>
+            {/* <div onClick={(e) => e.stopPropagation()}> */}
+            <ModalContents>
+              <div className="first">운동 끝! 오늘도 해냈어요!</div>
+              <div className="second">
+                방에 남아서 이야기를 나누거나, 메인페이지에서 운동 기록을 확인해
+                보세요
+              </div>
+              <div className="third">{count}초 후에 창이 닫혀요</div>
+            </ModalContents>
+            {/* </div> */}
           </ModalWrap>
         </BackGround>
       )}
@@ -76,8 +80,8 @@ const BackGround = styled.div`
 
 const ModalWrap = styled.div`
   background-color: #fff;
-  width: 661px;
-  height: 358px;
+  width: 660px;
+  height: 519px;
   border-radius: 12px;
   position: fixed;
   text-align: center;
@@ -90,8 +94,8 @@ const ModalWrap = styled.div`
 `;
 
 const CloseBtn = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   position: absolute;
   right: 15px;
   top: 15px;
@@ -103,40 +107,40 @@ const ModalContents = styled.div`
   width: 661px;
   height: 358px;
   position: absolute;
-  padding: 90px;
-`;
-
-const BtnWrap = styled.div`
-  width: 381px;
-  height: 60px;
-  border-radius: 8px;
-  background-color: #0028fa;
-  color: #f1f3f5;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  left: 50%;
-  right: 50%;
-  top: 55%;
-  bottom: 50%;
-  transform: translate(-50%, -50%);
-  /* max-height: 80%; */
-  width: 960px;
-  height: 480px;
-  text-align: center;
-  z-index: 999;
-
-  /* @media ${(props) => props.theme.device.MobileLandscape} {
-    width: 90%; */
-  /* } */
+  top: 0;
+  .first {
+    margin-top: 313px;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.39;
+    letter-spacing: -1.44px;
+    text-align: center;
+    color: #222529;
+  }
+  .second {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    letter-spacing: -0.64px;
+    text-align: center;
+    color: #878e95;
+  }
+  .third {
+    margin-top: 80px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.43;
+    letter-spacing: -0.56px;
+    text-align: center;
+    color: #878e95;
+  }
+  .animation {
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export default CompleteModal;
