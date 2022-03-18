@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { history } from "../redux/configureStore";
 import HiFive from "../Images/Videoplayer_emoji.png";
+import Screensaver from "../Images/Videoplayer_screensaver.png";
+import Mute from "../Images/Videoplayer_mute.png";
 //Style
 import styled from "styled-components";
 
@@ -9,7 +11,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const roomName = props.roomId;
   const [muted, setMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);
-  const [Audio, setAduio] = useState([]);
+  const [Audio, setAudio] = useState([]);
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
 
@@ -38,7 +40,16 @@ const Videoplayer = React.forwardRef((props, ref) => {
   useEffect(() => {
     const name = document.getElementById("name");
     name.innerText = `${nickname}`;
-    socket.emit("join_room", roomName, nickname);
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then(() => {
+        socket.emit("join_room", roomName, nickname);
+      })
+      .catch(() => {
+        window.alert("카메라 또는 마이크 장치를 확인 후 다시 입장해주세요");
+        history.push("/");
+        window.location.reload();
+      });
 
     return () => {
       LeaveRoom();
@@ -92,7 +103,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       mystream.current.append(myvideo.current);
       videoGrid.current.append(mystream.current);
       myvideo.current.muted = true;
-      setAduio(myStream.getAudioTracks());
+      setAudio(myStream.getAudioTracks());
       setVideo(myStream.getVideoTracks());
       if (!deviceId) {
         await getCameras();
@@ -159,26 +170,28 @@ const Videoplayer = React.forwardRef((props, ref) => {
     if (data.track.kind === "video") {
       paintPeerFace(peerStream, remoteSocketId, remoteNickname);
     }
+    console.log(data);
   }
 
   async function paintPeerFace(peerStream, id, remoteNickname) {
     try {
       const videoGrid = document.querySelector("#video-grid");
       const video = document.createElement("video");
-      const peername = document.createElement("h3");
+      const nickNameContainer = document.createElement("div");
+      const peername = document.createElement("div");
       const div = document.createElement("div");
       div.id = id;
       video.autoplay = true;
       video.playsInline = true;
       video.srcObject = peerStream;
-
       peername.innerText = `${remoteNickname}`;
       peername.style.color = "white";
-
-      div.appendChild(peername);
+      nickNameContainer.appendChild(peername);
+      div.appendChild(nickNameContainer);
       div.appendChild(video);
       video.className = "memberVideo";
-      peername.className = "nickNameBox";
+      peername.className = "nickName";
+      nickNameContainer.className = "nickNameContainer";
       div.className = "videoBox";
       videoGrid.appendChild(div);
     } catch (error) {
@@ -285,17 +298,33 @@ const Videoplayer = React.forwardRef((props, ref) => {
     handleCameraClick: () => {
       Video.forEach((track) => (track.enabled = !track.enabled));
       if (cameraOff === false) {
+        // 카메라 오프가 false이면 켜진상태
         setCameraOff(true);
+        // 스크린 세이버 온 오프
+        socket.emit("screensaver", roomName, socketID, true);
+        let screensaver = document.querySelector("#myscreensaver");
+        screensaver.style.display = "flex";
       } else if (cameraOff === true) {
         setCameraOff(false);
+        let screensaver = document.querySelector("#myscreensaver");
+        screensaver.style.display = "none";
+        socket.emit("screensaver", roomName, socketID, false);
       }
     },
     handleMuteClick: () => {
       Audio.forEach((track) => (track.enabled = !track.enabled));
+      const nickNameContainer = document.querySelector("#nickNameContainer");
       if (muted === false) {
         setMuted(true);
+        const muteIcon = document.createElement("div");
+        muteIcon.className = "muteIcon";
+        nickNameContainer.prepend(muteIcon);
+        socket.emit("mic_check", roomName, socketID, true);
       } else if (muted === true) {
         setMuted(false);
+        const muteIcon = nickNameContainer.querySelector(".muteIcon");
+        nickNameContainer.removeChild(muteIcon);
+        socket.emit("mic_check", roomName, socketID, false);
       }
     },
 
@@ -331,6 +360,34 @@ const Videoplayer = React.forwardRef((props, ref) => {
     }
   });
 
+  // 여긴 다른 사람들에게 띄우는 부분
+  socket.on("screensaver", (remoteSocketId, boolean) => {
+    const remoteDiv = document.getElementById(`${remoteSocketId}`);
+    if (boolean) {
+      const screensaver = document.createElement("div");
+      screensaver.className = "screensaver";
+      remoteDiv.appendChild(screensaver);
+    } else {
+      const screensaver = remoteDiv.querySelector(".screensaver");
+      setTimeout(() => {
+        remoteDiv.removeChild(screensaver);
+      }, 100);
+    }
+  });
+
+  socket.on("mic_check", (remoteSocketId, boolean) => {
+    const remoteDiv = document.getElementById(`${remoteSocketId}`);
+    const nickNameContainer = remoteDiv.querySelector(".nickNameContainer");
+    if (boolean) {
+      const muteIcon = document.createElement("div");
+      muteIcon.className = "muteIcon";
+      nickNameContainer.prepend(muteIcon);
+    } else {
+      const muteIcon = remoteDiv.querySelector(".muteIcon");
+      nickNameContainer.removeChild(muteIcon);
+    }
+  });
+
   return (
     <>
       <MemberWrap ref={videoGrid} id="video-grid">
@@ -342,7 +399,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
             id="myvideo"
             className="memberVideo myVideo"
           ></video>
-          <h3 id="name" className="nickNameBox "></h3>
+          <div id="nickNameContainer" className="nickNameContainer">
+            {/* <div className="mutedIcon" /> */}
+            <div id="name" className="nickName"></div>
+          </div>
+          <div
+            id="myscreensaver"
+            style={{ display: "none" }}
+            className="screensaver"
+          ></div>
         </div>
       </MemberWrap>
     </>
@@ -360,6 +425,7 @@ const MemberWrap = styled.div`
     right: 0px;
     top: -76px;
   }
+
   .memberVideo {
     margin-bottom: 8px;
     width: 200px;
@@ -372,18 +438,20 @@ const MemberWrap = styled.div`
       height: 113px;
     }
   }
-  .nickNameBox {
-    display: inline-block;
+  .nickNameContainer {
+    display: flex;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
     padding: 5px 8px;
     border-radius: 4px;
-    z-index: 2;
+    z-index: 3;
     font-size: 13px;
     font-weight: bold;
     letter-spacing: -0.26px;
+    align-items: center;
   }
+
   .videoBox {
     position: relative;
   }
@@ -400,10 +468,21 @@ const MemberWrap = styled.div`
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
   }
-`;
+  .screensaver {
+    display: flex;
+    position: absolute;
+    background-image: url(${Screensaver});
+    width: 200px;
+    height: 112px;
+    z-index: 2;
+    top: 0px;
+  }
 
-const Circle = styled.div`
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
+  .muteIcon {
+    background-image: url(${Mute});
+    z-index: 3;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+  }
 `;
