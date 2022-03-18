@@ -420,8 +420,7 @@ const MemberWrap = styled.div`
   height: 616px;
   display: flex;
   flex-direction: column;
-
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     position: absolute;
     right: 0px;
     top: -76px;
@@ -434,8 +433,7 @@ const MemberWrap = styled.div`
     border-radius: 8px;
     position: relative;
     object-fit: cover;
-
-    @media screen and (max-width: 1360px) {
+    @media screen and (max-width: 1440px) {
       width: 202px;
       height: 113px;
     }

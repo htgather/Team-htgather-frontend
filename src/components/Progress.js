@@ -147,7 +147,7 @@ const Contents = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     width: 758px;
     height: 50px;
   }
