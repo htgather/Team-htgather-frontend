@@ -13,7 +13,7 @@ const MyPart = () => {
       ) : (
         <DIV>
           <Container>
-            <img src={lock} alt="자물쇠 아이콘" />
+            <img src={lock} alt="자물쇠 아이콘" width="48" />
             <Text>로그인 후에 이용해주세요</Text>
             <LoginWithKakao />
           </Container>
@@ -29,7 +29,7 @@ const DIV = styled.div`
   background-color: rgba(34, 37, 41, 0.8);
   border-radius: 12px;
   position: absolute;
-  left: 0;
+  left: 19px;
   z-index: 10;
   display: flex;
   justify-content: center;

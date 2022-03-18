@@ -138,16 +138,7 @@ const Calender = () => {
             }}
             style={{ cursor: "pointer" }}
           />
-          <span
-            style={{
-              width: "77px",
-              height: "24px",
-              lineHeight: "24px",
-              letterSpacing: "-0.98px",
-            }}
-          >
-            {today.format("YYYY년 M월")}
-          </span>
+          <span style={{ letterSpacing: '-0.98px', margin: '0px 79px' }}>{today.format('YYYY년 M월')}</span>
           <img
             src={rightBtn}
             alt="오른쪽버튼"
@@ -180,6 +171,9 @@ const CalenderBox = styled.div`
   width: 315px;
   height: 284px;
   /* height: 100%; */
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 const CalenderTopBar = styled.div`
@@ -190,7 +184,7 @@ const CalenderTopBar = styled.div`
   font-size: 16px;
   font-weight: bold;
   justify-content: space-between;
-  margin: 27px 22px 15px 22px;
+  margin: 27px 22px 12px 22px;
   line-height: 18px;
 `;
 
@@ -202,17 +196,27 @@ const CalenderBody = styled.div`
   margin: 0px 27px 8px 27px;
   .row {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
   }
+
   .weekday {
     font-size: 13px;
     font-weight: bold;
   }
   .box {
-    width: 38px;
-    height: 32px;
+    width: 15px;
+    height: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
+    text-align: center;
+  }
+
+  .text {
+    text-align: center;
   }
   .calender {
     font-weight: bold;
@@ -235,20 +239,20 @@ const CalenderBody = styled.div`
 
   .CalenderCheckIcon {
     position: absolute;
-    top: -3.2px;
-    right: 6.12px;
+    top: -2.3px;
+    left: -4.2px;
   }
   .CalenderTodayIcon {
     position: absolute;
-    top: -2.5px;
-    right: 6px;
+    top: -2.3px;
+    left: -4.2px;
     z-index: 1;
   }
   .CalenderStampIcon {
     position: absolute;
     z-index: 2;
-    top: -8px;
-    right: -0.28px;
+    top: -6.8px;
+    left: -4px;
   }
 `;
 
@@ -257,6 +261,6 @@ const CalenderText = styled.div`
   font-weight: 400;
   color: #878e95;
   text-align: center;
-  margin-bottom: 0px 66px 12px 67px;
+  margin: 0px 66px 12px 67px;
 `;
 export default Calender;

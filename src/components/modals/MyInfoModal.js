@@ -35,9 +35,9 @@ const MoreInfoModal = (props) => {
   };
 
   //모달
-  const setModal = () => {
-    setShowModal(!showModal);
-  };
+  // const setModal = () => {
+  //   setShowModal(!showModal);
+  // };
 
   const NicknameChange = (e) => {
     setNickname(e.target.value);
@@ -48,7 +48,15 @@ const MoreInfoModal = (props) => {
       alert('닉네임을 입력해주세요');
       return;
     }
-    dispatch(userActions.userInfoChangeFB(nickname, Goal !== selectGoal ? selectGoal + 1 : Goal));
+
+    let _reg = /^[a-zA-Zㄱ-힣0-9]{2,9}$/.test(nickname);
+
+    if (_reg) {
+      dispatch(userActions.userInfoChangeFB(nickname, Goal !== selectGoal ? selectGoal + 1 : Goal));
+      return;
+    } else {
+      window.alert('닉네임 형식에 맞지 않습니다');
+    }
   };
 
   const onClickLogOut = () => {
@@ -69,7 +77,7 @@ const MoreInfoModal = (props) => {
           <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
         </NickName>
         <NickChange>
-          <NickInput type="text" placeholder={'닉네임을 입력해주세요'} onChange={NicknameChange} value={nickname} />
+          <input type="text" maxlength="10" placeholder={'닉네임을 입력해주세요'} onChange={NicknameChange} value={nickname} className="nicknameInput" />
         </NickChange>
         <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
         <GoalWrap>
@@ -135,16 +143,15 @@ const NickChange = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-top: 15px;
-`;
-
-const NickInput = styled.input`
-  width: 320px;
-  height: 40px;
-  padding: 10px;
-  border: 1px solid #f1f3f5;
-  background-color: #f1f3f5;
-  border-radius: 8px;
-  outline: none;
+  .nicknameInput {
+    width: 320px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #f1f3f5;
+    background-color: #f1f3f5;
+    border-radius: 8px;
+    outline: none;
+  }
 `;
 
 const CloseBtn = styled.div`

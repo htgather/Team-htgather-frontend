@@ -56,7 +56,7 @@ const Main = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <Header />
       <Container>
         {isLoginModal && (
@@ -78,7 +78,7 @@ const Main = () => {
           <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
         </ToTopBtn>
       </Container>
-    </>
+    </div>
   );
 };
 
@@ -89,7 +89,7 @@ const DIV = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   /* height: 100%; */
   background-color: #f8f9fa;
   display: flex;

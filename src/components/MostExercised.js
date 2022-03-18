@@ -1,33 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import MyCategoryRecordIcon from '../Images/MyCategoryRecordIcon.png';
-import Category1 from '../Images/Category1.png';
-import Category2 from '../Images/Category2.png';
+import fighting from '../Images/fighting.png';
 
 const MostExercised = (props) => {
   const { myRecords } = props;
 
+  const isRecords = myRecords.mostExercised ? true : false;
   const records = myRecords.mostExercised;
-
-  // React.useEffect(() => {}, []);
 
   return (
     <>
       <MostExercisedContainer>
         <MostExercisedHeader>
           이런 운동을 많이 했어요
-          <img src={MyCategoryRecordIcon} alt="팔 아이콘" style={{ marginLeft: '2px' }} />
+          <img src={fighting} alt="팔 아이콘" style={{ marginLeft: '2px' }} width="16" />
         </MostExercisedHeader>
         <MostExercisedContentBox>
-          {records ? (
+          {isRecords ? (
+            // records && (
             <>
               {records[0] && (
                 <MostExercisedContent>
                   <img src={records[0][2]} alt="" className="MostExercisedImg" />
                   <div className="MostExercisedContentTextBox">
                     <div className="MostExercisedTitle">{records[0][0]}</div>
-                    <div className="MostExercisedTimes">{records[0][1]}회</div>
+                    <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
+                      {records[0][1]}회
+                    </div>
                   </div>
                 </MostExercisedContent>
               )}
@@ -36,12 +36,15 @@ const MostExercised = (props) => {
                   <img src={records[1][2]} alt="" className="MostExercisedImg" />
                   <div className="MostExercisedContentTextBox">
                     <div className="MostExercisedTitle">{records[1][0]}</div>
-                    <div className="MostExercisedTimes">{records[1][1]}회</div>
+                    <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
+                      {records[1][1]}회
+                    </div>
                   </div>
                 </MostExercisedContent>
               )}
             </>
           ) : (
+            // )
             <>
               <Noti>
                 <div>
@@ -83,23 +86,21 @@ const MostExercisedContentBox = styled.div`
 `;
 
 const MostExercisedContent = styled.div`
-  width: 130px;
+  width: 132px;
   height: 56px;
   border-radius: 6px;
   background-color: #f1f3f5;
   display: flex;
-  align-items: center;
-  padding: 8px 6px;
-  letter-spacing: -0.96px;
+  letter-spacing: -0.64px;
 
   .MostExercisedContentTextBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 5px;
+    line-height: 20px;
   }
   .MostExercisedTitle {
-    font-size: 14px;
+    font-size: 13px;
   }
   .MostExercisedTimes {
     font-size: 12px;
@@ -109,6 +110,7 @@ const MostExercisedContent = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 4px;
+    margin: 8px 6px 8px 8px;
   }
 `;
 

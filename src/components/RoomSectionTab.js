@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import fire from '../Images/RoomSectionIcon_fire.png';
+
+import fire from '../Images/fire.png';
+
 import Reload from '../Images/RoomSectionIcon_Reload.png';
+
 import Dropdown from './Dropdown';
 import MakeRoomModal from './modals/MakeRoomModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,7 +44,7 @@ const RoomSectionTop = (props) => {
       <RoomSectionTopContainer>
         <RoomSectionTitle>
           <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
-            <img src={fire} alt="불꽃 아이콘" />
+            <img src={fire} alt="불꽃 아이콘" width="24" />
           </div>
 
           {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가를 기다리고 있는 방이에요, 로그인 후 함께해요!'}
@@ -96,6 +99,9 @@ const RoomSectionTopContainer = styled.div`
   @media screen and (max-width: 1360px) {
     width: 100%;
   }
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    padding: 0rem 12rem;
+  }
 `;
 const RoomSectionTitle = styled.div`
   color: #222529;
@@ -103,6 +109,7 @@ const RoomSectionTitle = styled.div`
   height: 34px; */
   font-size: 24px;
   font-weight: 700;
+  letter-spacing: -0.48px;
   display: flex;
   align-items: center;
   .reload:hover {

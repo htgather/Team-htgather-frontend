@@ -26,12 +26,14 @@ const MyRecord = (props) => {
     <DIV>
       <Header>이만큼 운동했어요</Header>
       <MyRecordContent>
-        <div></div>
-        <Progress type="circle" percent={per} showInfo={false} width={144} trailColor="#EAECEF" strokeColor="#405EFB" />
-        <div className="progressInTextBox">
-          <div className="countPerWeekText">{countPerWeek}일</div>
-          <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
+        <div style={{ position: 'relative' }}>
+          <Progress type="circle" percent={per} showInfo={false} width={144} trailColor="#EAECEF" strokeColor="#405EFB" />
+          <div className="progressInTextBox">
+            <div className="countPerWeekText">{countPerWeek}일</div>
+            <div className="weeklyGoalText">이번주 목표 {weeklyGoal}일</div>
+          </div>
         </div>
+
         <BottomTextContainer>
           <div className="bottomTextBox">
             <img src={fireIcon} alt="불꽃 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
@@ -92,6 +94,8 @@ const MyRecordContent = styled.div`
     flex-direction: column;
     align-items: center;
     position: absolute;
+    top: 0rem;
+    left: 0.5rem;
     margin: 42px 28px 32px 28px;
   }
   .countPerWeekText {
