@@ -103,6 +103,7 @@ const RoomSectionTitle = styled.div`
   height: 34px; */
   font-size: 24px;
   font-weight: 700;
+  letter-spacing: -0.48px;
   display: flex;
   align-items: center;
   .reload:hover {

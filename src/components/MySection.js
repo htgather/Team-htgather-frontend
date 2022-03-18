@@ -30,7 +30,7 @@ const MySection = () => {
         <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
           <img src={clap} alt="박수 아이콘" />
         </div>
-        <div>{nickName ? `안녕하세요 ${nickName}님 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
+        <div>{nickName ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
       </MySectionTitle>
       <MySectionContent>
         <MyPart />
@@ -70,6 +70,7 @@ const MySectionTitle = styled.div`
   justify-content: start;
   align-items: center;
   margin-bottom: 30px;
+  letter-spacing: -0.48px;
 `;
 
 const MySectionContent = styled.div`
@@ -88,7 +89,7 @@ const MyPage = styled.div`
   box-sizing: border-box;
   @media screen and (max-width: 1360px) {
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
   }
 `;
 const RightSection = styled.div`
