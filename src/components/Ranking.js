@@ -133,7 +133,11 @@ const Rank = styled.div`
 const Name = styled.div`
   width: 130px;
   height: 20px;
-  display: flex;
+  /* display: flex; */
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: left;
   font-size: 14px;
   line-height: 20px;

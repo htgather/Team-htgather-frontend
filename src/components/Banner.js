@@ -1,6 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import React from 'react';
+import styled from 'styled-components';
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import banner1 from '../Images/banner1.png';
+import banner2 from '../Images/banner2.png';
 
 const Banner = () => {
   // 배너인덱스를 useState로 관리
@@ -33,13 +35,7 @@ const Banner = () => {
 
   // useEffect와 setInterval을 활용해 일정시간마다 자동으로 슬라이더가 넘어가기 구현
   React.useEffect(() => {
-    const slider = setInterval(
-      () =>
-        setBannerIndex((value) =>
-          value === circleArray.length - 1 ? 0 : value + 1
-        ),
-      3000
-    );
+    const slider = setInterval(() => setBannerIndex((value) => (value === circleArray.length - 1 ? 0 : value + 1)), 3000);
     return () => clearInterval(slider);
   }, []);
 
@@ -48,16 +44,16 @@ const Banner = () => {
       <GrFormPrevious
         onClick={clickPrev}
         style={{
-          position: "absolute",
-          left: "20px",
+          position: 'absolute',
+          left: '20px',
           zIndex: 1,
-          cursor: "pointer",
+          cursor: 'pointer',
         }}
       />
       <Carousel bannerIndex={bannerIndex}>
         {circleArray.map((e, i) => (
-          <ContentBox style={{ display: "flex" }} index={i} key={i}>
-            <Content style={{ display: "flex" }}></Content>
+          <ContentBox style={{ display: 'flex' }} index={i} key={i}>
+            <Content style={{ display: 'flex' }}></Content>
           </ContentBox>
         ))}
       </Carousel>
@@ -69,17 +65,14 @@ const Banner = () => {
               clickCircle(i);
             }}
             style={{
-              width: i === bannerIndex ? "32px" : null,
-              borderRadius: i === bannerIndex ? "12px" : null,
-              transition: "width 0.1s",
+              width: i === bannerIndex ? '32px' : null,
+              borderRadius: i === bannerIndex ? '12px' : null,
+              transition: 'width 0.1s',
             }}
           ></Circle>
         ))}
       </CircleBox>
-      <GrFormNext
-        onClick={clickNext}
-        style={{ position: "absolute", right: "20px", cursor: "pointer" }}
-      />
+      <GrFormNext onClick={clickNext} style={{ position: 'absolute', right: '20px', cursor: 'pointer' }} />
     </Container>
   );
 };
@@ -102,7 +95,7 @@ const Carousel = styled.div`
   display: flex;
   transform: translate(
     ${(props) => {
-      return -(props.bannerIndex * 315) + "px";
+      return -(props.bannerIndex * 315) + 'px';
     }}
   );
 `;
@@ -117,8 +110,7 @@ const ContentBox = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 12px;
-  background-color: ${(props) =>
-    props.index === 1 ? "orange" : props.index === 2 ? "blue" : "pink"};
+  background-color: ${(props) => (props.index === 1 ? 'orange' : props.index === 2 ? 'blue' : 'pink')};
 `;
 
 const Content = styled.div``;
