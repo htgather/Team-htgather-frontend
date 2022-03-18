@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import close from '../../Images/MakeRoomModalIcon_close.png';
-import Dropdown from '../Dropdown';
-import { _parserVideoId, _getVideoInfo } from '../YoutubeDataAPI';
-import { actionCreators as roomActions } from '../../redux/modules/room';
+import close from "../../Images/MakeRoomModalIcon_close.png";
+import Dropdown from "../Dropdown";
+import { _parserVideoId, _getVideoInfo } from "../YoutubeDataAPI";
+import { actionCreators as roomActions } from "../../redux/modules/room";
 
 const MakeRoomModal = (props) => {
   const dispatch = useDispatch();
@@ -15,22 +15,28 @@ const MakeRoomModal = (props) => {
   const modal = React.useRef();
   // 셀렉트탭
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
-  const difficultyList = ['초급', '중급', '고급'];
+  const difficultyList = ["초급", "중급", "고급"];
   const [clickedStartTime, setClickedStartTime] = React.useState();
-  const startTimeList = ['1분 뒤', '15분 뒤', '30분 뒤'];
+  const startTimeList = ["1분 뒤", "15분 뒤", "30분 뒤"];
   // 태그선택
   const $RoomNameInput = React.useRef();
   const $LinkInput = React.useRef();
   const [clickedCategory, setClickedCategory] = React.useState();
 
   // textarea 입력된 글자수체크
-  const [inputTextarea, setTextarea] = React.useState('');
+  const [inputTextarea, setTextarea] = React.useState("");
   const onChange = (e) => {
     setTextarea(e.target.value);
   };
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const categoryList = ['근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
+  const categoryList = [
+    "근력 운동",
+    "유산소 운동",
+    "스트레칭",
+    "요가/필라테스",
+    "기타",
+  ];
   const getCategory = (category) => {
     setClickedCategory(category);
   };
@@ -52,8 +58,20 @@ const MakeRoomModal = (props) => {
 
   const clickMakeBtn = () => {
     // 미입력시 알림창띄우기 => 나중에 이쁜 모달이나 글자가 흔들리는걸로 변경하기
-    const checkInputArray = [$RoomNameInput.current.value, difficultyList[clickedDifficulty], categoryList[clickedCategory], $LinkInput.current.value, startTimeList[clickedStartTime]];
-    let alert = ['방제목을 입력해주세요', '운동 난이도를 선택해주세요', '카테고리를 선택해주세요', '링크를 입력해주세요', '시작 시간을 설정해주세요'];
+    const checkInputArray = [
+      $RoomNameInput.current.value,
+      difficultyList[clickedDifficulty],
+      categoryList[clickedCategory],
+      $LinkInput.current.value,
+      startTimeList[clickedStartTime],
+    ];
+    let alert = [
+      "방제목을 입력해주세요",
+      "운동 난이도를 선택해주세요",
+      "카테고리를 선택해주세요",
+      "링크를 입력해주세요",
+      "시작 시간을 설정해주세요",
+    ];
     for (let i = 0; i < checkInputArray.length; i++) {
       if (!checkInputArray[i]) {
         window.alert(alert[i]);
@@ -64,7 +82,7 @@ const MakeRoomModal = (props) => {
     let videoId = _parserVideoId($LinkInput.current.value);
     if (!videoId) {
       // 유튜브 링크 형식이 아닌 것을 올렸을 때 리턴처리
-      window.alert('유튜브 링크가 올바른지 확인해주세요');
+      window.alert("유튜브 링크가 올바른지 확인해주세요");
       return;
     }
     //youtubeDataApi를 이용하여 입력받은 링크를 가지고 비디오데이터를 받아온뒤 서버 api에 보낼 데이터로 정제 후 보내기
@@ -76,7 +94,7 @@ const MakeRoomModal = (props) => {
           videoLength: v.duration,
           videoUrl: $LinkInput.current.value,
           videoTitle: v.title,
-          videoStartAfter: +startTimeList[clickedStartTime].split('분')[0],
+          videoStartAfter: +startTimeList[clickedStartTime].split("분")[0],
           category: categoryList[clickedCategory],
           difficulty: difficultyList[clickedDifficulty],
         };
@@ -84,7 +102,7 @@ const MakeRoomModal = (props) => {
       })
       .catch((err) => {
         // 유튜브 링크 형식이지만 정보가 없는 것을 리턴처리
-        window.alert('현재 해당 영상의 정보를 받아올 수 없어요');
+        window.alert("현재 해당 영상의 정보를 받아올 수 없어요");
         return;
       });
   };
@@ -100,20 +118,26 @@ const MakeRoomModal = (props) => {
             onClick={() => {
               setIsMakeModal(false);
             }}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           />
         </MakeRoomHeader>
         <MakeRoomNameBox>
-          <Label style={{ margin: '42px 0px 13px 0px' }}>
+          <Label style={{ margin: "42px 0px 13px 0px" }}>
             <p className="boldText">방 이름</p>
-            <p style={{ fontSize: '16px' }}>{inputTextarea.length} / 50자</p>
+            <p style={{ fontSize: "16px" }}>{inputTextarea.length} / 50자</p>
           </Label>
-          <RoomNameInput maxLength={49} type="text" placeholder="생성할 방의 이름을 입력해주세요" ref={$RoomNameInput} onChange={onChange} />
+          <RoomNameInput
+            maxLength={49}
+            type="text"
+            placeholder="생성할 방의 이름을 입력해주세요"
+            ref={$RoomNameInput}
+            onChange={onChange}
+          />
         </MakeRoomNameBox>
         <MakeRoomOptionBox>
           <SelectBox>
             <p className="boldText">운동 난이도</p>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: "flex" }}>
               {difficultyList.map((e, i) => (
                 <DB_EL
                   key={i}
@@ -121,8 +145,8 @@ const MakeRoomModal = (props) => {
                     setClickedDifficulty(i);
                   }}
                   style={{
-                    color: clickedDifficulty === i ? '#FFF' : '',
-                    background: clickedDifficulty === i ? '#0028fa' : '',
+                    color: clickedDifficulty === i ? "#FFF" : "",
+                    background: clickedDifficulty === i ? "#0028fa" : "",
                   }}
                 >
                   {e}
@@ -131,21 +155,30 @@ const MakeRoomModal = (props) => {
             </div>
           </SelectBox>
           <CategoryBox>
-            <p className="boldText" style={{ margin: '12px 0px' }}>
+            <p className="boldText" style={{ margin: "12px 0px" }}>
               카테고리
             </p>
-            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#0028FA" fontcolor="#F8F9FA">
+            <Dropdown
+              dropdownList={categoryList}
+              getCategory={getCategory}
+              background="#0028FA"
+              fontcolor="#F8F9FA"
+            >
               운동 카테고리를 골라주세요
             </Dropdown>
           </CategoryBox>
         </MakeRoomOptionBox>
         <LinkInputBox>
           <p className="boldText">운동 영상 링크</p>
-          <LinkInput type="text" placeholder="함께 보고 운동할 영상의 링크를 입력해주세요" ref={$LinkInput} />
+          <LinkInput
+            type="text"
+            placeholder="함께 보고 운동할 영상의 링크를 입력해주세요"
+            ref={$LinkInput}
+          />
         </LinkInputBox>
-        <SelectBox style={{ width: '100%' }}>
+        <SelectBox style={{ width: "100%" }}>
           <p className="boldText">시작 시간 설정</p>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: "flex" }}>
             {startTimeList.map((e, i) => (
               <DB_EL
                 key={i}
@@ -153,10 +186,10 @@ const MakeRoomModal = (props) => {
                   setClickedStartTime(i);
                 }}
                 style={{
-                  padding: '8px 15px',
-                  color: clickedStartTime === i ? '#FFF' : '',
-                  background: clickedStartTime === i ? '#0028fa' : '',
-                  fontWeight: clickedStartTime === i ? '500' : '',
+                  padding: "8px 15px",
+                  color: clickedStartTime === i ? "#FFF" : "",
+                  background: clickedStartTime === i ? "#0028fa" : "",
+                  fontWeight: clickedStartTime === i ? "500" : "",
                 }}
               >
                 {e}

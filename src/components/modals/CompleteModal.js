@@ -5,10 +5,26 @@ import styled from "styled-components";
 import Close from "../../Images/Close.png";
 import { history } from "../../redux/configureStore";
 const CompleteModal = (props) => {
+  //https://www.youtube.com/watch?v=LCetNA5tUTE
   const [isOpen, setIsOpen] = React.useState(true);
+  const [count, setCount] = React.useState(3);
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  React.useEffect(() => {
+    const timeout = setInterval(() => {
+      setCount((count) => count - 1);
+    }, 1000);
+    return () => {
+      clearInterval(timeout);
+    };
+  }, []);
+  React.useEffect(() => {
+    if (count === 0) {
+      props.setIsDoneModal();
+    }
+  }, [count]);
   return (
     <>
       {isOpen && (
@@ -32,13 +48,13 @@ const CompleteModal = (props) => {
                 <div style={{ fontSize: "16px", color: "#878E95" }}>
                   운동시간을 저장하고 지금까지 함께 운동한 시간을 볼 수 있어요!
                 </div>
-                <BtnWrap
+                {/* <BtnWrap
                   onClick={() => {
                     closeModal();
                   }}
-                >
-                  운동시간 저장하기
-                </BtnWrap>
+                > */}
+                {count}
+                {/* </BtnWrap> */}
               </ModalContents>
             </div>
           </ModalWrap>

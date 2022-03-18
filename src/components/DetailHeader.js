@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import ExitModal from "../components/modals/ExitModal";
 import People from "../Images/People.png";
+import Logo from "../Images/Logo_only.svg";
 
+import { history } from "../redux/configureStore";
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
   const { isDone } = props;
@@ -16,12 +18,21 @@ const Header = (props) => {
   return (
     <HeaderContainer>
       <HeaderGrid>
-        <RoomTitle>{roomTitle}</RoomTitle>
+        <RoomTitle>
+          <img
+            src={Logo}
+            alt="홈트게더 로고"
+            style={{ height: "32px", marginRight: "12px" }}
+          />
+          {roomTitle}
+        </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
           <HeaderBtn onClick={exitRoom}>
             <BtnContents style={{ color: "#aeb5bc" }}>나가기</BtnContents>
-            {modalOn && <ExitModal roomId={roomId} isDone={isDone} />}
+            {modalOn && (
+              <ExitModal roomId={roomId} isDone={isDone} exitRoom={exitRoom} />
+            )}
           </HeaderBtn>
           {/*  인원수*/}
           <HeaderBtn>
@@ -43,7 +54,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   width: 100vw;
 `;

@@ -28,6 +28,7 @@ const Detail = (props) => {
   const nickname = jwt_decode(localStorage.getItem("isLogin")).nickName;
   const [isStart, setIsStart] = React.useState();
   const [isDone, setIsDone] = React.useState(false);
+  const [isDoneModal, setIsDoneModal] = React.useState(true);
   const [isClicked, setIsClicked] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [videoOn, setVideoOn] = useState(false);
@@ -67,9 +68,12 @@ const Detail = (props) => {
     <Background>
       {roomInfo && (
         <>
-          {isDone && (
+          {isDone && isDoneModal && (
             // <DoneScreen />
-            <CompleteModal isDone={isDone}></CompleteModal>
+            <CompleteModal
+              isDone={isDone}
+              setIsDoneModal={setIsDoneModal}
+            ></CompleteModal>
           )}
           <DetailHeader
             roomInfo={roomInfo}
@@ -191,7 +195,7 @@ const Detail = (props) => {
 
 const Background = styled.div`
   margin: 0px auto;
-  overflow-y: hidden;
+  // overflow-y: hidden;
 `;
 
 const BubbleWrap = styled.div`
