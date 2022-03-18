@@ -75,7 +75,7 @@ const MoreInfoModal = (props) => {
         <GoalWrap>
           주&nbsp;&nbsp;
           <CategoryBox>
-            <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px" background="#0028FA" fontcolor="#F8F9FA">
+            <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px" background="#D9DFFE" fontcolor="#878E95">
               {selectGoal}
             </Dropdown>
           </CategoryBox>
