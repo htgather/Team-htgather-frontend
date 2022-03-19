@@ -43,13 +43,13 @@ const Videoplayer = React.forwardRef((props, ref) => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then(() => {
-        socket.emit("join_room", roomName, nickname);
-      })
-      .catch(() => {
-        window.alert("카메라 또는 마이크 장치를 확인 후 다시 입장해주세요");
-        history.push("/");
-        window.location.reload();
-      });
+    socket.emit("join_room", roomName, nickname);
+    })
+    .catch(() => {
+      window.alert("카메라 또는 마이크 장치를 확인 후 다시 입장해주세요");
+      history.push("/");
+      window.location.reload();
+    });
 
     return () => {
       LeaveRoom();
@@ -257,10 +257,9 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   //나가기를 누르면 나한테 벌어지는 일
   function LeaveRoom() {
-    // dispatch(roomActions.exitRoomDB(roomName));
-    socket.disconnect();
     myStream.getTracks().forEach((track) => track.stop());
     clearAllVideos();
+    socket.disconnect();
   }
 
   function clearAllVideos() {
@@ -341,7 +340,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       emojiBox.className = "emojiBox";
       console.log(roomName, socketID);
       socket.emit("emoji", roomName, socketID);
-      
     },
   }));
   // 여긴 다른 사람들에게 띄우는 부분

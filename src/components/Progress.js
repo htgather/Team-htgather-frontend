@@ -43,6 +43,7 @@ export default function Timer(props) {
       diffS <= 0 && Math.abs(diffS) < changeToSeconds(roomInfo.videoLength)
         ? changeToSeconds(roomInfo.videoLength) - parseFloat(Math.abs(diffS))
         : changeToSeconds(roomInfo.videoLength)
+      //-2
     );
     diffS < 0 ? setProgress(parseFloat(Math.abs(diffS))) : setProgress(0);
   }, []);
@@ -146,7 +147,7 @@ export default function Timer(props) {
 }
 
 const Contents = styled.div`
-  width: 1096px;
+  width: 1095px;
   display: flex;
   justify-content: space-between;
   align-items: center;

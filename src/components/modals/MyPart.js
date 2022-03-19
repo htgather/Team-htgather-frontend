@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import lock from '../../Images/lock.png';
-import LoginWithKakao from '../KakaoLogin';
+import React, { useState } from "react";
+import styled from "styled-components";
+import lock from "../../Images/lock.png";
+import LoginWithKakao from "../KakaoLogin";
 
 const MyPart = () => {
-  const is_local = localStorage.getItem('isLogin') ? true : false;
+  const is_local = localStorage.getItem("isLogin") ? true : false;
 
   return (
     <>
       {is_local ? (
-        ''
+        ""
       ) : (
         <DIV>
           <Container>
@@ -24,16 +24,19 @@ const MyPart = () => {
 };
 
 const DIV = styled.div`
-  width: 965px;
+  width: 985px;
   height: 284px;
   background-color: rgba(34, 37, 41, 0.8);
   border-radius: 12px;
   position: absolute;
-  left: 19px;
+  left: 0px;
   z-index: 10;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  // @media screen and (max-width: 1360px) {
+  //   width: 1000px;
+  // }
 `;
 
 const Container = styled.div`
