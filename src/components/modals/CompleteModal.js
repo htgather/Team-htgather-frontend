@@ -49,7 +49,7 @@ const CompleteModal = (props) => {
             </CloseBtn>
             <Lottie
               options={lottieOptions}
-              style={{ width: "400px", height: "400px" }}
+              style={{ width: "300px", height: "300px" }}
             ></Lottie>
             {/* <div onClick={(e) => e.stopPropagation()}> */}
             <ModalContents>
