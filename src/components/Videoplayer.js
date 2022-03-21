@@ -41,7 +41,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     const name = document.getElementById("name");
     name.innerText = `${nickname}`;
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: false })
+      .getUserMedia({ video: true, audio: true })
       .then(() => {
         socket.emit("join_room", roomName, nickname);
       })
@@ -257,9 +257,10 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   //나가기를 누르면 나한테 벌어지는 일
   function LeaveRoom() {
+    // dispatch(roomActions.exitRoomDB(roomName));
+    socket.disconnect();
     myStream.getTracks().forEach((track) => track.stop());
     clearAllVideos();
-    socket.disconnect();
   }
 
   function clearAllVideos() {
