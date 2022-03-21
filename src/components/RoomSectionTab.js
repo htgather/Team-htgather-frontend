@@ -1,42 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 import fire from '../Images/fire.png';
-
 import Reload from '../Images/RoomSectionIcon_Reload.png';
 
 import Dropdown from './Dropdown';
 import MakeRoomModal from './modals/MakeRoomModal';
-import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as roomActions } from '../redux/modules/room';
 
 const RoomSectionTop = (props) => {
-  const dispatch = useDispatch();
-
   const { background, fontcolor } = props;
 
+  const dispatch = useDispatch();
   const is_local = localStorage.getItem('isLogin');
-  const nickName = useSelector((state) => state.User.nickname);
 
-  const DifficultyList = ['전체', '초급', '중급', '고급'];
+  const nickName = useSelector((state) => state.User.nickname);
+  const isStart = useSelector((state) => state.room.isStart);
+
   const [clickedDifficulty, setClickedDifficulty] = React.useState(0);
   const [isMakeModal, setIsMakeModal] = React.useState();
 
+  const DifficultyList = ['전체', '초급', '중급', '고급'];
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
   const categoryList = ['전체', '근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
   const [clickedCategory, setClickedCategory] = React.useState();
 
-  const clickReload = () => {
-    dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
-  };
+  const getCategory = (category) => setClickedCategory(category);
 
-  const getCategory = (category) => {
-    setClickedCategory(category);
-  };
+  // roomList 새로고침하기
+  const clickReload = () => dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
+  // 입장 가능한 방 조회하기
+  const isEnteringRoom = () => dispatch(roomActions.EnteringRoomDB());
 
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
   }, [clickedCategory, clickedDifficulty]);
+
+  React.useEffect(() => {
+    // dispatch(roomActions.EnteringRoomDB());
+  }, [isStart]);
 
   return (
     <>
@@ -58,6 +61,7 @@ const RoomSectionTop = (props) => {
           {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가를 기다리고 있는 방이에요, 로그인 후 함께해요!'}
 
           <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '48px' }} className="reload" onClick={clickReload} />
+          <button onClick={isEnteringRoom}>입장 가능!!!!</button>
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
