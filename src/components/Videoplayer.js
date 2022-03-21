@@ -341,7 +341,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       emojiBox.className = "emojiBox";
       console.log(roomName, socketID);
       socket.emit("emoji", roomName, socketID);
-      
     },
   }));
   // 여긴 다른 사람들에게 띄우는 부분

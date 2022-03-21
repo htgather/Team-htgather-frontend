@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -14,50 +15,40 @@ import MostExercised from '../MostExercised';
 import Ranking from '../Ranking';
 import { actionCreators as commonActions } from '../../redux/modules/common';
 
-const MySection = () => {
-  const dispatch = useDispatch();
-  const myRecords = useSelector((state) => state.common.myRecords);
-
-  const is_local = localStorage.getItem('isLogin');
-  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
-
-  React.useEffect(() => {
-    if (nickName) {
-      dispatch(commonActions.getRecordsDB());
-    }
-  }, []);
+const MyPart = () => {
+  const is_local = localStorage.getItem("isLogin") ? true : false;
 
   return (
-    <MySectionContainer>
-      <MySectionTitle>
-        <div
-          style={{
-            width: '24px',
-            height: '25px',
-            display: 'flex',
-            alignItems: 'center',
-            marginRight: '4px',
-          }}
-        >
-          <img src={clap} alt="박수 아이콘" width="24" />
-        </div>
-        <div>{nickName ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
-      </MySectionTitle>
-      <MySectionContent>
-        <MyPart />
-        <MyPage>
-          <Ranking />
-          <MyRecord myRecords={myRecords}></MyRecord>
-          <Calender></Calender>
-        </MyPage>
-        <RightSection>
-          <MostExercised myRecords={myRecords} />
-          <Banner></Banner>
-        </RightSection>
-      </MySectionContent>
-    </MySectionContainer>
+    <>
+      {is_local ? (
+        ""
+      ) : (
+        <DIV>
+          <Container>
+            <img src={lock} alt="자물쇠 아이콘" width="48" />
+            <Text>로그인 후에 이용해주세요</Text>
+            <LoginWithKakao />
+          </Container>
+        </DIV>
+      )}
+    </>
   );
 };
+
+const DIV = styled.div`
+  width: 985px;
+  height: 284px;
+  background-color: rgba(34, 37, 41, 0.8);
+  border-radius: 12px;
+  position: absolute;
+  left: 0px;
+  z-index: 10;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  // @media screen and (max-width: 1360px) {
+  //   width: 1000px;
+  // }
 
 const MySectionContainer = styled.div`
   display: flex;

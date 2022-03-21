@@ -1,29 +1,36 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import fire from '../Images/fire.png';
+import fire from "../Images/fire.png";
 
-import Reload from '../Images/RoomSectionIcon_Reload.png';
+import Reload from "../Images/RoomSectionIcon_Reload.png";
 
-import Dropdown from './Dropdown';
-import MakeRoomModal from './modals/MakeRoomModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as roomActions } from '../redux/modules/room';
+import Dropdown from "./Dropdown";
+import MakeRoomModal from "./modals/MakeRoomModal";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as roomActions } from "../redux/modules/room";
 
 const RoomSectionTop = (props) => {
   const dispatch = useDispatch();
 
   const { background, fontcolor } = props;
 
-  const is_local = localStorage.getItem('isLogin');
+  const is_local = localStorage.getItem("isLogin");
   const nickName = useSelector((state) => state.User.nickname);
 
-  const DifficultyList = ['전체', '초급', '중급', '고급'];
+  const DifficultyList = ["전체", "초급", "중급", "고급"];
   const [clickedDifficulty, setClickedDifficulty] = React.useState(0);
   const [isMakeModal, setIsMakeModal] = React.useState();
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const categoryList = ['전체', '근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
+  const categoryList = [
+    "전체",
+    "근력 운동",
+    "유산소 운동",
+    "스트레칭",
+    "요가/필라테스",
+    "기타",
+  ];
   const [clickedCategory, setClickedCategory] = React.useState();
 
   const clickReload = () => {
@@ -40,21 +47,42 @@ const RoomSectionTop = (props) => {
 
   return (
     <>
-      {isMakeModal && <MakeRoomModal setIsMakeModal={setIsMakeModal} isMakeModal={isMakeModal}></MakeRoomModal>}
+      {isMakeModal && (
+        <MakeRoomModal
+          setIsMakeModal={setIsMakeModal}
+          isMakeModal={isMakeModal}
+        ></MakeRoomModal>
+      )}
       <RoomSectionTopContainer>
         <RoomSectionTitle>
-          <div style={{ width: '24px', height: '25px', display: 'flex', alignItems: 'center', marginRight: '4px' }}>
+          <div
+            style={{
+              width: "24px",
+              height: "25px",
+              display: "flex",
+              alignItems: "center",
+              marginRight: "4px",
+            }}
+          >
             <img src={fire} alt="불꽃 아이콘" width="24" />
           </div>
 
-          {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가를 기다리고 있는 방이에요, 로그인 후 함께해요!'}
+          {is_local
+            ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!`
+            : "참가를 기다리고 있는 방이에요, 로그인 후 함께해요!"}
 
-          <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '48px' }} className="reload" onClick={clickReload} />
+          <img
+            src={Reload}
+            alt="리로드 아이콘"
+            style={{ marginLeft: "12px", cursor: "pointer", height: "48px" }}
+            className="reload"
+            onClick={clickReload}
+          />
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
             <DifficultyBox>
-              <p style={{ marginRight: '4px' }}>난이도</p>
+              <p style={{ marginRight: "4px" }}>난이도</p>
               {DifficultyList.map((e, i) => (
                 <DB_EL
                   key={i}
@@ -62,8 +90,8 @@ const RoomSectionTop = (props) => {
                     setClickedDifficulty(i);
                   }}
                   style={{
-                    color: clickedDifficulty === i ? '#FFF' : '',
-                    background: clickedDifficulty === i ? '#667EFC' : '',
+                    color: clickedDifficulty === i ? "#FFF" : "",
+                    background: clickedDifficulty === i ? "#667EFC" : "",
                   }}
                 >
                   {e}
@@ -72,7 +100,12 @@ const RoomSectionTop = (props) => {
             </DifficultyBox>
             <CategoryBox>
               <p>운동종류</p>
-              <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#D9DFFE" fontcolor="#878E95">
+              <Dropdown
+                dropdownList={categoryList}
+                getCategory={getCategory}
+                background="#D9DFFE"
+                fontcolor="#878E95"
+              >
                 어떤 운동을 찾고 계신가요?
               </Dropdown>
             </CategoryBox>
@@ -84,7 +117,7 @@ const RoomSectionTop = (props) => {
                 return;
               }
               setIsMakeModal(true);
-              document.body.style.overflow = 'hidden';
+              // document.body.style.overflow = 'hidden';
             }}
           >
             방만들기

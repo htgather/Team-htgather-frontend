@@ -67,7 +67,7 @@ function Player(props) {
         <ReactPlayer
           style={{ borderRadius: "12px" }}
           url={roomInfo.videoUrl}
-          width={NewMedia.matches ? "758px" : "1096px"} //"758px" //1096px
+          width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
           height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
           ref={player}
           playing={isPlaying}
@@ -92,7 +92,7 @@ function Player(props) {
 }
 
 const Container = styled.div`
-  width: 1096px;
+  width: 1095px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -109,7 +109,7 @@ const Container = styled.div`
 `;
 
 const Count = styled.div`
-  width: 1096px;
+  width: 1095px;
   height: 616px;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
