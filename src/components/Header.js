@@ -82,6 +82,10 @@ const HeaderContainer = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 72rem; //1000px;
+    padding: 0rem 9.5rem;
+  }
 `;
 const HeaderGrid = styled.div`
   display: flex;

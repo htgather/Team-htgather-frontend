@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commonActions } from '../redux/modules/common';
 
 import { Progress } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 
 import fireIcon from '../Images/MyRecordIcon_Fire.png';
 import clockIcon from '../Images/MyRecordIcon_Clock.png';
@@ -94,7 +94,7 @@ const MyRecordContent = styled.div`
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 0rem;
+    top: 0.5rem;
     left: 0.5rem;
     margin: 42px 28px 32px 28px;
   }

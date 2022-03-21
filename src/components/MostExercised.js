@@ -115,9 +115,9 @@ const MostExercisedContent = styled.div`
 `;
 
 const Noti = styled.div`
-  width: 255px;
+  width: 260px;
   height: 40px;
-  letter-spacing: -0.96px;
+  letter-spacing: -1.1px;
   color: #aeb5bc;
   margin-top: 3px;
 `;
