@@ -108,6 +108,10 @@ const RoomCardList = styled.div`
   @media screen and (max-width: 1360px) {
     grid-template-columns: repeat(3, 315px);
   }
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    grid-template-columns: repeat(2, 350px);
+    padding: 0rem 12rem 0rem 15rem;
+  }
 `;
 
 const ToTopBtn = styled.div`
