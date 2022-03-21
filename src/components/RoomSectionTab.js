@@ -134,6 +134,7 @@ const RoomSectionTopContainer = styled.div`
     width: 100%;
   }
   @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 72rem;
     padding: 0rem 12rem;
   }
 `;
@@ -158,6 +159,9 @@ const RoomSectionContent = styled.div`
   font-weight: 500;
   justify-content: space-between;
   margin: 24px 0px;
+  /* @media screen and (min-width: 768px) and (max-width: 1023px) {
+    font-size: 1rem;
+  } */
 `;
 const RoomSectionCategory = styled.div`
   display: flex;

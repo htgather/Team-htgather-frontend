@@ -17,13 +17,6 @@ const Ranking = (props) => {
   const dispatch = useDispatch();
 
   const rankingList = useSelector((state) => state.User.ranking);
-  // const rankingList = [
-  //   { rank: 1, nickName: "김승호", countPerWeek: 10, isMe: false },
-  //   { rank: 2, nickName: "감감감", countPerWeek: 1, isMe: false },
-  //   { rank: 3, nickName: "감감감", countPerWeek: 1, isMe: false },
-  //   { rank: 4, nickName: "감감감", countPerWeek: 0, isMe: true },
-  // ];
-
   const is_local = localStorage.getItem('isLogin');
   const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
@@ -34,27 +27,32 @@ const Ranking = (props) => {
     dispatch(userActions.getRankFB());
   }, []);
 
-  // 랭킹 집계 전 (랭킹 개수 0일 때)
-  if (rankingList.length === 0) {
-    <DIV>
-      <Header>이번 주 운동 랭킹</Header>
-      <Noti>
-        <TextWrap>
-          <strong>아직 랭킹이 집계되기 전입니다.</strong>
-          <br />
-          홈트게더를 이용하고 <br />
-          순위에 이름을 올려보세요!!
-          <br />
-        </TextWrap>
-      </Noti>
-    </DIV>;
-  }
-
   return (
     <DIV>
       <Header>이번 주 운동 랭킹</Header>
       <RankContainer>
         {rankingList.map((p, i) => {
+          // 랭킹 집계 전
+          if (rankingList.length < 2) {
+            if (p.isMe) {
+              if (p.countPerWeek === 0) {
+                return (
+                  <DIV>
+                    <Noti>
+                      <TextWrap>
+                        <strong>아직 랭킹이 집계되기 전입니다.</strong>
+                        <br />
+                        홈트게더를 이용하고 <br />
+                        순위에 이름을 올려보세요!!
+                        <br />
+                      </TextWrap>
+                    </Noti>
+                  </DIV>
+                );
+              }
+            }
+          }
+
           // 내 기록이 0회일 때 혹은 랭킹이 5위 초과일때
           if (p.isMe) {
             if (p.countPerWeek === 0 || p.rank > 4) {
