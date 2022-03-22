@@ -330,6 +330,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
         setCameraOff(false);
         let screensaver = document.querySelector("#myscreensaver");
         screensaver.style.display = "none";
+        console.log(`소켓에밋 소켓id ${socketID}`);
         socket.emit("screensaver", roomName, socketID, false);
       }
     },
@@ -396,6 +397,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   // 여긴 다른 사람들에게 띄우는 부분
   socket.on("screensaver", (remoteSocketId, boolean) => {
+    console.log(`소켓온 소켓id ${remoteSocketId}`);
     const remoteDiv = document.getElementById(`${remoteSocketId}`);
     if (boolean) {
       const screensaver = document.createElement("div");
