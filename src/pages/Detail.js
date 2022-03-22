@@ -65,6 +65,13 @@ const Detail = (props) => {
       dispatch(roomActions.getRoomDB());
     }
   }, []);
+
+  React.useEffect(() => {
+    if (isStart) {
+      setSoundOn(false);
+      childRef.current.handleAllMute();
+    }
+  }, [isStart]);
   return (
     <Background>
       {roomInfo && (

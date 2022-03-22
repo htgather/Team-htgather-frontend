@@ -350,6 +350,18 @@ const Videoplayer = React.forwardRef((props, ref) => {
       }
     },
 
+    handleAllMute: () => {
+      Audio.forEach((track) => (track.enabled = false));
+      const nickNameContainer = document.querySelector("#nickNameContainer");
+      if (muted === false) {
+        setMuted(true);
+        const muteIcon = document.createElement("div");
+        muteIcon.className = "muteIcon";
+        nickNameContainer.prepend(muteIcon);
+        socket.emit("mic_check", roomName, socketID, true);
+      }
+    },
+
     showEmoji: () => {
       const myArea = document.querySelector("#mystream");
       // const emojiBox = document.createElement("h1");
