@@ -77,7 +77,7 @@ const MoreInfoModal = (props) => {
           <TextWrap style={{ fontSize: '17px' }}>닉네임</TextWrap>
         </NickName>
         <NickChange>
-          <input type="text" maxlength="10" placeholder={'닉네임을 입력해주세요'} onChange={NicknameChange} value={nickname} className="nicknameInput" />
+          <input type="text" maxLength="10" placeholder={'닉네임을 입력해주세요'} onChange={NicknameChange} value={nickname} className="nicknameInput" />
         </NickChange>
         <TextWrap style={{ fontSize: '17px', margin: '25px 0px 15px' }}>목표</TextWrap>
         <GoalWrap>

@@ -7,7 +7,10 @@ const MostExercised = (props) => {
   const { myRecords } = props;
 
   const isRecords = myRecords.mostExercised ? true : false;
+  // console.log(isRecords);
   const records = myRecords.mostExercised;
+  // const recordsLength = records.length;
+  // console.log(records);
 
   return (
     <>
@@ -18,42 +21,45 @@ const MostExercised = (props) => {
         </MostExercisedHeader>
         <MostExercisedContentBox>
           {isRecords ? (
-            // records && (
             <>
-              {records[0] && (
-                <MostExercisedContent>
-                  <img src={records[0][2]} alt="" className="MostExercisedImg" />
-                  <div className="MostExercisedContentTextBox">
-                    <div className="MostExercisedTitle">{records[0][0]}</div>
-                    <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
-                      {records[0][1]}회
+              {/* 많이 한 운동에 데이터가 없을 때 */}
+              {records.length === 0 ? (
+                <>
+                  <Noti>
+                    <div>
+                      아직 운동 기록이 없어요. <br />
+                      홈트게더와 함께 즐거운 운동을 경험해보세요!
                     </div>
-                  </div>
-                </MostExercisedContent>
-              )}
-              {records[1] && (
-                <MostExercisedContent>
-                  <img src={records[1][2]} alt="" className="MostExercisedImg" />
-                  <div className="MostExercisedContentTextBox">
-                    <div className="MostExercisedTitle">{records[1][0]}</div>
-                    <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
-                      {records[1][1]}회
-                    </div>
-                  </div>
-                </MostExercisedContent>
+                  </Noti>
+                </>
+              ) : (
+                <>
+                  {records[0] && (
+                    <MostExercisedContent>
+                      <img src={records[0][2]} alt="" className="MostExercisedImg" />
+                      <div className="MostExercisedContentTextBox">
+                        <div className="MostExercisedTitle">{records[0][0]}</div>
+                        <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
+                          {records[0][1]}회
+                        </div>
+                      </div>
+                    </MostExercisedContent>
+                  )}
+                  {records[1] && (
+                    <MostExercisedContent>
+                      <img src={records[1][2]} alt="" className="MostExercisedImg" />
+                      <div className="MostExercisedContentTextBox">
+                        <div className="MostExercisedTitle">{records[1][0]}</div>
+                        <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
+                          {records[1][1]}회
+                        </div>
+                      </div>
+                    </MostExercisedContent>
+                  )}
+                </>
               )}
             </>
-          ) : (
-            // )
-            <>
-              <Noti>
-                <div>
-                  아직 운동 기록이 없어요. <br />
-                  홈트게더와 함께 즐거운 운동을 경험해보세요!
-                </div>
-              </Noti>
-            </>
-          )}
+          ) : null}
         </MostExercisedContentBox>
       </MostExercisedContainer>
     </>

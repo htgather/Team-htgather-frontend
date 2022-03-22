@@ -202,13 +202,9 @@ const CalenderBody = styled.div`
 
   .CalenderCheckIcon {
     position: absolute;
-    /* top: -2.3px;
-    left: -4.2px; */
   }
   .CalenderTodayIcon {
     position: absolute;
-    top: -2.8px;
-    left: -4px;
     z-index: 1;
   }
   .CalenderStampIcon {

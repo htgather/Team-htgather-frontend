@@ -26,12 +26,19 @@ const RoomSectionTop = (props) => {
   const categoryList = ['전체', '근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
   const [clickedCategory, setClickedCategory] = React.useState();
 
-  const getCategory = (category) => setClickedCategory(category);
-
   // roomList 새로고침하기
-  const clickReload = () => dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
+  const clickReload = () => {
+    dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
+  };
+
+  const getCategory = (category) => {
+    setClickedCategory(category);
+  };
+
   // 입장 가능한 방 조회하기
-  const isEnteringRoom = () => dispatch(roomActions.EnteringRoomDB());
+  const isEnteringRoom = () => {
+    dispatch(roomActions.EnteringRoomDB());
+  };
 
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
