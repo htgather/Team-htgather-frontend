@@ -7,7 +7,8 @@ import RoomCard from '../components/Card';
 import RoomSectionTab from '../components/RoomSectionTab';
 import MySection from '../components/MySection';
 import RoomClickModal from '../components/modals/RoomClickModal';
-// import ScrollToTop from '../components/ScrollToTop';
+import MobileAlert from '../components/MobileAlert';
+
 import toTop from '../Images/toTop.png';
 import jwt_decode from 'jwt-decode';
 import { actionCreators as roomActions } from '../redux/modules/room';
@@ -15,6 +16,9 @@ import { Socket } from 'socket.io-client';
 
 const Main = () => {
   const dispatch = useDispatch();
+
+  // 모바일일때
+  const NewMedia = window.matchMedia('screen and (max-width:767px)');
 
   const [isLoginModal, setIsLoginModal] = React.useState();
 
@@ -56,31 +60,41 @@ const Main = () => {
   }, []);
 
   return (
-    <div>
+    <Wrap>
       <Header />
-      <Container>
-        {isLoginModal && (
-          <DIV setIsLoginModal={setIsLoginModal}>
-            <RoomClickModal setIsLoginModal={setIsLoginModal} />
-          </DIV>
-        )}
-        <MySection></MySection>
-        <RoomSection>
-          <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
-          <RoomCardList>
-            {roomList.map((e, i) => (
-              <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-            ))}
-            <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-          </RoomCardList>
-        </RoomSection>
-        <ToTopBtn onClick={moveToTop}>
-          <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
-        </ToTopBtn>
-      </Container>
-    </div>
+      {NewMedia.matches ? (
+        <MobileAlert />
+      ) : (
+        <Container>
+          {isLoginModal && (
+            <DIV setIsLoginModal={setIsLoginModal}>
+              <RoomClickModal setIsLoginModal={setIsLoginModal} />
+            </DIV>
+          )}
+          <MySection></MySection>
+          <RoomSection>
+            <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
+            <RoomCardList>
+              {roomList.map((e, i) => (
+                <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+              ))}
+              <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+            </RoomCardList>
+          </RoomSection>
+          <ToTopBtn onClick={moveToTop}>
+            <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+          </ToTopBtn>
+        </Container>
+      )}
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 72rem;
+  }
+`;
 
 const DIV = styled.div`
   display: inline-flex;
@@ -90,7 +104,7 @@ const DIV = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;

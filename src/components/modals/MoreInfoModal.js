@@ -44,8 +44,8 @@ const DIV = styled.div`
   z-index: 30;
   width: 400px;
   border-radius: 12px;
-  top: 20px;
-  right: -20px;
+  top: 0.9rem;
+  right: -1.25rem;
   padding: 50px;
   position: absolute;
   :before {
@@ -55,8 +55,8 @@ const DIV = styled.div`
     border-bottom: 10px solid #fff;
     content: '';
     position: absolute;
-    top: -10px;
-    right: 24px;
+    top: -0.6rem;
+    right: 1.4rem;
   }
   box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 15px 0px;
 `;

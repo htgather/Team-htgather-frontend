@@ -40,34 +40,19 @@ const Header = (props) => {
             history.push('/');
           }}
         />
-
-        <div
-          style={{
-            width: '80px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            position: 'relative',
-            flexDirection: 'row-reverse',
-          }}
-        >
+        <IconsWrap>
           <div onClick={openModal} style={{ cursor: 'pointer', position: 'relative' }}>
-            <div>
-              <img src={Icon_Menu} />
-            </div>
+            <img src={Icon_Menu} alt="메뉴 버튼" style={{ width: '24px' }} />
             {showModal && <MoreInfoModal openModal={openModal} />}
           </div>
 
           {isLocal ? (
             <div>
-              <div>
-                <div onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }}>
-                  <img src={CardIcon_person} />
-                </div>
-                {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
-              </div>
+              <img src={CardIcon_person} alt="회원정보 버튼" onClick={openMyInfoModal} style={{ cursor: 'pointer', position: 'relative' }} />
+              {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
             </div>
           ) : null}
-        </div>
+        </IconsWrap>
       </HeaderGrid>
     </HeaderContainer>
   );
@@ -79,9 +64,23 @@ const HeaderContainer = styled.div`
   background: #f8f9fa;
   border-bottom: 1px solid #eaecef;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   z-index: 2;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 72rem; //1000px;
+    padding: 0rem 9.5rem;
+  }
+`;
+
+const IconsWrap = styled.div`
+  width: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.3rem;
+  flex-direction: row-reverse;
+  position: relative;
 `;
 const HeaderGrid = styled.div`
   display: flex;
