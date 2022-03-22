@@ -6,8 +6,8 @@ import { actionCreators as commonActions } from '../redux/modules/common';
 import { Progress } from 'antd';
 import 'antd/dist/antd.less';
 
-import fireIcon from '../Images/MyRecordIcon_Fire.png';
-import clockIcon from '../Images/MyRecordIcon_Clock.png';
+import fire from '../Images/fire.png';
+import clock from '../Images/clock.png';
 
 const MyRecord = (props) => {
   const {
@@ -36,14 +36,14 @@ const MyRecord = (props) => {
 
         <BottomTextContainer>
           <div className="bottomTextBox">
-            <img src={fireIcon} alt="불꽃 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
+            <img src={fire} alt="불꽃 아이콘" style={{ width: '14px', margin: '0px 2px 1px 0px' }} />
             <div>
               연속&nbsp; <span className="bold">{daysInARow}</span>일째 운동중이에요
             </div>
           </div>
 
           <div style={{ marginTop: '4px' }} className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" style={{ margin: '0px 2px 1px 0px' }} />
+            <img src={clock} alt="시계 아이콘" style={{ width: '14px', margin: '0px 2px 2px 0px' }} />
             <div>
               이번 주에&nbsp;<span className="bold">{totalTimePerWeek}</span>분 운동했어요
             </div>
