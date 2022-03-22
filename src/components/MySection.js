@@ -70,7 +70,7 @@ const MySectionContainer = styled.div`
   align-items: center;
   margin: 56px 0 64px 0;
   @media screen and (max-width: 1360px) {
-    width: 985px;
+    width: 60rem;
     justify-content: center;
   }
   position: relative;
@@ -110,7 +110,7 @@ const MyPage = styled.div`
   box-sizing: border-box;
   @media screen and (max-width: 1360px) {
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 `;
 const RightSection = styled.div`
