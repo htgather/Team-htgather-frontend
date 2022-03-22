@@ -35,6 +35,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   const socket = io("https://test.kimjeongho-server.com", {
     cors: { origin: "*" },
+    transports: ['websocket'],
   }); //Server adress
 
   //페이지가 마운트되고 "join_room" Event 함수 실행 1
