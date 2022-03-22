@@ -8,15 +8,18 @@ import Reload from '../Images/RoomSectionIcon_Reload.png';
 import Dropdown from './Dropdown';
 import MakeRoomModal from './modals/MakeRoomModal';
 import { actionCreators as roomActions } from '../redux/modules/room';
+import instance from '../shared/Request';
 
 const RoomSectionTop = (props) => {
-  const { background, fontcolor } = props;
+  const { background, fontcolor, isEntering } = props;
 
   const dispatch = useDispatch();
   const is_local = localStorage.getItem('isLogin');
 
+  const roomList = useSelector((state) => state.room.list);
+  const enteringList = roomList.filter((room) => room.isStart === false);
+
   const nickName = useSelector((state) => state.User.nickname);
-  const isStart = useSelector((state) => state.room.isStart);
 
   const [clickedDifficulty, setClickedDifficulty] = React.useState(0);
   const [isMakeModal, setIsMakeModal] = React.useState();
@@ -36,17 +39,17 @@ const RoomSectionTop = (props) => {
   };
 
   // 입장 가능한 방 조회하기
-  const isEnteringRoom = () => {
-    dispatch(roomActions.EnteringRoomDB());
+  const [clickedEntering, setClickedEntering] = React.useState(false);
+
+  const enteringHandler = () => {
+    setClickedEntering(!clickedEntering);
+    dispatch(roomActions.EnteringRoomDB(enteringList));
+    // console.log(clickedEntering);
   };
 
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB(clickedDifficulty, clickedCategory));
   }, [clickedCategory, clickedDifficulty]);
-
-  React.useEffect(() => {
-    // dispatch(roomActions.EnteringRoomDB());
-  }, [isStart]);
 
   return (
     <>
@@ -68,7 +71,9 @@ const RoomSectionTop = (props) => {
           {is_local ? `${nickName}님을 기다리고 있는 방이에요, 참가해보세요!` : '참가를 기다리고 있는 방이에요, 로그인 후 함께해요!'}
 
           <img src={Reload} alt="리로드 아이콘" style={{ marginLeft: '12px', cursor: 'pointer', height: '48px' }} className="reload" onClick={clickReload} />
-          <button onClick={isEnteringRoom}>입장 가능!!!!</button>
+          {/* <MakeRoomBtn className="isEntering" onClick={enteringHandler}>
+            입장 가능!!!!
+          </MakeRoomBtn> */}
         </RoomSectionTitle>
         <RoomSectionContent>
           <RoomSectionCategory>
@@ -136,6 +141,10 @@ const RoomSectionTitle = styled.div`
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     width: 72rem;
     padding: 0rem 12rem;
+  }
+  .isEntering {
+    background-color: pink;
+    width: 150px;
   }
 `;
 

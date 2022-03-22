@@ -5,7 +5,6 @@ import fighting from '../Images/fighting.png';
 
 const MostExercised = (props) => {
   const { myRecords } = props;
-
   const isRecords = myRecords.mostExercised ? true : false;
   // console.log(isRecords);
   const records = myRecords.mostExercised;

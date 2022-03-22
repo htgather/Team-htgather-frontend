@@ -14,18 +14,21 @@ import jwt_decode from 'jwt-decode';
 import { actionCreators as roomActions } from '../redux/modules/room';
 import { Socket } from 'socket.io-client';
 
-const Main = () => {
+const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
   const NewMedia = window.matchMedia('screen and (max-width:767px)');
 
-  const [isLoginModal, setIsLoginModal] = React.useState();
-
   const roomList = useSelector((state) => state.room.list);
+  const enteringList = roomList.filter((room) => room.isStart === false); //확인
+  //  console.log(enteringList);
+  // const enteringList = useSelector((state) => state.room.enteringList);
+  // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
   const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
+  const [isLoginModal, setIsLoginModal] = React.useState();
   // 위로가기 버튼 관련
   const [ScrollY, setScrollY] = useState(0);
   const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
@@ -34,17 +37,25 @@ const Main = () => {
     setScrollY(window.pageYOffset);
   };
 
-  React.useEffect(() => {
-    ScrollY > 120 ? setBtnStatus(true) : setBtnStatus(false);
-  }, [ScrollY]);
-
   const moveToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setScrollY(0); // ScrollY 의 값을 초기화
     setBtnStatus(false); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
   };
 
-  useEffect(() => {
+  const [clickedEntering, setClickedEntering] = React.useState(false);
+
+  const isEntering = () => {
+    setClickedEntering(!clickedEntering);
+    // dispatch(roomActions.EnteringRoomDB());
+    // console.log(clickedEntering);
+  };
+
+  React.useEffect(() => {
+    ScrollY > 120 ? setBtnStatus(true) : setBtnStatus(false);
+  }, [ScrollY]);
+
+  React.useEffect(() => {
     const watch = () => {
       window.addEventListener('scroll', handleFollow);
     };
@@ -73,11 +84,14 @@ const Main = () => {
           )}
           <MySection></MySection>
           <RoomSection>
-            <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
+            <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
             <RoomCardList>
               {roomList.map((e, i) => (
                 <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
               ))}
+              {enteringList.map((p, idx) => {
+                <RoomCard key={idx} roomInfo={p} />;
+              })}
               <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
             </RoomCardList>
           </RoomSection>
