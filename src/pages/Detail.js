@@ -68,7 +68,7 @@ const Detail = (props) => {
 
   React.useEffect(() => {
     if (isStart) {
-      setSoundOn(false);
+      setSoundOn(true);
       childRef.current.handleAllMute();
     }
   }, [isStart]);

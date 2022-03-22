@@ -20,7 +20,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
   // const leaveBtn = useRef();
-  const cameraSelect = useRef();
+  const cameraSelect = useRef(); //
   // const call = useRef();
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
@@ -35,7 +35,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   const socket = io("https://test.kimjeongho-server.com", {
     cors: { origin: "*" },
-    // transports: ['websocket'],/
+    transports: ["websocket"],
   }); //Server adress
 
   //페이지가 마운트되고 "join_room" Event 함수 실행 1
