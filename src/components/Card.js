@@ -23,9 +23,13 @@ const Card = (props) => {
       props.setIsLoginModal(true);
       return;
     }
-    // if (roomInfo.isStart) {
-    //   return;
-    // }
+    if (roomInfo.password) {
+      let pw = prompt("패스워드를 입력해주세요");
+      if (pw !== roomInfo.password) {
+        alert("패스워드가 틀렸습니다");
+        return;
+      }
+    }
     dispatch(roomActions.joinRoomDB(roomInfo.roomId));
   }
   // 마지막 카드

@@ -83,6 +83,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
         console.log(error);
       }
     }
+    console.log(pcObj.getStats());
   });
 
   //사용자의 stream 가져오는 함수
@@ -197,6 +198,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       console.log(error);
     }
   }
+
   // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯
   socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
     try {
@@ -348,8 +350,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     const remoteDiv = document.getElementById(`${remoteSocketId}`);
     const emojiBox = document.createElement("img");
     emojiBox.src = HiFive;
-    // const emojiBox = document.createElement("h1");
-    // emojiBox.innerText = "👍";
+
     emojiBox.className = "emojiBox";
     if (remoteDiv) {
       remoteDiv.appendChild(emojiBox);
@@ -419,8 +420,7 @@ const MemberWrap = styled.div`
   height: 616px;
   display: flex;
   flex-direction: column;
-
-  @media screen and (max-width: 1360px) {
+  @media screen and (max-width: 1440px) {
     position: absolute;
     right: 0px;
     top: -76px;
@@ -433,8 +433,7 @@ const MemberWrap = styled.div`
     border-radius: 8px;
     position: relative;
     object-fit: cover;
-
-    @media screen and (max-width: 1360px) {
+    @media screen and (max-width: 1440px) {
       width: 202px;
       height: 113px;
     }
@@ -486,9 +485,4 @@ const MemberWrap = styled.div`
     height: 12px;
     margin-right: 4px;
   }
-`;
-
-const Circle = styled.div`
-  bottom: 3px;
-  right: 3px;
 `;

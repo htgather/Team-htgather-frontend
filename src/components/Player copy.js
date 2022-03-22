@@ -20,7 +20,6 @@ function Player(props) {
   const NewMedia = window.matchMedia("screen and (max-width: 1440px)");
   // console.log('player match는', NewMedia.matches);
 
-  // 영상이 종료되면 실행되는 함수
   const endVideo = () => {
     const recordsData = {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
@@ -55,7 +54,6 @@ function Player(props) {
         } else if (durationS && Math.abs(diffS) > durationS) {
           // durationS 비동기로 받아오는 값.
           setCountTime("영상이 종료되었습니다");
-          props.setCurYoutubeTime(durationS);
         }
       }
     }, 100);
@@ -63,45 +61,33 @@ function Player(props) {
     return () => clearInterval(getTimeInterval);
   }, [roomInfo]);
 
-  // 유튜브가 재생되면, 플레이어 현재 시간 1초마다 받아오기
-  React.useEffect(() => {
-    let sendCurYoutubeTime = setInterval(() => {
-      props.setCurYoutubeTime(Math.ceil(player.current.getCurrentTime()));
-    }, 1000);
-    if (!isPlaying) {
-      clearInterval(sendCurYoutubeTime);
-    }
-    return () => clearInterval(sendCurYoutubeTime);
-  }, [isPlaying]);
-
   return (
     <Container>
-      {/* <div style={{ pointerEvents: "none" }}> */}
-      {countTime && <Count>{countTime}</Count>}
-      <ReactPlayer
-        style={{ borderRadius: "12px" }}
-        url={roomInfo.videoUrl}
-        width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
-        height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
-        ref={player}
-        playing={isPlaying}
-        controls
-        // 특정시점부터 시작
-        config={{
-          youtube: {
-            playerVars: {
-              start: 1,
+      <div style={{ pointerEvents: "none" }}>
+        {countTime && <Count>{countTime}</Count>}
+        <ReactPlayer
+          style={{ borderRadius: "12px" }}
+          url={roomInfo.videoUrl}
+          width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
+          height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
+          ref={player}
+          playing={isPlaying}
+          // 특정시점부터 시작
+          config={{
+            youtube: {
+              playerVars: {
+                start: 1,
+              },
             },
-          },
-        }}
-        onStart={() => {
-          props.setIsStart(true);
-        }}
-        onEnded={endVideo}
-        muted={isMuted}
-        volume={vol / 20}
-      />
-      {/* </div> */}
+          }}
+          onStart={() => {
+            props.setIsStart(true);
+          }}
+          onEnded={endVideo}
+          muted={isMuted}
+          volume={vol / 20}
+        />
+      </div>
     </Container>
   );
 }

@@ -29,19 +29,6 @@ const MakeRoomModal = (props) => {
     setTextarea(e.target.value);
   };
 
-  // 비밀방여부
-  const [isSecret, setIsSecret] = React.useState(false);
-  const $pwInput = React.useRef();
-  const checkSecret = (e) => {
-    setIsSecret(!isSecret);
-    if (isSecret) {
-      $pwInput.current.style.visibility = "hidden";
-      $pwInput.current.value = "";
-    } else {
-      $pwInput.current.style.visibility = "visible";
-    }
-  };
-
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
   const categoryList = [
     "근력 운동",
@@ -110,7 +97,6 @@ const MakeRoomModal = (props) => {
           videoStartAfter: +startTimeList[clickedStartTime].split("분")[0],
           category: categoryList[clickedCategory],
           difficulty: difficultyList[clickedDifficulty],
-          password: isSecret ? $pwInput.current.value : "",
         };
         dispatch(roomActions.addRoomDB(roomInfo));
       })
@@ -197,46 +183,27 @@ const MakeRoomModal = (props) => {
             ref={$LinkInput}
           />
         </LinkInputBox>
-        <SettingContainer>
-          <SelectBox style={{ width: "50%" }}>
-            <p className="boldText">시작 시간 설정</p>
-            <div style={{ display: "flex" }}>
-              {startTimeList.map((e, i) => (
-                <DB_EL
-                  key={i}
-                  onClick={() => {
-                    setClickedStartTime(i);
-                  }}
-                  style={{
-                    padding: "8px 10px",
-                    color: clickedStartTime === i ? "#FFF" : "",
-                    background: clickedStartTime === i ? "#667EFC" : "",
-                    fontWeight: clickedStartTime === i ? "600" : "",
-                  }}
-                >
-                  {e}
-                </DB_EL>
-              ))}
-            </div>
-          </SelectBox>
-          <PwInputBox style={{}}>
-            <p className="boldText">
-              비밀방 여부
-              <input
-                type="checkbox"
-                name="secret"
-                style={{ marginLeft: "5px" }}
-                onChange={checkSecret}
-              />
-            </p>
-            <PwInput
-              type="password"
-              placeholder="비밀번호 설정"
-              ref={$pwInput}
-              maxLength={8}
-            />
-          </PwInputBox>
-        </SettingContainer>
+        <SelectBox style={{ width: "100%" }}>
+          <p className="boldText">시작 시간 설정</p>
+          <div style={{ display: "flex" }}>
+            {startTimeList.map((e, i) => (
+              <DB_EL
+                key={i}
+                onClick={() => {
+                  setClickedStartTime(i);
+                }}
+                style={{
+                  padding: "8px 15px",
+                  color: clickedStartTime === i ? "#FFF" : "",
+                  background: clickedStartTime === i ? "#667EFC" : "",
+                  fontWeight: clickedStartTime === i ? "600" : "",
+                }}
+              >
+                {e}
+              </DB_EL>
+            ))}
+          </div>
+        </SelectBox>
         <BtnBox>
           <CancelBtn
             onClick={() => {
@@ -393,32 +360,4 @@ const MakeBtn = styled.div`
   color: white;
   cursor: pointer;
 `;
-
-const SettingContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const PwInputBox = styled.div`
-  margin-top: 32px;
-`;
-
-const PwInput = styled.input`
-  width: 200px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: #f1f3f5;
-  padding: 12px;
-  resize: none;
-  border: none;
-  // outline: none;
-  &::placeholder {
-    color: #878e95;
-    font-size: 16px;
-  }
-  margin-top: 12px;
-  font-size: 18px;
-  visibility: hidden;
-`;
-
 export default MakeRoomModal;
