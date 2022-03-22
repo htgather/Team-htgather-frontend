@@ -14,7 +14,8 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const [Audio, setAudio] = useState([]);
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
-
+  // const [checkCurStatus, setCheckCurStatus] = useState();
+  const checkCurStatus = useRef();
   const videoGrid = useRef();
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
@@ -170,7 +171,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
     if (data.track.kind === "video") {
       paintPeerFace(peerStream, remoteSocketId, remoteNickname);
     }
-    console.log(data);
   }
 
   async function paintPeerFace(peerStream, id, remoteNickname) {
@@ -194,10 +194,30 @@ const Videoplayer = React.forwardRef((props, ref) => {
       nickNameContainer.className = "nickNameContainer";
       div.className = "videoBox";
       videoGrid.appendChild(div);
+
+      // 입장시 현재인원들의 카메라 및 음소거 상태 확인
+
+      if (checkCurStatus.current[id].screensaver) {
+        const screensaver = document.createElement("div");
+        screensaver.className = "screensaver";
+        div.appendChild(screensaver);
+      }
+      if (checkCurStatus.current[id].muted) {
+        const muteIcon = document.createElement("div");
+        muteIcon.className = "muteIcon";
+        nickNameContainer.prepend(muteIcon);
+      }
     } catch (error) {
       console.log(error);
     }
   }
+
+  socket.on("checkCurStatus", (object) => {
+    // console.log(object);
+    // setCheckCurStatus(object);
+    checkCurStatus.current = object;
+  });
+
   // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯
   socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
     try {
@@ -349,8 +369,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     const remoteDiv = document.getElementById(`${remoteSocketId}`);
     const emojiBox = document.createElement("img");
     emojiBox.src = HiFive;
-    // const emojiBox = document.createElement("h1");
-    // emojiBox.innerText = "👍";
+
     emojiBox.className = "emojiBox";
     if (remoteDiv) {
       remoteDiv.appendChild(emojiBox);
