@@ -115,7 +115,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     }
   }
 
-  // 영상 스트림을 DOM 비디오 엘리먼트에 넣어주는 함수 2-2
+  // 영상 스트림을 DOM 비디오 엘리먼트에 넣어주는 함수 2-2.
   async function addVideoStream(video, stream) {
     try {
       video.srcObject = stream;
