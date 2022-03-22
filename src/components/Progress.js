@@ -40,7 +40,7 @@ function Progress(props) {
   useEffect(() => {
     const pg = parseInt(curYoutubeTime);
     if (pg >= changeToSeconds(roomInfo.videoLength) * 0.245) {
-      setText("화이팅!");
+      setText("화이팅!!");
     }
     if (pg >= changeToSeconds(roomInfo.videoLength) * 0.5) {
       setText("벌써 절반이나 왔어요!");
