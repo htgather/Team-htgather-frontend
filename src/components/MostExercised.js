@@ -5,7 +5,6 @@ import fighting from '../Images/fighting.png';
 
 const MostExercised = (props) => {
   const { myRecords } = props;
-
   const isRecords = myRecords.mostExercised ? true : false;
   // console.log(isRecords);
   const records = myRecords.mostExercised;
@@ -59,7 +58,16 @@ const MostExercised = (props) => {
                 </>
               )}
             </>
-          ) : null}
+          ) : (
+            <>
+              <Noti>
+                <div>
+                  아직 운동 기록이 없어요. <br />
+                  홈트게더와 함께 즐거운 운동을 경험해보세요!
+                </div>
+              </Noti>
+            </>
+          )}
         </MostExercisedContentBox>
       </MostExercisedContainer>
     </>

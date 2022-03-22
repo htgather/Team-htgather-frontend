@@ -23,9 +23,7 @@ const RoomClickModal = (props) => {
             </CloseBtn>
             <LeftSide>
               <ImgWrap>
-                <div style={{ width: '274px', height: '208px' }}>
-                  <img src={loginImg} />
-                </div>
+                <img src={loginImg} alt="운동하는 사람들" style={{ width: '274px', height: '208px' }} />
                 <div style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '22px' }}>홈트게더와 함께하는 홈 트레이닝</div>
                 <div
                   style={{
@@ -42,17 +40,13 @@ const RoomClickModal = (props) => {
             </LeftSide>
             <RightSide>
               <Container>
-                <div style={{ width: '96px', height: '80px' }}>
-                  <img src={lock} alt="자물쇠 아이콘" />
-                </div>
-                <div style={{ margin: '16px auto 28px', fontSize: '18px' }}>
+                <img src={lock} alt="자물쇠 아이콘" style={{ width: '68px' }} />
+                <TextWrap>
                   로그인 후에 확인할 수 있어요
                   <br />
                   3초 로그인하고 사람들과 함께 운동해볼까요?
-                </div>
-                <Kakao>
-                  <KakaoLogin />
-                </Kakao>
+                </TextWrap>
+                <KakaoLogin />
               </Container>
             </RightSide>
           </DIV>
@@ -121,7 +115,6 @@ const ImgWrap = styled.div`
 const RightSide = styled.div`
   width: 480px;
   height: 480px;
-  letter-spacing: -0.96px;
 `;
 
 const Container = styled.div`
@@ -133,7 +126,15 @@ const Container = styled.div`
   margin: 128px 88px;
 `;
 
-const Kakao = styled.div``;
+const TextWrap = styled.div`
+  height: 52px;
+  margin: 16px 0px 28px;
+  font-size: 18px;
+  letter-spacing: -0.58px;
+  line-height: 1.5;
+
+  /* margin: '16px auto 28px', fontSize: '18px', width: '305px', height: '52px', lineHeight: '52px' */
+`;
 
 const CloseBtn = styled.div`
   width: 30px;

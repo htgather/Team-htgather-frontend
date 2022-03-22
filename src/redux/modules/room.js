@@ -14,7 +14,7 @@ const getRoom = createAction(GET_ROOM, (roomList, searchIdxObj) => ({
 const addRoom = createAction(ADD_ROOM, (room) => ({
   room,
 }));
-const getEnteringRoom = createAction(GET_ENTERING_ROOM, (isStart) => ({ isStart }));
+const getEnteringRoom = createAction(GET_ENTERING_ROOM, () => ({}));
 
 const initialState = {
   list: [],
@@ -79,22 +79,13 @@ const getRoomDB = (difficulty, category) => {
 };
 
 // 입장 가능한 방 불러오기
-const EnteringRoomDB = (category, difficulty, isStart) => {
+const EnteringRoomDB = () => {
   return function (dispatch, getState, { history }) {
-    // const difficultyList = ['전체', '초급', '중급', '고급'];
-    // const categoryList = ['전체', '근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
     instance
       .get('/rooms')
       .then((response) => {
-        const arr = [];
-        for (let i = 0; i < response.data.rooms.length; i++) {
-          const isStarted = response.data.rooms[i].isStart;
-          // console.log(isStarted); //확인
-          arr.push(isStarted);
-          // console.log(arr); //확인
-        }
-        // console.log(arr); //ok
-        dispatch(getEnteringRoom(arr));
+        const enteringList = response.data.rooms;
+        // dispatch(getEnteringRoom(enteringList));
       })
       .catch((error) => {
         console.error(error);
@@ -163,7 +154,7 @@ export default handleActions(
 
     [GET_ENTERING_ROOM]: (state, action) =>
       produce(state, (draft) => {
-        draft.isStart = action.payload.isStart;
+        draft.enteringList = action.payload.enteringList;
       }),
   },
   initialState

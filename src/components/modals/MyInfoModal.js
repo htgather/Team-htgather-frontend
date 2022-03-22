@@ -21,8 +21,6 @@ const MoreInfoModal = (props) => {
   const nickName = is_local ? myToken.nickName : '';
   const Goal = is_local ? myToken.weeklyGoal : null;
 
-  console.log('토큰', Goal);
-
   //닉네임 변경
   const [showModal, setShowModal] = useState(false);
   const [nickname, setNickname] = useState(nickName);
@@ -33,11 +31,6 @@ const MoreInfoModal = (props) => {
   const changeGoal = (weeklyGoal) => {
     setSelectGoal(weeklyGoal);
   };
-
-  //모달
-  // const setModal = () => {
-  //   setShowModal(!showModal);
-  // };
 
   const NicknameChange = (e) => {
     setNickname(e.target.value);
@@ -62,7 +55,6 @@ const MoreInfoModal = (props) => {
   const onClickLogOut = () => {
     logoutWithKakao();
     openMyInfoModal(false);
-    // window.alert("다음에 또 만나요!");
   };
 
   return (
@@ -171,23 +163,11 @@ const GoalWrap = styled.div`
   font-size: 16px;
 `;
 
-// const Dropdown = styled.div`
-//   width: 89px;
-//   height: 40px;
-//   background-color: pink;
-// `;
-
 const CategoryBox = styled.div`
   width: 89px;
   height: 40px;
   display: flex;
   align-items: center;
-  /* & > p {
-    margin: 0 16px 0 38px;
-    @media screen and (max-width: 1360px) {
-      margin: 0 16px 0 10px;
-    }
-  } */
 `;
 
 const ChangeBtn = styled.div`
@@ -222,25 +202,4 @@ const LogOutBtn = styled.div`
   cursor: pointer;
 `;
 
-// 비로그인
-const Container = styled.div`
-  margin: 70px auto;
-  text-align: center;
-`;
-
-const LoginBtn = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: dimgray;
-  border-radius: 20px;
-  width: 316px;
-  height: 56px;
-  margin-top: 30px;
-  cursor: pointer;
-`;
-
-const Kakao = styled.div`
-  margin-top: 30px;
-`;
 export default MoreInfoModal;
