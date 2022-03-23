@@ -48,10 +48,6 @@ const MyRecord = (props) => {
               이번 주에&nbsp;<span className="bold">{totalTimePerWeek}</span>분 운동했어요
             </div>
           </div>
-          {/* <div className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" />
-            이번 주에&nbsp;<span className="bold">{totalTimePerMonth}</span>분 운동했어요
-          </div> */}
         </BottomTextContainer>
       </MyRecordContent>
     </DIV>

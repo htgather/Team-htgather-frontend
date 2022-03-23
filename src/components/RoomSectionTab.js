@@ -127,8 +127,6 @@ const RoomSectionTopContainer = styled.div`
 `;
 const RoomSectionTitle = styled.div`
   color: #222529;
-  /* width: 445px;
-  height: 34px; */
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.48px;
@@ -138,13 +136,8 @@ const RoomSectionTitle = styled.div`
     transform: rotate(80deg);
     transition: transform 0.2s linear;
   }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 72rem;
-    padding: 0rem 12rem;
-  }
-  .isEntering {
-    background-color: pink;
-    width: 150px;
+  @media screen and (max-width: 1023px) {
+    padding: 0rem 6.5rem;
   }
 `;
 
@@ -155,10 +148,8 @@ const RoomSectionContent = styled.div`
   font-weight: 500;
   justify-content: space-between;
   margin: 24px 0px;
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 72rem;
-    padding: 0rem 12rem;
-    font-size: 0.7rem;
+  @media screen and (max-width: 1023px) {
+    padding: 0rem 6.5rem;
   }
 `;
 const RoomSectionCategory = styled.div`

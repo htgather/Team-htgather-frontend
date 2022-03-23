@@ -19,7 +19,6 @@ const MobileAlert = () => {
 const DIV = styled.div`
   width: 100vw;
   height: 100vh;
-  /* background-color: pink; */
 `;
 
 const Contents = styled.div`
