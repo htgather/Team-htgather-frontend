@@ -69,18 +69,18 @@ function Player(props) {
     return () => clearInterval(getTimeInterval);
   }, [roomInfo]);
 
-  React.useEffect(() => {
-    if (isPlaying) {
-      sendCurYoutubeTime.current = setInterval(() => {
-        props.setCurYoutubeTime(Math.floor(player.current.getCurrentTime()));
-        // socket.emit(
-        //   "sendYoutubeTime",
-        //   Math.floor(player.current.getCurrentTime())
-        // );
-      }, 1000);
-    }
-    return () => clearInterval(sendCurYoutubeTime.current);
-  }, [isPlaying]);
+  // React.useEffect(() => {
+  //   if (isPlaying) {
+  //     sendCurYoutubeTime.current = setInterval(() => {
+  //       props.setCurYoutubeTime(Math.floor(player.current.getCurrentTime()));
+  //       // socket.emit(
+  //       //   "sendYoutubeTime",
+  //       //   Math.floor(player.current.getCurrentTime())
+  //       // );
+  //     }, 1000);
+  //   }
+  //   return () => clearInterval(sendCurYoutubeTime.current);
+  // }, [isPlaying]);
 
   return (
     <Container>

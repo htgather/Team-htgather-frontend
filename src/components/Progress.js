@@ -102,7 +102,7 @@ export default function Timer(props) {
           {/* {String(hours) === "00" ? "" : hours + ":"}
           {String(minutes).length < 2 ? "0" + minutes : minutes}:
           {String(seconds).length < 2 ? "0" + seconds : seconds} */}
-          {leftSeconds}
+          {/* {leftSeconds} */}
           {/* {hours} */}
         </TextWrap>
       </Contents>
