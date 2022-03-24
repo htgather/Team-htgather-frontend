@@ -3,20 +3,16 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
 import { changeToSeconds } from "./YoutubeDataAPI";
 import { getTimeStringSeconds } from "./YoutubeDataAPI";
-import { io } from "socket.io-client";
 
-export default function Timer(props) {
+function Progress(props) {
   const { roomInfo, curYoutubeTime } = props;
-  const socket = io("https://test.kimjeongho-server.com", {
-    cors: { origin: "*" },
-  }); //Server adress
+  console.log("프로그래스바");
 
   const [text, setText] = useState("오늘도 운동하는 여러분👍🏻");
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const leftSeconds = changeToSeconds(roomInfo.videoLength) - curYoutubeTime;
-  const progressBar = useRef();
 
   // JavaScript에 미디어쿼리를 사용하는 matchMedia()
   const NewMedia = window.matchMedia("screen and (max-width: 1360px)");
@@ -90,8 +86,7 @@ export default function Timer(props) {
       <Contents style={{ justifyContent: NewMedia.matches ? "center" : "" }}>
         <ProgressWrap>
           <ProgressBar
-            ref={progressBar}
-            completed={curYoutubeTime}
+            completed={0}
             isLabelVisible={false}
             maxCompleted={changeToSeconds(roomInfo.videoLength) - 1}
             height="12px"
@@ -134,3 +129,5 @@ const TextWrap = styled.div`
   line-height: 1.4;
   ${"" /* color: rgb(34, 307, 41); */}
 `;
+
+export default React.memo(Progress);

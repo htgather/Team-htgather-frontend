@@ -15,7 +15,7 @@ const MakeRoomModal = (props) => {
   const dispatch = useDispatch();
 
   // 모달창
-  const { setIsMakeModal, isMakeModal, background, fontcolor } = props;
+  const { setIsMakeModal } = props;
   const modal = React.useRef();
   // 셀렉트탭
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
@@ -74,21 +74,6 @@ const MakeRoomModal = (props) => {
   const getCategory = (category) => {
     setClickedCategory(category);
   };
-
-  // console.log(titleInput.current.value);
-  // 빈화면 클릭시 모달창 닫기
-  // const handleClose = (e) => {
-  //   if (isModal && !modal.current.contains(e.target)) {
-  //     setIsModal(false);
-  //   }
-  // };
-
-  // React.useEffect(() => {
-  //   window.addEventListener("click", handleClose);
-  //   return () => {
-  //     window.removeEventListener("click", handleClose);
-  //   };
-  // });
 
   const clickMakeBtn = () => {
     // 미입력시 알림창띄우기 => 나중에 이쁜 모달이나 글자가 흔들리는걸로 변경하기

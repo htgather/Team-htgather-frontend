@@ -22,6 +22,7 @@ import Videoplayer from "../components/Videoplayer";
 import jwt_decode from "jwt-decode";
 import CompleteModal from "../components/modals/CompleteModal";
 const Detail = (props) => {
+  console.log("디테일");
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
@@ -34,7 +35,6 @@ const Detail = (props) => {
   const [videoOn, setVideoOn] = useState(false);
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
-  const [curYoutubeTime, setCurYoutubeTime] = React.useState(0);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
 
   const childRef = React.useRef();
@@ -85,11 +85,7 @@ const Detail = (props) => {
           <DIV>
             <div>
               <TimerWrap>
-                <Progress
-                  roomInfo={roomInfo}
-                  isStart={isStart}
-                  curYoutubeTime={curYoutubeTime}
-                ></Progress>
+                <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
               </TimerWrap>
               <VideoWrap>
                 <MainVideo>
@@ -99,20 +95,8 @@ const Detail = (props) => {
                     vol={vol}
                     isMuted={isMuted}
                     setIsDone={setIsDone}
-                    setCurYoutubeTime={setCurYoutubeTime}
                   ></Player>
                 </MainVideo>
-                {/* <MemberWrap>
-                  <MemberVideo>
-                    <Circle>
-                      <img src={Me} />
-                    </Circle>
-                  </MemberVideo>
-                  <MemberVideo />
-                  <MemberVideo />
-                  <MemberVideo />
-                  <MemberVideo />
-                </MemberWrap> */}
                 <Videoplayer
                   nickname={nickname}
                   roomId={roomId}
@@ -291,36 +275,6 @@ const MainVideo = styled.div`
     margin: 0px 0px 110px;
   }
 `;
-
-// const MemberWrap = styled.div`
-//   height: 616px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   @media screen and (max-width: 1360px) {
-//     position: absolute;
-//     right: 0px;
-//     top: -76px;
-//   }
-// `;
-
-// const MemberVideo = styled.div`
-//   width: 200px;
-//   height: 112px;
-//   border-radius: 8px;
-//   background-color: skyblue;
-//   position: relative;
-//   @media screen and (max-width: 1360px) {
-//     width: 202px;
-//     height: 113px;
-//   }
-// `;
-
-// const Circle = styled.div`
-//   position: absolute;
-//   bottom: 3px;
-//   right: 3px;
-// `;
 
 const SoundBtn = styled.div`
   width: 740px;

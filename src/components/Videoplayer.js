@@ -8,6 +8,7 @@ import Mute from "../Images/Videoplayer_mute.png";
 import styled from "styled-components";
 
 const Videoplayer = React.forwardRef((props, ref) => {
+  console.log("영상통화");
   const roomName = props.roomId;
   const [muted, setMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);
@@ -433,7 +434,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   );
 });
 
-export default Videoplayer;
+
 
 const MemberWrap = styled.div`
   height: 616px;
@@ -505,3 +506,4 @@ const MemberWrap = styled.div`
     margin-right: 4px;
   }
 `;
+export default Videoplayer;
