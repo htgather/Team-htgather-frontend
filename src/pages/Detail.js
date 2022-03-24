@@ -36,6 +36,7 @@ const Detail = (props) => {
   const [isMuted, setIsMuted] = React.useState(true);
   const [curYoutubeTime, setCurYoutubeTime] = React.useState(0);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
+
   const childRef = React.useRef();
   const changeNumberOfUsers = (text) => {
     setNumberOfUsers(text);
@@ -66,12 +67,6 @@ const Detail = (props) => {
     }
   }, []);
 
-  React.useEffect(() => {
-    if (isStart) {
-      setSoundOn(true);
-      childRef.current.handleAllMute();
-    }
-  }, [isStart]);
   return (
     <Background>
       {roomInfo && (

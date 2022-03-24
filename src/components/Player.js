@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
+import { io } from "socket.io-client";
 import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commonActions } from "../redux/modules/common";
 
 function Player(props) {
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
+
+  const socket = io("https://test.kimjeongho-server.com", {
+    cors: { origin: "*" },
+  }); //Server adress
+
   const dispatch = useDispatch();
   const roomInfo = props.roomInfo;
   const { isMuted, vol } = props;
@@ -16,11 +22,11 @@ function Player(props) {
   const player = React.useRef();
   const [countTime, setCountTime] = React.useState();
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const sendCurYoutubeTime = React.useRef();
 
   const NewMedia = window.matchMedia("screen and (max-width: 1440px)");
   // console.log('player match는', NewMedia.matches);
 
-  // 영상이 종료되면 실행되는 함수
   const endVideo = () => {
     const recordsData = {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
@@ -63,15 +69,17 @@ function Player(props) {
     return () => clearInterval(getTimeInterval);
   }, [roomInfo]);
 
-  // 유튜브가 재생되면, 플레이어 현재 시간 1초마다 받아오기
   React.useEffect(() => {
-    let sendCurYoutubeTime = setInterval(() => {
-      props.setCurYoutubeTime(Math.ceil(player.current.getCurrentTime()));
-    }, 1000);
-    if (!isPlaying) {
-      clearInterval(sendCurYoutubeTime);
+    if (isPlaying) {
+      sendCurYoutubeTime.current = setInterval(() => {
+        props.setCurYoutubeTime(Math.floor(player.current.getCurrentTime()));
+        // socket.emit(
+        //   "sendYoutubeTime",
+        //   Math.floor(player.current.getCurrentTime())
+        // );
+      }, 1000);
     }
-    return () => clearInterval(sendCurYoutubeTime);
+    return () => clearInterval(sendCurYoutubeTime.current);
   }, [isPlaying]);
 
   return (

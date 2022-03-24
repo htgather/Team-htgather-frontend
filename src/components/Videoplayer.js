@@ -20,7 +20,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
   // const leaveBtn = useRef();
-  const cameraSelect = useRef(); //
+  const cameraSelect = useRef();
   // const call = useRef();
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
@@ -35,7 +35,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   const socket = io("https://test.kimjeongho-server.com", {
     cors: { origin: "*" },
-    transports: ["websocket"],
   }); //Server adress
 
   //페이지가 마운트되고 "join_room" Event 함수 실행 1
@@ -58,7 +57,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     };
   }, []);
 
-  //서버로부터 accept_join 받음 2
+  //서버로부터 accept_join 받음
   socket.on("accept_join", async (userObjArr, socketIdformserver) => {
     const length = userObjArr.length;
     //카메라, 마이크 가져오기
@@ -87,35 +86,35 @@ const Videoplayer = React.forwardRef((props, ref) => {
     }
   });
 
-  //사용자의 stream 가져오는 함수 2-1
+  //사용자의 stream 가져오는 함수
   async function getMedia(deviceId) {
     const initialConstraints = {
       audio: true,
       video: { facingMode: "user" },
     };
-    // const cameraConstraints = {
-    //   audio: true,
-    //   video: { deviceId: { exact: deviceId } },
-    // };
+    const cameraConstraints = {
+      audio: true,
+      video: { deviceId: { exact: deviceId } },
+    };
     try {
-      // myStream = await navigator.mediaDevices.getUserMedia(
-      //   deviceId ? cameraConstraints : initialConstraints
-      myStream = await navigator.mediaDevices.getUserMedia(initialConstraints);
+      myStream = await navigator.mediaDevices.getUserMedia(
+        deviceId ? cameraConstraints : initialConstraints
+      );
       addVideoStream(myvideo.current, myStream);
       mystream.current.append(myvideo.current);
       videoGrid.current.append(mystream.current);
       myvideo.current.muted = true;
       setAudio(myStream.getAudioTracks());
       setVideo(myStream.getVideoTracks());
-      // if (!deviceId) {
-      //   await getCameras();
-      // }
+      if (!deviceId) {
+        await getCameras();
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
-  // 영상 스트림을 DOM 비디오 엘리먼트에 넣어주는 함수 2-2.
+  // 영상 스트림을 DOM 비디오 엘리먼트에 넣어주는 함수
   async function addVideoStream(video, stream) {
     try {
       video.srcObject = stream;
@@ -166,7 +165,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
     changeNumberOfUsers(`${peopleInRoom}/5`);
     return myPeerConnection;
   }
-  // 다른사람 스트림 가져와서 그려주기
 
   function handleAddStream(data, remoteSocketId, remoteNickname) {
     const peerStream = data.streams[0];
@@ -215,12 +213,12 @@ const Videoplayer = React.forwardRef((props, ref) => {
   }
 
   socket.on("checkCurStatus", (object) => {
-    console.log(object);
+    // console.log(object);
     // setCheckCurStatus(object);
     checkCurStatus.current = object;
   });
 
-  // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯 3
+  // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯
   socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
     try {
       const newPC = makeConnection(remoteSocketId, remoteNickname);
@@ -233,7 +231,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     }
   });
 
-  //방 만든 브라우저에서 일어나는 일 (참가한 방에서 보낸 answer을 받아 저장함.) 4
+  //방 만든 브라우저에서 일어나는 일 (참가한 방에서 보낸 answer을 받아 저장함.)
   socket.on("answer", async (answer, remoteSocketId) => {
     await pcObj[remoteSocketId].setRemoteDescription(answer);
   });
@@ -248,21 +246,21 @@ const Videoplayer = React.forwardRef((props, ref) => {
     await pcObj[remoteSocketId].addIceCandidate(ice);
   });
 
-  // async function getCameras() {
-  //   try {
-  //     const devieces = await navigator.mediaDevices.enumerateDevices();
-  //     const cameras = devieces.filter((device) => device.kind === "videoinput");
+  async function getCameras() {
+    try {
+      const devieces = await navigator.mediaDevices.enumerateDevices();
+      const cameras = devieces.filter((device) => device.kind === "videoinput");
 
-  //     cameras.forEach((camera) => {
-  //       const option = document.createElement("option");
-  //       option.value = cameras[0].deviceId;
-  //       option.innerText = camera.label;
-  //       cameraSelect.current.append(option);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+      cameras.forEach((camera) => {
+        const option = document.createElement("option");
+        option.value = cameras[0].deviceId;
+        option.innerText = camera.label;
+        cameraSelect.current.append(option);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // 이후 참가한 방에 일어나는 일
 
@@ -330,7 +328,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
         setCameraOff(false);
         let screensaver = document.querySelector("#myscreensaver");
         screensaver.style.display = "none";
-        console.log(`소켓에밋 소켓id ${socketID}`);
         socket.emit("screensaver", roomName, socketID, false);
       }
     },
@@ -351,18 +348,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       }
     },
 
-    handleAllMute: () => {
-      Audio.forEach((track) => (track.enabled = false));
-      const nickNameContainer = document.querySelector("#nickNameContainer");
-      if (muted === false) {
-        setMuted(true);
-        const muteIcon = document.createElement("div");
-        muteIcon.className = "muteIcon";
-        nickNameContainer.prepend(muteIcon);
-        socket.emit("mic_check", roomName, socketID, true);
-      }
-    },
-
     showEmoji: () => {
       const myArea = document.querySelector("#mystream");
       // const emojiBox = document.createElement("h1");
@@ -378,7 +363,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       socket.emit("emoji", roomName, socketID);
     },
   }));
-
   // 여긴 다른 사람들에게 띄우는 부분
   socket.on("emoji", (remoteSocketId) => {
     // console.log(remoteSocketId);
@@ -397,7 +381,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   // 여긴 다른 사람들에게 띄우는 부분
   socket.on("screensaver", (remoteSocketId, boolean) => {
-    console.log(`소켓온 소켓id ${remoteSocketId}`);
     const remoteDiv = document.getElementById(`${remoteSocketId}`);
     if (boolean) {
       const screensaver = document.createElement("div");
