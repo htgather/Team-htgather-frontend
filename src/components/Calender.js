@@ -134,7 +134,6 @@ const Calender = () => {
 const CalenderBox = styled.div`
   width: 315px;
   height: 284px;
-  /* height: 100%; */
 `;
 
 const CalenderTopBar = styled.div`

@@ -62,14 +62,14 @@ const MySectionContainer = styled.div`
   flex-direction: column;
   width: 1320px;
   align-items: center;
-  margin: 56px 0 64px 0;
+  margin: 56px auto 64px;
   @media screen and (max-width: 1360px) {
     width: 62rem;
     justify-content: center;
   }
   @media screen and (max-width: 1023px) {
     width: 100vh;
-    margin: 56px auto 64px;
+    padding: 0px 1rem;
   }
   position: relative;
 `;
@@ -84,20 +84,14 @@ const MySectionTitle = styled.div`
   align-items: center;
   margin-bottom: 30px;
   letter-spacing: -0.48px;
-  @media screen and (max-width: 1023px) {
-    padding: 0rem 6.5rem;
-  }
 `;
 
 const MySectionContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
-  @media screen and (max-width: 1023px) {
-    width: 100%;
-    padding: 0rem 6.5rem;
-  }
 `;
+
 const MyPage = styled.div`
   width: 985px;
   height: 284px;

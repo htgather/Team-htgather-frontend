@@ -137,19 +137,22 @@ const Container = styled.div`
 const RoomSection = styled.div`
   @media screen and (max-width: 1023px) {
     width: 100vh;
+    height: 100vw;
     margin: 0px auto;
+    /* padding: 0 1rem; */
+    /* padding: 0rem 1rem; // 카드 리스트 위치 변경하려면 */
+    /* background-color: #add; */
   }
 `;
 
 const RoomCardList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 315px);
-  grid-gap: 20px;
+  grid-gap: 1.5rem;
   @media screen and (max-width: 1360px) {
     grid-template-columns: repeat(3, 315px);
   }
-  @media screen and (max-width: 1023px) {
-    padding: 0rem 6.5rem;
+  @media screen and (min-width: 769px) and (max-width: 1023px) {
     grid-gap: 15px;
   }
 `;

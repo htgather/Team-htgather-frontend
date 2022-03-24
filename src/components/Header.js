@@ -67,8 +67,14 @@ const HeaderContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   z-index: 2;
-  @media screen and (max-width: 1023px) {
+  // 태블릿일 때
+  @media screen and (min-width: 767px) and (max-width: 1023px) {
     width: 100vh;
+    padding: 1rem;
+  }
+  // 모바일일 때
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `;
 
@@ -95,7 +101,7 @@ const HeaderGrid = styled.div`
     width: 990px;
   }
   @media screen and (max-width: 1023px) {
-    padding-right: 0.9rem;
+    width: 100vh;
   }
 `;
 export default Header;
