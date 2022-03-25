@@ -93,7 +93,7 @@ const MobileLanding = () => {
                   clickCircle(i);
                 }}
                 style={{
-                  backgroundColor: i === bannerIndex ? '#353a3f' : '',
+                  backgroundColor: i === bannerIndex ? '#AEB5BC' : '',
                   transition: 'width 0.9s',
                 }}
               ></Circle>
@@ -119,7 +119,7 @@ const MobileLanding = () => {
 
 const DIV = styled.div`
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background-color: #fff;
 `;
 

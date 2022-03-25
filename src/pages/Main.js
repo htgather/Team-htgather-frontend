@@ -8,6 +8,7 @@ import RoomSectionTab from '../components/RoomSectionTab';
 import MySection from '../components/MySection';
 import RoomClickModal from '../components/modals/RoomClickModal';
 import MobileLanding from '../components/MobileLanding';
+import TabletPortrait from '../components/TabletPortrait';
 
 import toTop from '../Images/toTop.png';
 import jwt_decode from 'jwt-decode';
@@ -18,12 +19,10 @@ const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
-  const NewMedia = window.matchMedia('screen and (max-width:767px)');
-  const tablet = window.matchMedia('(orientation: landscape)');
+  const NewMedia = window.matchMedia('orientation: landscape)');
+  const tablet = window.matchMedia('(orientation: portrait)');
   // Portrait 모드일 때 실행할 스크립트
   // 폭과 높이가 같으면 Portrait 모드로 인식돼요
-  if (tablet.matches) {
-  }
 
   const roomList = useSelector((state) => state.room.list);
   const enteringList = roomList.filter((room) => room.isStart === false); //확인
@@ -80,6 +79,8 @@ const Main = (props) => {
       <div className="wrap">
         {NewMedia.matches ? (
           <MobileLanding />
+        ) : tablet.matches ? (
+          <TabletPortrait />
         ) : (
           <>
             <Header />
@@ -116,15 +117,15 @@ const Main = (props) => {
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
+  position: relative;
   .wrap {
     @media screen and (max-width: 1023px) {
+      /* transform: rotate(90deg);
+      width: 100vh;
+      height: 100vw; */
       height: 100vw;
-      transform: rotate(90deg);
+
       padding: 0 auto;
-      /* overflow-y: scroll; */
-    }
-    @media screen and (max-width: 767px) {
-      transform: rotate(0deg);
     }
   }
 `;

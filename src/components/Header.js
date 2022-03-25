@@ -61,16 +61,13 @@ const Header = (props) => {
 const HeaderContainer = styled.div`
   width: 100vw;
   height: 64px;
-  background: #add; //#f8f9fa;
+  background: #f8f9fa;
   border-bottom: 1px solid #eaecef;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   z-index: 2;
   // 태블릿일 때
-  @media screen and (max-width: 1023px) {
-    width: 100v;
-  }
 `;
 
 const IconsWrap = styled.div`
@@ -94,11 +91,6 @@ const HeaderGrid = styled.div`
   }
   @media screen and (max-width: 1360px) {
     width: 990px;
-  }
-  @media screen and (max-width: 1023px) {
-    width: 100vh;
-    padding: 0 1rem;
-    background-color: skyblue;
   }
 `;
 export default Header;
