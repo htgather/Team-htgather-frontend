@@ -134,9 +134,8 @@ const Calender = () => {
 const CalenderBox = styled.div`
   width: 315px;
   height: 284px;
-  /* height: 100%; */
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    display: none;
+  @media screen and (max-width: 1023px) {
+    width: 30vh;
   }
 `;
 

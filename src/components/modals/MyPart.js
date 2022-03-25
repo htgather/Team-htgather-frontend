@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import lock from '../../Images/lock.png';
@@ -36,9 +35,9 @@ const DIV = styled.div`
   justify-content: start;
   align-items: center;
 
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 45rem;
-    left: 7.5rem;
+  @media screen and (min-width: 767px) and (max-width: 1023px) {
+    width: 100vh;
+    margin-left: 1rem;
   }
 `;
 

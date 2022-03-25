@@ -48,10 +48,6 @@ const MyRecord = (props) => {
               이번 주에&nbsp;<span className="bold">{totalTimePerWeek}</span>분 운동했어요
             </div>
           </div>
-          {/* <div className="bottomTextBox">
-            <img src={clockIcon} alt="시계 아이콘" />
-            이번 주에&nbsp;<span className="bold">{totalTimePerMonth}</span>분 운동했어요
-          </div> */}
         </BottomTextContainer>
       </MyRecordContent>
     </DIV>
@@ -62,6 +58,9 @@ const DIV = styled.div`
   width: 315px;
   height: 284px;
   border-radius: 12px;
+  @media screen and (max-width: 1023px) {
+    width: 30vh;
+  }
 `;
 
 const Header = styled.div`
@@ -112,6 +111,9 @@ const MyRecordContent = styled.div`
   }
   .bold {
     font-weight: bold;
+  }
+  @media screen and (max-width: 1023px) {
+    margin: 0 auto;
   }
 `;
 

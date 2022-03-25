@@ -67,9 +67,14 @@ const HeaderContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   z-index: 2;
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 72rem; //1000px;
-    padding: 0rem 9.5rem;
+  // 태블릿일 때
+  @media screen and (min-width: 767px) and (max-width: 1023px) {
+    width: 100vh;
+    padding: 1rem;
+  }
+  // 모바일일 때
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `;
 
@@ -82,11 +87,11 @@ const IconsWrap = styled.div`
   flex-direction: row-reverse;
   position: relative;
 `;
+
 const HeaderGrid = styled.div`
   display: flex;
   justify-content: space-between;
   width: 1320px;
-  /* min-width: 980px; */
   & > p {
     color: #4a5056;
     font-size: 20px;
@@ -95,8 +100,8 @@ const HeaderGrid = styled.div`
   @media screen and (max-width: 1360px) {
     width: 990px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    padding: 0rem 2rem;
+  @media screen and (max-width: 1023px) {
+    width: 100vh;
   }
 `;
 export default Header;

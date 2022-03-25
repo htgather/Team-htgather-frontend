@@ -1,25 +1,23 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import clap from "../Images/clap.png";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import clap from '../Images/clap.png';
 
-import Banner from "./Banner";
-import Calender from "./Calender";
-import jwt_decode from "jwt-decode";
-import MyPart from "./modals/MyPart"; //로그인 안했을 때 가리는 모달
-import MyRecord from "./MyRecord";
-import MostExercised from "./MostExercised";
-import Ranking from "./Ranking";
-import { actionCreators as commonActions } from "../redux/modules/common";
+import Banner from './Banner';
+import Calender from './Calender';
+import jwt_decode from 'jwt-decode';
+import MyPart from './modals/MyPart'; //로그인 안했을 때 가리는 모달
+import MyRecord from './MyRecord';
+import MostExercised from './MostExercised';
+import Ranking from './Ranking';
+import { actionCreators as commonActions } from '../redux/modules/common';
 
 const MySection = () => {
   const dispatch = useDispatch();
   const myRecords = useSelector((state) => state.common.myRecords);
 
-  const is_local = localStorage.getItem("isLogin");
-  const nickName = is_local
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
   React.useEffect(() => {
     if (nickName) {
@@ -32,20 +30,16 @@ const MySection = () => {
       <MySectionTitle>
         <div
           style={{
-            width: "24px",
-            height: "25px",
-            display: "flex",
-            alignItems: "center",
-            marginRight: "4px",
+            width: '24px',
+            height: '25px',
+            display: 'flex',
+            alignItems: 'center',
+            marginRight: '4px',
           }}
         >
           <img src={clap} alt="박수 아이콘" width="24" />
         </div>
-        <div>
-          {nickName
-            ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!`
-            : "안녕하세요, 오늘도 함께 운동해요!"}
-        </div>
+        <div>{nickName ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
       </MySectionTitle>
       <MySectionContent>
         <MyPart />
@@ -68,10 +62,14 @@ const MySectionContainer = styled.div`
   flex-direction: column;
   width: 1320px;
   align-items: center;
-  margin: 56px 0 64px 0;
+  margin: 56px auto 64px;
   @media screen and (max-width: 1360px) {
     width: 62rem;
     justify-content: center;
+  }
+  @media screen and (max-width: 1023px) {
+    width: 100vh;
+    /* padding: 0px 1rem; */
   }
   position: relative;
 `;
@@ -86,8 +84,8 @@ const MySectionTitle = styled.div`
   align-items: center;
   margin-bottom: 30px;
   letter-spacing: -0.48px;
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    padding: 0rem 7.6rem;
+  @media screen and (max-width: 1023px) {
+    padding: 0 1rem;
   }
 `;
 
@@ -95,10 +93,11 @@ const MySectionContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    padding: 0rem 7.6rem;
+  @media screen and (max-width: 1023px) {
+    padding: 0 1rem;
   }
 `;
+
 const MyPage = styled.div`
   width: 985px;
   height: 284px;
@@ -111,6 +110,9 @@ const MyPage = styled.div`
   @media screen and (max-width: 1360px) {
     width: 100%;
     justify-content: space-evenly;
+  }
+  @media screen and (max-width: 1023px) {
+    justify-content: space-between;
   }
 `;
 const RightSection = styled.div`

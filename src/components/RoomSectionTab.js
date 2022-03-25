@@ -124,11 +124,15 @@ const RoomSectionTopContainer = styled.div`
   @media screen and (max-width: 1360px) {
     width: 100%;
   }
+  @media screen and (max-width: 1023px) {
+    width: 100vh;
+    padding: 0 1rem;
+    /* width: 100vh; */
+    /* padding: 0px 1rem; */
+  }
 `;
 const RoomSectionTitle = styled.div`
   color: #222529;
-  /* width: 445px;
-  height: 34px; */
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.48px;
@@ -137,14 +141,6 @@ const RoomSectionTitle = styled.div`
   .reload:hover {
     transform: rotate(80deg);
     transition: transform 0.2s linear;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 72rem;
-    padding: 0rem 12rem;
-  }
-  .isEntering {
-    background-color: pink;
-    width: 150px;
   }
 `;
 
@@ -155,12 +151,8 @@ const RoomSectionContent = styled.div`
   font-weight: 500;
   justify-content: space-between;
   margin: 24px 0px;
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 72rem;
-    padding: 0rem 12rem;
-    font-size: 0.7rem;
-  }
 `;
+
 const RoomSectionCategory = styled.div`
   display: flex;
 `;
@@ -205,6 +197,8 @@ const MakeRoomBtn = styled.div`
   cursor: pointer;
   @media screen and (max-width: 1360px) {
     width: 221px;
+  }
+  @media screen and (max-width: 1023px) {
   }
 `;
 export default RoomSectionTop;
