@@ -10,7 +10,7 @@ const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
   const { isDone } = props;
   const [modalOn, setModalOn] = React.useState(false);
-
+  console.log("디테일헤더");
   const exitRoom = () => {
     setModalOn(!modalOn);
   };
@@ -104,4 +104,4 @@ const BtnContents = styled.div`
   align-items: center;
   vertical-align: middle;
 `;
-export default Header;
+export default React.memo(Header);

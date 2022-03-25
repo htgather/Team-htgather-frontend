@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
+import { io } from "socket.io-client";
 import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commonActions } from "../redux/modules/common";
 
 function Player(props) {
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
-  console.log("유투브플레이어");
   const dispatch = useDispatch();
+  console.log("플레이어");
   const roomInfo = props.roomInfo;
   const { isMuted, vol } = props;
   // 동영상 재생으로 관리될 변수들
@@ -55,6 +56,7 @@ function Player(props) {
         } else if (durationS && Math.abs(diffS) > durationS) {
           // durationS 비동기로 받아오는 값.
           setCountTime("영상이 종료되었습니다");
+          props.setCurYoutubeTime(durationS);
         }
       }
     }, 100);
@@ -62,60 +64,47 @@ function Player(props) {
     return () => clearInterval(getTimeInterval);
   }, [roomInfo]);
 
-  // useInterval(()=>{
-  //   const now = Date.now();
-  //       const videoStart = createdAt.getTime() + videoStartAfter * 60000;
-  //       const diffMs = parseInt(videoStart - now);
-  //       const durationS = Math.floor(player.current.getDuration()); // 영상길이(초단위)
-  //       let diffS = parseInt(diffMs / 1000); // 동영상시작예정시간-현재시간(초단위)
-  //       if (diffS > 0) {
-  //         setCountTime(calCount(getTimeStringSeconds(diffS)));
-  //       }
-  //       // 차이가 0보다 작으면 동영상을 재생
-  //       // -일때는 그 차이의 절댓값부터 동영상을 재생
-  //       // 차이의 절댒값이 동영상의 길이보다 크면 영상이 종료되었습니다 띄움.
-  //       if (diffS <= 0) {
-  //         if (Math.abs(diffS) < durationS) {
-  //           player.current.seekTo(parseFloat(Math.abs(diffS)));
-  //           setIsPlaying(true);
-  //           clearInterval(getTimeInterval);
-  //           setCountTime(false);
-  //         } else if (durationS && Math.abs(diffS) > durationS) {
-  //           // durationS 비동기로 받아오는 값.
-  //           setCountTime("영상이 종료되었습니다");
-  //         }
-  //       }
-
-  // },100
-  // )
+  // React.useEffect(() => {
+  //   if (isPlaying) {
+  //     sendCurYoutubeTime.current = setInterval(() => {
+  //       props.setCurYoutubeTime(Math.floor(player.current.getCurrentTime()));
+  //       // socket.emit(
+  //       //   "sendYoutubeTime",
+  //       //   Math.floor(player.current.getCurrentTime())
+  //       // );
+  //     }, 1000);
+  //   }
+  //   return () => clearInterval(sendCurYoutubeTime.current);
+  // }, [isPlaying]);
 
   return (
     <Container>
-      <div style={{ pointerEvents: "none" }}>
-        {countTime && <Count>{countTime}</Count>}
-        <ReactPlayer
-          style={{ borderRadius: "12px" }}
-          url={roomInfo.videoUrl}
-          width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
-          height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
-          ref={player}
-          playing={isPlaying}
-          // 특정시점부터 시작
-          config={{
-            youtube: {
-              playerVars: {
-                start: 1,
-              },
+      {/* <div style={{ pointerEvents: "none" }}> */}
+      {countTime && <Count>{countTime}</Count>}
+      <ReactPlayer
+        style={{ borderRadius: "12px" }}
+        url={roomInfo.videoUrl}
+        width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
+        height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
+        ref={player}
+        playing={isPlaying}
+        controls
+        // 특정시점부터 시작
+        config={{
+          youtube: {
+            playerVars: {
+              start: 1,
             },
-          }}
-          onStart={() => {
-            props.setIsStart(true);
-          }}
-          onEnded={endVideo}
-          muted={isMuted}
-          volume={vol / 20}
-        />
-      </div>
+          },
+        }}
+        onStart={() => {
+          props.setIsStart(true);
+        }}
+        onEnded={endVideo}
+        muted={isMuted}
+        volume={vol / 20}
+      />
+      {/* </div> */}
     </Container>
   );
 }
@@ -153,4 +142,4 @@ const Count = styled.div`
     height: 428px;
   }
 `;
-export default React.memo(Player);
+export default Player;
