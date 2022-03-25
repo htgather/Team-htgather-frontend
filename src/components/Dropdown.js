@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { IoMdArrowDropdown } from 'react-icons/io';
+import React from "react";
+import styled from "styled-components";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const Dropdown = (props) => {
   // props로 리스트목록을 받아오고, useState로 모달 및 클릭 관리
@@ -18,15 +18,16 @@ const Dropdown = (props) => {
     }
   };
   React.useEffect(() => {
-    window.addEventListener('click', handleClose);
+    window.addEventListener("click", handleClose);
     return () => {
-      window.removeEventListener('click', handleClose);
+      window.removeEventListener("click", handleClose);
     };
   });
 
   return (
     <>
       <DropdownBtn
+        width={width}
         onClick={() => {
           setIsDropdown(!isDropdown);
         }}
@@ -34,10 +35,20 @@ const Dropdown = (props) => {
         {dropdownList ? (
           <>
             <DropdownInput>
-              <div>{dropdownList[clickedDropdown] ? dropdownList[clickedDropdown] : props.children}</div>
-              <IoMdArrowDropdown style={{ color: '#4a5056' }}></IoMdArrowDropdown>
+              <div>
+                {dropdownList[clickedDropdown]
+                  ? dropdownList[clickedDropdown]
+                  : props.children}
+              </div>
+              <IoMdArrowDropdown
+                style={{ color: "#4a5056" }}
+              ></IoMdArrowDropdown>
             </DropdownInput>
-            <DropdownModal {...styles} isDropdown={isDropdown} clickedDropdown={clickedDropdown}>
+            <DropdownModal
+              {...styles}
+              isDropdown={isDropdown}
+              clickedDropdown={clickedDropdown}
+            >
               {dropdownList.map((e, i) => (
                 <DdEl
                   key={i}
@@ -58,8 +69,14 @@ const Dropdown = (props) => {
           <>
             {/* 회원정보 드롭다운일 떄 */}
             <DropdownInput>
-              <div>{myDropdownList[clickedDropdown] ? myDropdownList[clickedDropdown] : props.children}</div>
-              <IoMdArrowDropdown style={{ color: '#4a5056' }}></IoMdArrowDropdown>
+              <div>
+                {myDropdownList[clickedDropdown]
+                  ? myDropdownList[clickedDropdown]
+                  : props.children}
+              </div>
+              <IoMdArrowDropdown
+                style={{ color: "#4a5056" }}
+              ></IoMdArrowDropdown>
             </DropdownInput>
             <DropdownModal {...styles} isDropdown={isDropdown}>
               {myDropdownList.map((e, i) => (
@@ -85,15 +102,15 @@ const Dropdown = (props) => {
 };
 
 Dropdown.defaultProps = {
-  width: '285px',
-  background: '',
-  fontcolor: '',
+  width: "285px",
+  background: "",
+  fontcolor: "",
 };
 
 const DropdownBtn = styled.div`
   display: flex;
   align-items: center;
-  width: 285px;
+  width: ${(props) => (props.width ? props.width : "285px")};
   // height: 34px;
   height: 40px;
   border-radius: 8px;
@@ -120,15 +137,16 @@ const DropdownModal = styled.div`
   top: 38px;
   right: 0px;
   z-index: 2;
-  display: ${(props) => (props.isDropdown ? null : 'none')};
+  display: ${(props) => (props.isDropdown ? null : "none")};
 `;
 
 const DdEl = styled.div`
-  height: ${(props) => 240 / props.length + 'px'};
+  height: ${(props) => 240 / props.length + "px"};
   display: flex;
   align-items: center;
   padding-left: 16px;
-  border-bottom: ${(props) => (props.i === props.length - 1 ? '' : '1px solid #f1f3f5')};
+  border-bottom: ${(props) =>
+    props.i === props.length - 1 ? "" : "1px solid #f1f3f5"};
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
