@@ -78,33 +78,35 @@ const Main = (props) => {
   return (
     <Wrap>
       <div className="wrap">
-        <Header />
         {NewMedia.matches ? (
           <MobileLanding />
         ) : (
-          <Container>
-            {isLoginModal && (
-              <DIV setIsLoginModal={setIsLoginModal}>
-                <RoomClickModal setIsLoginModal={setIsLoginModal} />
-              </DIV>
-            )}
-            <MySection></MySection>
-            <RoomSection>
-              <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
-              <RoomCardList>
-                {roomList.map((e, i) => (
-                  <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-                ))}
-                {enteringList.map((p, idx) => {
-                  <RoomCard key={idx} roomInfo={p} />;
-                })}
-                <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-              </RoomCardList>
-            </RoomSection>
-            <ToTopBtn onClick={moveToTop}>
-              <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
-            </ToTopBtn>
-          </Container>
+          <>
+            <Header />
+            <Container>
+              {isLoginModal && (
+                <DIV setIsLoginModal={setIsLoginModal}>
+                  <RoomClickModal setIsLoginModal={setIsLoginModal} />
+                </DIV>
+              )}
+              <MySection></MySection>
+              <RoomSection>
+                <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
+                <RoomCardList>
+                  {roomList.map((e, i) => (
+                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                  ))}
+                  {enteringList.map((p, idx) => {
+                    <RoomCard key={idx} roomInfo={p} />;
+                  })}
+                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+                </RoomCardList>
+              </RoomSection>
+              <ToTopBtn onClick={moveToTop}>
+                <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+              </ToTopBtn>
+            </Container>
+          </>
         )}
       </div>
     </Wrap>
@@ -112,6 +114,8 @@ const Main = (props) => {
 };
 
 const Wrap = styled.div`
+  width: 100%;
+  overflow-x: hidden;
   .wrap {
     @media screen and (max-width: 1023px) {
       width: 100%; //width: 100vh;
@@ -174,6 +178,7 @@ const RoomCardList = styled.div`
   }
   @media screen and (min-width: 769px) and (max-width: 1023px) {
     grid-gap: 15px;
+    display: none;
   }
 `;
 

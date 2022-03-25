@@ -18,9 +18,14 @@
 
 body {
   background-color: #f8f9fa;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  /* https://velog.io/@yunaineworld/CSS-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%9A%B0%EC%B8%A1-%EA%B3%B5%EB%B0%B1-%EC%97%86%EC%95%A0%EA%B8%B0 */
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
+  /* width:100%; */
+  /* overflow-x:hidden; */
   margin: 0;
+  padding: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;

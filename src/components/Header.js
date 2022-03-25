@@ -69,13 +69,13 @@ const HeaderContainer = styled.div`
   z-index: 2;
   // 태블릿일 때
   @media screen and (min-width: 767px) and (max-width: 1023px) {
-    width: 100vh;
-    padding: 1rem;
+    width: 100%;
+    background-color: #add;
   }
   // 모바일일 때
-  @media screen and (max-width: 767px) {
+  /* @media screen and (max-width: 767px) {
     display: none;
-  }
+  } */
 `;
 
 const IconsWrap = styled.div`
