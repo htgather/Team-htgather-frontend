@@ -434,6 +434,8 @@ const Videoplayer = React.forwardRef((props, ref) => {
   );
 });
 
+
+
 const MemberWrap = styled.div`
   height: 616px;
   display: flex;
