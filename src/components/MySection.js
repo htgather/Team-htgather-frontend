@@ -69,7 +69,7 @@ const MySectionContainer = styled.div`
   }
   @media screen and (max-width: 1023px) {
     width: 100vh;
-    padding: 0px 1rem;
+    /* padding: 0px 1rem; */
   }
   position: relative;
 `;
@@ -84,12 +84,18 @@ const MySectionTitle = styled.div`
   align-items: center;
   margin-bottom: 30px;
   letter-spacing: -0.48px;
+  @media screen and (max-width: 1023px) {
+    padding: 0 1rem;
+  }
 `;
 
 const MySectionContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
+  @media screen and (max-width: 1023px) {
+    padding: 0 1rem;
+  }
 `;
 
 const MyPage = styled.div`
@@ -104,6 +110,9 @@ const MyPage = styled.div`
   @media screen and (max-width: 1360px) {
     width: 100%;
     justify-content: space-evenly;
+  }
+  @media screen and (max-width: 1023px) {
+    justify-content: space-between;
   }
 `;
 const RightSection = styled.div`

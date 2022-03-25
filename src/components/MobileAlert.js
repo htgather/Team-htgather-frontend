@@ -3,13 +3,25 @@ import styled from 'styled-components';
 import mobileMode from '../Images/mobileMode.png';
 
 const MobileAlert = () => {
+  const { Kakao } = window;
+
+  const shareLink = () => {
+    Kakao.Link.sendCustom({
+      templateId: 73709,
+      // templateArgs: {
+      //   title: '제목 영역입니다.',
+      //   description: '설명 영역입니다.',
+      // },
+    });
+  };
+
   return (
     <DIV>
       <Contents>
         <img src={mobileMode} width="100%" />
         <LinkBtn
           onClick={() => {
-            window.alert('링크 복사 될 예정');
+            shareLink();
           }}
         >
           홈트게더 링크 공유하기

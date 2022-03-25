@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import jwt_decode from "jwt-decode";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
-import { actionCreators as userActions } from "../redux/modules/user";
-import { actionCreators as commonActions } from "../redux/modules/common";
+import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as commonActions } from '../redux/modules/common';
 
-import gold from "../Images/gold.png";
-import silver from "../Images/silver.png";
-import bronze from "../Images/bronze.png";
-import clap from "../Images/clap.png";
-import fire from "../Images/fire.png";
-import fighting from "../Images/fighting.png";
+import gold from '../Images/gold.png';
+import silver from '../Images/silver.png';
+import bronze from '../Images/bronze.png';
+import clap from '../Images/clap.png';
+import fire from '../Images/fire.png';
+import fighting from '../Images/fighting.png';
 
 const Ranking = (props) => {
   const dispatch = useDispatch();
 
   const rankingList = useSelector((state) => state.User.ranking);
-  const is_local = localStorage.getItem("isLogin");
-  const nickName = is_local
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : false;
+  const is_local = localStorage.getItem('isLogin');
+  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
 
   React.useEffect(() => {
     if (nickName) {
@@ -60,12 +58,8 @@ const Ranking = (props) => {
             if (p.countPerWeek === 0 || p.rank > 4) {
               return (
                 <IsMeZero key={i}>
-                  <Rank style={{ paddingLeft: p.rank > 9 ? "" : "2px" }}>
-                    {p.rank}
-                  </Rank>
-                  <Name style={{ fontWeight: p.isMe ? "bold" : "" }}>
-                    {p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}
-                  </Name>
+                  <Rank style={{ paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
+                  <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
                   <Count>{p.countPerWeek}회</Count>
                 </IsMeZero>
               );
@@ -75,8 +69,8 @@ const Ranking = (props) => {
             <OneRank
               key={i}
               style={{
-                backgroundColor: p.isMe ? "#405EFB" : "",
-                color: p.isMe ? "#fff" : "",
+                backgroundColor: p.isMe ? '#405EFB' : '',
+                color: p.isMe ? '#fff' : '',
               }}
             >
               <Rank>
@@ -90,9 +84,7 @@ const Ranking = (props) => {
                   p.rank
                 )}
               </Rank>
-              <Name style={{ fontWeight: p.isMe ? "bold" : "" }}>
-                {p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}
-              </Name>
+              <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
               <Count>{p.countPerWeek}회</Count>
             </OneRank>
           );
@@ -106,6 +98,9 @@ const DIV = styled.div`
   width: 315px;
   height: 284px;
   border-radius: 12px;
+  @media screen and (max-width: 1023px) {
+    width: 30vh;
+  }
 `;
 
 const Header = styled.div`
@@ -125,6 +120,9 @@ const RankContainer = styled.div`
   align-items: start;
   row-gap: 4px;
   margin: 0px 24px 24px 24px;
+  @media screen and (max-width: 1023px) {
+    width: 25vh;
+  }
 `;
 
 const OneRank = styled.div`
@@ -138,6 +136,9 @@ const OneRank = styled.div`
   color: rgb(34, 37, 41);
   letter-spacing: -0.48px;
   /* padding: 0px 8px; */
+  @media screen and (max-width: 1023px) {
+    width: 25vh;
+  }
 `;
 
 const Rank = styled.div`

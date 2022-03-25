@@ -64,6 +64,10 @@ const BackGround = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
+  @media screen and (max-width: 1023px) {
+    width: 100vh;
+    height: 1000vw;
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -73,15 +77,12 @@ const ModalContainer = styled.div`
   top: 55%;
   bottom: 50%;
   transform: translate(-50%, -50%);
-  /* max-height: 80%; */
   width: 960px;
   height: 480px;
   text-align: center;
   z-index: 999;
-
-  /* @media ${(props) => props.theme.device.MobileLandscape} {
-    width: 90%; */
-  /* } */
+  @media screen and (max-width: 1023px) {
+  }
 `;
 const DIV = styled.div`
   background-color: #f1f3f5;

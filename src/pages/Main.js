@@ -77,44 +77,62 @@ const Main = (props) => {
 
   return (
     <Wrap>
-      <Header />
-      {NewMedia.matches ? (
-        <MobileAlert />
-      ) : (
-        <Container>
-          {isLoginModal && (
-            <DIV setIsLoginModal={setIsLoginModal}>
-              <RoomClickModal setIsLoginModal={setIsLoginModal} />
-            </DIV>
-          )}
-          <MySection></MySection>
-          <RoomSection>
-            <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
-            <RoomCardList>
-              {roomList.map((e, i) => (
-                <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-              ))}
-              {enteringList.map((p, idx) => {
-                <RoomCard key={idx} roomInfo={p} />;
-              })}
-              <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-            </RoomCardList>
-          </RoomSection>
-          <ToTopBtn onClick={moveToTop}>
-            <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
-          </ToTopBtn>
-        </Container>
-      )}
+      <div className="wrap">
+        <Header />
+        {NewMedia.matches ? (
+          <MobileAlert />
+        ) : (
+          <Container>
+            {isLoginModal && (
+              <DIV setIsLoginModal={setIsLoginModal}>
+                <RoomClickModal setIsLoginModal={setIsLoginModal} />
+              </DIV>
+            )}
+            <MySection></MySection>
+            <RoomSection>
+              <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
+              <RoomCardList>
+                {roomList.map((e, i) => (
+                  <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                ))}
+                {enteringList.map((p, idx) => {
+                  <RoomCard key={idx} roomInfo={p} />;
+                })}
+                <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+              </RoomCardList>
+            </RoomSection>
+            <ToTopBtn onClick={moveToTop}>
+              <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+            </ToTopBtn>
+          </Container>
+        )}
+      </div>
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
-  @media screen and (max-width: 1023px) {
+  .wrap {
+    @media screen and (max-width: 1023px) {
+      width: 100%; //width: 100vh;
+      height: 100vh; //100%는 좌우 스크롤 생김
+      transform: rotate(90deg);
+      /* overflow-x: scroll; */
+    }
+    @media screen and (max-width: 767px) {
+      transform: rotate(0deg);
+    }
+    :-webkit-scrollbar {
+      width: 10px;
+      background-color: black;
+    }
+  }
+  /* @media screen and (max-width: 1023px) {
     width: 100%; //width: 100vh;
     height: 100vw; //100%는 좌우 스크롤 생김
     transform: rotate(90deg);
-  }
+    /* overflow-x: scroll; */
+  // 모바일 접속 화면
 `;
 
 const DIV = styled.div`
@@ -132,6 +150,11 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   /* padding-bottom: 40px; */
+  @media screen and (max-width: 1023px) {
+    width: 100vh;
+    /* background-color: #add; */
+    padding: 0 0.5rem;
+  }
 `;
 
 const RoomSection = styled.div`
@@ -139,9 +162,6 @@ const RoomSection = styled.div`
     width: 100vh;
     height: 100vw;
     margin: 0px auto;
-    /* padding: 0 1rem; */
-    /* padding: 0rem 1rem; // 카드 리스트 위치 변경하려면 */
-    /* background-color: #add; */
   }
 `;
 
