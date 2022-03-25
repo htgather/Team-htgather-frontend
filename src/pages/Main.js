@@ -7,7 +7,7 @@ import RoomCard from '../components/Card';
 import RoomSectionTab from '../components/RoomSectionTab';
 import MySection from '../components/MySection';
 import RoomClickModal from '../components/modals/RoomClickModal';
-import MobileAlert from '../components/MobileAlert';
+import MobileLanding from '../components/MobileLanding';
 
 import toTop from '../Images/toTop.png';
 import jwt_decode from 'jwt-decode';
@@ -80,7 +80,7 @@ const Main = (props) => {
       <div className="wrap">
         <Header />
         {NewMedia.matches ? (
-          <MobileAlert />
+          <MobileLanding />
         ) : (
           <Container>
             {isLoginModal && (
