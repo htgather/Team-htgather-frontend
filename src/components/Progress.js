@@ -99,7 +99,7 @@ function Progress(props) {
           {String(seconds).length < 2 ? "0" + seconds : seconds} */}
           {/* {leftSeconds} */}
           {/* {hours} */}
-          {props.curYoutubeTime}초
+          {props.curYoutubeTime}
         </TextWrap>
       </Contents>
     </div>
