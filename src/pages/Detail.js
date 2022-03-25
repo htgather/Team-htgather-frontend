@@ -36,6 +36,7 @@ const Detail = (props) => {
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
+  const [curYoutubeTime,setCurYoutubeTime] =React.useState(0);
 
   const childRef = React.useRef();
   const changeNumberOfUsers = (text) => {
@@ -85,7 +86,7 @@ const Detail = (props) => {
           <DIV>
             <div>
               <TimerWrap>
-                <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+                <Progress roomInfo={roomInfo} isStart={isStart} curYoutubeTime={curYoutubeTime}></Progress>
               </TimerWrap>
               <VideoWrap>
                 <MainVideo>
@@ -95,6 +96,7 @@ const Detail = (props) => {
                     vol={vol}
                     isMuted={isMuted}
                     setIsDone={setIsDone}
+                    setCurYoutubeTime={setCurYoutubeTime}
                   ></Player>
                 </MainVideo>
                 <Videoplayer
@@ -331,4 +333,4 @@ const VolInput = styled.input`
     background: #4a5056;
   }
 `;
-export default Detail;
+export default React.memo(Detail);

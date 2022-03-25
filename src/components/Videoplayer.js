@@ -506,4 +506,4 @@ const MemberWrap = styled.div`
     margin-right: 4px;
   }
 `;
-export default Videoplayer;
+export default React.memo(Videoplayer);
