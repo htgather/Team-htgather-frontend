@@ -114,29 +114,19 @@ const Main = (props) => {
 };
 
 const Wrap = styled.div`
-  width: 100%;
-  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
   .wrap {
     @media screen and (max-width: 1023px) {
-      width: 100%; //width: 100vh;
-      height: 100vh; //100%는 좌우 스크롤 생김
+      height: 100vw;
       transform: rotate(90deg);
-      /* overflow-x: scroll; */
+      padding: 0 auto;
+      /* overflow-y: scroll; */
     }
     @media screen and (max-width: 767px) {
       transform: rotate(0deg);
     }
-    :-webkit-scrollbar {
-      width: 10px;
-      background-color: black;
-    }
   }
-  /* @media screen and (max-width: 1023px) {
-    width: 100%; //width: 100vh;
-    height: 100vw; //100%는 좌우 스크롤 생김
-    transform: rotate(90deg);
-    /* overflow-x: scroll; */
-  // 모바일 접속 화면
 `;
 
 const DIV = styled.div`
@@ -156,8 +146,6 @@ const Container = styled.div`
   /* padding-bottom: 40px; */
   @media screen and (max-width: 1023px) {
     width: 100vh;
-    /* background-color: #add; */
-    padding: 0 0.5rem;
   }
 `;
 
@@ -176,8 +164,11 @@ const RoomCardList = styled.div`
   @media screen and (max-width: 1360px) {
     grid-template-columns: repeat(3, 315px);
   }
-  @media screen and (min-width: 769px) and (max-width: 1023px) {
+  @media screen and (max-width: 1023px) {
     grid-gap: 15px;
+    width: 100vh;
+    padding-left: 1.4rem;
+    /* background-color: #add; */
     display: none;
   }
 `;
@@ -191,7 +182,6 @@ const ToTopBtn = styled.div`
     opacity: 0;
     transition: opacity 0.17s ease-in;
   }
-
   .topBtn.active {
     z-index: 10;
     opacity: 1;

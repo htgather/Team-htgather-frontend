@@ -125,8 +125,10 @@ const RoomSectionTopContainer = styled.div`
     width: 100%;
   }
   @media screen and (max-width: 1023px) {
-    width: 100vh;
+    width: 50rem;
+    margin: 0 auto;
     padding: 0 1rem;
+    display: none;
     /* width: 100vh; */
     /* padding: 0px 1rem; */
   }
@@ -197,8 +199,6 @@ const MakeRoomBtn = styled.div`
   cursor: pointer;
   @media screen and (max-width: 1360px) {
     width: 221px;
-  }
-  @media screen and (max-width: 1023px) {
   }
 `;
 export default RoomSectionTop;
