@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ExitModal from "../components/modals/ExitModal";
 import People from "../Images/People.png";
 import Logo from "../Images/Logo_only.svg";
+import CopyLink from "../Images/CopyLink.png";
 
 import { history } from "../redux/configureStore";
 const Header = (props) => {
@@ -13,6 +14,20 @@ const Header = (props) => {
   console.log("디테일헤더");
   const exitRoom = () => {
     setModalOn(!modalOn);
+  };
+
+  // const { Kakao } = window;
+
+  const copyLink = () => {
+    let url;
+    let textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+    url = window.document.location.href;
+    textarea.value = url;
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    alert("URL이 복사되었습니다.");
   };
 
   return (
@@ -25,6 +40,12 @@ const Header = (props) => {
             style={{ height: "32px", marginRight: "12px" }}
           />
           {roomTitle}
+          <img
+            src={CopyLink}
+            alt="링크공유"
+            onClick={copyLink}
+            style={{ cursor: "pointer" }}
+          />
         </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
