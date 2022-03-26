@@ -16,12 +16,12 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
   // const [checkCurStatus, setCheckCurStatus] = useState();
-  const checkCurStatus = useRef();
+  const checkEnterStatus = useRef();
   const videoGrid = useRef();
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
   // const leaveBtn = useRef();
-  const cameraSelect = useRef();
+  // const cameraSelect = useRef();
   // const call = useRef();
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
@@ -75,9 +75,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     });
 
     socket.on("checkCurStatus", (object) => {
-      // console.log(object);
-      // setCheckCurStatus(object);
-      checkCurStatus.current = object;
+      checkEnterStatus.current = object;
     });
 
     // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯
@@ -279,13 +277,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
         videoGrid.appendChild(div);
 
         // 입장시 현재인원들의 카메라 및 음소거 상태 확인
-
-        if (checkCurStatus.current[id].screensaver) {
+        if (!checkEnterStatus.current[id]) {
+          return;
+        }
+        if (checkEnterStatus.current[id].screensaver) {
           const screensaver = document.createElement("div");
           screensaver.className = "screensaver";
           div.appendChild(screensaver);
         }
-        if (checkCurStatus.current[id].muted) {
+        if (checkEnterStatus.current[id].muted) {
           const muteIcon = document.createElement("div");
           muteIcon.className = "muteIcon";
           nickNameContainer.prepend(muteIcon);
