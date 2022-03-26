@@ -25,6 +25,7 @@ function Player(props) {
     const recordsData = {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
       category: roomInfo.category,
+      videoUrl: roomInfo.videoUrl,
     };
     setCountTime("영상이 종료되었습니다");
     dispatch(commonActions.saveRecordsDB(recordsData));

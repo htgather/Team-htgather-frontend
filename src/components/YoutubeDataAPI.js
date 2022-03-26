@@ -28,11 +28,12 @@ export async function _getVideoInfo(videoId) {
     if (!resData.items[0].status.embeddable) {
       return;
     }
-    const title = resData.items[0].snippet.title;
+
+    const { title, channelTitle } = resData.items[0].snippet;
     const thumbnail = resData.items[0].snippet.thumbnails.high.url;
     let { duration } = resData.items[0].contentDetails;
     duration = changePlayTime(duration);
-    return { title, thumbnail, duration }; //객체로 전달
+    return { title, thumbnail, duration, channelTitle }; //객체로 전달
   }
 }
 
