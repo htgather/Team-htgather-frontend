@@ -68,6 +68,13 @@ const Detail = (props) => {
     }
   }, []);
 
+  React.useEffect(() => {
+    if (isStart) {
+      setSoundOn(true);
+      childRef.current.handleAllMute();
+    }
+  }, [isStart]);
+
   return (
     <Background>
       {roomInfo && (
