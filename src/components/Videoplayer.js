@@ -53,8 +53,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       await getMedia();
       setSocketID(socketIdformserver);
       changeNumberOfUsers(`${peopleInRoom}/5`);
-      // const title = document.getElementById("numberOfusers");
-      // title.innerText = `현재인원 : ${peopleInRoom}`;
+
       if (length === 1) {
         return;
       }
@@ -165,8 +164,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       removeVideo(leavedSocketId);
       peopleInRoom--;
       changeNumberOfUsers(`${peopleInRoom}/5`);
-      // const title = document.getElementById("numberOfusers");
-      // title.innerText = `현재인원 : ${peopleInRoom}`;
     });
 
     //사용자의 stream 가져오는 함수
@@ -175,13 +172,16 @@ const Videoplayer = React.forwardRef((props, ref) => {
         audio: true,
         video: { facingMode: "user" },
       };
-      const cameraConstraints = {
-        audio: true,
-        video: { deviceId: { exact: deviceId } },
-      };
+      // const cameraConstraints = {
+      //   audio: true,
+      //   video: { deviceId: { exact: deviceId } },
+      // };
       try {
+        // myStream = await navigator.mediaDevices.getUserMedia(
+        //   deviceId ? cameraConstraints : initialConstraints
+        // );
         myStream = await navigator.mediaDevices.getUserMedia(
-          deviceId ? cameraConstraints : initialConstraints
+          initialConstraints
         );
         addVideoStream(myvideo.current, myStream);
         mystream.current.append(myvideo.current);
@@ -189,9 +189,9 @@ const Videoplayer = React.forwardRef((props, ref) => {
         myvideo.current.muted = true;
         setAudio(myStream.getAudioTracks());
         setVideo(myStream.getVideoTracks());
-        if (!deviceId) {
-          await getCameras();
-        }
+        // if (!deviceId) {
+        //   await getCameras();
+        // }
       } catch (error) {
         console.log(error);
       }
@@ -301,23 +301,23 @@ const Videoplayer = React.forwardRef((props, ref) => {
       }
     }
 
-    async function getCameras() {
-      try {
-        const devieces = await navigator.mediaDevices.enumerateDevices();
-        const cameras = devieces.filter(
-          (device) => device.kind === "videoinput"
-        );
+    // async function getCameras() {
+    //   try {
+    //     const devieces = await navigator.mediaDevices.enumerateDevices();
+    //     const cameras = devieces.filter(
+    //       (device) => device.kind === "videoinput"
+    //     );
 
-        cameras.forEach((camera) => {
-          const option = document.createElement("option");
-          option.value = cameras[0].deviceId;
-          option.innerText = camera.label;
-          cameraSelect.current.append(option);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    //     cameras.forEach((camera) => {
+    //       const option = document.createElement("option");
+    //       option.value = cameras[0].deviceId;
+    //       option.innerText = camera.label;
+    //       cameraSelect.current.append(option);
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   }, []);
 
   //페이지가 마운트되고 "join_room" Event 함수 실행 1

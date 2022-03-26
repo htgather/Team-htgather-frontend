@@ -23,7 +23,7 @@ const MakeRoomModal = (props) => {
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
   const difficultyList = ["낮음", "보통", "높음"];
   const [clickedStartTime, setClickedStartTime] = React.useState();
-  const startTimeList = ["1분 뒤", "15분 뒤", "30분 뒤"];
+  const startTimeList = ["0.1분 뒤", "15분 뒤", "30분 뒤"];
   // 태그선택
   const $RoomNameInput = React.useRef();
   const $LinkInput = React.useRef();

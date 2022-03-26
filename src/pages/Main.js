@@ -12,6 +12,7 @@ import MobileLanding from "../components/MobileLanding";
 import toTop from "../Images/toTop.png";
 import jwt_decode from "jwt-decode";
 import { actionCreators as roomActions } from "../redux/modules/room";
+import { actionCreators as playerActions } from "../redux/modules/player";
 import { Socket } from "socket.io-client";
 
 const Main = (props) => {
@@ -75,6 +76,11 @@ const Main = (props) => {
   // 방정보 리스트 불러오기
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB());
+    dispatch(
+      playerActions.setPlayInfo({
+        curYoutubeTime: 0,
+      })
+    );
   }, []);
 
   return (

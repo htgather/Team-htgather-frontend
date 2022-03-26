@@ -12,7 +12,7 @@ const RecommendList = (props) => {
     recentUrl: "https://www.youtube.com/watch?v=soSdvC_Gows",
     bestUrls: [
       "https://www.youtube.com/watch?v=jiuhGYenRg4",
-      "https://www.youtube.com/watch?v=nm8q5ZfFpdc",
+      "https://www.youtube.com/watch?v=LCetNA5tUTE",
       "https://www.youtube.com/watch?v=nm8q5ZfFpdc",
     ],
   };
