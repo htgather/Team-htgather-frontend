@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,16 +16,16 @@ import { actionCreators as roomActions } from "../redux/modules/room";
 import { actionCreators as playerActions } from "../redux/modules/player";
 import { Socket } from "socket.io-client";
 
+
 const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
-  const NewMedia = window.matchMedia("screen and (max-width:767px)");
-  const tablet = window.matchMedia("(orientation: landscape)");
+
+  const NewMedia = window.matchMedia('orientation: landscape)');
+  const tablet = window.matchMedia('(orientation: portrait)');
   // Portrait 모드일 때 실행할 스크립트
   // 폭과 높이가 같으면 Portrait 모드로 인식돼요
-  if (tablet.matches) {
-  }
 
   const roomList = useSelector((state) => state.room.list);
   const enteringList = roomList.filter((room) => room.isStart === false); //확인
@@ -86,47 +87,37 @@ const Main = (props) => {
   return (
     <Wrap>
       <div className="wrap">
-        <Header />
         {NewMedia.matches ? (
           <MobileLanding />
+        ) : tablet.matches ? (
+          <TabletPortrait />
         ) : (
-          <Container>
-            {isLoginModal && (
-              <DIV setIsLoginModal={setIsLoginModal}>
-                <RoomClickModal setIsLoginModal={setIsLoginModal} />
-              </DIV>
-            )}
-            <MySection></MySection>
-            <RoomSection>
-              <RoomSectionTab
-                setIsLoginModal={setIsLoginModal}
-                isEntering={isEntering}
-              ></RoomSectionTab>
-              <RoomCardList>
-                {roomList.map((e, i) => (
-                  <RoomCard
-                    key={i}
-                    roomInfo={e}
-                    setIsLoginModal={setIsLoginModal}
-                  ></RoomCard>
-                ))}
-                {enteringList.map((p, idx) => {
-                  <RoomCard key={idx} roomInfo={p} />;
-                })}
-                <RoomCard
-                  last="last"
-                  setIsLoginModal={setIsLoginModal}
-                ></RoomCard>
-              </RoomCardList>
-            </RoomSection>
-            <ToTopBtn onClick={moveToTop}>
-              <img
-                src={toTop}
-                alt="최상단 이동 버튼"
-                className={BtnStatus ? "topBtn active" : "topBtn"}
-              />
-            </ToTopBtn>
-          </Container>
+          <>
+            <Header />
+            <Container>
+              {isLoginModal && (
+                <DIV setIsLoginModal={setIsLoginModal}>
+                  <RoomClickModal setIsLoginModal={setIsLoginModal} />
+                </DIV>
+              )}
+              <MySection></MySection>
+              <RoomSection>
+                <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
+                <RoomCardList>
+                  {roomList.map((e, i) => (
+                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                  ))}
+                  {enteringList.map((p, idx) => {
+                    <RoomCard key={idx} roomInfo={p} />;
+                  })}
+                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+                </RoomCardList>
+              </RoomSection>
+              <ToTopBtn onClick={moveToTop}>
+                <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+              </ToTopBtn>
+            </Container>
+          </>
         )}
       </div>
     </Wrap>
@@ -134,27 +125,19 @@ const Main = (props) => {
 };
 
 const Wrap = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: relative;
   .wrap {
     @media screen and (max-width: 1023px) {
-      width: 100%; //width: 100vh;
-      height: 100vh; //100%는 좌우 스크롤 생김
-      transform: rotate(90deg);
-      /* overflow-x: scroll; */
-    }
-    @media screen and (max-width: 767px) {
-      transform: rotate(0deg);
-    }
-    :-webkit-scrollbar {
-      width: 10px;
-      background-color: black;
+      /* transform: rotate(90deg);
+      width: 100vh;
+      height: 100vw; */
+      height: 100vw;
+
+      padding: 0 auto;
     }
   }
-  /* @media screen and (max-width: 1023px) {
-    width: 100%; //width: 100vh;
-    height: 100vw; //100%는 좌우 스크롤 생김
-    transform: rotate(90deg);
-    /* overflow-x: scroll; */
-  // 모바일 접속 화면
 `;
 
 const DIV = styled.div`
@@ -174,8 +157,6 @@ const Container = styled.div`
   /* padding-bottom: 40px; */
   @media screen and (max-width: 1023px) {
     width: 100vh;
-    /* background-color: #add; */
-    padding: 0 0.5rem;
   }
 `;
 
@@ -194,8 +175,12 @@ const RoomCardList = styled.div`
   @media screen and (max-width: 1360px) {
     grid-template-columns: repeat(3, 315px);
   }
-  @media screen and (min-width: 769px) and (max-width: 1023px) {
+  @media screen and (max-width: 1023px) {
     grid-gap: 15px;
+    width: 100vh;
+    padding-left: 1.4rem;
+    /* background-color: #add; */
+    display: none;
   }
 `;
 
@@ -208,7 +193,6 @@ const ToTopBtn = styled.div`
     opacity: 0;
     transition: opacity 0.17s ease-in;
   }
-
   .topBtn.active {
     z-index: 10;
     opacity: 1;

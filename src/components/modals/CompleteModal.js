@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as roomActions } from "../../redux/modules/room";
-import styled from "styled-components";
-import Close from "../../Images/Close.png";
-import { history } from "../../redux/configureStore";
-import Lottie from "react-lottie";
-import Trophy from "../../Images/Trophy.json";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as roomActions } from '../../redux/modules/room';
+import styled from 'styled-components';
+import Close from '../../Images/Close.png';
+import { history } from '../../redux/configureStore';
+import Lottie from 'react-lottie';
+import Trophy from '../../Images/Trophy.json';
 
 const CompleteModal = (props) => {
-  console.log("끝모달");
+  console.log('끝모달');
   //https://www.youtube.com/watch?v=LCetNA5tUTE
   const [isOpen, setIsOpen] = React.useState(true);
   const [count, setCount] = React.useState(3);
@@ -20,11 +20,11 @@ const CompleteModal = (props) => {
     animationData: Trophy,
     loop: true,
     autoplay: true,
-    background: "transparent",
+    background: 'transparent',
     speed: 0.5,
     rendererSettings: {
-      className: "animation", // svg에 적용
-      preserveAspectRatio: "xMidYMid slice",
+      className: 'animation', // svg에 적용
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   React.useEffect(() => {
@@ -48,17 +48,11 @@ const CompleteModal = (props) => {
             <CloseBtn onClick={closeModal}>
               <img src={Close} alt="취소" />
             </CloseBtn>
-            <Lottie
-              options={lottieOptions}
-              style={{ width: "300px", height: "300px" }}
-            ></Lottie>
+            <Lottie options={lottieOptions} style={{ width: '300px', height: '300px' }}></Lottie>
             {/* <div onClick={(e) => e.stopPropagation()}> */}
             <ModalContents>
               <div className="first">운동 끝! 오늘도 해냈어요!</div>
-              <div className="second">
-                방에 남아서 이야기를 나누거나, 메인페이지에서 운동 기록을 확인해
-                보세요
-              </div>
+              <div className="second">방에 남아서 이야기를 나누거나, 메인페이지에서 운동 기록을 확인해 보세요</div>
               <div className="third">{count}초 후에 창이 닫혀요</div>
             </ModalContents>
             {/* </div> */}
