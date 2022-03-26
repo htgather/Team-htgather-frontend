@@ -5,6 +5,7 @@ import { connectRouter } from "connected-react-router";
 import User from "./modules/user";
 import Room from "./modules/room";
 import Common from "./modules/common";
+import Player from "./modules/player";
 
 // import Post from "./modules/post" // 리듀서 연결위해 모듈스파일 임포트
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   User: User,
   room: Room,
   common: Common,
+  player: Player,
   router: connectRouter(history),
 });
 

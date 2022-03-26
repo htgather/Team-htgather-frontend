@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 
-import Header from '../components/Header';
-import RoomCard from '../components/Card';
-import RoomSectionTab from '../components/RoomSectionTab';
-import MySection from '../components/MySection';
-import RoomClickModal from '../components/modals/RoomClickModal';
-import MobileLanding from '../components/MobileLanding';
-import TabletPortrait from '../components/TabletPortrait';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import toTop from '../Images/toTop.png';
-import jwt_decode from 'jwt-decode';
-import { actionCreators as roomActions } from '../redux/modules/room';
-import { Socket } from 'socket.io-client';
+import Header from "../components/Header";
+import RoomCard from "../components/Card";
+import RoomSectionTab from "../components/RoomSectionTab";
+import MySection from "../components/MySection";
+import RoomClickModal from "../components/modals/RoomClickModal";
+import MobileLanding from "../components/MobileLanding";
+
+import toTop from "../Images/toTop.png";
+import jwt_decode from "jwt-decode";
+import { actionCreators as roomActions } from "../redux/modules/room";
+import { actionCreators as playerActions } from "../redux/modules/player";
+import { Socket } from "socket.io-client";
+
 
 const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
+
   const NewMedia = window.matchMedia('orientation: landscape)');
   const tablet = window.matchMedia('(orientation: portrait)');
   // Portrait 모드일 때 실행할 스크립트
@@ -30,7 +33,9 @@ const Main = (props) => {
   // const enteringList = useSelector((state) => state.room.enteringList);
   // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
-  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+  const nickName = localStorage.getItem("isLogin")
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
 
   const [isLoginModal, setIsLoginModal] = React.useState();
   // 위로가기 버튼 관련
@@ -42,7 +47,7 @@ const Main = (props) => {
   };
 
   const moveToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setScrollY(0); // ScrollY 의 값을 초기화
     setBtnStatus(false); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
   };
@@ -61,17 +66,22 @@ const Main = (props) => {
 
   React.useEffect(() => {
     const watch = () => {
-      window.addEventListener('scroll', handleFollow);
+      window.addEventListener("scroll", handleFollow);
     };
     watch();
     return () => {
-      window.removeEventListener('scroll', handleFollow);
+      window.removeEventListener("scroll", handleFollow);
     };
   });
 
   // 방정보 리스트 불러오기
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB());
+    dispatch(
+      playerActions.setPlayInfo({
+        curYoutubeTime: 0,
+      })
+    );
   }, []);
 
   return (
