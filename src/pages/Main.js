@@ -25,9 +25,14 @@ const Main = (props) => {
   // Portrait 모드일 때 실행할 스크립트
   // 폭과 높이가 같으면 Portrait 모드로 인식돼요
 
-  const roomList = useSelector((state) => state.room.list);
-  const enteringList = roomList.filter((room) => room.isStart === false); //확인
-  //  console.log(enteringList);
+  const roomList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === false)
+  );
+  const enteringList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === true)
+  ); //확인
+
+  console.log(enteringList);
   // const enteringList = useSelector((state) => state.room.enteringList);
   // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
@@ -85,51 +90,55 @@ const Main = (props) => {
   return (
     <Wrap>
       <div className="wrap">
-        {/* {NewMedia.matches ? (
+        {NewMedia.matches ? (
           <MobileLanding />
         ) : tablet.matches ? (
           <TabletPortrait />
-        ) : ( */}
-        <>
-          <Header />
-          <Container>
-            {isLoginModal && (
-              <DIV setIsLoginModal={setIsLoginModal}>
-                <RoomClickModal setIsLoginModal={setIsLoginModal} />
-              </DIV>
-            )}
-            <MySection></MySection>
-            <RoomSection>
-              <RoomSectionTab
-                setIsLoginModal={setIsLoginModal}
-                isEntering={isEntering}
-              ></RoomSectionTab>
-              <RoomCardList>
-                {roomList.map((e, i) => (
+        ) : (
+          <>
+            <Header />
+            <Container>
+              {isLoginModal && (
+                <DIV setIsLoginModal={setIsLoginModal}>
+                  <RoomClickModal setIsLoginModal={setIsLoginModal} />
+                </DIV>
+              )}
+              <MySection></MySection>
+              <RoomSection>
+                <RoomSectionTab
+                  setIsLoginModal={setIsLoginModal}
+                  isEntering={isEntering}
+                ></RoomSectionTab>
+                <RoomCardList>
+                  {roomList.map((e, i) => (
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    ></RoomCard>
+                  ))}
                   <RoomCard
-                    key={i}
-                    roomInfo={e}
+                    last="last"
                     setIsLoginModal={setIsLoginModal}
                   ></RoomCard>
-                ))}
-                {enteringList.map((p, idx) => {
-                  <RoomCard key={idx} roomInfo={p} />;
-                })}
-                <RoomCard
-                  last="last"
-                  setIsLoginModal={setIsLoginModal}
-                ></RoomCard>
-              </RoomCardList>
-            </RoomSection>
-            <ToTopBtn onClick={moveToTop}>
-              <img
-                src={toTop}
-                alt="최상단 이동 버튼"
-                className={BtnStatus ? "topBtn active" : "topBtn"}
-              />
-            </ToTopBtn>
-          </Container>
-        </>
+                  {enteringList.map((e, i) => (
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    />
+                  ))}
+                </RoomCardList>
+              </RoomSection>
+              <ToTopBtn onClick={moveToTop}>
+                <img
+                  src={toTop}
+                  alt="최상단 이동 버튼"
+                  className={BtnStatus ? "topBtn active" : "topBtn"}
+                />
+              </ToTopBtn>
+            </Container>
+          </>
         )}
       </div>
     </Wrap>
@@ -146,7 +155,6 @@ const Wrap = styled.div`
       width: 100vh;
       height: 100vw; */
       height: 100vw;
-
       padding: 0 auto;
     }
   }
@@ -166,7 +174,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* padding-bottom: 40px; */
+  padding-bottom: 40px;
   @media screen and (max-width: 1023px) {
     width: 100vh;
   }
