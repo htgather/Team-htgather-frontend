@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,21 +8,20 @@ import RoomSectionTab from "../components/RoomSectionTab";
 import MySection from "../components/MySection";
 import RoomClickModal from "../components/modals/RoomClickModal";
 import MobileLanding from "../components/MobileLanding";
-
+import TabletPortrait from "../components/TabletPortrait";
 import toTop from "../Images/toTop.png";
 import jwt_decode from "jwt-decode";
 import { actionCreators as roomActions } from "../redux/modules/room";
 import { actionCreators as playerActions } from "../redux/modules/player";
 import { Socket } from "socket.io-client";
 
-
 const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
 
-  const NewMedia = window.matchMedia('orientation: landscape)');
-  const tablet = window.matchMedia('(orientation: portrait)');
+  const NewMedia = window.matchMedia("orientation: landscape)");
+  const tablet = window.matchMedia("(orientation: portrait)");
   // Portrait 모드일 때 실행할 스크립트
   // 폭과 높이가 같으면 Portrait 모드로 인식돼요
 
@@ -87,37 +85,51 @@ const Main = (props) => {
   return (
     <Wrap>
       <div className="wrap">
-        {NewMedia.matches ? (
+        {/* {NewMedia.matches ? (
           <MobileLanding />
         ) : tablet.matches ? (
           <TabletPortrait />
-        ) : (
-          <>
-            <Header />
-            <Container>
-              {isLoginModal && (
-                <DIV setIsLoginModal={setIsLoginModal}>
-                  <RoomClickModal setIsLoginModal={setIsLoginModal} />
-                </DIV>
-              )}
-              <MySection></MySection>
-              <RoomSection>
-                <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
-                <RoomCardList>
-                  {roomList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-                  ))}
-                  {enteringList.map((p, idx) => {
-                    <RoomCard key={idx} roomInfo={p} />;
-                  })}
-                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-                </RoomCardList>
-              </RoomSection>
-              <ToTopBtn onClick={moveToTop}>
-                <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
-              </ToTopBtn>
-            </Container>
-          </>
+        ) : ( */}
+        <>
+          <Header />
+          <Container>
+            {isLoginModal && (
+              <DIV setIsLoginModal={setIsLoginModal}>
+                <RoomClickModal setIsLoginModal={setIsLoginModal} />
+              </DIV>
+            )}
+            <MySection></MySection>
+            <RoomSection>
+              <RoomSectionTab
+                setIsLoginModal={setIsLoginModal}
+                isEntering={isEntering}
+              ></RoomSectionTab>
+              <RoomCardList>
+                {roomList.map((e, i) => (
+                  <RoomCard
+                    key={i}
+                    roomInfo={e}
+                    setIsLoginModal={setIsLoginModal}
+                  ></RoomCard>
+                ))}
+                {enteringList.map((p, idx) => {
+                  <RoomCard key={idx} roomInfo={p} />;
+                })}
+                <RoomCard
+                  last="last"
+                  setIsLoginModal={setIsLoginModal}
+                ></RoomCard>
+              </RoomCardList>
+            </RoomSection>
+            <ToTopBtn onClick={moveToTop}>
+              <img
+                src={toTop}
+                alt="최상단 이동 버튼"
+                className={BtnStatus ? "topBtn active" : "topBtn"}
+              />
+            </ToTopBtn>
+          </Container>
+        </>
         )}
       </div>
     </Wrap>
@@ -190,7 +202,7 @@ const ToTopBtn = styled.div`
   bottom: 30px;
   /* box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.3); */
   .topBtn {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.17s ease-in;
   }
   .topBtn.active {
