@@ -41,7 +41,7 @@ jobs:
         run: |
           npm install
       # Build an optimized production build
-        name: Setting .env
+      - name: Setting .env
         run: |
           echo "REACT_APP_KAKAO_INIT_KEY=${{secrets.REACT_APP_KAKAO_INIT_KEY}}" >> .env
       - name: Production build
