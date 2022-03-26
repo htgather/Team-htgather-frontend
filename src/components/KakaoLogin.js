@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { Buffer } from 'buffer';
+import jwt_decode from 'jwt-decode';
 
 const { Kakao } = window;
 
@@ -13,11 +13,11 @@ export const LoginWithKakao = () => {
     // success는 인증 정보를 응답(response)으로 받는다.
     success: function (response) {
       //카카오 SDK에 사용자 토큰을 설정한다.
-      window.Kakao.Auth.setAccessToken(response.access_token);
-      const ACCESS_TOKEN = window.Kakao.Auth.getAccessToken();
-      console.log(ACCESS_TOKEN); //토큰 발급 완료
+      Kakao.Auth.setAccessToken(response.access_token);
+      const ACCESS_TOKEN = Kakao.Auth.getAccessToken();
+      // console.log(ACCESS_TOKEN); //토큰 발급 완료
       // 사용자 정보 불러오기
-      window.Kakao.API.request({
+      Kakao.API.request({
         url: '/v2/user/me',
         success: (response) => {
           console.log('카카오에서', response);
@@ -29,15 +29,10 @@ export const LoginWithKakao = () => {
               snsId: _id,
             })
             .then((res) => {
-              // console.log(res)
               localStorage.setItem('isLogin', res.data.token);
-              const base64payload = localStorage.getItem('isLogin').split('.')[1];
-              const payload = Buffer.from(base64payload, 'base64');
-              const result = JSON.parse(payload.toString());
-              const _nickname = result.nickName;
+              const _nickname = jwt_decode(localStorage.getItem('isLogin')).nickName;
 
-              window.alert(`반갑습니다 ${_nickname}님!😄`); // 변경하는 값 반영됨 근데 로그아웃했다가 로그인해야
-
+              window.alert(`반갑습니다 ${_nickname}님!😄`);
               window.location.reload('/');
             })
             .catch((error) => {
@@ -82,6 +77,7 @@ const KakaoLogin = () => {
     <>
       <a id="custom-login-btn" onClick={LoginWithKakao}>
         <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="250" />
+        {/* 222 */}
       </a>
     </>
   );
