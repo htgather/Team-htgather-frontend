@@ -1,7 +1,8 @@
+import React, { useEffect } from "react";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import instance from "../../shared/Request";
-
+import { _parserVideoId, _getVideoInfo } from "../../components/YoutubeDataAPI";
 const GET_ROOM = "GET_ROOM";
 const ADD_ROOM = "ADD_ROOM";
 
@@ -22,6 +23,7 @@ const getSuggestions = createAction(GET_SUGGESTIONS, (suggestions) => ({
 const initialState = {
   list: [],
   isStart: false,
+  suggestions: [],
 };
 
 // 게시물 정보 불러오기 axios 요청 _ 카테고리가 있을 경우 그에 따라 다른 요청
@@ -158,8 +160,25 @@ const getSuggestionsDB = () => {
     instance
       .get("https://test.kimjeongho-server.com/rooms/suggestions")
       .then((response) => {
-        dispatch(getSuggestions(response.data));
+        console.log("실행됨");
+        const suggestionsArray = [
+          response.data["recentUrl"],
+          ...response.data["bestUrls"],
+        ];
+        console.log(suggestionsArray);
+        const suggestion = [];
+        (async () => {
+          for (let link of suggestionsArray) {
+            const info = await _getVideoInfo(_parserVideoId(link));
+            // dispatch(getSuggestions({ ...info, link: link }));
+            suggestion.push({ ...info, link });
+          }
+          dispatch(getSuggestions(suggestion));
+        })();
+
+        // dispatch(getSuggestions(suggestions));
       })
+
       .catch((error) => {
         console.error(error);
       });
@@ -185,6 +204,9 @@ export default handleActions(
 
     [GET_SUGGESTIONS]: (state, action) =>
       produce(state, (draft) => {
+        // if (draft.suggestions.length === 4) {
+        //   draft.suggestions = [];
+        // }
         draft.suggestions = action.payload.suggestions;
       }),
   },

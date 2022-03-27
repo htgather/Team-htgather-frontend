@@ -201,7 +201,7 @@ const MakeRoomModal = (props) => {
         </MakeRoomNameBox>
         <MakeRoomOptionBox>
           <SelectBox>
-            <p className="boldText">운동 난이도</p>
+            <p className="boldText">난이도</p>
             <div style={{ display: "flex" }}>
               {difficultyList.map((e, i) => (
                 <DB_EL
@@ -314,10 +314,10 @@ const MakeRoomModal = (props) => {
               비밀방 여부
               <img
                 src={isSecret ? checkBox : noneCheckBox}
-                alt="미체크"
+                alt="비밀방여부체크박스"
                 className="scaleHalf"
                 onClick={checkSecret}
-                style={{ WebkitUserDrag: "none" }}
+                style={{ WebkitUserDrag: "none", cursor: "pointer" }}
               ></img>
             </p>
             <PwInputBox ref={$pwInputBox}>
@@ -347,7 +347,6 @@ const MakeRoomModal = (props) => {
           <CancelBtn
             onClick={() => {
               setIsMakeModal(false);
-              // document.body.style.overflow = 'unset';
             }}
           >
             취소하기

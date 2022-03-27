@@ -32,7 +32,7 @@ const Main = (props) => {
     state.room.list.filter((e) => e.isStart === true)
   ); //확인
 
-  console.log(enteringList);
+  // console.log(enteringList);
   // const enteringList = useSelector((state) => state.room.enteringList);
   // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
@@ -75,7 +75,7 @@ const Main = (props) => {
     return () => {
       window.removeEventListener("scroll", handleFollow);
     };
-  });
+  }, []);
 
   // 방정보 리스트 불러오기
   React.useEffect(() => {
