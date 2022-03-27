@@ -118,7 +118,7 @@ const DropdownBtn = styled.div`
   color: #878e95;
   position: relative;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 16px;
 `;
 
 const DropdownInput = styled.div`

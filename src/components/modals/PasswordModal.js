@@ -87,34 +87,36 @@ const PasswordModal = (props) => {
           />
         </MakeRoomHeader>
         <h1 className="boldText">비밀번호를 입력하여주세요</h1>
-        <b1 className="pwdMessage">
+        <p className="pwdMessage">
           비밀방에 입장하려면 비밀번호를 입력하여주세요
-        </b1>
+        </p>
 
-        <PwdInputDiv>
-          <PwdInput
-            type={typePwd ? "password" : "text"}
-            placeholder="비밀번호"
-            maxLength={8}
-            onChange={onChange}
-            onFocus={onFocus}
-            onKeyDown={pwOnkeydown}
-            pwInputWrong={pwInputWrong}
-          ></PwdInput>
-          <EyeImg
-            src={typePwd ? greyEye : blackEye}
-            alt="비밀번호 확인"
-            className="checkPwd"
-            onClick={showPwd}
-          />
-        </PwdInputDiv>
+        <div>
+          <PwdInputDiv>
+            <PwdInput
+              type={typePwd ? "password" : "text"}
+              placeholder="비밀번호"
+              maxLength={8}
+              onChange={onChange}
+              onFocus={onFocus}
+              onKeyDown={pwOnkeydown}
+              pwInputWrong={pwInputWrong}
+            ></PwdInput>
+            <EyeImg
+              src={typePwd ? greyEye : blackEye}
+              alt="비밀번호 확인"
+              className="checkPwd"
+              onClick={showPwd}
+            />
+          </PwdInputDiv>
 
-        {pwdUnfiiled && (
-          <PwdUnfilledMessage>비밀번호를 입력해주세요</PwdUnfilledMessage>
-        )}
-        {wrongPwd && (
-          <PwdUnfilledMessage>잘못된 비밀번호입니다</PwdUnfilledMessage>
-        )}
+          {pwdUnfiiled && (
+            <PwdUnfilledMessage>비밀번호를 입력해주세요</PwdUnfilledMessage>
+          )}
+          {wrongPwd && (
+            <PwdUnfilledMessage>잘못된 비밀번호입니다</PwdUnfilledMessage>
+          )}
+        </div>
 
         <BtnBox>
           <MakeBtn onClick={checkPWDnEnterRoom}>비밀방 입장하기</MakeBtn>
@@ -237,7 +239,7 @@ const EyeImg = styled.img`
 const PwdUnfilledMessage = styled.div`
   position: absolute;
   font-size: 12px;
-  bottom: 175px;
+  bottom: 165px;
   left: 135px;
   color: red;
 `;

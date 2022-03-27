@@ -1,37 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import Header from '../components/Header';
-import RoomCard from '../components/Card';
-import RoomSectionTab from '../components/RoomSectionTab';
-import MySection from '../components/MySection';
-import RoomClickModal from '../components/modals/RoomClickModal';
-import MobileLanding from '../components/MobileLanding';
-
-import toTop from '../Images/toTop.png';
-import jwt_decode from 'jwt-decode';
-import { actionCreators as roomActions } from '../redux/modules/room';
-import { Socket } from 'socket.io-client';
+import Header from "../components/Header";
+import RoomCard from "../components/Card";
+import RoomSectionTab from "../components/RoomSectionTab";
+import MySection from "../components/MySection";
+import RoomClickModal from "../components/modals/RoomClickModal";
+import MobileLanding from "../components/MobileLanding";
+import TabletPortrait from "../components/TabletPortrait";
+import toTop from "../Images/toTop.png";
+import jwt_decode from "jwt-decode";
+import { actionCreators as roomActions } from "../redux/modules/room";
+import { actionCreators as playerActions } from "../redux/modules/player";
+import { Socket } from "socket.io-client";
 
 const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
-  const NewMedia = window.matchMedia('screen and (max-width:767px)');
-  const tablet = window.matchMedia('(orientation: landscape)');
+
+  const NewMedia = window.matchMedia("orientation: landscape)");
+  const tablet = window.matchMedia("(orientation: portrait)");
   // Portrait 모드일 때 실행할 스크립트
   // 폭과 높이가 같으면 Portrait 모드로 인식돼요
-  if (tablet.matches) {
-  }
 
-  const roomList = useSelector((state) => state.room.list);
-  const enteringList = roomList.filter((room) => room.isStart === false); //확인
-  //  console.log(enteringList);
+  const roomList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === false)
+  );
+  const enteringList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === true)
+  ); //확인
+
+  // console.log(enteringList);
   // const enteringList = useSelector((state) => state.room.enteringList);
   // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
-  const nickName = localStorage.getItem('isLogin') ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+  const nickName = localStorage.getItem("isLogin")
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
 
   const [isLoginModal, setIsLoginModal] = React.useState();
   // 위로가기 버튼 관련
@@ -43,7 +50,7 @@ const Main = (props) => {
   };
 
   const moveToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setScrollY(0); // ScrollY 의 값을 초기화
     setBtnStatus(false); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
   };
@@ -62,49 +69,76 @@ const Main = (props) => {
 
   React.useEffect(() => {
     const watch = () => {
-      window.addEventListener('scroll', handleFollow);
+      window.addEventListener("scroll", handleFollow);
     };
     watch();
     return () => {
-      window.removeEventListener('scroll', handleFollow);
+      window.removeEventListener("scroll", handleFollow);
     };
-  });
+  }, []);
 
   // 방정보 리스트 불러오기
   React.useEffect(() => {
     dispatch(roomActions.getRoomDB());
+    dispatch(
+      playerActions.setPlayInfo({
+        curYoutubeTime: 0,
+      })
+    );
   }, []);
 
   return (
     <Wrap>
       <div className="wrap">
-        <Header />
         {NewMedia.matches ? (
           <MobileLanding />
+        ) : tablet.matches ? (
+          <TabletPortrait />
         ) : (
-          <Container>
-            {isLoginModal && (
-              <DIV setIsLoginModal={setIsLoginModal}>
-                <RoomClickModal setIsLoginModal={setIsLoginModal} />
-              </DIV>
-            )}
-            <MySection></MySection>
-            <RoomSection>
-              <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
-              <RoomCardList>
-                {roomList.map((e, i) => (
-                  <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-                ))}
-                {enteringList.map((p, idx) => {
-                  <RoomCard key={idx} roomInfo={p} />;
-                })}
-                <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-              </RoomCardList>
-            </RoomSection>
-            <ToTopBtn onClick={moveToTop}>
-              <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
-            </ToTopBtn>
-          </Container>
+          <>
+            <Header />
+            <Container>
+              {isLoginModal && (
+                <DIV setIsLoginModal={setIsLoginModal}>
+                  <RoomClickModal setIsLoginModal={setIsLoginModal} />
+                </DIV>
+              )}
+              <MySection></MySection>
+              <RoomSection>
+                <RoomSectionTab
+                  setIsLoginModal={setIsLoginModal}
+                  isEntering={isEntering}
+                ></RoomSectionTab>
+                <RoomCardList>
+                  {roomList.map((e, i) => (
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    ></RoomCard>
+                  ))}
+                  <RoomCard
+                    last="last"
+                    setIsLoginModal={setIsLoginModal}
+                  ></RoomCard>
+                  {enteringList.map((e, i) => (
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    />
+                  ))}
+                </RoomCardList>
+              </RoomSection>
+              <ToTopBtn onClick={moveToTop}>
+                <img
+                  src={toTop}
+                  alt="최상단 이동 버튼"
+                  className={BtnStatus ? "topBtn active" : "topBtn"}
+                />
+              </ToTopBtn>
+            </Container>
+          </>
         )}
       </div>
     </Wrap>
@@ -112,27 +146,18 @@ const Main = (props) => {
 };
 
 const Wrap = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: relative;
   .wrap {
     @media screen and (max-width: 1023px) {
-      width: 100%; //width: 100vh;
-      height: 100vh; //100%는 좌우 스크롤 생김
-      transform: rotate(90deg);
-      /* overflow-x: scroll; */
-    }
-    @media screen and (max-width: 767px) {
-      transform: rotate(0deg);
-    }
-    :-webkit-scrollbar {
-      width: 10px;
-      background-color: black;
+      /* transform: rotate(90deg);
+      width: 100vh;
+      height: 100vw; */
+      height: 100vw;
+      padding: 0 auto;
     }
   }
-  /* @media screen and (max-width: 1023px) {
-    width: 100%; //width: 100vh;
-    height: 100vw; //100%는 좌우 스크롤 생김
-    transform: rotate(90deg);
-    /* overflow-x: scroll; */
-  // 모바일 접속 화면
 `;
 
 const DIV = styled.div`
@@ -149,11 +174,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* padding-bottom: 40px; */
+  padding-bottom: 40px;
   @media screen and (max-width: 1023px) {
     width: 100vh;
-    /* background-color: #add; */
-    padding: 0 0.5rem;
   }
 `;
 
@@ -172,8 +195,12 @@ const RoomCardList = styled.div`
   @media screen and (max-width: 1360px) {
     grid-template-columns: repeat(3, 315px);
   }
-  @media screen and (min-width: 769px) and (max-width: 1023px) {
+  @media screen and (max-width: 1023px) {
     grid-gap: 15px;
+    width: 100vh;
+    padding-left: 1.4rem;
+    /* background-color: #add; */
+    display: none;
   }
 `;
 
@@ -183,10 +210,9 @@ const ToTopBtn = styled.div`
   bottom: 30px;
   /* box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.3); */
   .topBtn {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.17s ease-in;
   }
-
   .topBtn.active {
     z-index: 10;
     opacity: 1;

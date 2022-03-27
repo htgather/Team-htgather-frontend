@@ -11,7 +11,7 @@ const CompleteModal = (props) => {
   console.log("끝모달");
   //https://www.youtube.com/watch?v=LCetNA5tUTE
   const [isOpen, setIsOpen] = React.useState(true);
-  const [count, setCount] = React.useState(3);
+  const [count, setCount] = React.useState(5);
   const closeModal = () => {
     setIsOpen(false);
   };

@@ -68,8 +68,10 @@ const MySectionContainer = styled.div`
     justify-content: center;
   }
   @media screen and (max-width: 1023px) {
-    width: 100vh;
+    /* width: 65rem */
+    /* width: 100vh; */
     /* padding: 0px 1rem; */
+    display: none;
   }
   position: relative;
 `;

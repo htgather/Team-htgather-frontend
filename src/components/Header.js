@@ -64,18 +64,10 @@ const HeaderContainer = styled.div`
   background: #f8f9fa;
   border-bottom: 1px solid #eaecef;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   z-index: 2;
   // 태블릿일 때
-  @media screen and (min-width: 767px) and (max-width: 1023px) {
-    width: 100vh;
-    padding: 1rem;
-  }
-  // 모바일일 때
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
 `;
 
 const IconsWrap = styled.div`
@@ -99,9 +91,6 @@ const HeaderGrid = styled.div`
   }
   @media screen and (max-width: 1360px) {
     width: 990px;
-  }
-  @media screen and (max-width: 1023px) {
-    width: 100vh;
   }
 `;
 export default Header;

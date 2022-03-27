@@ -1,11 +1,13 @@
-import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
-import instance from '../../shared/Request';
+import React, { useEffect } from "react";
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import instance from "../../shared/Request";
+import { _parserVideoId, _getVideoInfo } from "../../components/YoutubeDataAPI";
+const GET_ROOM = "GET_ROOM";
+const ADD_ROOM = "ADD_ROOM";
 
-const GET_ROOM = 'GET_ROOM';
-const ADD_ROOM = 'ADD_ROOM';
-
-const GET_ENTERING_ROOM = 'GET_ENTERING_ROOM';
+const GET_ENTERING_ROOM = "GET_ENTERING_ROOM";
+const GET_SUGGESTIONS = "GET_SUGGESTIONS";
 
 const getRoom = createAction(GET_ROOM, (roomList, searchIdxObj) => ({
   roomList,
@@ -15,17 +17,27 @@ const addRoom = createAction(ADD_ROOM, (room) => ({
   room,
 }));
 const getEnteringRoom = createAction(GET_ENTERING_ROOM, () => ({}));
-
+const getSuggestions = createAction(GET_SUGGESTIONS, (suggestions) => ({
+  suggestions,
+}));
 const initialState = {
   list: [],
   isStart: false,
+  suggestions: [],
 };
 
 // 게시물 정보 불러오기 axios 요청 _ 카테고리가 있을 경우 그에 따라 다른 요청
 const getRoomDB = (difficulty, category) => {
   const searchIndexObj = { difficulty, category };
-  const difficultyList = ['전체', '초급', '중급', '고급'];
-  const categoryList = ['전체', '근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
+  const difficultyList = ["전체", "낮음", "보통", "높음"];
+  const categoryList = [
+    "전체",
+    "근력 운동",
+    "유산소 운동",
+    "스트레칭",
+    "요가/필라테스",
+    "기타",
+  ];
 
   if (category && !difficulty) {
     // 카테고리만 있는 경우
@@ -55,7 +67,9 @@ const getRoomDB = (difficulty, category) => {
     // 카테고리, 난이도 둘 다있는경우
     return function (dispatch, getState, { history }) {
       instance
-        .get(`/rooms?category=${categoryList[category]}&difficulty=${difficultyList[difficulty]}`)
+        .get(
+          `/rooms?category=${categoryList[category]}&difficulty=${difficultyList[difficulty]}`
+        )
         .then((response) => {
           dispatch(getRoom(response.data.rooms, searchIndexObj));
         })
@@ -67,7 +81,7 @@ const getRoomDB = (difficulty, category) => {
     return function (dispatch, getState, { history }) {
       // 카테고리, 난이도 둘 다 없는 경우_ 전체불러오기
       instance
-        .get('/rooms')
+        .get("/rooms")
         .then((response) => {
           dispatch(getRoom(response.data.rooms, searchIndexObj));
         })
@@ -82,7 +96,7 @@ const getRoomDB = (difficulty, category) => {
 const EnteringRoomDB = () => {
   return function (dispatch, getState, { history }) {
     instance
-      .get('/rooms')
+      .get("/rooms")
       .then((response) => {
         const enteringList = response.data.rooms;
         // dispatch(getEnteringRoom(enteringList));
@@ -97,7 +111,7 @@ const EnteringRoomDB = () => {
 const addRoomDB = (roomInfo) => {
   return function (dispatch, getState, { history }) {
     instance
-      .post('/rooms', roomInfo)
+      .post("/rooms", roomInfo)
       .then((response) => {
         dispatch(addRoom(response.data.roomInfo));
         history.push(`/room/${response.data.roomInfo.roomId}`);
@@ -132,10 +146,41 @@ const exitRoomDB = (roomId) => {
     instance
       .post(`/rooms/exit/${roomId}`)
       .then((response) => {
-        history.replace('/');
+        history.replace("/");
       })
       .catch((error) => {
         window.alert(error.response.data.message);
+      });
+  };
+};
+
+// 영상추천목록 가져오기
+const getSuggestionsDB = () => {
+  return function (dispatch, getState, { history }) {
+    instance
+      .get("https://test.kimjeongho-server.com/rooms/suggestions")
+      .then((response) => {
+        console.log("1111", response.data);
+        const suggestionsArray = [
+          response.data["recentUrl"],
+          ...response.data["bestUrls"],
+        ];
+        console.log(suggestionsArray);
+        const suggestion = [];
+        (async () => {
+          for (let link of suggestionsArray) {
+            const info = await _getVideoInfo(_parserVideoId(link));
+            // dispatch(getSuggestions({ ...info, link: link }));
+            suggestion.push({ ...info, link });
+          }
+          dispatch(getSuggestions(suggestion));
+        })();
+
+        // dispatch(getSuggestions(suggestions));
+      })
+
+      .catch((error) => {
+        console.error(error);
       });
   };
 };
@@ -156,6 +201,14 @@ export default handleActions(
       produce(state, (draft) => {
         draft.enteringList = action.payload.enteringList;
       }),
+
+    [GET_SUGGESTIONS]: (state, action) =>
+      produce(state, (draft) => {
+        // if (draft.suggestions.length === 4) {
+        //   draft.suggestions = [];
+        // }
+        draft.suggestions = action.payload.suggestions;
+      }),
   },
   initialState
 );
@@ -166,6 +219,7 @@ const actionCreators = {
   joinRoomDB,
   exitRoomDB,
   EnteringRoomDB,
+  getSuggestionsDB,
 };
 
 export { actionCreators };

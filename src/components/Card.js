@@ -112,11 +112,11 @@ const Card = (props) => {
             <CardTag
               style={{
                 backgroundColor:
-                  roomInfo.difficulty === "고급"
+                  roomInfo.difficulty === "높음"
                     ? "#2E4EF6"
-                    : roomInfo.difficulty === "중급"
+                    : roomInfo.difficulty === "보통"
                     ? "#5C74F2"
-                    : roomInfo.difficulty === "초급"
+                    : roomInfo.difficulty === "낮음"
                     ? "#8999ed"
                     : "",
               }}
