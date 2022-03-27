@@ -448,7 +448,7 @@ const MemberWrap = styled.div`
   }
 
   .memberVideo {
-    margin-bottom: 8px;
+    margin-bottom: 10px; //화상채팅간 영상간격
     width: 200px;
     height: 112px;
     border-radius: 8px;
