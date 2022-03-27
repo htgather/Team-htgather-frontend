@@ -160,7 +160,7 @@ const getSuggestionsDB = () => {
     instance
       .get("https://test.kimjeongho-server.com/rooms/suggestions")
       .then((response) => {
-        console.log("실행됨");
+        console.log("1111", response.data);
         const suggestionsArray = [
           response.data["recentUrl"],
           ...response.data["bestUrls"],

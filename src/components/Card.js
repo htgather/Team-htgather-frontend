@@ -6,6 +6,7 @@ import lock from "../Images/CardIcon_lock.png";
 import emoji from "../Images/RoomCardIcon_emoji.png";
 
 import MakeRoomModal from "./modals/MakeRoomModal";
+import PasswordModal from "./modals/PasswordModal";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as roomActions } from "../redux/modules/room";
 import { history } from "../redux/configureStore";
@@ -14,6 +15,7 @@ const Card = (props) => {
   const { roomInfo } = props;
   const dispatch = useDispatch();
   const [isMakeModal, setIsMakeModal] = React.useState();
+  const [pwdCheckModal, setpwdCheckModal] = React.useState(false);
   const is_local = localStorage.getItem("isLogin") ? true : false;
   // const [showModal, setShowModal] = useState(false);
 
@@ -24,13 +26,14 @@ const Card = (props) => {
       return;
     }
     if (roomInfo.password) {
-      let pw = prompt("패스워드를 입력해주세요");
-      if (pw !== roomInfo.password) {
-        alert("패스워드가 틀렸습니다");
-        return;
-      }
+      setpwdCheckModal(!pwdCheckModal);
+      // let pw = prompt("패스워드를 입력해주세요");
+      // if (pw !== roomInfo.password) {
+      //   alert("패스워드가 틀렸습니다");
+      //   return;
+      // }
     }
-    dispatch(roomActions.joinRoomDB(roomInfo.roomId));
+    // dispatch(roomActions.joinRoomDB(roomInfo.roomId));
   }
   // 마지막 카드
   if (props.last) {
@@ -72,6 +75,13 @@ const Card = (props) => {
   // 방 카드
   return (
     <>
+      {roomInfo.password && pwdCheckModal && (
+        <PasswordModal
+          setPwdCheck={setpwdCheckModal}
+          pwdCheckModal={pwdCheckModal}
+          roomInfo={roomInfo}
+        />
+      )}
       <CardContainer onClick={joinRoom} isStart={roomInfo.isStart}>
         {roomInfo.isStart && (
           <CardLock>

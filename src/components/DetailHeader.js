@@ -5,16 +5,22 @@ import ExitModal from "../components/modals/ExitModal";
 import People from "../Images/People.png";
 import Logo from "../Images/Logo_only.svg";
 import CopyLink from "../Images/CopyLink.png";
+import URLCopied from "../Images/URLCopied.png";
 
 import { history } from "../redux/configureStore";
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
   const { isDone } = props;
   const [modalOn, setModalOn] = React.useState(false);
+  const [UrlCopied, setUrlCopied] = React.useState(false);
   console.log("디테일헤더");
   const exitRoom = () => {
     setModalOn(!modalOn);
   };
+
+  const deleteCopyImg = setTimeout(() => {
+    setUrlCopied(false);
+  }, 3000);
 
   // const { Kakao } = window;
 
@@ -27,7 +33,8 @@ const Header = (props) => {
     textarea.select();
     document.execCommand("copy");
     document.body.removeChild(textarea);
-    alert("URL이 복사되었습니다.");
+    setUrlCopied(!UrlCopied);
+    deleteCopyImg();
   };
 
   return (
@@ -46,6 +53,7 @@ const Header = (props) => {
             onClick={copyLink}
             style={{ cursor: "pointer" }}
           />
+          {UrlCopied && <img src={URLCopied} alt="링크 복사 완료"></img>}
         </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
