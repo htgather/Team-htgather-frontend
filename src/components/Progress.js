@@ -24,7 +24,6 @@ function Progress(props) {
 
   // 프로그래스 단위 초
   useEffect(() => {
-    // console.log(curYoutubeTime, changeToSeconds(roomInfo.videoLength));
     if (curYoutubeTime >= (changeToSeconds(roomInfo.videoLength) - 1) * 0.245) {
       setText("화이팅!!");
     }

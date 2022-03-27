@@ -45,7 +45,6 @@ const MakeRoomModal = (props) => {
     //   setIsRecommend(false);
     // });
     $LinkInput.current.addEventListener("input", () => {
-      console.log(213);
       if ($LinkInput.current.value) {
         setIsRecommend(false);
       } else {

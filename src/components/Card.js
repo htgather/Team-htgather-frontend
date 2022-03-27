@@ -21,6 +21,9 @@ const Card = (props) => {
 
   // 카드 클릭시 방입장 함수
   function joinRoom() {
+    if (roomInfo.isStart) {
+      return;
+    }
     if (!is_local) {
       props.setIsLoginModal(true);
       return;

@@ -32,7 +32,6 @@ const Main = (props) => {
     state.room.list.filter((e) => e.isStart === true)
   ); //확인
 
-  // console.log(enteringList);
   // const enteringList = useSelector((state) => state.room.enteringList);
   // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
@@ -46,6 +45,7 @@ const Main = (props) => {
   const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
 
   const handleFollow = () => {
+    console.log("asd");
     setScrollY(window.pageYOffset);
   };
 
@@ -60,7 +60,6 @@ const Main = (props) => {
   const isEntering = () => {
     setClickedEntering(!clickedEntering);
     // dispatch(roomActions.EnteringRoomDB());
-    // console.log(clickedEntering);
   };
 
   React.useEffect(() => {
@@ -199,7 +198,6 @@ const RoomCardList = styled.div`
     grid-gap: 15px;
     width: 100vh;
     padding-left: 1.4rem;
-    /* background-color: #add; */
     display: none;
   }
 `;
@@ -210,7 +208,7 @@ const ToTopBtn = styled.div`
   bottom: 30px;
   /* box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.3); */
   .topBtn {
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.17s ease-in;
   }
   .topBtn.active {

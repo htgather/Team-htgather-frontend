@@ -51,7 +51,6 @@ const RoomSectionTop = (props) => {
   const enteringHandler = () => {
     setClickedEntering(!clickedEntering);
     dispatch(roomActions.EnteringRoomDB(enteringList));
-    // console.log(clickedEntering);
   };
 
   React.useEffect(() => {

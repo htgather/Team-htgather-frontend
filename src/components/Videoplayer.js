@@ -111,7 +111,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
     // 여긴 다른 사람들에게 띄우는 부분
     socket.on("emoji", (remoteSocketId) => {
-      // console.log(remoteSocketId);
       const remoteDiv = document.getElementById(`${remoteSocketId}`);
       const emojiBox = document.createElement("img");
       emojiBox.src = HiFive;
@@ -297,7 +296,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       }
     }
     function LeaveRoom() {
-      console.log("나간다나가");
       socket.disconnect();
       myStream.getTracks().forEach((track) => track.stop());
       // clearAllVideos();
@@ -397,8 +395,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
     showEmoji: () => {
       const myArea = document.querySelector("#mystream");
-      // const emojiBox = document.createElement("h1");
-      // emojiBox.innerText = "👍";
       const emojiBox = document.createElement("img");
       emojiBox.src = HiFive;
       myArea.appendChild(emojiBox);
@@ -406,7 +402,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
         myArea.removeChild(emojiBox);
       }, 2000);
       emojiBox.className = "emojiBox";
-      console.log(roomName, socketID);
       socket.emit("emoji", roomName, socketID);
     },
   }));

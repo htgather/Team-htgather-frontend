@@ -20,7 +20,6 @@ export const LoginWithKakao = () => {
       Kakao.API.request({
         url: "/v2/user/me",
         success: (response) => {
-          console.log("카카오에서", response);
           const _id = response.id;
           const { profile } = response.kakao_account;
           axios

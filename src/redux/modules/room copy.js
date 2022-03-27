@@ -142,7 +142,6 @@ const joinRoomDB = (roomId) => {
 };
 // 방퇴장 axios 요청
 const exitRoomDB = (roomId) => {
-  console.log(`/rooms/exit/${roomId}`);
   return function (dispatch, getState, { history }) {
     instance
       .post(`/rooms/exit/${roomId}`)
@@ -161,12 +160,11 @@ const getSuggestionsDB = () => {
     instance
       .get("https://test.kimjeongho-server.com/rooms/suggestions")
       .then((response) => {
-        console.log("실행됨");
         const suggestionsArray = [
           response.data["recentUrl"],
           ...response.data["bestUrls"],
         ];
-        console.log(suggestionsArray);
+
         const suggestion = [];
         (async () => {
           for (let i = 0; i < suggestionsArray.length; i++) {

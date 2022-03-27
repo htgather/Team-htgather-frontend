@@ -55,10 +55,6 @@ const PasswordModal = (props) => {
       setPwInputWrong(true);
     }
   };
-  console.log("아무것도 안쳤을 때", pwInputWrong);
-  console.log("이건 메세지", pwdUnfiiled);
-  console.log("이건 틀리게 입력했을 때", pwInputWrong);
-  console.log("이건 메세지", wrongPwd);
 
   // 모달창
   const { setPwdCheck } = props;
