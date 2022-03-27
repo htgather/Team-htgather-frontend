@@ -421,7 +421,7 @@ const RoomNameInput = styled.textarea`
   height: 72px;
   border-radius: 8px;
   background-color: #f1f3f5;
-  padding: 12px 114px 12px 12px;
+  padding: 12px;
   resize: none;
   border: none;
   &::placeholder {
@@ -501,7 +501,7 @@ const LinkInput = styled.input`
   height: 48px;
   border-radius: 8px;
   background-color: #f1f3f5;
-  padding: 12px;
+  padding: 12px 118px 12px 12px;
   resize: none;
   border: none;
 
