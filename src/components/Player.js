@@ -82,7 +82,7 @@ function Player(props) {
 
 const Container = styled.div`
   width: 1095px;
-  height: 100%;
+  height: 123%; //100%
   display: flex;
   justify-content: center;
   align-items: center;

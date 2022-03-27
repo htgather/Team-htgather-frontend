@@ -27,13 +27,9 @@ const Card = (props) => {
     }
     if (roomInfo.password) {
       setpwdCheckModal(!pwdCheckModal);
-      // let pw = prompt("패스워드를 입력해주세요");
-      // if (pw !== roomInfo.password) {
-      //   alert("패스워드가 틀렸습니다");
-      //   return;
-      // }
+    } else {
+      dispatch(roomActions.joinRoomDB(roomInfo.roomId));
     }
-    // dispatch(roomActions.joinRoomDB(roomInfo.roomId));
   }
   // 마지막 카드
   if (props.last) {
