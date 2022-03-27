@@ -36,10 +36,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
   const [socket, setSocket] = useState(null);
 
-  useEffect(() => {});
-  useEffect(() => {}, []);
-  useEffect(() => {}, [muted]);
-
   useEffect(() => {
     const socket = io("https://test.kimjeongho-server.com", {
       cors: { origin: "*" },
@@ -300,24 +296,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
         socket.emit("ice", event.candidate, remoteSocketId);
       }
     }
-
-    // async function getCameras() {
-    //   try {
-    //     const devieces = await navigator.mediaDevices.enumerateDevices();
-    //     const cameras = devieces.filter(
-    //       (device) => device.kind === "videoinput"
-    //     );
-
-    //     cameras.forEach((camera) => {
-    //       const option = document.createElement("option");
-    //       option.value = cameras[0].deviceId;
-    //       option.innerText = camera.label;
-    //       cameraSelect.current.append(option);
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    function LeaveRoom() {
+      console.log("나간다나가");
+      socket.disconnect();
+      myStream.getTracks().forEach((track) => track.stop());
+      // clearAllVideos();
+    }
+    return () => {
+      LeaveRoom();
+    };
   }, []);
 
   //페이지가 마운트되고 "join_room" Event 함수 실행 1
@@ -337,29 +324,18 @@ const Videoplayer = React.forwardRef((props, ref) => {
         history.push("/");
         window.location.reload();
       });
-
-    return () => {
-      LeaveRoom();
-    };
   }, [socket]);
 
   //나가기를 누르면 나한테 벌어지는 일
-  function LeaveRoom() {
-    // dispatch(roomActions.exitRoomDB(roomName));
-    socket.disconnect();
-    myStream.getTracks().forEach((track) => track.stop());
-    clearAllVideos();
-  }
-
-  function clearAllVideos() {
-    const streams = document.querySelector("#video-grid");
-    const streamArr = streams.querySelectorAll("div");
-    streamArr.forEach((streamElement) => {
-      if (streamElement.id !== "mystream") {
-        streams.removeChild(streamElement);
-      }
-    });
-  }
+  // function clearAllVideos() {
+  //   const streams = document.querySelector("#video-grid");
+  //   const streamArr = streams.querySelectorAll("div");
+  //   streamArr.forEach((streamElement) => {
+  //     if (streamElement.id !== "mystream") {
+  //       streams.removeChild(streamElement);
+  //     }
+  //   });
+  // }
 
   function removeVideo(leavedSocketId) {
     const streams = document.querySelector("#video-grid");
