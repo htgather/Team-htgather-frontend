@@ -25,13 +25,29 @@ const MyInfoModal = (props) => {
           <Line />
           <TextWrap>고객 지원</TextWrap>
           <DESC>
-            <a href="https://forms.gle/CvGWzLRzHtEZkBJU6" target="_blank">
-              ✍️ 홈트게더 이용 후기 남기기
-            </a>
-            <br />
-            <a href="https://forms.gle/ympKY1rVpspLX1Ut8" target="_blank">
-              😱 오류, 버그 신고하기
-            </a>
+            {is_local ? (
+              <>
+                <a href="https://forms.gle/CvGWzLRzHtEZkBJU6" target="_blank">
+                  ✍️ 홈트게더 이용 후기 남기기
+                </a>
+                <br />
+                <a href="https://forms.gle/ympKY1rVpspLX1Ut8" target="_blank">
+                  😱 오류, 버그 신고하기
+                </a>
+              </>
+            ) : (
+              <>
+                <div
+                  onClick={() => {
+                    window.alert('로그인 후 이용가능합니다');
+                  }}
+                >
+                  ✍️ 홈트게더 이용 후기 남기기
+                  <br />
+                  😱 오류, 버그 신고하기
+                </div>
+              </>
+            )}
           </DESC>
           {is_local ? null : (
             <Login>
