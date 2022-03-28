@@ -42,7 +42,6 @@ const Detail = (props) => {
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
-  // const [curYoutubeTime,setCurYoutubeTime] =React.useState(0);
 
   const childRef = React.useRef();
   const changeNumberOfUsers = (text) => {
@@ -114,7 +113,11 @@ const Detail = (props) => {
               <DIV>
                 <div>
                   <TimerWrap>
-                    <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+                    <Progress
+                      roomInfo={roomInfo}
+                      isStart={isStart}
+                      isDone={isDone}
+                    ></Progress>
                   </TimerWrap>
                   <VideoWrap>
                     <MainVideo>
@@ -124,6 +127,7 @@ const Detail = (props) => {
                         vol={vol}
                         isMuted={isMuted}
                         setIsDone={setIsDone}
+                        isDone={isDone}
                       ></Player>
                     </MainVideo>
                     <Videoplayer

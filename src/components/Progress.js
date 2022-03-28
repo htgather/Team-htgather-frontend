@@ -6,7 +6,7 @@ import { getTimeStringSeconds } from "./YoutubeDataAPI";
 import { useDispatch, useSelector } from "react-redux";
 
 function Progress(props) {
-  const { roomInfo } = props;
+  const { roomInfo, isDone } = props;
   console.log("프로그래스바");
   let curYoutubeTime = useSelector(
     (state) => state.player.playInfo.curYoutubeTime
@@ -37,7 +37,11 @@ function Progress(props) {
       setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
     }
   }, [leftSeconds]);
-
+  useEffect(() => {
+    if (isDone) {
+      setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
+    }
+  }, [isDone]);
   return (
     <div className="App" style={{ color: "black" }}>
       <div style={{ margin: "0px 0px 1px 0px" }}>

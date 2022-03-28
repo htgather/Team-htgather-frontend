@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IoMdArrowDropdown } from "react-icons/io";
-
+import ArrowIcon from "../Images/DropdownArrowIcon.png";
 const Dropdown = (props) => {
   // props로 리스트목록을 받아오고, useState로 모달 및 클릭 관리
   const { dropdownList, myDropdownList, width, background, fontcolor } = props;
@@ -40,9 +40,7 @@ const Dropdown = (props) => {
                   ? dropdownList[clickedDropdown]
                   : props.children}
               </div>
-              <IoMdArrowDropdown
-                style={{ color: "#4a5056" }}
-              ></IoMdArrowDropdown>
+              <img src={ArrowIcon} alt="드롭다운화살표"></img>
             </DropdownInput>
             <DropdownModal
               {...styles}
@@ -74,9 +72,7 @@ const Dropdown = (props) => {
                   ? myDropdownList[clickedDropdown]
                   : props.children}
               </div>
-              <IoMdArrowDropdown
-                style={{ color: "#4a5056" }}
-              ></IoMdArrowDropdown>
+              <img src={ArrowIcon} alt="드롭다운화살표"></img>
             </DropdownInput>
             <DropdownModal {...styles} isDropdown={isDropdown}>
               {myDropdownList.map((e, i) => (
@@ -118,7 +114,7 @@ const DropdownBtn = styled.div`
   color: #878e95;
   position: relative;
   cursor: pointer;
-  padding: 0 16px;
+  padding: 0 12px;
 `;
 
 const DropdownInput = styled.div`

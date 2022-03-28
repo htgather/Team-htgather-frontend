@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commonActions } from "../redux/modules/common";
 import { actionCreators as playerActions } from "../redux/modules/player";
-
 import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
-
+import { PlayInfoContext } from "../context/PlayInfoContext";
 function Player(props) {
   console.log("유튜브플레이어");
+
   // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
   const roomInfo = props.roomInfo;
   const dispatch = useDispatch();
-  const { isMuted, vol } = props;
+  const { isMuted, vol, setIsDone, isDone } = props;
   // 동영상 재생으로 관리될 변수들
 
   const player = React.useRef();
@@ -30,6 +30,7 @@ function Player(props) {
     dispatch(commonActions.saveRecordsDB(recordsData));
     props.setIsDone(true);
     setIsPlaying(false);
+    setIsDone(true);
   };
 
   React.useEffect(() => {
@@ -52,6 +53,7 @@ function Player(props) {
           roomInfo={roomInfo}
           setIsPlaying={setIsPlaying}
           player={player}
+          isDone={isDone}
         ></BeforeTimer>
         <ReactPlayer
           url={roomInfo.videoUrl}
@@ -99,7 +101,7 @@ export default React.memo(Player);
 /// 타이머 분리
 const BeforeTimer = (props) => {
   console.log("시작 전 타이머");
-  const { roomInfo, setIsPlaying, player } = props;
+  const { roomInfo, setIsPlaying, player, isDone } = props;
   const createdAt = new Date(roomInfo.createdAt);
   const videoStartAfter = roomInfo.videoStartAfter;
   const [countTime, setCountTime] = React.useState();
@@ -130,11 +132,13 @@ const BeforeTimer = (props) => {
           clearInterval(getTimeInterval);
         }
       }
-    }, 100);
+    }, 1000);
     // unMount되는 경우 interval함수 제거
     return () => clearInterval(getTimeInterval);
   }, []);
-
+  React.useEffect(() => {
+    setCountTime("영상이 종료되었습니다");
+  }, [isDone]);
   return <>{countTime && <Count>{countTime}</Count>}</>;
 };
 const Count = styled.div`
