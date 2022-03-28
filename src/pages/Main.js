@@ -25,29 +25,21 @@ const Main = (props) => {
   const tablet = window.matchMedia('(orientation: portrait)');
 
   const roomList = useSelector((state) => state.room.list.filter((e) => e.isStart === false));
-  const enteringList = useSelector((state) => state.room.list.filter((e) => e.isStart === true)); //확인
 
   const [isLoginModal, setIsLoginModal] = React.useState();
+
   // 위로가기 버튼 관련
   const [ScrollY, setScrollY] = useState(0);
   const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
 
   const handleFollow = () => {
-    console.log('asd');
-    setScrollY(window.pageYOffset);
+    setScrollY(window.scrollY);
   };
 
   const moveToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setScrollY(0); // ScrollY 의 값을 초기화
     setBtnStatus(false); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
-  };
-
-  const [clickedEntering, setClickedEntering] = React.useState(false);
-
-  const isEntering = () => {
-    setClickedEntering(!clickedEntering);
-    // dispatch(roomActions.EnteringRoomDB());
   };
 
   React.useEffect(() => {
@@ -92,15 +84,15 @@ const Main = (props) => {
               )}
               <MySection></MySection>
               <RoomSection>
-                <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
+                <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
                 <RoomCardList>
                   {roomList.map((e, i) => (
                     <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
                   ))}
                   <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-                  {enteringList.map((e, i) => (
+                  {/* {enteringList.map((e, i) => (
                     <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal} />
-                  ))}
+                  ))} */}
                 </RoomCardList>
               </RoomSection>
               <ToTopBtn onClick={moveToTop}>
@@ -116,14 +108,11 @@ const Main = (props) => {
 
 const Wrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: relative;
   .wrap {
     @media screen and (max-width: 1023px) {
-      /* transform: rotate(90deg);
-      width: 100vh;
-      height: 100vw; */
-      height: 100vw;
+      height: 100vh;
       padding: 0 auto;
     }
   }
