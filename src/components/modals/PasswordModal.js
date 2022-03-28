@@ -82,9 +82,9 @@ const PasswordModal = (props) => {
             style={{ cursor: "pointer" }}
           />
         </MakeRoomHeader>
-        <h1 className="boldText">비밀번호를 입력하여주세요</h1>
+        <h1 className="boldText">비밀번호를 입력해주세요</h1>
         <p className="pwdMessage">
-          비밀방에 입장하려면 비밀번호를 입력하여주세요
+          비밀방에 입장하려면 비밀번호를 입력해주세요
         </p>
 
         <div>
@@ -152,6 +152,7 @@ const MakeRoomContainer = styled.div`
   }
   .pwdMessage {
     margin: 10px auto 13px auto;
+    opacity: 0;
   }
   display: flex;
   justify-content: center;
