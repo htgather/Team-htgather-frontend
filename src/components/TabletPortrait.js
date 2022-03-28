@@ -1,46 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-
-import Lottie from "react-lottie";
-import Trophy from "../Images/Trophy.json";
+import React from 'react';
+import styled from 'styled-components';
+import tablet2 from '../Images/tablet.png';
 
 const TabletPortrait = (props) => {
-  const [isOpen, setIsOpen] = React.useState(true);
-  const [count, setCount] = React.useState(3);
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
-  const lottieOptions = {
-    animationData: Trophy,
-    // loop: true,
-    autoplay: true,
-    background: "transparent",
-    speed: 5,
-    rendererSettings: {
-      className: "animation", // svg에 적용
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-  React.useEffect(() => {
-    const timeout = setInterval(() => {
-      setCount((count) => count - 1);
-    }, 10000);
-    return () => {
-      clearInterval(timeout);
-    };
-  }, []);
-  // React.useEffect(() => {
-  //   if (count === 0) {
-  //     props.setIsDoneModal();
-  //   }
-  // }, [count]);
   return (
     <DIV>
+      <TabletImage />
       <TextWrap>
-        <Lottie
-          options={lottieOptions}
-          style={{ width: "300px", height: "300px" }}
-        ></Lottie>
         홈트게더는 가로화면에 최적화되어있어요 <br />
         화면을 돌려 사용해주세요💡
       </TextWrap>
@@ -52,9 +18,9 @@ const DIV = styled.div`
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background-color: #add;
-  z-index: 999;
-  ${"" /* display: flex; */}
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   /* Portrait orientation */
@@ -67,8 +33,37 @@ const DIV = styled.div`
   }
 `;
 
+const TabletImage = styled.div`
+  width: 400px;
+  height: 400px;
+  background-color: #add;
+  background: url(${tablet2});
+  /* url('Images/tablet2.png'); */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 40px;
+
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: 3;
+  animation-direction: normal; //alternate;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-90deg);
+    }
+  }
+`;
+
 const TextWrap = styled.div`
   text-align: center;
+  z-index: 3;
 `;
 
 export default TabletPortrait;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Close from '../../Images/Close.png';
 import KakaoLogin from '../../components/KakaoLogin';
+import { history } from '../../redux/configureStore';
 
 const MyInfoModal = (props) => {
   const { openMyInfoModal } = props;
@@ -24,9 +25,13 @@ const MyInfoModal = (props) => {
           <Line />
           <TextWrap>고객 지원</TextWrap>
           <DESC>
-            ✍️&nbsp;홈트게더 이용 후기 남기기
+            <a href="https://forms.gle/CvGWzLRzHtEZkBJU6" target="_blank">
+              ✍️ 홈트게더 이용 후기 남기기
+            </a>
             <br />
-            😱&nbsp;오류, 버그 신고하기
+            <a href="https://forms.gle/ympKY1rVpspLX1Ut8" target="_blank">
+              😱 오류, 버그 신고하기
+            </a>
           </DESC>
           {is_local ? null : (
             <Login>
@@ -79,6 +84,13 @@ const DESC = styled.div`
   margin-top: 8px;
   height: 30px;
   line-height: 30px;
+  a {
+    text-decoration-line: none;
+  }
+  a:link,
+  a:visited {
+    color: rgb(34, 37, 41);
+  }
 `;
 
 const Login = styled.div`
