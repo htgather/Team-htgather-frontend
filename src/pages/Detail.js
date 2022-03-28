@@ -81,7 +81,8 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     if (NewMedia.matches) {
-      history.push("/");
+      history.replace("/");
+      return;
     }
     if (!roomInfo) {
       if (!isLocal) {
