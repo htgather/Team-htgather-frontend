@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,27 +8,30 @@ import RoomSectionTab from "../components/RoomSectionTab";
 import MySection from "../components/MySection";
 import RoomClickModal from "../components/modals/RoomClickModal";
 import MobileLanding from "../components/MobileLanding";
-
+import TabletPortrait from "../components/TabletPortrait";
 import toTop from "../Images/toTop.png";
 import jwt_decode from "jwt-decode";
 import { actionCreators as roomActions } from "../redux/modules/room";
 import { actionCreators as playerActions } from "../redux/modules/player";
 import { Socket } from "socket.io-client";
 
-
 const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일일때
 
-  const NewMedia = window.matchMedia('orientation: landscape)');
-  const tablet = window.matchMedia('(orientation: portrait)');
+  const NewMedia = window.matchMedia("orientation: landscape)");
+  const tablet = window.matchMedia("(orientation: portrait)");
   // Portrait 모드일 때 실행할 스크립트
   // 폭과 높이가 같으면 Portrait 모드로 인식돼요
 
-  const roomList = useSelector((state) => state.room.list);
-  const enteringList = roomList.filter((room) => room.isStart === false); //확인
-  //  console.log(enteringList);
+  const roomList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === false)
+  );
+  const enteringList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === true)
+  ); //확인
+
   // const enteringList = useSelector((state) => state.room.enteringList);
   // console.log(enteringList); // 처음엔 undefined, 버튼 클릭시 console 찍힘
 
@@ -43,6 +45,7 @@ const Main = (props) => {
   const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
 
   const handleFollow = () => {
+    console.log("asd");
     setScrollY(window.pageYOffset);
   };
 
@@ -57,7 +60,6 @@ const Main = (props) => {
   const isEntering = () => {
     setClickedEntering(!clickedEntering);
     // dispatch(roomActions.EnteringRoomDB());
-    // console.log(clickedEntering);
   };
 
   React.useEffect(() => {
@@ -72,7 +74,7 @@ const Main = (props) => {
     return () => {
       window.removeEventListener("scroll", handleFollow);
     };
-  });
+  }, []);
 
   // 방정보 리스트 불러오기
   React.useEffect(() => {
@@ -102,19 +104,37 @@ const Main = (props) => {
               )}
               <MySection></MySection>
               <RoomSection>
-                <RoomSectionTab setIsLoginModal={setIsLoginModal} isEntering={isEntering}></RoomSectionTab>
+                <RoomSectionTab
+                  setIsLoginModal={setIsLoginModal}
+                  isEntering={isEntering}
+                ></RoomSectionTab>
                 <RoomCardList>
                   {roomList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    ></RoomCard>
                   ))}
-                  {enteringList.map((p, idx) => {
-                    <RoomCard key={idx} roomInfo={p} />;
-                  })}
-                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+                  <RoomCard
+                    last="last"
+                    setIsLoginModal={setIsLoginModal}
+                  ></RoomCard>
+                  {enteringList.map((e, i) => (
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    />
+                  ))}
                 </RoomCardList>
               </RoomSection>
               <ToTopBtn onClick={moveToTop}>
-                <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+                <img
+                  src={toTop}
+                  alt="최상단 이동 버튼"
+                  className={BtnStatus ? "topBtn active" : "topBtn"}
+                />
               </ToTopBtn>
             </Container>
           </>
@@ -134,7 +154,6 @@ const Wrap = styled.div`
       width: 100vh;
       height: 100vw; */
       height: 100vw;
-
       padding: 0 auto;
     }
   }
@@ -154,7 +173,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* padding-bottom: 40px; */
+  padding-bottom: 40px;
   @media screen and (max-width: 1023px) {
     width: 100vh;
   }
@@ -179,7 +198,6 @@ const RoomCardList = styled.div`
     grid-gap: 15px;
     width: 100vh;
     padding-left: 1.4rem;
-    /* background-color: #add; */
     display: none;
   }
 `;

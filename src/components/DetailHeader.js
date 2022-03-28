@@ -5,16 +5,23 @@ import ExitModal from "../components/modals/ExitModal";
 import People from "../Images/People.png";
 import Logo from "../Images/Logo_only.svg";
 import CopyLink from "../Images/CopyLink.png";
+import URLCopied from "../Images/URLCopied.png";
 
 import { history } from "../redux/configureStore";
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
   const { isDone } = props;
   const [modalOn, setModalOn] = React.useState(false);
+  const [UrlCopied, setUrlCopied] = React.useState(false);
+  const [borderNone, setBorderNone] = React.useState(true);
   console.log("디테일헤더");
   const exitRoom = () => {
     setModalOn(!modalOn);
   };
+
+  const deleteCopyImg = setTimeout(() => {
+    setUrlCopied(false);
+  }, 4000);
 
   // const { Kakao } = window;
 
@@ -27,7 +34,8 @@ const Header = (props) => {
     textarea.select();
     document.execCommand("copy");
     document.body.removeChild(textarea);
-    alert("URL이 복사되었습니다.");
+    setUrlCopied(!UrlCopied);
+    deleteCopyImg();
   };
 
   return (
@@ -44,8 +52,15 @@ const Header = (props) => {
             src={CopyLink}
             alt="링크공유"
             onClick={copyLink}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", marginLeft: "25px" }}
           />
+          {UrlCopied && (
+            <img
+              src={URLCopied}
+              alt="링크 복사 완료"
+              style={{ marginLeft: "25px" }}
+            ></img>
+          )}
         </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
@@ -57,7 +72,7 @@ const Header = (props) => {
           </HeaderBtn>
           {/*  인원수*/}
           <HeaderBtn>
-            <BtnContents>
+            <BtnContents borderNone={borderNone}>
               <img src={People} alt="인원수" />
               <div style={{ color: "#aeb5bc" }}>{props.numberOfUsers}</div>
             </BtnContents>
@@ -111,8 +126,6 @@ const BtnWrap = styled.div`
 const HeaderBtn = styled.div`
   width: 92px;
   height: 40px;
-  border: 1px solid #aeb5bc;
-  border-radius: 4px;
   cursor: pointer;
   position: relative;
 `;
@@ -121,6 +134,8 @@ const BtnContents = styled.div`
   width: 92px;
   height: 40px;
   display: flex;
+  border: ${(props) => (props.borderNone ? "none" : "1px solid #aeb5bc")};
+  border-radius: 4px;
   justify-content: space-evenly;
   align-items: center;
   vertical-align: middle;

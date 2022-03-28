@@ -23,7 +23,7 @@ const MakeRoomModal = (props) => {
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
   const difficultyList = ["낮음", "보통", "높음"];
   const [clickedStartTime, setClickedStartTime] = React.useState();
-  const startTimeList = ["0.1분 뒤", "15분 뒤", "30분 뒤"];
+  const startTimeList = ["5분 뒤", "10분 뒤", "1분 뒤"];
   // 태그선택
   const $RoomNameInput = React.useRef();
   const $LinkInput = React.useRef();
@@ -45,7 +45,6 @@ const MakeRoomModal = (props) => {
     //   setIsRecommend(false);
     // });
     $LinkInput.current.addEventListener("input", () => {
-      console.log(213);
       if ($LinkInput.current.value) {
         setIsRecommend(false);
       } else {
@@ -201,7 +200,7 @@ const MakeRoomModal = (props) => {
         </MakeRoomNameBox>
         <MakeRoomOptionBox>
           <SelectBox>
-            <p className="boldText">운동 난이도</p>
+            <p className="boldText">난이도</p>
             <div style={{ display: "flex" }}>
               {difficultyList.map((e, i) => (
                 <DB_EL
@@ -314,10 +313,10 @@ const MakeRoomModal = (props) => {
               비밀방 여부
               <img
                 src={isSecret ? checkBox : noneCheckBox}
-                alt="미체크"
+                alt="비밀방여부체크박스"
                 className="scaleHalf"
                 onClick={checkSecret}
-                style={{ WebkitUserDrag: "none" }}
+                style={{ WebkitUserDrag: "none", cursor: "pointer" }}
               ></img>
             </p>
             <PwInputBox ref={$pwInputBox}>
@@ -347,7 +346,6 @@ const MakeRoomModal = (props) => {
           <CancelBtn
             onClick={() => {
               setIsMakeModal(false);
-              // document.body.style.overflow = 'unset';
             }}
           >
             취소하기
@@ -425,7 +423,6 @@ const RoomNameInput = styled.textarea`
   padding: 12px;
   resize: none;
   border: none;
-
   &::placeholder {
     color: #878e95;
     font-size: 16px;
@@ -503,7 +500,7 @@ const LinkInput = styled.input`
   height: 48px;
   border-radius: 8px;
   background-color: #f1f3f5;
-  padding: 12px;
+  padding: 12px 118px 12px 12px;
   resize: none;
   border: none;
 

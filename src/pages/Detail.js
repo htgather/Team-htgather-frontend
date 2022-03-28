@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
 
 import styled from "styled-components";
 
@@ -17,20 +18,25 @@ import Happy from "../Images/Happy.png";
 import Me from "../Images/Me.png";
 import NoVideo from "../Images/NoVideo.png";
 import Notmute from "../Images/Notmute.png";
-import { actionCreators as roomActions } from "../redux/modules/room";
+import Room, { actionCreators as roomActions } from "../redux/modules/room";
 import Videoplayer from "../components/Videoplayer";
 import jwt_decode from "jwt-decode";
 import CompleteModal from "../components/modals/CompleteModal";
+import RoomClickModalForLogin from "../components/modals/RoomClickModalForLogin";
 const Detail = (props) => {
   console.log("디테일");
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
-  const nickname = jwt_decode(localStorage.getItem("isLogin")).nickName;
+  const isLocal = localStorage.getItem("isLogin") ? true : false;
+  const nickname = isLocal
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : null;
   const [isStart, setIsStart] = React.useState();
   const [isDone, setIsDone] = React.useState(false);
   const [isDoneModal, setIsDoneModal] = React.useState(true);
   const [isClicked, setIsClicked] = useState(false);
+  const [modalOn, setModalOn] = React.useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [videoOn, setVideoOn] = useState(false);
   const [vol, setVol] = React.useState(10);
@@ -61,133 +67,162 @@ const Detail = (props) => {
   const fighting = () => {
     childRef.current.showEmoji();
   };
+
+  const popLoginModal = () => {
+    setModalOn(true);
+  };
+
   const dispatch = useDispatch();
   React.useEffect(() => {
     if (!roomInfo) {
+      if (!isLocal) {
+        var result = window.confirm("로그인이 필요합니다.");
+        if (result) {
+          popLoginModal();
+        } else {
+          history.replace("/");
+        }
+      }
       dispatch(roomActions.getRoomDB());
     }
   }, []);
 
+  React.useEffect(() => {
+    if (isStart) {
+      setSoundOn(true);
+      childRef.current.handleAllMute();
+    }
+  }, [isStart]);
+
   return (
-    <Background>
-      {roomInfo && (
-        <>
-          {isDone && isDoneModal && (
-            <CompleteModal
-              isDone={isDone}
-              setIsDoneModal={setIsDoneModal}
-            ></CompleteModal>
-          )}
-          <DetailHeader
-            roomInfo={roomInfo}
-            numberOfUsers={numberOfUsers}
-            isDone={isDone}
-          />
-          <DIV>
-            <div>
-              <TimerWrap>
-                <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
-              </TimerWrap>
-              <VideoWrap>
-                <MainVideo>
-                  <Player
-                    roomInfo={roomInfo}
-                    setIsStart={setIsStart}
-                    vol={vol}
-                    isMuted={isMuted}
-                    setIsDone={setIsDone}
-                  ></Player>
-                </MainVideo>
-                <Videoplayer
-                  nickname={nickname}
-                  roomId={roomId}
-                  changeNumberOfUsers={changeNumberOfUsers}
-                  ref={childRef}
-                ></Videoplayer>
-              </VideoWrap>
-
-              <SoundBtn>
+    <>
+      {isLocal ? (
+        <Background>
+          {roomInfo && (
+            <>
+              {isDone && isDoneModal && (
+                <CompleteModal
+                  isDone={isDone}
+                  setIsDoneModal={setIsDoneModal}
+                ></CompleteModal>
+              )}
+              <DetailHeader
+                roomInfo={roomInfo}
+                numberOfUsers={numberOfUsers}
+                isDone={isDone}
+              />
+              <DIV>
                 <div>
-                  {isClicked ? (
-                    <>
-                      <Btn
-                        style={{ width: "236px", justifyContent: "flex-start" }}
-                      >
-                        <img
-                          src={Speaker}
-                          alt="음량조절"
-                          onClick={setClicked}
-                        />
-                        <VolInput
-                          type="range"
-                          min="0"
-                          max="20"
-                          value={vol}
-                          onChange={(e) => {
-                            setVol(e.target.value);
-                          }}
-                          style={{ margin: "8px" }}
-                        />
-                        <div>{vol}</div>
-                      </Btn>
-                    </>
-                  ) : (
-                    <>
-                      <BubbleWrap>
-                        <div>먼저 음소거해제 버튼을 눌러주세요!</div>
-                      </BubbleWrap>
-                      <Btn onClick={setClicked}>
-                        <img src={Mute} alt="비디오 음소거해제 버튼" />
-                        <div>음소거해제</div>
-                      </Btn>
-                    </>
-                  )}
-                </div>
+                  <TimerWrap>
+                    <Progress roomInfo={roomInfo} isStart={isStart}></Progress>
+                  </TimerWrap>
+                  <VideoWrap>
+                    <MainVideo>
+                      <Player
+                        roomInfo={roomInfo}
+                        setIsStart={setIsStart}
+                        vol={vol}
+                        isMuted={isMuted}
+                        setIsDone={setIsDone}
+                      ></Player>
+                    </MainVideo>
+                    <Videoplayer
+                      nickname={nickname}
+                      roomId={roomId}
+                      changeNumberOfUsers={changeNumberOfUsers}
+                      ref={childRef}
+                    ></Videoplayer>
+                  </VideoWrap>
 
-                <BtnWrap>
-                  <Btn onClick={setSound}>
-                    {soundOn ? (
-                      <>
-                        <img src={Notmute} alt="음소거해제" />
-                        마이크켜기
-                      </>
-                    ) : (
-                      <>
-                        <img src={Microphone} alt="음소거" />
-                        마이크끄기
-                      </>
-                    )}
-                  </Btn>
-                  <Btn onClick={setVideo}>
-                    {videoOn ? (
-                      <>
-                        <img src={NoVideo} alt="마이크 음소거" />
-                        비디오켜기
-                      </>
-                    ) : (
-                      <>
-                        <img src={Video} alt="카메라 버튼" />
-                        비디오끄기
-                      </>
-                    )}
-                  </Btn>
-                  <Btn onClick={fighting}>
-                    <img src={Happy} alt="격려하기" />
-                    격려하기
-                  </Btn>
-                </BtnWrap>
-              </SoundBtn>
-            </div>
-          </DIV>
-        </>
+                  <SoundBtn>
+                    <div>
+                      {isClicked ? (
+                        <>
+                          <Btn
+                            style={{
+                              width: "236px",
+                              justifyContent: "flex-start",
+                            }}
+                          >
+                            <img
+                              src={Speaker}
+                              alt="음량조절"
+                              onClick={setClicked}
+                            />
+                            <VolInput
+                              type="range"
+                              min="0"
+                              max="20"
+                              value={vol}
+                              onChange={(e) => {
+                                setVol(e.target.value);
+                              }}
+                              style={{ margin: "8px" }}
+                            />
+                            <div>{vol}</div>
+                          </Btn>
+                        </>
+                      ) : (
+                        <>
+                          <BubbleWrap>
+                            <div>먼저 음소거해제 버튼을 눌러주세요!</div>
+                          </BubbleWrap>
+                          <Btn onClick={setClicked}>
+                            <img src={Mute} alt="비디오 음소거해제 버튼" />
+                            <div>음소거해제</div>
+                          </Btn>
+                        </>
+                      )}
+                    </div>
+
+                    <BtnWrap>
+                      <Btn onClick={setSound}>
+                        {soundOn ? (
+                          <>
+                            <img src={Notmute} alt="음소거해제" />
+                            마이크켜기
+                          </>
+                        ) : (
+                          <>
+                            <img src={Microphone} alt="음소거" />
+                            마이크끄기
+                          </>
+                        )}
+                      </Btn>
+                      <Btn onClick={setVideo}>
+                        {videoOn ? (
+                          <>
+                            <img src={NoVideo} alt="마이크 음소거" />
+                            비디오켜기
+                          </>
+                        ) : (
+                          <>
+                            <img src={Video} alt="카메라 버튼" />
+                            비디오끄기
+                          </>
+                        )}
+                      </Btn>
+                      <Btn onClick={fighting}>
+                        <img src={Happy} alt="격려하기" />
+                        격려하기
+                      </Btn>
+                    </BtnWrap>
+                  </SoundBtn>
+                </div>
+              </DIV>
+            </>
+          )}
+        </Background>
+      ) : (
+        modalOn && <RoomClickModalForLogin />
       )}
-    </Background>
+    </>
   );
 };
 
 const Background = styled.div`
   margin: 0px auto;
-  overflow-y: hidden;
+  ${"" /* overflow-y: hidden; */}
 `;
 
 const BubbleWrap = styled.div`
@@ -218,7 +253,7 @@ const BubbleWrap = styled.div`
 
 const DIV = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 98vh; //100vh
   padding-top: 64px;
   margin: 0px 0px auto;
   display: flex;
@@ -248,7 +283,8 @@ const TimerWrap = styled.div`
 
 const VideoWrap = styled.div`
   width: 1320px;
-  height: 616px;
+  ${"" /* height: 616px; */}
+  height: 610px;
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -263,7 +299,8 @@ const VideoWrap = styled.div`
 
 const MainVideo = styled.div`
   width: 1096px;
-  line-height: 616px;
+  height: 500px; //추가
+  ${"" /* line-height: 616px; */}
   border-radius: 12px;
   @media screen and (max-width: 1440px) {
     width: 758px;

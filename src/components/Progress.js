@@ -24,16 +24,16 @@ function Progress(props) {
 
   // 프로그래스 단위 초
   useEffect(() => {
-    if (curYoutubeTime >= changeToSeconds(roomInfo.videoLength) * 0.245) {
+    if (curYoutubeTime >= (changeToSeconds(roomInfo.videoLength) - 1) * 0.245) {
       setText("화이팅!!");
     }
-    if (curYoutubeTime >= changeToSeconds(roomInfo.videoLength) * 0.5) {
+    if (curYoutubeTime >= (changeToSeconds(roomInfo.videoLength) + 1) * 0.5) {
       setText("벌써 절반이나 왔어요!");
     }
-    if (curYoutubeTime >= changeToSeconds(roomInfo.videoLength) * 0.745) {
+    if (curYoutubeTime >= (changeToSeconds(roomInfo.videoLength) - 1) * 0.745) {
       setText("거의 다 왔습니다! 조금만 더 힘내요!");
     }
-    if (curYoutubeTime === changeToSeconds(roomInfo.videoLength)) {
+    if (curYoutubeTime >= changeToSeconds(roomInfo.videoLength)) {
       setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
     }
   }, [leftSeconds]);
@@ -49,7 +49,7 @@ function Progress(props) {
           <ProgressBar
             completed={curYoutubeTime ? curYoutubeTime : 0}
             isLabelVisible={false}
-            maxCompleted={changeToSeconds(roomInfo.videoLength) - 1}
+            maxCompleted={changeToSeconds(roomInfo.videoLength) - 2}
             height="12px"
             bgColor="#0028fa"
           />

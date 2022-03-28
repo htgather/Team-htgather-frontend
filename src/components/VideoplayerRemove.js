@@ -214,8 +214,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
   }
 
   socket.on("checkCurStatus", (object) => {
-    // console.log(object);
-    // setCheckCurStatus(object);
     checkCurStatus.current = object;
   });
 
@@ -360,13 +358,12 @@ const Videoplayer = React.forwardRef((props, ref) => {
         myArea.removeChild(emojiBox);
       }, 2000);
       emojiBox.className = "emojiBox";
-      console.log(roomName, socketID);
+
       socket.emit("emoji", roomName, socketID);
     },
   }));
   // 여긴 다른 사람들에게 띄우는 부분
   socket.on("emoji", (remoteSocketId) => {
-    // console.log(remoteSocketId);
     const remoteDiv = document.getElementById(`${remoteSocketId}`);
     const emojiBox = document.createElement("img");
     emojiBox.src = HiFive;
@@ -433,8 +430,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
     </>
   );
 });
-
-
 
 const MemberWrap = styled.div`
   height: 616px;

@@ -17,13 +17,14 @@ const addRoom = createAction(ADD_ROOM, (room) => ({
   room,
 }));
 const getEnteringRoom = createAction(GET_ENTERING_ROOM, () => ({}));
-const getSuggestions = createAction(GET_SUGGESTIONS, (suggestions) => ({
+const getSuggestions = createAction(GET_SUGGESTIONS, (suggestions, kind) => ({
   suggestions,
+  kind,
 }));
 const initialState = {
   list: [],
   isStart: false,
-  suggestions: [],
+  suggestions: { recentUrl: {}, bestUrls: [] },
 };
 
 // 게시물 정보 불러오기 axios 요청 _ 카테고리가 있을 경우 그에 따라 다른 요청
@@ -162,16 +163,31 @@ const getSuggestionsDB = () => {
         const suggestionsArray = [
           response.data["recentUrl"],
           ...response.data["bestUrls"],
-        ].filter((i) => i.length !== 0);
+        ];
+
         const suggestion = [];
         (async () => {
-          for (let link of suggestionsArray) {
-            const info = await _getVideoInfo(_parserVideoId(link));
-            suggestion.push({ ...info, link });
+          for (let i = 0; i < suggestionsArray.length; i++) {
+            const info = await _getVideoInfo(
+              _parserVideoId(suggestionsArray[i])
+            );
+            if (i === 0) {
+              dispatch(
+                getSuggestions(
+                  { ...info, link: suggestionsArray[i] },
+                  "recentUrl"
+                )
+              );
+            } else {
+              suggestion.push({ ...info, link: suggestionsArray[i] });
+            }
           }
-          dispatch(getSuggestions(suggestion));
+          dispatch(getSuggestions(suggestion, "bestUrls"));
         })();
+
+        // dispatch(getSuggestions(suggestions));
       })
+
       .catch((error) => {
         console.error(error);
       });
@@ -197,7 +213,11 @@ export default handleActions(
 
     [GET_SUGGESTIONS]: (state, action) =>
       produce(state, (draft) => {
-        draft.suggestions = action.payload.suggestions;
+        if (action.payload.kind === "recentUrl") {
+          draft.suggestions.recentUrlInfo = action.payload.suggestions;
+        } else {
+          draft.suggestions.bestUrlsInfo = action.payload.suggestions;
+        }
       }),
   },
   initialState

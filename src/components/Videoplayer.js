@@ -16,12 +16,12 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
   // const [checkCurStatus, setCheckCurStatus] = useState();
-  const checkCurStatus = useRef();
+  const checkEnterStatus = useRef();
   const videoGrid = useRef();
   // const muteBtn = useRef();
   // const cameraBtn = useRef();
   // const leaveBtn = useRef();
-  const cameraSelect = useRef();
+  // const cameraSelect = useRef();
   // const call = useRef();
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
@@ -35,10 +35,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
   let peopleInRoom = 1;
 
   const [socket, setSocket] = useState(null);
-
-  useEffect(() => {});
-  useEffect(() => {}, []);
-  useEffect(() => {}, [muted]);
 
   useEffect(() => {
     const socket = io("https://test.kimjeongho-server.com", {
@@ -75,9 +71,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     });
 
     socket.on("checkCurStatus", (object) => {
-      // console.log(object);
-      // setCheckCurStatus(object);
-      checkCurStatus.current = object;
+      checkEnterStatus.current = object;
     });
 
     // 두명이상이 들어올때부터 실행이 되는데, 누가 들어올 때마다 처음 사람빼고 실행되는 듯
@@ -117,7 +111,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
     // 여긴 다른 사람들에게 띄우는 부분
     socket.on("emoji", (remoteSocketId) => {
-      // console.log(remoteSocketId);
       const remoteDiv = document.getElementById(`${remoteSocketId}`);
       const emojiBox = document.createElement("img");
       emojiBox.src = HiFive;
@@ -279,13 +272,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
         videoGrid.appendChild(div);
 
         // 입장시 현재인원들의 카메라 및 음소거 상태 확인
-
-        if (checkCurStatus.current[id].screensaver) {
+        if (!checkEnterStatus.current[id]) {
+          return;
+        }
+        if (checkEnterStatus.current[id].screensaver) {
           const screensaver = document.createElement("div");
           screensaver.className = "screensaver";
           div.appendChild(screensaver);
         }
-        if (checkCurStatus.current[id].muted) {
+        if (checkEnterStatus.current[id].muted) {
           const muteIcon = document.createElement("div");
           muteIcon.className = "muteIcon";
           nickNameContainer.prepend(muteIcon);
@@ -300,24 +295,14 @@ const Videoplayer = React.forwardRef((props, ref) => {
         socket.emit("ice", event.candidate, remoteSocketId);
       }
     }
-
-    // async function getCameras() {
-    //   try {
-    //     const devieces = await navigator.mediaDevices.enumerateDevices();
-    //     const cameras = devieces.filter(
-    //       (device) => device.kind === "videoinput"
-    //     );
-
-    //     cameras.forEach((camera) => {
-    //       const option = document.createElement("option");
-    //       option.value = cameras[0].deviceId;
-    //       option.innerText = camera.label;
-    //       cameraSelect.current.append(option);
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    function LeaveRoom() {
+      socket.disconnect();
+      myStream.getTracks().forEach((track) => track.stop());
+      // clearAllVideos();
+    }
+    return () => {
+      LeaveRoom();
+    };
   }, []);
 
   //페이지가 마운트되고 "join_room" Event 함수 실행 1
@@ -337,29 +322,18 @@ const Videoplayer = React.forwardRef((props, ref) => {
         history.push("/");
         window.location.reload();
       });
-
-    return () => {
-      LeaveRoom();
-    };
   }, [socket]);
 
   //나가기를 누르면 나한테 벌어지는 일
-  function LeaveRoom() {
-    // dispatch(roomActions.exitRoomDB(roomName));
-    socket.disconnect();
-    myStream.getTracks().forEach((track) => track.stop());
-    clearAllVideos();
-  }
-
-  function clearAllVideos() {
-    const streams = document.querySelector("#video-grid");
-    const streamArr = streams.querySelectorAll("div");
-    streamArr.forEach((streamElement) => {
-      if (streamElement.id !== "mystream") {
-        streams.removeChild(streamElement);
-      }
-    });
-  }
+  // function clearAllVideos() {
+  //   const streams = document.querySelector("#video-grid");
+  //   const streamArr = streams.querySelectorAll("div");
+  //   streamArr.forEach((streamElement) => {
+  //     if (streamElement.id !== "mystream") {
+  //       streams.removeChild(streamElement);
+  //     }
+  //   });
+  // }
 
   function removeVideo(leavedSocketId) {
     const streams = document.querySelector("#video-grid");
@@ -407,10 +381,20 @@ const Videoplayer = React.forwardRef((props, ref) => {
       }
     },
 
+    handleAllMute: () => {
+      Audio.forEach((track) => (track.enabled = false));
+      const nickNameContainer = document.querySelector("#nickNameContainer");
+      if (muted === false) {
+        setMuted(true);
+        const muteIcon = document.createElement("div");
+        muteIcon.className = "muteIcon";
+        nickNameContainer.prepend(muteIcon);
+        socket.emit("mic_check", roomName, socketID, true);
+      }
+    },
+
     showEmoji: () => {
       const myArea = document.querySelector("#mystream");
-      // const emojiBox = document.createElement("h1");
-      // emojiBox.innerText = "👍";
       const emojiBox = document.createElement("img");
       emojiBox.src = HiFive;
       myArea.appendChild(emojiBox);
@@ -418,7 +402,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
         myArea.removeChild(emojiBox);
       }, 2000);
       emojiBox.className = "emojiBox";
-      console.log(roomName, socketID);
       socket.emit("emoji", roomName, socketID);
     },
   }));
@@ -460,7 +443,7 @@ const MemberWrap = styled.div`
   }
 
   .memberVideo {
-    margin-bottom: 8px;
+    margin-bottom: 10px; //화상채팅간 영상간격
     width: 200px;
     height: 112px;
     border-radius: 8px;

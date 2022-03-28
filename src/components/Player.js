@@ -25,6 +25,7 @@ function Player(props) {
     const recordsData = {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
       category: roomInfo.category,
+      videoUrl: roomInfo.videoUrl,
     };
     dispatch(commonActions.saveRecordsDB(recordsData));
     props.setIsDone(true);
@@ -46,42 +47,42 @@ function Player(props) {
 
   return (
     <Container>
-      {/* <div style={{ pointerEvents: "none" }}> */}
-      <BeforeTimer
-        roomInfo={roomInfo}
-        setIsPlaying={setIsPlaying}
-        player={player}
-      ></BeforeTimer>
-      <ReactPlayer
-        url={roomInfo.videoUrl}
-        width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
-        height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
-        ref={player}
-        playing={isPlaying}
-        // 특정시점부터 시작
-        config={{
-          youtube: {
-            playerVars: {
-              start: 1,
+      <div style={{ pointerEvents: "none" }}>
+        <BeforeTimer
+          roomInfo={roomInfo}
+          setIsPlaying={setIsPlaying}
+          player={player}
+        ></BeforeTimer>
+        <ReactPlayer
+          url={roomInfo.videoUrl}
+          width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
+          height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
+          ref={player}
+          playing={isPlaying}
+          // 특정시점부터 시작
+          config={{
+            youtube: {
+              playerVars: {
+                start: 1,
+              },
             },
-          },
-        }}
-        onStart={() => {
-          props.setIsStart(true);
-        }}
-        onEnded={endVideo}
-        muted={isMuted}
-        volume={vol / 20}
-        controls
-      />
-      {/* </div> */}
+          }}
+          onStart={() => {
+            props.setIsStart(true);
+          }}
+          onEnded={endVideo}
+          muted={isMuted}
+          volume={vol / 20}
+          controls
+        />
+      </div>
     </Container>
   );
 }
 
 const Container = styled.div`
   width: 1095px;
-  height: 100%;
+  height: 123%; //100%
   display: flex;
   justify-content: center;
   align-items: center;

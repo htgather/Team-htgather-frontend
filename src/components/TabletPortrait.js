@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Lottie from 'react-lottie';
-import Trophy from '../Images/Trophy.json';
+import Lottie from "react-lottie";
+import Trophy from "../Images/Trophy.json";
 
 const TabletPortrait = (props) => {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -14,11 +14,11 @@ const TabletPortrait = (props) => {
     animationData: Trophy,
     // loop: true,
     autoplay: true,
-    background: 'transparent',
+    background: "transparent",
     speed: 5,
     rendererSettings: {
-      className: 'animation', // svg에 적용
-      preserveAspectRatio: 'xMidYMid slice',
+      className: "animation", // svg에 적용
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
   React.useEffect(() => {
@@ -37,7 +37,10 @@ const TabletPortrait = (props) => {
   return (
     <DIV>
       <TextWrap>
-        <Lottie options={lottieOptions} style={{ width: '300px', height: '300px' }}></Lottie>
+        <Lottie
+          options={lottieOptions}
+          style={{ width: "300px", height: "300px" }}
+        ></Lottie>
         홈트게더는 가로화면에 최적화되어있어요 <br />
         화면을 돌려 사용해주세요💡
       </TextWrap>
