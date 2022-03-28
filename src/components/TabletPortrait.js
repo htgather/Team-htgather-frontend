@@ -51,10 +51,20 @@ const TabletPortrait = (props) => {
 const DIV = styled.div`
   width: 100vw;
   height: 100vh;
+  position: absolute;
   background-color: #add;
-  display: flex;
+  z-index: 999;
+  ${"" /* display: flex; */}
   justify-content: center;
   align-items: center;
+  /* Portrait orientation */
+  @media screen and (orientation: portrait) {
+    display: flex;
+  }
+  /* Landscape orientation */
+  @media screen and (orientation: landscape) {
+    display: none;
+  }
 `;
 
 const TextWrap = styled.div`

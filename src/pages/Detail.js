@@ -9,6 +9,7 @@ import ExitModal from "../components/modals/ExitModal";
 
 import Player from "../components/Player";
 import Progress from "../components/Progress";
+import TabletPortrait from "../components/TabletPortrait";
 
 import Mute from "../Images/Mute.png";
 import Speaker from "../Images/Speaker.png";
@@ -42,7 +43,15 @@ const Detail = (props) => {
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
+  const [tablet, setTablet] = React.useState(
+    window.matchMedia("(orientation: portrait)").matches
+  );
   // const [curYoutubeTime,setCurYoutubeTime] =React.useState(0);
+
+  // 모바일 접속시
+  const NewMedia = window.matchMedia("screen and (max-width:767px)");
+  // 태블릿 세로
+  const tabletColumn = window.matchMedia("(orientation: portrait)").matches; //세로:ture, 가로:false
 
   const childRef = React.useRef();
   const changeNumberOfUsers = (text) => {
@@ -74,6 +83,13 @@ const Detail = (props) => {
 
   const dispatch = useDispatch();
   React.useEffect(() => {
+    if (NewMedia.matches) {
+      history.replace("/");
+      return;
+    }
+    // window.addEventListener("orientationchange", () => {
+    //   setTablet(tabletColumn);
+    // });
     if (!roomInfo) {
       if (!isLocal) {
         var result = window.confirm("로그인이 필요합니다.");
@@ -96,6 +112,7 @@ const Detail = (props) => {
 
   return (
     <>
+      <TabletPortrait />
       {isLocal ? (
         <Background>
           {roomInfo && (
