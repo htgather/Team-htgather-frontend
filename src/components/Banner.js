@@ -6,6 +6,7 @@ import banner1 from '../Images/banner1.png';
 import banner2 from '../Images/banner2.png';
 
 const Banner = () => {
+  const isLogin = localStorage.getItem('isLogin');
   // 배너인덱스를 useState로 관리
   const [bannerIndex, setBannerIndex] = React.useState(0);
 
@@ -54,7 +55,7 @@ const Banner = () => {
                 alt="오류제보 배너"
                 width="315px"
                 onClick={() => {
-                  window.open(bug_report);
+                  isLogin ? window.open(bug_report) : window.alert('로그인 후 이용가능합니다');
                 }}
               />
             ) : (
@@ -63,7 +64,7 @@ const Banner = () => {
                 alt="사용후기 배너"
                 width="315px"
                 onClick={() => {
-                  window.open(report);
+                  isLogin ? window.open(bug_report) : window.alert('로그인 후 이용가능합니다');
                 }}
               />
             )}
