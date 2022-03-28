@@ -10,6 +10,7 @@ import noneCheckBox from "../../Images/MakeRoomModalIcon_noneCheckBox.png";
 import youtubeLogo from "../../Images/MakeRoomModalIcon_youtube.png";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Dropdown from "../Dropdown";
+import DropdownArrowIcon from "../../Images/DropdownArrowIcon.png";
 import { _parserVideoId, _getVideoInfo } from "../YoutubeDataAPI";
 import { actionCreators as roomActions } from "../../redux/modules/room";
 import RecommendModal from "./RecommendModal";
@@ -65,14 +66,17 @@ const MakeRoomModal = (props) => {
     if (isSecret) {
       $pwInputBox.current.style.pointerEvents = "none";
       $pwInput.current.value = "";
-      // $postMessage.current.style.visibility = "hidden";
+      setPwInputWrong(false);
     } else {
       $pwInputBox.current.style.pointerEvents = "auto";
-      // $postMessage.current.style.visibility = "visible";
     }
   };
   const pwOnkeydown = (e) => {
     let code = e.keyCode;
+    if ($pwInput.current.value.length < 3) {
+      setPwInputWrong(true);
+      return;
+    }
     if (
       (code > 47 && code < 58) ||
       (code > 95 && code < 106) ||
@@ -163,16 +167,8 @@ const MakeRoomModal = (props) => {
   };
 
   return (
-    <Background
-      onClick={() => {
-        // setIsMakeModal(false);
-        // document.body.style.overflow = "unset";
-      }}
-    >
-      <MakeRoomContainer
-        ref={modal}
-        // onClick={(e) => e.stopPropagation()}
-      >
+    <Background>
+      <MakeRoomContainer ref={modal}>
         <MakeRoomHeader className="boldText">
           방 만들기
           <img
@@ -180,7 +176,6 @@ const MakeRoomModal = (props) => {
             alt="엑스 아이콘"
             onClick={() => {
               setIsMakeModal(false);
-              // document.body.style.overflow = "unset";
             }}
             style={{ cursor: "pointer" }}
           />
@@ -191,7 +186,7 @@ const MakeRoomModal = (props) => {
             <p style={{ fontSize: "16px" }}>{inputTextarea.length} / 50자</p>
           </Label>
           <RoomNameInput
-            maxLength={49}
+            maxLength={50}
             type="text"
             placeholder="생성할 방의 이름을 입력해주세요"
             ref={$RoomNameInput}
@@ -244,7 +239,6 @@ const MakeRoomModal = (props) => {
               className="youtubeLinkText"
               color="#878e95"
               rel="noreferrer"
-              style={{ display: "flex", alignItems: "center" }}
             >
               <img
                 src={youtubeLogo}
@@ -272,7 +266,11 @@ const MakeRoomModal = (props) => {
               }}
             >
               추천 영상 보기
-              <IoMdArrowDropdown className="arrowIcon"></IoMdArrowDropdown>
+              <img
+                src={DropdownArrowIcon}
+                alt="드롭다운화살표"
+                style={{ marginLeft: "2px" }}
+              ></img>
             </div>
             {isRecommend && (
               <RecommendModal
@@ -471,6 +469,20 @@ const LinkInputContainer = styled.div`
     line-height: 1.43;
     letter-spacing: -0.56px;
     text-align: left;
+    display: flex;
+    align-items: center;
+  }
+  a:link {
+    color: #878e95;
+  }
+  a:visited {
+    color: #878e95;
+  }
+  a:hover {
+    color: red;
+  }
+  a:active {
+    color: #878e95;
   }
 `;
 
@@ -484,7 +496,7 @@ const LinkInputBox = styled.div`
     letter-spacing: -0.56px;
     position: absolute;
     color: #4a5056;
-    right: 16px;
+    right: 12px;
     top: 48%;
     display: flex;
     align-items: center;
@@ -563,7 +575,7 @@ const PwInput = styled.input`
   height: 40px;
   border-radius: 8px;
   background-color: #f1f3f5;
-  padding: 16px;
+  padding: 12px;
   resize: none;
   border: none;
   // outline: none;
