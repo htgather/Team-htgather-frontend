@@ -6,6 +6,8 @@ import Screensaver from "../Images/Videoplayer_screensaver.png";
 import Mute from "../Images/Videoplayer_mute.png";
 //Style
 import styled from "styled-components";
+import invite from "../Images/Videoplayer_invite.png";
+import { findByLabelText } from "@testing-library/react";
 
 const Videoplayer = React.forwardRef((props, ref) => {
   console.log("영상통화");
@@ -26,7 +28,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
   const mystream = useRef();
-
+  console.log(videoGrid.current);
   let nickname = props.nickname;
 
   let myPeerConnection;
@@ -165,14 +167,8 @@ const Videoplayer = React.forwardRef((props, ref) => {
         audio: true,
         video: { facingMode: "user" },
       };
-      // const cameraConstraints = {
-      //   audio: true,
-      //   video: { deviceId: { exact: deviceId } },
-      // };
+
       try {
-        // myStream = await navigator.mediaDevices.getUserMedia(
-        //   deviceId ? cameraConstraints : initialConstraints
-        // );
         myStream = await navigator.mediaDevices.getUserMedia(
           initialConstraints
         );
@@ -182,9 +178,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
         myvideo.current.muted = true;
         setAudio(myStream.getAudioTracks());
         setVideo(myStream.getVideoTracks());
-        // if (!deviceId) {
-        //   await getCameras();
-        // }
       } catch (error) {
         console.log(error);
       }
@@ -236,8 +229,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
       peopleInRoom++;
 
-      // const title = document.getElementById("numberOfusers");
-      // title.innerText = `현재인원 : ${peopleInRoom}`;
       changeNumberOfUsers(`${peopleInRoom}/5`);
       return myPeerConnection;
     }
@@ -407,7 +398,13 @@ const Videoplayer = React.forwardRef((props, ref) => {
   }));
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+      }}
+    >
       <MemberWrap ref={videoGrid} id="video-grid">
         <div ref={mystream} id="mystream" className="videoBox">
           <video
@@ -418,7 +415,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
             className="memberVideo myVideo"
           ></video>
           <div id="nickNameContainer" className="nickNameContainer">
-            {/* <div className="mutedIcon" /> */}
             <div id="name" className="nickName"></div>
           </div>
           <div
@@ -428,14 +424,16 @@ const Videoplayer = React.forwardRef((props, ref) => {
           ></div>
         </div>
       </MemberWrap>
-    </>
+      <img src={invite} className="invite"></img>
+    </div>
   );
 });
 
 const MemberWrap = styled.div`
-  height: 616px;
+  max-height: 616px;
   display: flex;
   flex-direction: column;
+
   @media screen and (max-width: 1440px) {
     position: absolute;
     right: 0px;

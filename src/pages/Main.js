@@ -1,31 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import Header from '../components/Header';
-import RoomCard from '../components/Card';
-import RoomSectionTab from '../components/RoomSectionTab';
-import MySection from '../components/MySection';
-import RoomClickModal from '../components/modals/RoomClickModal';
-import MobileLanding from '../components/MobileLanding';
-import TabletPortrait from '../components/TabletPortrait';
-import toTop from '../Images/toTop.png';
+import Header from "../components/Header";
+import RoomCard from "../components/Card";
+import RoomSectionTab from "../components/RoomSectionTab";
+import MySection from "../components/MySection";
+import RoomClickModal from "../components/modals/RoomClickModal";
+import MobileLanding from "../components/MobileLanding";
+import TabletPortrait from "../components/TabletPortrait";
+import toTop from "../Images/toTop.png";
 
-import jwt_decode from 'jwt-decode';
-import { actionCreators as roomActions } from '../redux/modules/room';
-import { actionCreators as playerActions } from '../redux/modules/player';
-import { Socket } from 'socket.io-client';
+import jwt_decode from "jwt-decode";
+import { actionCreators as roomActions } from "../redux/modules/room";
+import { actionCreators as playerActions } from "../redux/modules/player";
+import { Socket } from "socket.io-client";
 
 const Main = (props) => {
   const dispatch = useDispatch();
 
   // 모바일 접속시
-  const NewMedia = window.matchMedia('screen and (max-width:767px)');
+  const NewMedia = window.matchMedia("screen and (max-width:767px)");
   // 태블릿 세로
-  const tablet = window.matchMedia('(orientation: portrait)');
+  const tablet = window.matchMedia("(orientation: portrait)");
 
-  const roomList = useSelector((state) => state.room.list.filter((e) => e.isStart === false));
-
+  const roomList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === false)
+  );
+  const enteringList = useSelector((state) =>
+    state.room.list.filter((e) => e.isStart === true)
+  ); //확인
   const [isLoginModal, setIsLoginModal] = React.useState();
 
   // 위로가기 버튼 관련
@@ -37,7 +41,7 @@ const Main = (props) => {
   };
 
   const moveToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setScrollY(0); // ScrollY 의 값을 초기화
     setBtnStatus(false); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
   };
@@ -48,11 +52,11 @@ const Main = (props) => {
 
   React.useEffect(() => {
     const watch = () => {
-      window.addEventListener('scroll', handleFollow);
+      window.addEventListener("scroll", handleFollow);
     };
     watch();
     return () => {
-      window.removeEventListener('scroll', handleFollow);
+      window.removeEventListener("scroll", handleFollow);
     };
   }, []);
 
@@ -84,19 +88,36 @@ const Main = (props) => {
               )}
               <MySection></MySection>
               <RoomSection>
-                <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
+                <RoomSectionTab
+                  setIsLoginModal={setIsLoginModal}
+                ></RoomSectionTab>
                 <RoomCardList>
                   {roomList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    ></RoomCard>
                   ))}
-                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-                  {/* {enteringList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal} />
-                  ))} */}
+                  <RoomCard
+                    last="last"
+                    setIsLoginModal={setIsLoginModal}
+                  ></RoomCard>
+                  {enteringList.map((e, i) => (
+                    <RoomCard
+                      key={i}
+                      roomInfo={e}
+                      setIsLoginModal={setIsLoginModal}
+                    />
+                  ))}
                 </RoomCardList>
               </RoomSection>
               <ToTopBtn onClick={moveToTop}>
-                <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+                <img
+                  src={toTop}
+                  alt="최상단 이동 버튼"
+                  className={BtnStatus ? "topBtn active" : "topBtn"}
+                />
               </ToTopBtn>
             </Container>
           </>
