@@ -1,51 +1,57 @@
-# react-setting
 
-1. 사용방법
-   yarn install
-   yarn start
+<h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼</h1>
+<p align='center'>
+  <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
+  <img src='https://img.shields.io/badge/ReactRouter-v5.2.1-pink?logo=React Router'/>
+  <img src='https://img.shields.io/badge/StyledComponents-v^5.3.3-violet?logo=styled-components'/>
+  <img src='https://img.shields.io/badge/Redux-v4.1.2-764ABC?logo=Redux'/>
+  <img src='https://img.shields.io/badge/Axios-v0.26.0-pink?'/>
+  <br>
+  <img src='https://img.shields.io/badge/ReactPlayer-v2.9.0-red?'/>
+  <img src='https://img.shields.io/badge/WebRTC-333333?logo=WebRTC'/>
+  <img src='https://img.shields.io/badge/socket.io-v4.4.1-white?logo=Socket.io'/>
+  <img src="https://img.shields.io/badge/CloudFront-D05C4B?style=for-the-badge&logo=CloudFront&logoColor=white">
+  <img src="https://img.shields.io/badge/Route53-E68B49?style=for-the-badge&logo=Route53s&logoColor=white">
+  <img src="https://img.shields.io/badge/S3-569A31?style=for-the-badge&logo=S3&logoColor=white">
+</p>
 
-2. 폴더구조
-   src > components / elements / pages / redux / shared
-   redux > modules 폴더와 configureStore.js
-   shared > App.js / App.css / Request.js(axios통신)
+<br>
 
-   설명:
-   components 폴더 생성 (컴포넌트 단위 ex: 카드,헤더 등)
-   elements 폴더 생성 (최소단위 컴포넌트 ex : 버튼, input,text,Grid 등)
-   pages 폴더생성 (페이지 단위 ex: main, detail 등)
-   redux 풀더 생성 (redux )
-   shared 폴더 생성 (페이지에서 전범위에 적용될 것들 ex: App, api,Cookie 등등 )
+## 프로젝트 기간
+>2월25일 부터 4월8일 까지(6주)
 
-3. 사용 패키지
+<br>
 
-   yarn add styled-components react-router-dom@5.2.1 history@4.10.1 connected-react-router@6.8.0 redux react-redux redux-actions redux-thunk immer redux-logger axios
+##  홈트게더 서비스 소개
+### :runner:유튜브 영상과 함께 하는 홈트레이닝에 참여해보세요.
+> - 화상캠을 통해 비대면에서도, 함께 운동하는 기분을 느껴보세요.
+> - 다 같이 하나의 유튜브 운동 영상으로 운동해봐요.
+### ✔️ 간편하게 나의 수준에 맞는 운동을 찾아보세요.
+> - 난이도, 운동 종류에 따라 나에게 맞는 방을 찾거나 개설할 수 있어요.
+> - 내가 마지막으로 했던 운동 영상, 현재 TOP3 영상을 추천해줘요. 
+### 🏆 친구와 함께 운동해보세요.
+> - 비밀방 기능을 통해, 친구끼리만 운동할 수 있어요.
+> - 링크복사 버튼을 통해 간편하게 친구를 초대해보세요.
+### :date: 운동을 완료하고, 나만의 기록을 남겨보세요.
+> - 달력스탬프, 랭킹, 통계시스템을 통해, 동기부여를 하고, 운동을 지속하게 해줘요. 
 
-   보통 필수적으로 설치하는 라이브러리
-   css관련
-   yarn add styled-components // js에서 css를 작성할 수 있음.
-   페이지이동관련
-   yarn add react-router-dom@5.2.1 // 주소창의 url에 따라 페이지를 보여줌
-   yarn add history@4.10.1 // 새로고침없이 페이지이동 가능
-   yarn add connected-react-router@6.8.0 // 히스토리를 전역에서 사용가능하게 해줌
-   상태관리관련
-   yarn add redux react-redux //상태관리 라이브러리인 리덕스 설치
-   yarn add redux-actions // 리덕스 액션 관리를 용이하게 해줌.
-   yarn add redux-thunk // 비동기 작업을 처리할 때 많이 사용되는 thunk라이브러리 설치
-   yarn add immer // 불변성관리를 위한 immer
-   yarn add redux-logger // 리덕스 실행 전과 후를 콘솔 창에서 볼 수 있게해줌.
-   서버통신
-   yarn add axios // 서버와의 통신을 위한 axios설치
-   npm install buffer // 토큰값 해독을 위한 buffer 설치
-   "이건 조그마한 TEST 입니다"
 
-   추가 사용 라이브러리
-   아이콘 관련
-   yarn add react-icons // 참고 : https://react-icons.github.io/react-icons/icons?name=fc
-   yarn add react-player // 유튜브 api플레이어를 리액트에서 좀 더 쉽게 쓰게 해줌. 참고: https://www.npmjs.com/package/react-player/v/2.9.0
-   yarn add moment // 시간데티터 관리를 쉽게
-   yarn add jwt-decode // jwt 디코딩
-   npm install @ramonak/react-progress-bar //프로그레스바 라이브러리
-   yarn add "antd": "^4.19.2", // 원형프로그래스바
-   "styled-components": "^5.3.3",
+<br>
 
-   "web-vitals": "^2.1.4"
+## <a href="https://github.com/wkqkel/work-out-at-home-FE/wiki">📌 기술 및 고민 정리 - WIKI</a>
+## 📌 주요 기능
+## 🎫 프로젝트 구조
+![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png)
+## 🛠 Front-End 기술스택
+![Stack](https://user-images.githubusercontent.com/59644518/131254702-f92170c3-6c53-4b5f-ae77-ee3eb58e71c7.png)
+
+## 📌 팀원소개
+### 프론트엔드
++ 박상원: https://github.com/wkqkel
++ 고주열: https://github.com/Noah8922
++ 이규리: https://github.com/degurrrrrr
+### 백엔드
++ 김정호: https://github.com/fancyers
++ 강경묵: https://github.com/G-moog
++ 김승호: https://github.com/naho199345
+
