@@ -41,7 +41,7 @@ const Banner = () => {
     return () => clearInterval(slider);
   }, []);
 
-  const report = 'https://forms.gle/CvGWzLRzHtEZkBJU6';
+  const report = 'https://forms.gle/Shna39cfEnXqkLfu6';
   const bug_report = 'https://forms.gle/ympKY1rVpspLX1Ut8';
 
   return (
@@ -64,12 +64,11 @@ const Banner = () => {
                 alt="사용후기 배너"
                 width="315px"
                 onClick={() => {
-                  isLogin ? window.open(bug_report) : window.alert('로그인 후 이용가능합니다');
+                  isLogin ? window.open(report) : window.alert('로그인 후 이용가능합니다');
                 }}
               />
             )}
           </ContentBox>
-          /* <button onClick={window.open(report)}>랄라</button> */
         ))}
       </Carousel>
       <CircleBox>

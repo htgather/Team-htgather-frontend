@@ -14,6 +14,9 @@ const MyInfoModal = (props) => {
     setMyModal(false);
   };
 
+  const report = 'https://forms.gle/Shna39cfEnXqkLfu6';
+  const bug_report = 'https://forms.gle/ympKY1rVpspLX1Ut8';
+
   return (
     <div style={{ position: 'relative' }}>
       <DIV style={{ height: is_local ? '290px' : '350px' }}>
@@ -27,11 +30,11 @@ const MyInfoModal = (props) => {
           <DESC>
             {is_local ? (
               <>
-                <a href="https://forms.gle/CvGWzLRzHtEZkBJU6" target="_blank">
+                <a href={report} target="_blank">
                   ✍️ 홈트게더 이용 후기 남기기
                 </a>
                 <br />
-                <a href="https://forms.gle/ympKY1rVpspLX1Ut8" target="_blank">
+                <a href={bug_report} target="_blank">
                   😱 오류, 버그 신고하기
                 </a>
               </>
