@@ -343,16 +343,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
       });
   }, [socket]);
 
-  //나가기를 누르면 나한테 벌어지는 일
-  // function clearAllVideos() {
-  //   const streams = document.querySelector("#video-grid");
-  //   const streamArr = streams.querySelectorAll("div");
-  //   streamArr.forEach((streamElement) => {
-  //     if (streamElement.id !== "mystream") {
-  //       streams.removeChild(streamElement);
-  //     }
-  //   });
-  // }
 
   function removeVideo(leavedSocketId) {
     const streams = document.querySelector('#video-grid');

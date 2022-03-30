@@ -10,15 +10,15 @@ import { PlayInfoContext } from "../context/PlayInfoContext";
 function Player(props) {
   console.log("유튜브플레이어");
 
-  // useSelector로 방정보 받아오고, params이용해 주소창에서 roomId받아와서 일치하는 방정보 추출
-  const roomInfo = props.roomInfo;
+ 
   const dispatch = useDispatch();
-  const { isMuted, vol, setIsDone, isDone } = props;
+  const { roomInfo,isMuted, vol, setIsDone, isDone } = props;
   // 동영상 재생으로 관리될 변수들
 
   const player = React.useRef();
-  const [isPlaying, setIsPlaying] = React.useState(false);
   const sendCurYoutubeTime = React.useRef();
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
   const NewMedia = window.matchMedia("screen and (max-width: 1440px)");
 
   const endVideo = () => {
@@ -33,6 +33,7 @@ function Player(props) {
     setIsDone(true);
   };
 
+  
   React.useEffect(() => {
     if (isPlaying) {
       sendCurYoutubeTime.current = setInterval(() => {
@@ -89,7 +90,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   @media screen and (max-width: 1440px) {
     width: 758px;
     height: 100%;
@@ -136,8 +136,11 @@ const BeforeTimer = (props) => {
     // unMount되는 경우 interval함수 제거
     return () => clearInterval(getTimeInterval);
   }, []);
+  // 끝나면 영상이 종료되었습니다
   React.useEffect(() => {
-    setCountTime("영상이 종료되었습니다");
+    if(isDone){
+      setCountTime("영상이 종료되었습니다");
+    }
   }, [isDone]);
   return <>{countTime && <Count>{countTime}</Count>}</>;
 };

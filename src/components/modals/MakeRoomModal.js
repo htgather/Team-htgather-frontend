@@ -75,7 +75,6 @@ const MakeRoomModal = (props) => {
     let code = e.keyCode;
     if ($pwInput.current.value.length < 3) {
       setPwInputWrong(true);
-      return;
     }
     if (
       (code > 47 && code < 58) ||
@@ -131,7 +130,9 @@ const MakeRoomModal = (props) => {
       isSecret &&
       ($pwInput.current.value === "" ||
         $pwInput.current.value.length < 4 ||
-        $pwInput.current.value.length > 8)
+        $pwInput.current.value.length > 8||
+        isNaN($pwInput.current.value)
+        )
     ) {
       window.alert("비밀번호는 숫자 4~8자 사이로 입력해주세요");
       return;
