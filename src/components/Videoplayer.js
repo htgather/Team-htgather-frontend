@@ -11,7 +11,7 @@ import invite from '../Images/Videoplayer_invite.png';
 import { findByLabelText } from '@testing-library/react';
 
 const Videoplayer = React.forwardRef((props, ref) => {
-  console.log('영상통화');
+  // console.log('영상통화');
   const roomName = props.roomId;
   const [muted, setMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);

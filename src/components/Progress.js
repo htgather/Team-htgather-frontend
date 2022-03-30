@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Progress(props) {
   const { roomInfo, isDone } = props;
-  console.log("프로그래스바");
+  // console.log("프로그래스바");
   let curYoutubeTime = useSelector(
     (state) => state.player.playInfo.curYoutubeTime
   );
