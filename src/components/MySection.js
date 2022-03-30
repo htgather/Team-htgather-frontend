@@ -39,7 +39,7 @@ const MySection = () => {
         >
           <img src={clap} alt="박수 아이콘" width="24" />
         </div>
-        <div>{nickName ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
+        <div>{nickName ? `d아아아아아악 안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
       </MySectionTitle>
       <MySectionContent>
         <MyPart />
