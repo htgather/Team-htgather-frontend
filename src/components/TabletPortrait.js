@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
 import tablet from '../Images/tablet.json';
-import tablet2 from '../Images/tablet2.png';
 
 const TabletPortrait = (props) => {
   const lottieOptions = {
@@ -31,21 +30,11 @@ const TabletPortrait = (props) => {
 };
 
 const DIV = styled.div`
-  width: 100vw;
   height: 100vh;
-  position: absolute;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* Portrait orientation */
-  /* @media screen and (orientation: portrait) {
-    display: flex; */
-  }
-  /* Landscape orientation */
-  /* @media screen and (orientation: landscape) {
-  } */
 `;
 
 const TextWrap = styled.div`
