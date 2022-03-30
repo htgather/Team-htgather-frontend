@@ -48,12 +48,12 @@ const Header = (props) => {
             style={{ height: "32px", marginRight: "12px" }}
           />
           {roomTitle}
-          <img
+          {/* <img
             src={CopyLink}
             alt="링크공유"
             onClick={copyLink}
             style={{ cursor: "pointer", marginLeft: "25px" }}
-          />
+          /> */}
           {UrlCopied && (
             <img
               src={URLCopied}
