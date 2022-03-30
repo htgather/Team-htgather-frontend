@@ -106,7 +106,7 @@ const Detail = (props) => {
 
   return (
     <>
-      <TabletPortrait />
+      {/* <TabletPortrait /> */}
       {isLocal ? (
         <Background>
           {roomInfo && (

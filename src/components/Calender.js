@@ -134,9 +134,9 @@ const Calender = () => {
 const CalenderBox = styled.div`
   width: 315px;
   height: 284px;
-  @media screen and (max-width: 1023px) {
+  /* @media screen and (max-width: 1023px) {
     width: 30vh;
-  }
+  } */
 `;
 
 const CalenderTopBar = styled.div`

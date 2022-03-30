@@ -1,14 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import tablet2 from '../Images/tablet.png';
+import Lottie from 'react-lottie';
+import tablet from '../Images/tablet.json';
+import tablet2 from '../Images/tablet2.png';
 
 const TabletPortrait = (props) => {
+  const lottieOptions = {
+    animationData: tablet,
+    loop: true,
+    autoplay: true,
+    background: 'transparent',
+    speed: 0.5,
+    rendererSettings: {
+      className: 'animation', // svg에 적용
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
   return (
     <DIV>
-      <TabletImage />
+      <Lottie options={lottieOptions} style={{ width: '460px', height: '460px' }}></Lottie>
       <TextWrap>
-        홈트게더는 가로화면에 최적화되어있어요 <br />
-        화면을 돌려 사용해주세요💡
+        <p>
+          홈트게더는 가로 모드에서 이용할 수 있어요
+          <br /> 태블릿을 돌려 가로로 이용해 주세요
+        </p>
       </TextWrap>
     </DIV>
   );
@@ -24,44 +40,21 @@ const DIV = styled.div`
   justify-content: center;
   align-items: center;
   /* Portrait orientation */
-  @media screen and (orientation: portrait) {
-    display: flex;
+  /* @media screen and (orientation: portrait) {
+    display: flex; */
   }
   /* Landscape orientation */
-  @media screen and (orientation: landscape) {
-    display: none;
-  }
-`;
-
-const TabletImage = styled.div`
-  width: 400px;
-  height: 400px;
-  background-color: #add;
-  background: url(${tablet2});
-  /* url('Images/tablet2.png'); */
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-bottom: 40px;
-
-  animation-name: rotate;
-  animation-duration: 3s;
-  animation-iteration-count: 3;
-  animation-direction: normal; //alternate;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(-90deg);
-    }
-  }
+  /* @media screen and (orientation: landscape) {
+  } */
 `;
 
 const TextWrap = styled.div`
+  margin-top: 80px;
+  width: 38rem; //586px;
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: -2%;
+  line-height: 50px;
   text-align: center;
   z-index: 3;
 `;

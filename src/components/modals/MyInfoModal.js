@@ -96,8 +96,8 @@ const DIV = styled.div`
   width: 400px;
   height: 500px;
   border-radius: 12px;
-  top: 45px;
-  right: 33px;
+  top: 2.4rem;
+  right: -1.3rem;
   padding: 50px;
   position: absolute;
   :before {

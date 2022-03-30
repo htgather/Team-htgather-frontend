@@ -65,8 +65,8 @@ const DIV = styled.div`
   z-index: 30;
   width: 400px;
   border-radius: 12px;
-  top: 0.9rem;
-  right: -1.25rem;
+  top: 2.4rem;
+  right: -1.3rem;
   padding: 50px;
   position: absolute;
   :before {

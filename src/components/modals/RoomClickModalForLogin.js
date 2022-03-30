@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { history } from "../../redux/configureStore";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { history } from '../../redux/configureStore';
 
-import KakaoLogin from "../KakaoLogin";
-import loginImg from "../../Images/loginImg.png";
-import lock from "../../Images/lock.png";
-import Close from "../../Images/Close.png";
+import KakaoLogin from '../KakaoLogin';
+import loginImg from '../../Images/loginImg.png';
+import lock from '../../Images/lock.png';
+import Close from '../../Images/Close.png';
 
 const RoomClickModal = (props) => {
-  const is_local = localStorage.getItem("isLogin") ? true : false;
+  const is_local = localStorage.getItem('isLogin') ? true : false;
 
   const closeModal = () => {
-    history.replace("/");
+    history.replace('/');
   };
 
   return (
@@ -24,37 +24,32 @@ const RoomClickModal = (props) => {
             </CloseBtn>
             <LeftSide>
               <ImgWrap>
-                <img
-                  src={loginImg}
-                  alt="운동하는 사람들"
-                  style={{ width: "274px", height: "208px" }}
-                />
+                <img src={loginImg} alt="운동하는 사람들" style={{ width: '274px', height: '208px' }} />
                 <div
                   style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    marginTop: "22px",
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    marginTop: '22px',
                   }}
                 >
                   홈트게더와 함께하는 홈 트레이닝
                 </div>
                 <div
                   style={{
-                    fontSize: "16px",
-                    marginTop: "28px",
-                    color: "#aaa",
+                    fontSize: '16px',
+                    marginTop: '28px',
+                    color: '#aaa',
                   }}
                 >
                   혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
                   <br />
-                  홈트게더와 함께 사람들과 소통하며 재미있는 홈트를
-                  시작해보세요.
+                  홈트게더와 함께 사람들과 소통하며 재미있는 홈트를 시작해보세요.
                 </div>
               </ImgWrap>
             </LeftSide>
             <RightSide>
               <Container>
-                <img src={lock} alt="자물쇠 아이콘" style={{ width: "68px" }} />
+                <img src={lock} alt="자물쇠 아이콘" style={{ width: '68px' }} />
                 <TextWrap>
                   로그인 후에 확인할 수 있어요
                   <br />
@@ -78,10 +73,10 @@ const BackGround = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
-  @media screen and (max-width: 1023px) {
+  /* @media screen and (max-width: 1023px) {
     width: 100vh;
     height: 1000vw;
-  }
+  } */
 `;
 
 const ModalContainer = styled.div`
@@ -95,8 +90,6 @@ const ModalContainer = styled.div`
   height: 480px;
   text-align: center;
   z-index: 999;
-  @media screen and (max-width: 1023px) {
-  }
 `;
 const DIV = styled.div`
   background-color: #f1f3f5;

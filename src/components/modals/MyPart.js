@@ -35,11 +35,11 @@ const DIV = styled.div`
   justify-content: start;
   align-items: center;
 
-  @media screen and (min-width: 767px) and (max-width: 1023px) {
+  /* @media screen and (min-width: 767px) and (max-width: 1023px) {
     width: 100vh;
     margin-left: 1rem;
     display: none;
-  }
+  } */
 `;
 
 const Container = styled.div`
