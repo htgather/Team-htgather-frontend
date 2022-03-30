@@ -135,14 +135,13 @@ const BeforeTimer = (props) => {
           clearInterval(getTimeInterval);
         }
       }
-      function skip() {
-        clearInterval(getTimeInterval);
-        setIsPlaying(true);
-        setCountTime(false);
-      }
-      window.skip = skip;
     }, 1000);
-
+    function skip() {
+      clearInterval(getTimeInterval);
+      setIsPlaying(true);
+      setCountTime(false);
+    }
+    window.skip= skip
     // unMount되는 경우 interval함수 제거
     return () => clearInterval(getTimeInterval);
   }, []);
