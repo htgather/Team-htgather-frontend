@@ -58,9 +58,9 @@ const DIV = styled.div`
   width: 315px;
   height: 284px;
   border-radius: 12px;
-  @media screen and (max-width: 1023px) {
+  /* @media screen and (max-width: 1023px) {
     width: 30vh;
-  }
+  } */
 `;
 
 const Header = styled.div`

@@ -64,10 +64,10 @@ const BackGround = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
-  @media screen and (max-width: 1023px) {
+  /* @media screen and (max-width: ) {
     width: 100vh;
     height: 1000vw;
-  }
+  } */
 `;
 
 const ModalContainer = styled.div`

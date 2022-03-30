@@ -40,11 +40,9 @@ const Ranking = (props) => {
                   <DIV key={i}>
                     <Noti>
                       <TextWrap>
-                        <strong>아직 랭킹이 집계되기 전입니다.</strong>
+                        이번주 운동 랭킹을 집계중이에요
                         <br />
-                        홈트게더를 이용하고 <br />
-                        순위에 이름을 올려보세요!!
-                        <br />
+                        운동 시간은 계속 기록되고 있어요!
                       </TextWrap>
                     </Noti>
                   </DIV>
@@ -73,17 +71,7 @@ const Ranking = (props) => {
                 color: p.isMe ? '#fff' : '',
               }}
             >
-              <Rank>
-                {p.rank === 1 ? (
-                  <img src={gold} alt="금메달" width="20" />
-                ) : p.rank && p.rank === 2 ? (
-                  <img src={silver} alt="은메달" width="20" />
-                ) : p.rank && p.rank === 3 ? (
-                  <img src={bronze} alt="동메달" width="20" />
-                ) : (
-                  p.rank
-                )}
-              </Rank>
+              <Rank>{p.rank === 1 ? <img src={gold} alt="금메달" width="20" /> : p.rank && p.rank === 2 ? <img src={silver} alt="은메달" width="20" /> : p.rank && p.rank === 3 ? <img src={bronze} alt="동메달" width="20" /> : p.rank}</Rank>
               <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
               <Count>{p.countPerWeek}회</Count>
             </OneRank>
@@ -98,9 +86,6 @@ const DIV = styled.div`
   width: 315px;
   height: 284px;
   border-radius: 12px;
-  @media screen and (max-width: 1023px) {
-    width: 30vh;
-  }
 `;
 
 const Header = styled.div`
@@ -120,9 +105,6 @@ const RankContainer = styled.div`
   align-items: start;
   row-gap: 4px;
   margin: 0px 24px 24px 24px;
-  @media screen and (max-width: 1023px) {
-    width: 25vh;
-  }
 `;
 
 const OneRank = styled.div`
@@ -136,9 +118,6 @@ const OneRank = styled.div`
   color: rgb(34, 37, 41);
   letter-spacing: -0.48px;
   /* padding: 0px 8px; */
-  @media screen and (max-width: 1023px) {
-    width: 25vh;
-  }
 `;
 
 const Rank = styled.div`
@@ -173,7 +152,8 @@ const Count = styled.div`
 //집계 0일때
 const Noti = styled(OneRank)`
   width: 267px;
-  height: 196px;
+  height: 177px;
+  border-radius: 8px;
   display: inline-flex;
   justify-content: center;
   flex-direction: column;
@@ -184,7 +164,7 @@ const IsMeZero = styled(OneRank)`
   background-color: #405efb;
   color: #fff;
   position: absolute;
-  bottom: 27px;
+  bottom: 25px;
 `;
 
 const TextWrap = styled.div`
