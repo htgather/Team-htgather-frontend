@@ -4,6 +4,7 @@ import { history } from "../redux/configureStore";
 import HiFive from "../Images/Videoplayer_emoji.png";
 import Screensaver from "../Images/Videoplayer_screensaver.png";
 import Mute from "../Images/Videoplayer_mute.png";
+import URLCopied from "../Images/URLCopied.png";
 //Style
 import styled from "styled-components";
 import invite from "../Images/Videoplayer_invite.png";
@@ -17,6 +18,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const [Audio, setAudio] = useState([]);
   const [Video, setVideo] = useState([]);
   const [socketID, setSocketID] = useState("");
+  const [UrlCopied, setUrlCopied] = React.useState(false);
   // const [checkCurStatus, setCheckCurStatus] = useState();
   const checkEnterStatus = useRef();
   const videoGrid = useRef();
@@ -28,13 +30,32 @@ const Videoplayer = React.forwardRef((props, ref) => {
   const changeNumberOfUsers = props.changeNumberOfUsers;
   const myvideo = useRef();
   const mystream = useRef();
-  console.log(videoGrid.current);
+  const urlcopybox = useRef();
   let nickname = props.nickname;
 
   let myPeerConnection;
   let myStream;
   let pcObj = {};
   let peopleInRoom = 1;
+
+  const deleteCopyImg = setTimeout(() => {
+    setUrlCopied(false);
+  }, 4000);
+
+  // const { Kakao } = window; urlcopybox.current.style.display = "none";
+
+  const copyLink = () => {
+    let url;
+    let textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+    url = window.document.location.href;
+    textarea.value = url;
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    setUrlCopied(!UrlCopied);
+    deleteCopyImg();
+  };
 
   const [socket, setSocket] = useState(null);
 
@@ -55,6 +76,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       if (length === 1) {
         return;
       }
+
       for (let i = 0; i < length - 1; i++) {
         //가장 최근 들어온 브라우저 제외
         try {
@@ -159,6 +181,13 @@ const Videoplayer = React.forwardRef((props, ref) => {
       removeVideo(leavedSocketId);
       peopleInRoom--;
       changeNumberOfUsers(`${peopleInRoom}/5`);
+      for (let i = 0; i < peopleInRoom; i++) {
+        if (peopleInRoom <= 4) {
+          urlcopybox.current.style.display = "block";
+        } else if (peopleInRoom === 5) {
+          urlcopybox.current.style.display = "none";
+        }
+      }
     });
 
     //사용자의 stream 가져오는 함수
@@ -228,6 +257,15 @@ const Videoplayer = React.forwardRef((props, ref) => {
       pcObj[remoteSocketId] = myPeerConnection;
 
       peopleInRoom++;
+      console.log(peopleInRoom);
+
+      for (let i = 0; i < peopleInRoom; i++) {
+        if (peopleInRoom <= 4) {
+          urlcopybox.current.style.display = "block";
+        } else if (peopleInRoom === 5) {
+          urlcopybox.current.style.display = "none";
+        }
+      }
 
       changeNumberOfUsers(`${peopleInRoom}/5`);
       return myPeerConnection;
@@ -424,7 +462,23 @@ const Videoplayer = React.forwardRef((props, ref) => {
           ></div>
         </div>
       </MemberWrap>
-      <img src={invite} className="invite"></img>
+      <URLCopyBox>
+        <img
+          ref={urlcopybox}
+          src={invite}
+          className="invite"
+          onClick={copyLink}
+          style={{ width: 202, height: 113, cursor: "pointer" }}
+        ></img>
+      </URLCopyBox>
+      {UrlCopied && (
+        <img
+          src={URLCopied}
+          alt="링크 복사 완료"
+          className="copied"
+          style={{ width: 202, marginTop: 10 }}
+        ></img>
+      )}
     </div>
   );
 });
@@ -500,4 +554,15 @@ const MemberWrap = styled.div`
     margin-right: 4px;
   }
 `;
+
+const URLCopyBox = styled.div`
+  @media screen and (max-width: 1440px) {
+    ${
+      "" /* position: relative;
+    right: 0px;
+    top: 50px; */
+    }
+  }
+`;
+
 export default React.memo(Videoplayer);
