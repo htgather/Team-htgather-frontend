@@ -43,9 +43,16 @@ const Detail = (props) => {
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
+  const [tabletsize, setTabletSize] = React.useState(
+    window.matchMedia("(orientation: portrait)")
+  );
 
   // 모바일 접속시
   const NewMedia = window.matchMedia("screen and (max-width:767px)");
+  // 태블릿 세로
+  const tablet = window.matchMedia("(orientation: portrait)"); //세로일때 : true, 가로일때 : false
+  // 웹페이지에서 태블릿 세로만큼
+  const webPortrait = window.matchMedia("screen and (max-width: 767px");
 
   const childRef = React.useRef();
   const changeNumberOfUsers = (text) => {
@@ -81,9 +88,7 @@ const Detail = (props) => {
       history.replace("/");
       return;
     }
-    // window.addEventListener("orientationchange", () => {
-    //   setTablet(tabletColumn);
-    // });
+
     if (!roomInfo) {
       if (!isLocal) {
         var result = window.confirm("로그인이 필요합니다.");
@@ -104,10 +109,18 @@ const Detail = (props) => {
     }
   }, [isStart]);
 
+  console.log(tablet.matches);
+
+  window.addEventListener("orientationchange", () => {
+    setTabletSize(window.matchMedia("(orientation: portrait)"));
+  });
+  console.log(tabletsize);
+
   return (
     <>
-      {/* <TabletPortrait /> */}
-      {isLocal ? (
+      {tablet.matches ? (
+        <TabletPortrait />
+      ) : isLocal ? (
         <Background>
           {roomInfo && (
             <>
