@@ -25,7 +25,7 @@ import jwt_decode from "jwt-decode";
 import CompleteModal from "../components/modals/CompleteModal";
 import RoomClickModalForLogin from "../components/modals/RoomClickModalForLogin";
 const Detail = (props) => {
-  console.log("디테일");
+  // console.log("디테일");
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
@@ -96,7 +96,9 @@ const Detail = (props) => {
       dispatch(roomActions.getRoomDB());
     }
   }, []);
-
+  
+  
+  const App = () => {};
   React.useEffect(() => {
     if (isStart) {
       setSoundOn(true);

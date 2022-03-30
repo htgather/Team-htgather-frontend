@@ -8,7 +8,7 @@ import Lottie from "react-lottie";
 import Trophy from "../../Images/Trophy.json";
 
 const CompleteModal = (props) => {
-  console.log("끝모달");
+  // console.log("끝모달");
 
   const [isOpen, setIsOpen] = React.useState(true);
   const [count, setCount] = React.useState(5);
