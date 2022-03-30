@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import ExitModal from "../components/modals/ExitModal";
-import People from "../Images/People.png";
-import Logo from "../Images/Logo_only.svg";
-import CopyLink from "../Images/CopyLink.png";
-import URLCopied from "../Images/URLCopied.png";
+import ExitModal from '../components/modals/ExitModal';
+import People from '../Images/People.png';
+import Logo from '../Images/Logo_only.svg';
+import CopyLink from '../Images/CopyLink.png';
+import URLCopied from '../Images/URLCopied.png';
 
-import { history } from "../redux/configureStore";
+import { history } from '../redux/configureStore';
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
   const { isDone } = props;
   const [modalOn, setModalOn] = React.useState(false);
   const [UrlCopied, setUrlCopied] = React.useState(false);
   const [borderNone, setBorderNone] = React.useState(true);
-  console.log("디테일헤더");
+  console.log('디테일헤더');
   const exitRoom = () => {
     setModalOn(!modalOn);
   };
@@ -27,12 +27,12 @@ const Header = (props) => {
 
   const copyLink = () => {
     let url;
-    let textarea = document.createElement("textarea");
+    let textarea = document.createElement('textarea');
     document.body.appendChild(textarea);
     url = window.document.location.href;
     textarea.value = url;
     textarea.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(textarea);
     setUrlCopied(!UrlCopied);
     deleteCopyImg();
@@ -42,11 +42,7 @@ const Header = (props) => {
     <HeaderContainer>
       <HeaderGrid>
         <RoomTitle>
-          <img
-            src={Logo}
-            alt="홈트게더 로고"
-            style={{ height: "32px", marginRight: "12px" }}
-          />
+          <img src={Logo} alt="홈트게더 로고" style={{ height: '32px', marginRight: '12px' }} />
           {roomTitle}
           {/* <img
             src={CopyLink}
@@ -54,27 +50,19 @@ const Header = (props) => {
             onClick={copyLink}
             style={{ cursor: "pointer", marginLeft: "25px" }}
           /> */}
-          {UrlCopied && (
-            <img
-              src={URLCopied}
-              alt="링크 복사 완료"
-              style={{ marginLeft: "25px" }}
-            ></img>
-          )}
+          {UrlCopied && <img src={URLCopied} alt="링크 복사 완료" style={{ marginLeft: '25px' }}></img>}
         </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
           <HeaderBtn onClick={exitRoom}>
-            <BtnContents style={{ color: "#aeb5bc" }}>나가기</BtnContents>
-            {modalOn && (
-              <ExitModal roomId={roomId} isDone={isDone} exitRoom={exitRoom} />
-            )}
+            <BtnContents style={{ color: '#aeb5bc' }}>나가기</BtnContents>
+            {modalOn && <ExitModal roomId={roomId} isDone={isDone} exitRoom={exitRoom} />}
           </HeaderBtn>
           {/*  인원수*/}
           <HeaderBtn>
             <BtnContents borderNone={borderNone}>
               <img src={People} alt="인원수" />
-              <div style={{ color: "#aeb5bc" }}>{props.numberOfUsers}</div>
+              <div style={{ color: '#aeb5bc' }}>{props.numberOfUsers}</div>
             </BtnContents>
           </HeaderBtn>
         </BtnWrap>
@@ -134,7 +122,7 @@ const BtnContents = styled.div`
   width: 92px;
   height: 40px;
   display: flex;
-  border: ${(props) => (props.borderNone ? "none" : "1px solid #aeb5bc")};
+  border: ${(props) => (props.borderNone ? 'none' : '1px solid #aeb5bc')};
   border-radius: 4px;
   justify-content: space-evenly;
   align-items: center;
