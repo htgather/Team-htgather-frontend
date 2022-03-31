@@ -74,10 +74,8 @@ const Main = (props) => {
         <MobileLanding /> // 모바일인지 여부확인 후 모바일랜딩 페이지
       ) : (
         <>
-          {tablet.matches ? (
             <TabletPortrait />
-          ) : (
-            <>
+            <Box>
               <Header />
               <Container>
                 {isLoginModal && (
@@ -102,8 +100,8 @@ const Main = (props) => {
                   <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
                 </ToTopBtn>
               </Container>
-            </>
-          )}{' '}
+            </Box>
+          )
         </>
       )}
     </Wrap>
@@ -111,21 +109,22 @@ const Main = (props) => {
 };
 
 const Wrap = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
   position: relative;
-  /* .wrap {
-    @media screen and (max-width: 1023px) {
-      height: 100vh;
-      padding: 0 auto;
-    }
-  } */
 `;
+const Box =styled.div`
+@media screen and (orientation: portrait) {
+  display:none;
+}
+overflow-x: hidden;
+`
 
 const DIV = styled.div`
   display: inline-flex;
   justify-content: center;
   margin: auto;
+
 `;
 
 const Container = styled.div`
@@ -176,5 +175,7 @@ const ToTopBtn = styled.div`
   @media screen and (max-width: 1360px) {
     display: none;
   }
+
+
 `;
 export default Main;
