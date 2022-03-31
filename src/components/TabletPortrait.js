@@ -57,6 +57,9 @@ const PortraitBackground = styled.div`
   height: 100vh;
   width: 100vw;
   z-index: 998;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const TextWrap = styled.div`
