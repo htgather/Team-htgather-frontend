@@ -80,32 +80,35 @@ const MyRecordContent = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0px 77px 20px 79px;
-  /* position: relative; */
   * {
     font-size: 14px;
     font-weight: 400;
     color: #4a5056;
   }
   .progressInTextBox {
-    width: 72px;
-    height: 54px;
+    /* width: 72px; */
+    /* height: 54px; */
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    margin: 42px 28px 32px 28px;
+    top: 2.75rem;
+    left: 2.18rem;
+    /* top: 50%; */
+    /* bottom: 50%; */
+    /* margin: 42px 28px 32px 28px; */
   }
   .countPerWeekText {
     font-size: 24px;
-    letter-spacing: -0.96px;
+    line-height: 34px;
+    letter-spacing: -4%;
     color: #222529;
     font-weight: bold;
   }
   .weeklyGoalText {
     font-size: 12px;
-    letter-spacing: -0.48px;
+    line-height: 20px;
+    letter-spacing: -4%;
     color: #aeb5bc;
     font-size: 12px;
   }

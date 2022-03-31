@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import User from "../Images/User.png";
-import lock from "../Images/CardIcon_lock.png";
-import emoji from "../Images/RoomCardIcon_emoji.png";
+import User from '../Images/User.png';
+import lock from '../Images/CardIcon_lock.png';
+import emoji from '../Images/RoomCardIcon_emoji.png';
 
-import MakeRoomModal from "./modals/MakeRoomModal";
-import PasswordModal from "./modals/PasswordModal";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as roomActions } from "../redux/modules/room";
-import { history } from "../redux/configureStore";
+import MakeRoomModal from './modals/MakeRoomModal';
+import PasswordModal from './modals/PasswordModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as roomActions } from '../redux/modules/room';
+import { history } from '../redux/configureStore';
 
 const Card = (props) => {
   const { roomInfo } = props;
   const dispatch = useDispatch();
   const [isMakeModal, setIsMakeModal] = React.useState();
   const [pwdCheckModal, setpwdCheckModal] = React.useState(false);
-  const is_local = localStorage.getItem("isLogin") ? true : false;
+  const is_local = localStorage.getItem('isLogin') ? true : false;
   // const [showModal, setShowModal] = useState(false);
 
   // 카드 클릭시 방입장 함수
@@ -38,21 +38,9 @@ const Card = (props) => {
   if (props.last) {
     return (
       <>
-        {isMakeModal && (
-          <MakeRoomModal
-            setIsMakeModal={setIsMakeModal}
-            isMakeModal={isMakeModal}
-          ></MakeRoomModal>
-        )}
-        <CardContainer
-          last="last"
-          style={{ fontWeight: "bold", fontSize: "18px", lineHeight: "26px" }}
-        >
-          <img
-            src={emoji}
-            alt="이모지 아이콘"
-            style={{ marginBottom: "8px" }}
-          />
+        {isMakeModal && <MakeRoomModal setIsMakeModal={setIsMakeModal} isMakeModal={isMakeModal}></MakeRoomModal>}
+        <CardContainer last="last" style={{ fontWeight: 'bold', fontSize: '18px', lineHeight: '26px' }}>
+          <img src={emoji} alt="이모지 아이콘" style={{ marginBottom: '8px' }} />
           <p>찾으시는 운동방이 없나요?</p>
           <p>직접 만들고 사람들을 모집해보세요!</p>
           <LastCardBtn
@@ -63,7 +51,7 @@ const Card = (props) => {
               }
               setIsMakeModal(true);
             }}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           >
             방만들기
           </LastCardBtn>
@@ -74,73 +62,54 @@ const Card = (props) => {
   // 방 카드
   return (
     <>
-      {roomInfo.password && pwdCheckModal && (
-        <PasswordModal
-          setPwdCheck={setpwdCheckModal}
-          pwdCheckModal={pwdCheckModal}
-          roomInfo={roomInfo}
-        />
-      )}
+      {roomInfo.password && pwdCheckModal && <PasswordModal setPwdCheck={setpwdCheckModal} pwdCheckModal={pwdCheckModal} roomInfo={roomInfo} />}
       <CardContainer onClick={joinRoom} isStart={roomInfo.isStart}>
         {roomInfo.isStart && (
           <CardLock>
             <img src={lock} alt="자물쇠 아이콘" />
             <p
               style={{
-                margin: "14px 0px 8px 0px",
-                fontSize: "20px",
-                fontWeight: "bold",
+                margin: '14px 0px 8px 0px',
+                fontSize: '20px',
+                fontWeight: 'bold',
               }}
             >
               이미 시작된 방이에요
             </p>
-            <p style={{ letterSpacing: "-0.28px", fontSize: "14px" }}>
-              다음에 참여해보세요!
-            </p>
+            <p style={{ letterSpacing: '-0.28px', fontSize: '14px' }}>다음에 참여해보세요!</p>
           </CardLock>
         )}
         <CardImgBox>
           <CardImg thumbnail={roomInfo.videoThumbnail}></CardImg>
           <CardHoverBox>
             <p>{roomInfo.videoTitle}</p>
-            <p style={{ textAlign: "end" }}>{roomInfo.videoLength}</p>
+            <p style={{ textAlign: 'end' }}>{roomInfo.videoLength}</p>
           </CardHoverBox>
         </CardImgBox>
         <CardContent>
           <div>
             <CardTag
-              style={{
-                backgroundColor:
-                  roomInfo.difficulty === "높음"
-                    ? "#2E4EF6"
-                    : roomInfo.difficulty === "보통"
-                    ? "#5C74F2"
-                    : roomInfo.difficulty === "낮음"
-                    ? "#8999ed"
-                    : "",
-              }}
+            // style={{
+            //   backgroundColor:
+            //   roomInfo.difficulty === "높음"
+            //     ? "#2E4EF6"
+            //     : roomInfo.difficulty === "보통"
+            //     ? "#5C74F2"
+            //     : roomInfo.difficulty === "낮음"
+            //     ? "#8999ed"
+            //     : "",
+            // }}
             >
               {roomInfo.difficulty}
             </CardTag>
-            <CardTag style={{ background: "#FEEFDD", color: "#4A5056" }}>
-              {roomInfo.category}
-            </CardTag>
+            <CardTag style={{ background: '#FEEFDD', color: '#4A5056' }}>{roomInfo.category}</CardTag>
           </div>
           <CardTitle>{roomInfo.roomTitle}</CardTitle>
           <CardInfo>
             <p>{roomInfo.videoStartAt} 시작</p>
             <div className="cardInfo_personBox">
-              <img
-                src={User}
-                alt="사람 아이콘"
-                style={{ marginRight: "6px" }}
-              />
-              <p>
-                {roomInfo.numberOfPeopleInRoom > 5
-                  ? 5
-                  : roomInfo.numberOfPeopleInRoom}
-                / 5
-              </p>
+              <img src={User} alt="사람 아이콘" style={{ marginRight: '6px' }} />
+              <p>{roomInfo.numberOfPeopleInRoom > 5 ? 5 : roomInfo.numberOfPeopleInRoom}/ 5</p>
             </div>
           </CardInfo>
         </CardContent>
@@ -187,10 +156,7 @@ const CardContainer = styled.div`
         box-shadow: 0 0px 24px 0 rgba(34, 37, 41, 0.24);
         transition: transform 0.4s, translateY ease-out;
       }`}
-  ${(props) =>
-    props.last
-      ? `display: flex; justify-content: center; align-items:center; flex-direction:column`
-      : ""}
+  ${(props) => (props.last ? `display: flex; justify-content: center; align-items:center; flex-direction:column` : '')}
 `;
 const LastCardBtn = styled.div`
   font-weight: bold;
@@ -223,8 +189,8 @@ const CardContent = styled.div`
 const CardTag = styled.div`
   display: inline-block;
   padding: 4px 8px;
-  background: #8999ed;
-  color: #f8f9fa;
+  background: #f2f4ff;
+  color: #4a5056;
   border-radius: 4px;
   margin-right: 12px;
   font-size: 12px;
