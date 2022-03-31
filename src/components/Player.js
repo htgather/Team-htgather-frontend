@@ -10,9 +10,8 @@ import { PlayInfoContext } from "../context/PlayInfoContext";
 function Player(props) {
   // console.log("유튜브플레이어");
 
- 
   const dispatch = useDispatch();
-  const { roomInfo,isMuted, vol, setIsDone, isDone } = props;
+  const { roomInfo, isMuted, vol, setIsDone, isDone } = props;
   // 동영상 재생으로 관리될 변수들
 
   const player = React.useRef();
@@ -32,7 +31,6 @@ function Player(props) {
     setIsPlaying(false);
     setIsDone(true);
   };
-
 
   React.useEffect(() => {
     if (isPlaying) {
@@ -60,6 +58,7 @@ function Player(props) {
           url={roomInfo.videoUrl}
           width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
           height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
+          className="reactPlayer"
           ref={player}
           playing={isPlaying}
           // 특정시점부터 시작
@@ -90,9 +89,18 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
   @media screen and (max-width: 1440px) {
     width: 758px;
     height: 100%;
+  }
+  ${
+    "" /* .reactPlayer {
+    @media screen and (max-width: 1440px) {
+      width: 758px;
+      height: 100%;
+    }
+  } */
   }
 `;
 
@@ -105,10 +113,8 @@ const BeforeTimer = (props) => {
   const createdAt = new Date(roomInfo.createdAt);
   const videoStartAfter = roomInfo.videoStartAfter;
   const [countTime, setCountTime] = React.useState();
-  
-  function finish(){
-    
-  }
+
+  function finish() {}
   React.useEffect(() => {
     // 방입장시 동영상시작예정시간-현재시간을 setTimeout으로 계속 차이를 계산해서 타이머로 나타냄
     let getTimeInterval = setInterval(() => {
@@ -141,14 +147,14 @@ const BeforeTimer = (props) => {
       setIsPlaying(true);
       setCountTime(false);
     }
-    window.skip= skip
+    window.skip = skip;
     // unMount되는 경우 interval함수 제거
     return () => clearInterval(getTimeInterval);
   }, []);
- 
+
   // 끝나면 영상이 종료되었습니다
   React.useEffect(() => {
-    if(isDone){
+    if (isDone) {
       setCountTime("영상이 종료되었습니다");
     }
   }, [isDone]);

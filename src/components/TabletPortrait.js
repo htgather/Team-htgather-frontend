@@ -1,31 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
-import Lottie from 'react-lottie';
-import tablet from '../Images/tablet.json';
+import React from "react";
+import styled from "styled-components";
+import Lottie from "react-lottie";
+import tablet from "../Images/tablet.json";
 
 const TabletPortrait = (props) => {
   const lottieOptions = {
     animationData: tablet,
     loop: true,
     autoplay: true,
-    background: 'transparent',
+    background: "transparent",
     speed: 0.5,
     rendererSettings: {
-      className: 'animation', // svg에 적용
-      preserveAspectRatio: 'xMidYMid slice',
+      className: "animation", // svg에 적용
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
 
   return (
     <DIV>
       <PortraitBackground>
-      <Lottie options={lottieOptions} style={{ width: '460px', height: '460px' }}></Lottie>
-      <TextWrap>
-        <div>
-          홈트게더는 가로 모드에서 이용할 수 있어요
-          <br /> 태블릿을 돌려 가로로 이용해 주세요
-        </div>
-      </TextWrap>
+        <Lottie
+          options={lottieOptions}
+          style={{ width: "460px", height: "460px" }}
+        ></Lottie>
+        <TextWrap>
+          <div>
+            홈트게더는 가로 모드에서 이용할 수 있어요
+            <br /> 태블릿을 돌려 가로로 이용해 주세요
+          </div>
+        </TextWrap>
       </PortraitBackground>
     </DIV>
   );
@@ -33,7 +36,7 @@ const TabletPortrait = (props) => {
 
 const DIV = styled.div`
   height: 100vh;
-  width:100vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,14 +51,13 @@ const DIV = styled.div`
   @media screen and (orientation: landscape) {
     display: none;
   }
-
 `;
-const PortraitBackground =styled.div`
-background:grey;
-height: 100vh;
-width:100vw;
-z-index:998;
-`
+const PortraitBackground = styled.div`
+  background: grey;
+  height: 100vh;
+  width: 100vw;
+  z-index: 998;
+`;
 
 const TextWrap = styled.div`
   margin-top: 80px;
@@ -65,7 +67,6 @@ const TextWrap = styled.div`
   line-height: 50px;
   text-align: center;
   z-index: 3;
- 
 `;
 
 export default TabletPortrait;
