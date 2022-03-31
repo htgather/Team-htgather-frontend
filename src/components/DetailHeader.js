@@ -14,7 +14,7 @@ const Header = (props) => {
   const [modalOn, setModalOn] = React.useState(false);
   const [UrlCopied, setUrlCopied] = React.useState(false);
   const [borderNone, setBorderNone] = React.useState(true);
-  console.log('디테일헤더');
+  // console.log('디테일헤더');
   const exitRoom = () => {
     setModalOn(!modalOn);
   };

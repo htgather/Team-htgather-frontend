@@ -256,6 +256,7 @@ const CardInfo = styled.div`
 const CardLock = styled.div`
   position: absolute;
   background-color: rgba(34, 37, 41, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(34, 37, 41, 0.12);
   width: 100%;
   height: 100%;
   border-radius: 16px;

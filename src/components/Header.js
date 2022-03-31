@@ -43,6 +43,10 @@ const Header = (props) => {
     }
   };
 
+  const clickBubble = () => {
+    setBubble(false);
+  };
+
   return (
     <HeaderContainer>
       <HeaderGrid>
@@ -72,8 +76,11 @@ const Header = (props) => {
             {!isLocal
               ? bubble && (
                   <BubbleWrap>
-                    홈트게더가 처음이신가요? <br />
-                    사용 방법을 확인해 보세요
+                    <Contents>
+                      홈트게더가 처음이신가요? <br />
+                      사용 방법을 확인해 보세요
+                      <Check onClick={clickBubble}>확인할게요</Check>
+                    </Contents>
                   </BubbleWrap>
                 )
               : null}
@@ -135,6 +142,7 @@ const BubbleWrap = styled.div`
   background-color: #0028fa;
   border-radius: 4px;
   display: inline-flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -151,5 +159,18 @@ const BubbleWrap = styled.div`
     top: -8px;
     right: 12px;
   }
+`;
+
+const Contents = styled.div`
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -4%;
+`;
+const Check = styled.div`
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: -2%;
 `;
 export default Header;

@@ -25,7 +25,7 @@ import jwt_decode from "jwt-decode";
 import CompleteModal from "../components/modals/CompleteModal";
 import RoomClickModalForLogin from "../components/modals/RoomClickModalForLogin";
 const Detail = (props) => {
-  console.log("디테일");
+  // console.log("디테일");
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
@@ -43,9 +43,6 @@ const Detail = (props) => {
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
   const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
-  const [tabletsize, setTabletSize] = React.useState(
-    window.matchMedia("(orientation: portrait)")
-  );
 
   // 모바일 접속시
   const NewMedia = window.matchMedia("screen and (max-width:767px)");
@@ -102,6 +99,7 @@ const Detail = (props) => {
     }
   }, []);
 
+  const App = () => {};
   React.useEffect(() => {
     if (isStart) {
       setSoundOn(true);
@@ -109,18 +107,10 @@ const Detail = (props) => {
     }
   }, [isStart]);
 
-  console.log(tablet.matches);
-
-  window.addEventListener("orientationchange", () => {
-    setTabletSize(window.matchMedia("(orientation: portrait)"));
-  });
-  console.log(tabletsize);
-
   return (
     <>
-      {tablet.matches ? (
-        <TabletPortrait />
-      ) : isLocal ? (
+      <TabletPortrait />
+      {isLocal ? (
         <Background>
           {roomInfo && (
             <>

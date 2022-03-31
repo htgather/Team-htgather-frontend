@@ -1,25 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import Lottie from 'react-lottie';
-import tablet from '../Images/tablet.json';
-import tablet2 from '../Images/tablet2.png';
+import React from "react";
+import styled from "styled-components";
+import Lottie from "react-lottie";
+import tablet from "../Images/tablet.json";
 
 const TabletPortrait = (props) => {
   const lottieOptions = {
     animationData: tablet,
     loop: true,
     autoplay: true,
-    background: 'transparent',
+    background: "transparent",
     speed: 0.5,
     rendererSettings: {
-      className: 'animation', // svg에 적용
-      preserveAspectRatio: 'xMidYMid slice',
+      className: "animation", // svg에 적용
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
 
   return (
     <DIV>
-      <Lottie options={lottieOptions} style={{ width: '460px', height: '460px' }}></Lottie>
+      <Lottie
+        options={lottieOptions}
+        style={{ width: "460px", height: "460px" }}
+      ></Lottie>
       <TextWrap>
         <p>
           홈트게더는 가로 모드에서 이용할 수 있어요
@@ -31,21 +33,20 @@ const TabletPortrait = (props) => {
 };
 
 const DIV = styled.div`
-  width: 100vw;
   height: 100vh;
-  position: absolute;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 999;
   /* Portrait orientation */
-  /* @media screen and (orientation: portrait) {
-    display: flex; */
+  @media screen and (orientation: portrait) {
+    display: flex;
   }
   /* Landscape orientation */
-  /* @media screen and (orientation: landscape) {
-  } */
+  @media screen and (orientation: landscape) {
+    display: none;
+  }
 `;
 
 const TextWrap = styled.div`

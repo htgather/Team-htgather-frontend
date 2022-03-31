@@ -11,7 +11,7 @@ import invite from "../Images/Videoplayer_invite.png";
 import { findByLabelText } from "@testing-library/react";
 
 const Videoplayer = React.forwardRef((props, ref) => {
-  console.log("영상통화");
+  // console.log('영상통화');
   const roomName = props.roomId;
   const [muted, setMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);
@@ -38,7 +38,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
   let pcObj = {};
   let peopleInRoom = 1;
 
-  const deleteCopyImg = setTimeout(() => {
+  const DeleteCopyImg = setTimeout(() => {
     setUrlCopied(false);
   }, 4000);
 
@@ -54,7 +54,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     document.execCommand("copy");
     document.body.removeChild(textarea);
     setUrlCopied(!UrlCopied);
-    deleteCopyImg();
+    DeleteCopyImg();
   };
 
   const [socket, setSocket] = useState(null);
@@ -352,17 +352,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
         window.location.reload();
       });
   }, [socket]);
-
-  //나가기를 누르면 나한테 벌어지는 일
-  // function clearAllVideos() {
-  //   const streams = document.querySelector("#video-grid");
-  //   const streamArr = streams.querySelectorAll("div");
-  //   streamArr.forEach((streamElement) => {
-  //     if (streamElement.id !== "mystream") {
-  //       streams.removeChild(streamElement);
-  //     }
-  //   });
-  // }
 
   function removeVideo(leavedSocketId) {
     const streams = document.querySelector("#video-grid");

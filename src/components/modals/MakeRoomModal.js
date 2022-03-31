@@ -24,7 +24,7 @@ const MakeRoomModal = (props) => {
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
   const difficultyList = ["낮음", "보통", "높음"];
   const [clickedStartTime, setClickedStartTime] = React.useState();
-  const startTimeList = ["5분 뒤", "10분 뒤", "1분 뒤"];
+  const startTimeList = ["5분 뒤", "10분 뒤", "20분 뒤"];
   // 태그선택
   const $RoomNameInput = React.useRef();
   const $LinkInput = React.useRef();
@@ -42,9 +42,7 @@ const MakeRoomModal = (props) => {
     $LinkInput.current.addEventListener("focus", () => {
       setIsRecommend(true);
     });
-    // $LinkInput.current.addEventListener("blur", () => {
-    //   setIsRecommend(false);
-    // });
+   
     $LinkInput.current.addEventListener("input", () => {
       if ($LinkInput.current.value) {
         setIsRecommend(false);
@@ -75,7 +73,6 @@ const MakeRoomModal = (props) => {
     let code = e.keyCode;
     if ($pwInput.current.value.length < 3) {
       setPwInputWrong(true);
-      return;
     }
     if (
       (code > 47 && code < 58) ||
@@ -131,7 +128,9 @@ const MakeRoomModal = (props) => {
       isSecret &&
       ($pwInput.current.value === "" ||
         $pwInput.current.value.length < 4 ||
-        $pwInput.current.value.length > 8)
+        $pwInput.current.value.length > 8||
+        isNaN($pwInput.current.value)
+        )
     ) {
       window.alert("비밀번호는 숫자 4~8자 사이로 입력해주세요");
       return;

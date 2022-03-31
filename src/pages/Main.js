@@ -20,9 +20,9 @@ const Main = (props) => {
   const dispatch = useDispatch();
 
   // 태블릿 세로
-  const tablet = window.matchMedia('(orientation: portrait)');
+  const tablet = window.matchMedia('screen and (orientation: portrait)');
   // 웹페이지에서 태블릿 세로만큼
-  const webPortrait = window.matchMedia('screen and (max-width: 767px');
+  // const webPortrait = window.matchMedia('screen and (max-width: 820px');
   // 모바일 접속시
   const NewMedia = window.matchMedia('screen and (max-width:480px)');
 
@@ -70,40 +70,42 @@ const Main = (props) => {
 
   return (
     <Wrap>
-      <div className="wrap">
-        {NewMedia.matches ? (
-          <MobileLanding />
-        ) : webPortrait.matches ? (
-          <TabletPortrait />
-        ) : (
-          <>
-            <Header />
-            <Container>
-              {isLoginModal && (
-                <DIV setIsLoginModal={setIsLoginModal}>
-                  <RoomClickModal setIsLoginModal={setIsLoginModal} />
-                </DIV>
-              )}
-              <MySection></MySection>
-              <RoomSection>
-                <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
-                <RoomCardList>
-                  {roomList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-                  ))}
-                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-                  {enteringList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal} />
-                  ))}
-                </RoomCardList>
-              </RoomSection>
-              <ToTopBtn onClick={moveToTop}>
-                <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
-              </ToTopBtn>
-            </Container>
-          </>
-        )}
-      </div>
+      {NewMedia.matches ? (
+        <MobileLanding /> // 모바일인지 여부확인 후 모바일랜딩 페이지
+      ) : (
+        <>
+          {tablet.matches ? (
+            <TabletPortrait />
+          ) : (
+            <>
+              <Header />
+              <Container>
+                {isLoginModal && (
+                  <DIV setIsLoginModal={setIsLoginModal}>
+                    <RoomClickModal setIsLoginModal={setIsLoginModal} />
+                  </DIV>
+                )}
+                <MySection></MySection>
+                <RoomSection>
+                  <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
+                  <RoomCardList>
+                    {roomList.map((e, i) => (
+                      <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                    ))}
+                    <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+                    {enteringList.map((e, i) => (
+                      <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal} />
+                    ))}
+                  </RoomCardList>
+                </RoomSection>
+                <ToTopBtn onClick={moveToTop}>
+                  <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
+                </ToTopBtn>
+              </Container>
+            </>
+          )}{' '}
+        </>
+      )}
     </Wrap>
   );
 };
