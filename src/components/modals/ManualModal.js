@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Close from '../../Images/Close.png';
 import guide1 from '../../Images/guide1.png';
-import guide2 from '../../Images/guide2.png';
-import guide2_2 from '../../Images/guide2_2.png';
 import guide3 from '../../Images/guide3.png';
 import guide4 from '../../Images/guide4.png';
 import guide5 from '../../Images/guide5.png';

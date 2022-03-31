@@ -7,7 +7,6 @@ import guide2_2 from '../../Images/guide2_2.png';
 const Guide = () => {
   return (
     <>
-      {/* <div>랄라</div> */}
       <Img></Img>
       <SmallImg></SmallImg>
     </>
