@@ -73,8 +73,8 @@ const MostExercised = (props) => {
   );
 };
 const MostExercisedContainer = styled.div`
-  width: 315px;
-  height: 136px;
+  width: 316px;
+  height: 132px;
   background: white;
   border-radius: 12px;
   display: flex;
@@ -86,8 +86,9 @@ const MostExercisedHeader = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
-  margin: 24px 0px 12px 24px;
+  margin: 24px 0px 16px 24px;
   line-height: 24px;
+  letter-spacing: -4%;
 `;
 
 const MostExercisedContentBox = styled.div`
@@ -104,8 +105,7 @@ const MostExercisedContent = styled.div`
   border-radius: 6px;
   background-color: #f1f3f5;
   display: flex;
-  line-height: 2
-  letter-spacing: -0.64px;
+  letter-spacing: -4%;
 
   .MostExercisedContentTextBox {
     display: flex;
@@ -129,12 +129,10 @@ const MostExercisedContent = styled.div`
 `;
 
 const Noti = styled.div`
-  width: 260px;
   font-size: 14px;
   letter-spacing: -4%;
   line-height: 20px;
   color: #aeb5bc;
-  margin-top: 3px;
 `;
 
 export default MostExercised;
