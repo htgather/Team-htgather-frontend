@@ -18,34 +18,54 @@ const TabletPortrait = (props) => {
 
   return (
     <DIV>
+      <PortraitBackground>
       <Lottie options={lottieOptions} style={{ width: '460px', height: '460px' }}></Lottie>
       <TextWrap>
-        <p>
+        <div>
           홈트게더는 가로 모드에서 이용할 수 있어요
           <br /> 태블릿을 돌려 가로로 이용해 주세요
-        </p>
+        </div>
       </TextWrap>
+      </PortraitBackground>
     </DIV>
   );
 };
 
 const DIV = styled.div`
   height: 100vh;
+  width:100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 999;
+  /* Portrait orientation */
+  @media screen and (orientation: portrait) {
+    display: flex;
+  }
+  /* Landscape orientation */
+  @media screen and (orientation: landscape) {
+    display: none;
+  }
+
 `;
+const PortraitBackground =styled.div`
+background:grey;
+height: 100vh;
+width:100vw;
+z-index:998;
+`
 
 const TextWrap = styled.div`
   margin-top: 80px;
-  width: 38rem; //586px;
   font-size: 36px;
   font-weight: bold;
   letter-spacing: -2%;
   line-height: 50px;
   text-align: center;
   z-index: 3;
+ 
 `;
 
 export default TabletPortrait;
