@@ -241,7 +241,7 @@ const Detail = (props) => {
 
 const Background = styled.div`
   margin: 0px auto;
-  ${"" /* overflow-y: hidden; */}
+  overflow-x: hidden;
 `;
 
 const BubbleWrap = styled.div`
@@ -272,7 +272,7 @@ const BubbleWrap = styled.div`
 
 const DIV = styled.div`
   width: 100%;
-  height: 98vh; //100vh
+  height: 100vh; //100vh
   padding-top: 64px;
   margin: 0px 0px auto;
   display: flex;
