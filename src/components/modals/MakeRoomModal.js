@@ -8,7 +8,6 @@ import blackEye from "../../Images/MakeRoomModalIcon_blackEye.png";
 import checkBox from "../../Images/MakeRoomModalIcon_checkBox.png";
 import noneCheckBox from "../../Images/MakeRoomModalIcon_noneCheckBox.png";
 import youtubeLogo from "../../Images/MakeRoomModalIcon_youtube.png";
-import { IoMdArrowDropdown } from "react-icons/io";
 import Dropdown from "../Dropdown";
 import DropdownArrowIcon from "../../Images/DropdownArrowIcon.png";
 import { _parserVideoId, _getVideoInfo } from "../YoutubeDataAPI";
@@ -42,7 +41,7 @@ const MakeRoomModal = (props) => {
     $LinkInput.current.addEventListener("focus", () => {
       setIsRecommend(true);
     });
-   
+
     $LinkInput.current.addEventListener("input", () => {
       if ($LinkInput.current.value) {
         setIsRecommend(false);
@@ -128,9 +127,8 @@ const MakeRoomModal = (props) => {
       isSecret &&
       ($pwInput.current.value === "" ||
         $pwInput.current.value.length < 4 ||
-        $pwInput.current.value.length > 8||
-        isNaN($pwInput.current.value)
-        )
+        $pwInput.current.value.length > 8 ||
+        isNaN($pwInput.current.value))
     ) {
       window.alert("비밀번호는 숫자 4~8자 사이로 입력해주세요");
       return;
@@ -215,7 +213,7 @@ const MakeRoomModal = (props) => {
           </SelectBox>
           <CategoryBox>
             <p className="boldText" style={{ margin: "14px 0px" }}>
-              카테고리
+              운동종류
             </p>
             <Dropdown
               dropdownList={categoryList}
@@ -319,7 +317,7 @@ const MakeRoomModal = (props) => {
             <PwInputBox ref={$pwInputBox}>
               <PwInput
                 type={isStar ? "password" : "text"}
-                placeholder="비밀번호 설정"
+                placeholder="비밀번호를 입력해주세요"
                 ref={$pwInput}
                 maxLength={8}
                 onKeyDown={pwOnkeydown}
@@ -514,7 +512,6 @@ const LinkInput = styled.input`
   padding: 12px 118px 12px 12px;
   resize: none;
   border: none;
-
   &::placeholder {
     color: #878e95;
     font-size: 16px;

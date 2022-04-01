@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import MoreInfoModal from '../components/modals/MoreInfoModal';
-import MyInfoModal from '../components/modals/MyInfoModal';
-import ManualModal from '../components/modals/ManualModal';
-import Logo from '../Images/Logo.svg';
-import Icon_Menu from '../Images/Icon_Menu.png';
-import manualBtn from '../Images/manualBtn.png';
-import CardIcon_person from '../Images/CardIcon_person.png';
-import { history } from '../redux/configureStore';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MoreInfoModal from "../components/modals/MoreInfoModal";
+import MyInfoModal from "../components/modals/MyInfoModal";
+import ManualModal from "../components/modals/ManualModal";
+import Logo from "../Images/Logo.svg";
+import hamburgerIcon from "../Images/HeaderIcon_hamburger.svg";
+import manualBtn from "../Images/HeaderIcon_manualBtn.svg";
+import personIcon from "../Images/HeaderIcon_person.svg";
+import { history } from "../redux/configureStore";
 
 const Header = (props) => {
-  const isLocal = localStorage.getItem('isLogin') ? true : false;
+  const isLocal = localStorage.getItem("isLogin") ? true : false;
 
   const [showModal, setShowModal] = React.useState(false);
   const [myModal, setMyModal] = React.useState(false);
@@ -53,26 +53,34 @@ const Header = (props) => {
         <img
           src={Logo}
           alt="홈트게더 로고"
-          style={{ width: '130px', height: '32px' }}
+          style={{ width: "130px", height: "32px" }}
           onClick={() => {
-            history.push('/');
+            history.push("/");
           }}
         />
 
-        <IconsWrap style={{ width: isLocal ? '' : '113px' }}>
+        <IconsWrap style={{ width: isLocal ? "" : "113px" }}>
           <Icons onClick={openModal}>
-            <img src={Icon_Menu} alt="메뉴 버튼" style={{ width: '24px' }} />
+            <img src={hamburgerIcon} alt="메뉴 버튼" />
             {showModal && <MoreInfoModal openModal={openModal} />}
           </Icons>
           {isLocal ? (
             <Icons>
-              <img src={CardIcon_person} alt="회원정보 버튼" onClick={openMyInfoModal} style={{ width: '24px' }} />
+              <img
+                src={personIcon}
+                alt="회원정보 버튼"
+                onClick={openMyInfoModal}
+              />
               {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
             </Icons>
           ) : null}
 
           <Icons>
-            <img src={manualBtn} alt="서비스 메뉴얼 버튼" style={{ width: '20px' }} onClick={openManual} />
+            <img
+              src={manualBtn}
+              alt="서비스 메뉴얼 버튼"
+              onClick={openManual}
+            />
             {!isLocal
               ? bubble && (
                   <BubbleWrap>
@@ -154,7 +162,7 @@ const BubbleWrap = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #0028fa;
-    content: '';
+    content: "";
     position: absolute;
     top: -8px;
     right: 12px;

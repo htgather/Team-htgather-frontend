@@ -25,6 +25,7 @@ function Player(props) {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
       category: roomInfo.category,
       videoUrl: roomInfo.videoUrl,
+      roomId: roomInfo.roomId,
     };
     dispatch(commonActions.saveRecordsDB(recordsData));
     props.setIsDone(true);
