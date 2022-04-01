@@ -56,7 +56,7 @@ const Ranking = (props) => {
             if (p.countPerWeek === 0 || p.rank > 4) {
               return (
                 <IsMeZero key={i}>
-                  <Rank style={{ paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
+                  <Rank style={{ color: '#fff', paddingLeft: p.rank > 9 ? '' : '2px' }}>{p.rank}</Rank>
                   <Name style={{ fontWeight: p.isMe ? 'bold' : '' }}>{p.isMe ? (nickName ? nickName : p.nickName) : p.nickName}</Name>
                   <Count>{p.countPerWeek} 회</Count>
                 </IsMeZero>
@@ -94,7 +94,7 @@ const Header = styled.div`
   line-height: 24px;
   color: #222529;
   margin: 24px 0px 16px 24px;
-  letter-spacing: -0.64px;
+  letter-spacing: -0.64pt;
 `;
 
 const RankContainer = styled.div`
@@ -125,6 +125,7 @@ const Rank = styled.div`
   font-size: 16px;
   text-align: center;
   margin: 4px 0px 4px 15px;
+  color: #878e95;
 `;
 
 const Name = styled.div`
@@ -139,6 +140,7 @@ const Name = styled.div`
   font-size: 14px;
   line-height: 20px;
   margin-left: 17px;
+  letter-spacing: -0.56pt;
 `;
 
 const Count = styled.div`
@@ -146,6 +148,7 @@ const Count = styled.div`
   font-size: 15px;
   font-weight: 600;
   text-align: right;
+  letter-spacing: -0.6pt;
   margin: 7px 12px 7px 0px;
 `;
 

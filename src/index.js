@@ -9,8 +9,6 @@ import store from './redux/configureStore';
 
 // const store = createStore(rootReducer, compose(applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : (f) => f));
 
-// setAuthorizationToken(localStorage.isLogin);
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Close from '../../Images/Close.png';
+import Close from '../../Images/Close.svg';
 import KakaoLogin from '../../components/KakaoLogin';
 import { history } from '../../redux/configureStore';
 
@@ -19,44 +19,31 @@ const MyInfoModal = (props) => {
 
   return (
     <div style={{ position: 'relative' }}>
-      <DIV style={{ height: is_local ? '290px' : '350px' }}>
+      <DIV>
         <CloseBtn>
           <img src={Close} alt="closeBtn" onClick={onClickClose} />
         </CloseBtn>
         <div onClick={(e) => e.stopPropagation()}>
-          <TextWrap style={{ fontSize: '24px' }}>더보기</TextWrap>
+          <Title>더보기</Title>
           <Line />
           <TextWrap>고객 지원</TextWrap>
           <DESC>
-            {is_local ? (
-              <>
-                <a href={report} target="_blank">
-                  ✍️ 홈트게더 이용 후기 남기기
-                </a>
-                <br />
-                <a href={bug_report} target="_blank">
-                  😱 오류, 버그 신고하기
-                </a>
-              </>
-            ) : (
-              <>
-                <div
-                  onClick={() => {
-                    window.alert('로그인 후 이용가능합니다');
-                  }}
-                >
-                  ✍️ 홈트게더 이용 후기 남기기
-                  <br />
-                  😱 오류, 버그 신고하기
-                </div>
-              </>
-            )}
+            <div
+              style={{ marginBottom: '12px' }}
+              onClick={() => {
+                window.open('https://forms.gle/Shna39cfEnXqkLfu6', '_blank');
+              }}
+            >
+              ✍️ 홈트게더 이용 후기 남기기
+            </div>
+            <div
+              onClick={() => {
+                window.open('https://forms.gle/ympKY1rVpspLX1Ut8', '_blank');
+              }}
+            >
+              😱 오류, 버그 신고하기
+            </div>
           </DESC>
-          {is_local ? null : (
-            <Login>
-              <KakaoLogin />
-            </Login>
-          )}
         </div>
       </DIV>
     </div>
@@ -65,12 +52,14 @@ const MyInfoModal = (props) => {
 
 const DIV = styled.div`
   background-color: #fff;
+  color: rgb(34, 37, 41);
   z-index: 30;
   width: 400px;
+  height: 284px;
   border-radius: 12px;
   top: 2.4rem;
   right: -1.3rem;
-  padding: 50px;
+  padding: 40px;
   position: absolute;
   :before {
     border-top: 0px solid;
@@ -89,20 +78,29 @@ const Line = styled.div`
   background-color: #eaecef;
   width: 320px;
   height: 1px;
-  margin: 20px auto 30px;
+  margin-top: 27px;
+`;
+
+const Title = styled.div`
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -0.96px;
+  font-weight: bold;
 `;
 
 const TextWrap = styled.div`
-  vertical-align: middle;
   font-weight: bold;
-  font-size: large;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: -0.72px;
+  margin: 40px 0 16px;
 `;
 
 const DESC = styled.div`
   font-size: 16px;
-  margin-top: 8px;
-  height: 30px;
-  line-height: 30px;
+  line-height: 24px;
+  letter-spacing: -0.64pt;
+  /* margin-bottom: 12px; */
   a {
     text-decoration-line: none;
   }

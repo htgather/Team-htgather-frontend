@@ -9,7 +9,7 @@ const TabletPortrait = (props) => {
     loop: true,
     autoplay: true,
     background: 'transparent',
-    speed: 0.5,
+    speed: 0.6,
     rendererSettings: {
       className: 'animation', // svg에 적용
       preserveAspectRatio: 'xMidYMid slice',

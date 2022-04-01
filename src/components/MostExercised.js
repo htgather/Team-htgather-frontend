@@ -88,7 +88,7 @@ const MostExercisedHeader = styled.div`
   align-items: center;
   margin: 24px 0px 16px 24px;
   line-height: 24px;
-  letter-spacing: -4%;
+  letter-spacing: -0.64pt;
 `;
 
 const MostExercisedContentBox = styled.div`
@@ -130,7 +130,7 @@ const MostExercisedContent = styled.div`
 
 const Noti = styled.div`
   font-size: 14px;
-  letter-spacing: -4%;
+  letter-spacing: -0.56pt;
   line-height: 20px;
   color: #aeb5bc;
 `;

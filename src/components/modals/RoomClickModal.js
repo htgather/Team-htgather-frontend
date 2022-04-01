@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import KakaoLogin from '../KakaoLogin';
 import loginImg from '../../Images/loginImg.png';
 import lock from '../../Images/lock.png';
-import Close from '../../Images/Close.png';
+import Close from '../../Images/Close.svg';
 
 const RoomClickModal = (props) => {
   const is_local = localStorage.getItem('isLogin') ? true : false;

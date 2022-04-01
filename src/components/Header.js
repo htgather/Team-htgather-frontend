@@ -4,9 +4,9 @@ import MoreInfoModal from '../components/modals/MoreInfoModal';
 import MyInfoModal from '../components/modals/MyInfoModal';
 import ManualModal from '../components/modals/ManualModal';
 import Logo from '../Images/Logo.svg';
-import Icon_Menu from '../Images/Icon_Menu.png';
-import manualBtn from '../Images/manualBtn.png';
-import CardIcon_person from '../Images/CardIcon_person.png';
+import Icon_Menu from '../Images/Icon_Menu.svg';
+import manualBtn from '../Images/manualBtn.svg';
+import CardIcon_person from '../Images/CardIcon_person.svg';
 import { history } from '../redux/configureStore';
 
 const Header = (props) => {
@@ -59,20 +59,17 @@ const Header = (props) => {
           }}
         />
 
-        <IconsWrap style={{ width: isLocal ? '' : '113px' }}>
+        <IconsWrap>
           <Icons onClick={openModal}>
             <img src={Icon_Menu} alt="메뉴 버튼" style={{ width: '24px' }} />
             {showModal && <MoreInfoModal openModal={openModal} />}
           </Icons>
-          {isLocal ? (
-            <Icons>
-              <img src={CardIcon_person} alt="회원정보 버튼" onClick={openMyInfoModal} style={{ width: '24px' }} />
-              {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
-            </Icons>
-          ) : null}
-
           <Icons>
-            <img src={manualBtn} alt="서비스 메뉴얼 버튼" style={{ width: '20px' }} onClick={openManual} />
+            <img src={CardIcon_person} alt="회원정보 버튼" onClick={openMyInfoModal} style={{ width: '24px' }} />
+            {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
+          </Icons>
+          <Icons>
+            <img src={manualBtn} alt="서비스 메뉴얼 버튼" style={{ width: '24px' }} onClick={openManual} />
             {!isLocal
               ? bubble && (
                   <BubbleWrap>
@@ -164,13 +161,13 @@ const BubbleWrap = styled.div`
 const Contents = styled.div`
   font-size: 16px;
   line-height: 24px;
-  letter-spacing: -4%;
+  letter-spacing: -0.64pt;
 `;
 const Check = styled.div`
   font-weight: bold;
   margin-top: 8px;
   font-size: 13px;
   line-height: 20px;
-  letter-spacing: -2%;
+  letter-spacing: -0.26pt;
 `;
 export default Header;

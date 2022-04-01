@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Close from '../../Images/Close.png';
+import Close from '../../Images/Close.svg';
 import guide1 from '../../Images/guide1.png';
 import guide3 from '../../Images/guide3.png';
 import guide4 from '../../Images/guide4.png';
@@ -174,7 +174,7 @@ const TextWrap = styled.div`
   font-size: 24px;
   line-height: 34px;
   font-weight: bold;
-  letter-spacing: -2%;
+  letter-spacing: -0.96pt;
 `;
 
 const ImageWrap = styled.img`
@@ -191,7 +191,7 @@ const GreyText = styled.div`
   font-size: 16px;
   line-height: 24px;
   color: #878e95;
-  letter-spacing: -4%;
+  letter-spacing: -0.64pt;
 `;
 
 const Buttons = styled.div`

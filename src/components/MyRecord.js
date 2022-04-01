@@ -75,7 +75,6 @@ const Header = styled.div`
 const MyRecordContent = styled.div`
   width: 159px;
   height: 200px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,29 +85,24 @@ const MyRecordContent = styled.div`
     color: #4a5056;
   }
   .progressInTextBox {
-    /* width: 72px; */
-    /* height: 54px; */
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 2.75rem;
-    left: 2.18rem;
-    /* top: 50%; */
-    /* bottom: 50%; */
-    /* margin: 42px 28px 32px 28px; */
+    top: 32%; // 2.77rem;
+    left: 26%; //2.4rem;
   }
   .countPerWeekText {
     font-size: 24px;
     line-height: 34px;
-    letter-spacing: -4%;
     color: #222529;
     font-weight: bold;
+    letter-spacing: -0.96pt;
   }
   .weeklyGoalText {
     font-size: 12px;
     line-height: 20px;
-    letter-spacing: -4%;
+    letter-spacing: -0.48pt;
     color: #aeb5bc;
     font-size: 12px;
   }
@@ -126,6 +120,7 @@ const BottomTextContainer = styled.div`
   align-items: center;
   text-align: center;
   margin-top: 12px;
+  letter-spacing: -0.56pt;
   .bottomTextBox {
     width: 159px;
     height: 20px;
