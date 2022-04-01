@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { history } from "../redux/configureStore";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configureStore';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import DetailHeader from "../components/DetailHeader";
-import ExitModal from "../components/modals/ExitModal";
+import DetailHeader from '../components/DetailHeader';
+import ExitModal from '../components/modals/ExitModal';
 
-import Player from "../components/Player";
-import Progress from "../components/Progress";
-import TabletPortrait from "../components/TabletPortrait";
+import Player from '../components/Player';
+import Progress from '../components/Progress';
+import TabletPortrait from '../components/TabletPortrait';
 
-import Mute from "../Images/Mute.png";
-import Speaker from "../Images/Speaker.png";
-import Video from "../Images/Video.png";
-import Microphone from "../Images/Microphone.png";
-import Happy from "../Images/Happy.png";
-import Me from "../Images/Me.png";
-import NoVideo from "../Images/NoVideo.png";
-import Notmute from "../Images/Notmute.png";
-import Room, { actionCreators as roomActions } from "../redux/modules/room";
-import Videoplayer from "../components/Videoplayer";
-import jwt_decode from "jwt-decode";
-import CompleteModal from "../components/modals/CompleteModal";
-import RoomClickModalForLogin from "../components/modals/RoomClickModalForLogin";
+import Mute from '../Images/Mute.svg';
+import Speaker from '../Images/Speaker.svg';
+import Microphone from '../Images/Microphone.svg';
+import Notmute from '../Images/Notmute.svg';
+import Video from '../Images/Video.svg';
+import NoVideo from '../Images/NoVideo.svg';
+import Happy from '../Images/Happy.svg';
+
+import Room, { actionCreators as roomActions } from '../redux/modules/room';
+import Videoplayer from '../components/Videoplayer';
+import jwt_decode from 'jwt-decode';
+import CompleteModal from '../components/modals/CompleteModal';
+import RoomClickModalForLogin from '../components/modals/RoomClickModalForLogin';
 const Detail = (props) => {
   // console.log("디테일");
   const roomId = props.match.params.roomId;
   const roomList = useSelector((state) => state.room.list);
   const roomInfo = roomList.filter((e, i) => e.roomId === roomId)[0];
-  const isLocal = localStorage.getItem("isLogin") ? true : false;
-  const nickname = isLocal
-    ? jwt_decode(localStorage.getItem("isLogin")).nickName
-    : null;
+  const isLocal = localStorage.getItem('isLogin') ? true : false;
+  const nickname = isLocal ? jwt_decode(localStorage.getItem('isLogin')).nickName : null;
   const [isStart, setIsStart] = React.useState();
   const [isDone, setIsDone] = React.useState(false);
   const [isDoneModal, setIsDoneModal] = React.useState(true);
@@ -42,14 +40,14 @@ const Detail = (props) => {
   const [videoOn, setVideoOn] = useState(false);
   const [vol, setVol] = React.useState(10);
   const [isMuted, setIsMuted] = React.useState(true);
-  const [numberOfUsers, setNumberOfUsers] = React.useState("1/5");
+  const [numberOfUsers, setNumberOfUsers] = React.useState('1/5');
 
   // 모바일 접속시
-  const NewMedia = window.matchMedia("screen and (max-width:767px)");
+  const NewMedia = window.matchMedia('screen and (max-width:767px)');
   // 태블릿 세로
-  const tablet = window.matchMedia("(orientation: portrait)"); //세로일때 : true, 가로일때 : false
+  const tablet = window.matchMedia('(orientation: portrait)'); //세로일때 : true, 가로일때 : false
   // 웹페이지에서 태블릿 세로만큼
-  const webPortrait = window.matchMedia("screen and (max-width: 767px");
+  const webPortrait = window.matchMedia('screen and (max-width: 767px');
 
   const childRef = React.useRef();
   const changeNumberOfUsers = (text) => {
@@ -82,17 +80,17 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     if (NewMedia.matches) {
-      history.replace("/");
+      history.replace('/');
       return;
     }
 
     if (!roomInfo) {
       if (!isLocal) {
-        var result = window.confirm("로그인이 필요합니다.");
+        var result = window.confirm('로그인이 필요합니다.');
         if (result) {
           popLoginModal();
         } else {
-          history.replace("/");
+          history.replace('/');
         }
       }
       dispatch(roomActions.getRoomDB());
@@ -114,43 +112,18 @@ const Detail = (props) => {
         <Background>
           {roomInfo && (
             <>
-              {isDone && isDoneModal && (
-                <CompleteModal
-                  isDone={isDone}
-                  setIsDoneModal={setIsDoneModal}
-                ></CompleteModal>
-              )}
-              <DetailHeader
-                roomInfo={roomInfo}
-                numberOfUsers={numberOfUsers}
-                isDone={isDone}
-              />
+              {isDone && isDoneModal && <CompleteModal isDone={isDone} setIsDoneModal={setIsDoneModal}></CompleteModal>}
+              <DetailHeader roomInfo={roomInfo} numberOfUsers={numberOfUsers} isDone={isDone} />
               <DIV>
                 <div>
                   <TimerWrap>
-                    <Progress
-                      roomInfo={roomInfo}
-                      isStart={isStart}
-                      isDone={isDone}
-                    ></Progress>
+                    <Progress roomInfo={roomInfo} isStart={isStart} isDone={isDone}></Progress>
                   </TimerWrap>
                   <VideoWrap>
                     <MainVideo>
-                      <Player
-                        roomInfo={roomInfo}
-                        setIsStart={setIsStart}
-                        vol={vol}
-                        isMuted={isMuted}
-                        setIsDone={setIsDone}
-                        isDone={isDone}
-                      ></Player>
+                      <Player roomInfo={roomInfo} setIsStart={setIsStart} vol={vol} isMuted={isMuted} setIsDone={setIsDone} isDone={isDone}></Player>
                     </MainVideo>
-                    <Videoplayer
-                      nickname={nickname}
-                      roomId={roomId}
-                      changeNumberOfUsers={changeNumberOfUsers}
-                      ref={childRef}
-                    ></Videoplayer>
+                    <Videoplayer nickname={nickname} roomId={roomId} changeNumberOfUsers={changeNumberOfUsers} ref={childRef}></Videoplayer>
                   </VideoWrap>
 
                   <SoundBtn>
@@ -159,15 +132,11 @@ const Detail = (props) => {
                         <>
                           <Btn
                             style={{
-                              width: "236px",
-                              justifyContent: "flex-start",
+                              width: '236px',
+                              justifyContent: 'flex-start',
                             }}
                           >
-                            <img
-                              src={Speaker}
-                              alt="음량조절"
-                              onClick={setClicked}
-                            />
+                            <img src={Speaker} alt="음량조절" onClick={setClicked} />
                             <VolInput
                               type="range"
                               min="0"
@@ -176,7 +145,7 @@ const Detail = (props) => {
                               onChange={(e) => {
                                 setVol(e.target.value);
                               }}
-                              style={{ margin: "8px" }}
+                              style={{ margin: '8px' }}
                             />
                             <div>{vol}</div>
                           </Btn>
@@ -221,8 +190,8 @@ const Detail = (props) => {
                           </>
                         )}
                       </Btn>
-                      <Btn onClick={fighting}>
-                        <img src={Happy} alt="격려하기" />
+                      <Btn onClick={fighting} style={{ justifyContent: 'center' }}>
+                        <img src={Happy} alt="격려하기" style={{ marginRight: '4px' }} />
                         격려하기
                       </Btn>
                     </BtnWrap>
@@ -263,7 +232,7 @@ const BubbleWrap = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 0px solid;
-    content: "";
+    content: '';
     position: absolute;
     bottom: -9px;
     left: 20px;
@@ -302,7 +271,7 @@ const TimerWrap = styled.div`
 
 const VideoWrap = styled.div`
   width: 1320px;
-  ${"" /* height: 616px; */}
+  ${'' /* height: 616px; */}
   height: 610px;
   display: flex;
   justify-content: space-between;
@@ -319,7 +288,7 @@ const VideoWrap = styled.div`
 const MainVideo = styled.div`
   width: 1096px;
   height: 500px; //추가
-  ${"" /* line-height: 616px; */}
+  ${'' /* line-height: 616px; */}
   border-radius: 12px;
   @media screen and (max-width: 1440px) {
     width: 758px;

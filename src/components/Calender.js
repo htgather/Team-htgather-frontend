@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { actionCreators as commonActions } from '../redux/modules/common';
 
-import leftBtn from '../Images/CalenderLeftIcon.png';
-import rightBtn from '../Images/CalenderRightIcon.png';
-import CalenderCheckIcon from '../Images/CalenderCheckIcon.png';
-import CalenderTodayIcon from '../Images/CalenderTodayIcon.png';
-import CalenderStampIcon from '../Images/CalenderStampIcon.png';
+import leftBtn from '../Images/CalenderLeftIcon.svg';
+import rightBtn from '../Images/CalenderRightIcon.svg';
+import CalenderCheckIcon from '../Images/CalenderCheckIcon.svg';
+import CalenderTodayIcon from '../Images/CalenderTodayIcon.svg';
+import CalenderStampIcon from '../Images/CalenderStampIcon.svg';
 
 const Calender = () => {
   const isLocal = localStorage.getItem('isLogin') ? true : false;
@@ -106,7 +106,7 @@ const Calender = () => {
             }}
             style={{ cursor: 'pointer' }}
           />
-          <span style={{ letterSpacing: '-0.98px' }}>{today.format('YYYY년 M월')}</span>
+          <span style={{ letterSpacing: '-0.64px' }}>{today.format('YYYY년 M월')}</span>
           <img
             src={rightBtn}
             alt="오른쪽버튼"
@@ -134,9 +134,6 @@ const Calender = () => {
 const CalenderBox = styled.div`
   width: 315px;
   height: 284px;
-  /* @media screen and (max-width: 1023px) {
-    width: 30vh;
-  } */
 `;
 
 const CalenderTopBar = styled.div`
@@ -215,8 +212,9 @@ const CalenderBody = styled.div`
 `;
 
 const CalenderText = styled.div`
-  letter-spacing: -0.64px;
+  letter-spacing: -0.48pt;
   font-size: 12px;
+  line-height: 20px;
   font-weight: 400;
   color: #878e95;
   text-align: center;

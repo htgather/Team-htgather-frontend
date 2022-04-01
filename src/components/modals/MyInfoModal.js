@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import KakaoLogin from '../KakaoLogin';
 import jwt_decode from 'jwt-decode';
 
-import lock from '../../Images/lock.png';
+import lock from '../../Images/lock.svg';
 import Close from '../../Images/Close.svg';
 import Dropdown from '../Dropdown';
 

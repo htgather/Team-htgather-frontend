@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import fighting from '../Images/fighting.png';
+import fighting from '../Images/fighting.svg';
 
 const MostExercised = (props) => {
   const { myRecords } = props;
@@ -86,7 +86,7 @@ const MostExercisedHeader = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
-  margin: 24px 0px 16px 24px;
+  margin: 24px 0px 12px 24px;
   line-height: 24px;
   letter-spacing: -0.64pt;
 `;
@@ -105,20 +105,23 @@ const MostExercisedContent = styled.div`
   border-radius: 6px;
   background-color: #f1f3f5;
   display: flex;
-  letter-spacing: -4%;
+  line-height: 20px;
 
   .MostExercisedContentTextBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 1px;
     line-height: 20px;
   }
   .MostExercisedTitle {
     font-size: 13px;
+    letter-spacing: -0.26pt;
   }
   .MostExercisedTimes {
     font-size: 12px;
     color: #878e95;
+    letter-spacing: -0.48pt;
   }
   .MostExercisedImg {
     width: 40px;

@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import blackEye from "../../Images/MakeRoomModalIcon_blackEye.png";
-import greyEye from "../../Images/MakeRoomModalIcon_greyEye.png";
+import React from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import blackEye from '../../Images/MakeRoomModalIcon_blackEye.png';
+import greyEye from '../../Images/MakeRoomModalIcon_greyEye.png';
 
-import close from "../../Images/MakeRoomModalIcon_close.png";
-import { actionCreators as roomActions } from "../../redux/modules/room";
+import close from '../../Images/Close.svg';
+import { actionCreators as roomActions } from '../../redux/modules/room';
 
 const PasswordModal = (props) => {
   const roomInfo = props.roomInfo;
   const dispatch = useDispatch();
 
-  const [inputTextarea, setTextarea] = React.useState("");
+  const [inputTextarea, setTextarea] = React.useState('');
   const [typePwd, setTypePwd] = React.useState(true);
   const [pwdUnfiiled, setPwdUnfilled] = React.useState(false);
   const [wrongPwd, setWrongPwd] = React.useState(false);
@@ -31,16 +31,12 @@ const PasswordModal = (props) => {
   const onFocus = (e) => {
     setPwdUnfilled(false);
     setWrongPwd(false);
-    setTextarea("");
+    setTextarea('');
   };
 
   const pwOnkeydown = (e) => {
     let code = e.keyCode;
-    if (
-      (code > 47 && code < 58) ||
-      (code > 95 && code < 106) ||
-      e.keyCode === 8
-    ) {
+    if ((code > 47 && code < 58) || (code > 95 && code < 106) || e.keyCode === 8) {
       setPwInputWrong(false);
       return;
     }
@@ -59,7 +55,7 @@ const PasswordModal = (props) => {
   const checkPWDnEnterRoom = () => {
     if (inputTextarea === roomInfo.password) {
       dispatch(roomActions.joinRoomDB(roomInfo._id));
-    } else if (inputTextarea === "") {
+    } else if (inputTextarea === '') {
       setPwInputWrong(true);
       setPwdUnfilled(true);
     } else if (inputTextarea !== roomInfo.password) {
@@ -97,7 +93,7 @@ const PasswordModal = (props) => {
               setPwdCheck(false);
               // document.body.style.overflow = "unset";
             }}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           />
         </MakeRoomHeader>
         <h1 className="boldText">비밀번호를 입력해주세요</h1>
@@ -105,31 +101,12 @@ const PasswordModal = (props) => {
 
         <div>
           <PwdInputDiv>
-            <PwdInput
-              type={typePwd ? "password" : "text"}
-              id="PWD"
-              placeholder="비밀번호"
-              maxLength={8}
-              onChange={onChange}
-              onFocus={onFocus}
-              onKeyDown={pwOnkeydown}
-              pwInputWrong={pwInputWrong}
-              oni
-            ></PwdInput>
-            <EyeImg
-              src={typePwd ? greyEye : blackEye}
-              alt="비밀번호 확인"
-              className="checkPwd"
-              onClick={showPwd}
-            />
+            <PwdInput type={typePwd ? 'password' : 'text'} id="PWD" placeholder="비밀번호" maxLength={8} onChange={onChange} onFocus={onFocus} onKeyDown={pwOnkeydown} pwInputWrong={pwInputWrong} oni></PwdInput>
+            <EyeImg src={typePwd ? greyEye : blackEye} alt="비밀번호 확인" className="checkPwd" onClick={showPwd} />
           </PwdInputDiv>
 
-          {pwdUnfiiled && (
-            <PwdUnfilledMessage>비밀번호를 입력해주세요</PwdUnfilledMessage>
-          )}
-          {wrongPwd && (
-            <PwdUnfilledMessage>잘못된 비밀번호입니다</PwdUnfilledMessage>
-          )}
+          {pwdUnfiiled && <PwdUnfilledMessage>비밀번호를 입력해주세요</PwdUnfilledMessage>}
+          {wrongPwd && <PwdUnfilledMessage>잘못된 비밀번호입니다</PwdUnfilledMessage>}
         </div>
 
         <BtnBox>
@@ -200,7 +177,7 @@ const PwdInput = styled.input`
   // .pwInputWrong {
   //   border: 1px #f7444e solid;
   // }
-  outline: ${(props) => (props.pwInputWrong ? "1px #f7444e solid" : "")};
+  outline: ${(props) => (props.pwInputWrong ? '1px #f7444e solid' : '')};
 `;
 const EyeImg = styled.img`
   width: 16px;

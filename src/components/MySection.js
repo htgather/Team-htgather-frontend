@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import clap from '../Images/clap.png';
+import clap from '../Images/clap.svg';
 
 import Banner from './Banner';
 import Calender from './Calender';
@@ -63,6 +63,7 @@ const MySectionContainer = styled.div`
   width: 1320px;
   align-items: center;
   margin: 56px auto 64px;
+  color: rgb(34 37 41);
   @media screen and (max-width: 1360px) {
     width: 62rem;
     justify-content: center;
@@ -79,13 +80,15 @@ const MySectionContainer = styled.div`
 const MySectionTitle = styled.div`
   color: #222529;
   font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -0.96pt;
   font-weight: 700;
   display: flex;
   width: 100%;
   justify-content: start;
   align-items: center;
   margin-bottom: 30px;
-  letter-spacing: -0.48px;
+
   /* @media screen and (max-width: 1023px) {
     padding: 0 1rem;
   } */

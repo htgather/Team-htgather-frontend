@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import KakaoLogin from '../KakaoLogin';
-import loginImg from '../../Images/loginImg.png';
-import lock from '../../Images/lock.png';
+import loginImg from '../../Images/loginImg.svg';
+import lock from '../../Images/lock.svg';
 import Close from '../../Images/Close.svg';
 
 const RoomClickModal = (props) => {
@@ -40,7 +40,7 @@ const RoomClickModal = (props) => {
             </LeftSide>
             <RightSide>
               <Container>
-                <img src={lock} alt="자물쇠 아이콘" style={{ width: '68px' }} />
+                <LockImage />
                 <TextWrap>
                   로그인 후에 확인할 수 있어요
                   <br />
@@ -116,6 +116,15 @@ const ImgWrap = styled.div`
 const RightSide = styled.div`
   width: 480px;
   height: 480px;
+`;
+
+const LockImage = styled.div`
+  width: 96px;
+  height: 80px;
+  background-image: url(${lock});
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 `;
 
 const Container = styled.div`

@@ -6,10 +6,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
-import mobile1 from '../Images/mobile1.png';
-import mobile2 from '../Images/mobile2.png';
-import mobile3 from '../Images/mobile3.png';
-import mobile4 from '../Images/mobile4.png';
+import mobile1 from '../Images/mobile1.svg';
+import mobile2 from '../Images/mobile2.svg';
+import mobile3 from '../Images/mobile3.svg';
+import mobile4 from '../Images/mobile4.svg';
 
 const MobileLanding = () => {
   const { Kakao } = window;

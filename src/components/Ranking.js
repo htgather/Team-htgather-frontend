@@ -6,12 +6,9 @@ import jwt_decode from 'jwt-decode';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { actionCreators as commonActions } from '../redux/modules/common';
 
-import gold from '../Images/gold.png';
-import silver from '../Images/silver.png';
-import bronze from '../Images/bronze.png';
-import clap from '../Images/clap.png';
-import fire from '../Images/fire.png';
-import fighting from '../Images/fighting.png';
+import gold from '../Images/gold.svg';
+import silver from '../Images/silver.svg';
+import bronze from '../Images/bronze.svg';
 
 const Ranking = (props) => {
   const dispatch = useDispatch();

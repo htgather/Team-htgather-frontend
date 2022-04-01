@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import lock from '../../Images/lock.png';
+import lock from '../../Images/lock.svg';
 import LoginWithKakao from '../KakaoLogin';
 
 const MyPart = () => {
@@ -50,9 +50,11 @@ const Container = styled.div`
   align-items: center;
 `;
 const Text = styled.div`
-  margin: 14px;
+  margin: 14px 0;
   color: #fff;
   font-size: 18px;
+  line-height: 26px;
+  letter-spacing: -0.72pt;
   font-weight: 500;
 `;
 

@@ -5,8 +5,8 @@ import MyInfoModal from '../components/modals/MyInfoModal';
 import ManualModal from '../components/modals/ManualModal';
 import Logo from '../Images/Logo.svg';
 import hamburgerIcon from '../Images/HeaderIcon_hamburger.svg';
-import manualBtn from '../Images/manualBtn.svg';
-import CardIcon_person from '../Images/CardIcon_person.svg';
+import HeaderIcon_manualBtn from '../Images/HeaderIcon_manualBtn.svg';
+import HeaderIcon_person from '../Images/HeaderIcon_person.svg';
 import { history } from '../redux/configureStore';
 
 const Header = (props) => {
@@ -65,11 +65,11 @@ const Header = (props) => {
             {showModal && <MoreInfoModal openModal={openModal} />}
           </Icons>
           <Icons>
-            <img src={CardIcon_person} alt="회원정보 버튼" onClick={openMyInfoModal} style={{ width: '24px' }} />
+            <img src={HeaderIcon_person} alt="회원정보 버튼" onClick={openMyInfoModal} style={{ width: '24px' }} />
             {myModal && <MyInfoModal openMyInfoModal={openMyInfoModal} />}
           </Icons>
           <Icons>
-            <img src={manualBtn} alt="서비스 메뉴얼 버튼" style={{ width: '24px' }} onClick={openManual} />
+            <img src={HeaderIcon_manualBtn} alt="서비스 메뉴얼 버튼" style={{ width: '24px' }} onClick={openManual} />
             {!isLocal
               ? bubble && (
                   <BubbleWrap>

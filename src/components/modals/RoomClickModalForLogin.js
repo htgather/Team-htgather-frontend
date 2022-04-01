@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { history } from '../../redux/configureStore';
 
 import KakaoLogin from '../KakaoLogin';
-import loginImg from '../../Images/loginImg.png';
-import lock from '../../Images/lock.png';
-import Close from '../../Images/Close.png';
+import loginImg from '../../Images/loginImg.svg';
+import lock from '../../Images/lock.svg';
+import Close from '../../Images/Close.svg';
 
 const RoomClickModal = (props) => {
   const is_local = localStorage.getItem('isLogin') ? true : false;

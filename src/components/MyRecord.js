@@ -6,8 +6,8 @@ import { actionCreators as commonActions } from '../redux/modules/common';
 import { Progress } from 'antd';
 import 'antd/dist/antd.less';
 
-import fire from '../Images/fire.png';
-import clock from '../Images/clock.png';
+import fire from '../Images/fire.svg';
+import clock from '../Images/clock.svg';
 
 const MyRecord = (props) => {
   const {
