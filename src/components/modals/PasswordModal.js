@@ -16,8 +16,16 @@ const PasswordModal = (props) => {
   const [pwdUnfiiled, setPwdUnfilled] = React.useState(false);
   const [wrongPwd, setWrongPwd] = React.useState(false);
   const [pwInputWrong, setPwInputWrong] = React.useState(null);
+  const PwdInputBox = React.useRef();
   const onChange = (e) => {
-    setTextarea(e.target.value);
+    const text = e.target.value;
+    setTextarea(text);
+    if (text.length <= inputTextarea.length) {
+      setWrongPwd(false);
+    }
+    if (text.length > 0) {
+      setPwdUnfilled(false);
+    }
   };
 
   const onFocus = (e) => {
@@ -34,6 +42,10 @@ const PasswordModal = (props) => {
       e.keyCode === 8
     ) {
       setPwInputWrong(false);
+      return;
+    }
+    if (code === 13) {
+      checkPWDnEnterRoom();
       return;
     }
     setPwInputWrong(true);
@@ -55,6 +67,12 @@ const PasswordModal = (props) => {
       setPwInputWrong(true);
     }
   };
+
+  // const onKeyPress = (e) => {
+  //   if (e.keyCode === "13") {
+  //     console.log("이게 과연 되는가");
+  //   }
+  // };
 
   // 모달창
   const { setPwdCheck } = props;
@@ -83,20 +101,20 @@ const PasswordModal = (props) => {
           />
         </MakeRoomHeader>
         <h1 className="boldText">비밀번호를 입력해주세요</h1>
-        <p className="pwdMessage">
-          비밀방에 입장하려면 비밀번호를 입력해주세요
-        </p>
+        <p className="pwdMessage">비밀번호는 숫자 4~8자 사이로 입력해주세요</p>
 
         <div>
           <PwdInputDiv>
             <PwdInput
               type={typePwd ? "password" : "text"}
+              id="PWD"
               placeholder="비밀번호"
               maxLength={8}
               onChange={onChange}
               onFocus={onFocus}
               onKeyDown={pwOnkeydown}
               pwInputWrong={pwInputWrong}
+              oni
             ></PwdInput>
             <EyeImg
               src={typePwd ? greyEye : blackEye}
@@ -152,7 +170,6 @@ const MakeRoomContainer = styled.div`
   }
   .pwdMessage {
     margin: 10px auto 13px auto;
-    opacity: 0;
   }
   display: flex;
   justify-content: center;
@@ -162,7 +179,6 @@ const MakeRoomContainer = styled.div`
 
 const PwdInputDiv = styled.div`
   position: relative;
-
   align-items: center;
 `;
 
@@ -187,9 +203,11 @@ const PwdInput = styled.input`
   outline: ${(props) => (props.pwInputWrong ? "1px #f7444e solid" : "")};
 `;
 const EyeImg = styled.img`
+  width: 16px;
+  height: 16px;
   position: absolute;
-  right: 6px;
-  bottom: 5px;
+  right: 16px;
+  bottom: 11px;
 `;
 
 // const PwdInputDiv = styled.div`
