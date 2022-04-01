@@ -70,15 +70,17 @@ const MakeRoomModal = (props) => {
   };
   const pwOnkeydown = (e) => {
     let code = e.keyCode;
-    if ($pwInput.current.value.length < 3) {
-      setPwInputWrong(true);
-    }
+
     if (
       (code > 47 && code < 58) ||
       (code > 95 && code < 106) ||
       e.keyCode === 8
     ) {
-      setPwInputWrong(false);
+      if ($pwInput.current.value.length < 3) {
+        setPwInputWrong(true);
+      } else {
+        setPwInputWrong(false);
+      }
       return;
     }
     setPwInputWrong(true);
