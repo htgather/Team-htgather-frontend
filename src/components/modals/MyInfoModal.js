@@ -11,13 +11,14 @@ import Dropdown from '../Dropdown';
 import { logoutWithKakao } from '../KakaoLogin';
 import { actionCreators as userActions } from '../../redux/modules/user';
 
-const MoreInfoModal = (props) => {
+const MyInfoModal = (props) => {
   const { openMyInfoModal, width, background, fontcolor } = props;
 
   const dispatch = useDispatch();
 
-  const is_local = localStorage.getItem('isLogin');
-  const myToken = jwt_decode(localStorage.getItem('isLogin'));
+  // const token = localStorage.getItem('isLogin');
+  const is_local = localStorage.getItem('isLogin') ? true : false;
+  const myToken = is_local ? jwt_decode(localStorage.getItem('isLogin')) : null;
   const nickName = is_local ? myToken.nickName : '';
   const Goal = is_local ? myToken.weeklyGoal : null;
 
@@ -42,6 +43,7 @@ const MoreInfoModal = (props) => {
       return;
     }
 
+    // 닉네임 체크 정규식 (한글/영문/숫자 이용하여 2~9자)
     let _reg = /^[a-zA-Zㄱ-힣0-9]{2,9}$/.test(nickname);
 
     if (_reg) {
@@ -65,7 +67,13 @@ const MoreInfoModal = (props) => {
         </CloseBtn>
         <Title>마이페이지</Title>
         <Line />
-        {myToken ? (
+        {!is_local ? (
+          <BeforeLogin>
+            <Lock />
+            <NotiText> 로그인 후에 이용해주세요</NotiText>
+            <KakaoLogin />
+          </BeforeLogin>
+        ) : (
           <>
             <NickName>
               <TextWrap>닉네임</TextWrap>
@@ -88,12 +96,6 @@ const MoreInfoModal = (props) => {
               <LogOutBtn onClick={onClickLogOut}>로그아웃</LogOutBtn>
             </Btns>
           </>
-        ) : (
-          <BeforeLogin>
-            <Lock />
-            <NotiText> 로그인 후에 이용해주세요</NotiText>
-            <KakaoLogin />
-          </BeforeLogin>
         )}
       </DIV>
     </>
@@ -264,4 +266,4 @@ const LogOutBtn = styled.div`
   cursor: pointer;
 `;
 
-export default MoreInfoModal;
+export default MyInfoModal;

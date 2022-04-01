@@ -172,5 +172,9 @@ const IsMeZero = styled(OneRank)`
 
 const TextWrap = styled.div`
   text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.56pt;
+  color: rgb(34 37 41);
 `;
 export default Ranking;
