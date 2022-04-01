@@ -3,8 +3,8 @@ import { io } from "socket.io-client";
 import { history } from "../redux/configureStore";
 import HiFive from "../Images/Videoplayer_emoji.png";
 import Screensaver from "../Images/Videoplayer_screensaver.png";
-import Mute from "../Images/Videoplayer_mute.png";
-import URLCopied from "../Images/URLCopied.png";
+import Mute from "../Images/Videoplayer_mute.svg";
+// import URLCopied from "../Images/URLCopied.png";
 //Style
 import styled from "styled-components";
 import invite from "../Images/Videoplayer_invite.png";
@@ -71,7 +71,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
       //카메라, 마이크 가져오기
       await getMedia();
       setSocketID(socketIdformserver);
-      changeNumberOfUsers(`${peopleInRoom}/5`);
+      changeNumberOfUsers(`${peopleInRoom} / 5`);
 
       if (length === 1) {
         return;
@@ -130,7 +130,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
 
     socket.on("exception", () => {
       peopleInRoom++;
-      changeNumberOfUsers(`5/5`);
+      changeNumberOfUsers(`5 / 5`);
     });
 
     // 여긴 다른 사람들에게 띄우는 부분
@@ -180,7 +180,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
     socket.on("leave_room", (leavedSocketId) => {
       removeVideo(leavedSocketId);
       peopleInRoom--;
-      changeNumberOfUsers(`${peopleInRoom}/5`);
+      changeNumberOfUsers(`${peopleInRoom} / 5`);
       for (let i = 0; i < peopleInRoom; i++) {
         if (peopleInRoom <= 4) {
           urlcopybox.current.style.display = "block";
@@ -267,7 +267,7 @@ const Videoplayer = React.forwardRef((props, ref) => {
         }
       }
 
-      changeNumberOfUsers(`${peopleInRoom}/5`);
+      changeNumberOfUsers(`${peopleInRoom} / 5`);
       return myPeerConnection;
     }
 
@@ -457,13 +457,11 @@ const Videoplayer = React.forwardRef((props, ref) => {
             cursor: "pointer",
           }}
         ></img>
+
         {UrlCopied && (
-          <img
-            src={URLCopied}
-            alt="링크 복사 완료"
-            className="copied"
-            style={{ width: 202, marginTop: 10 }}
-          ></img>
+          <BubbleWrap>
+            <div>URL이 클립보드에 복사되었습니다.</div>
+          </BubbleWrap>
         )}
       </URLCopyBox>
     </DIV>
@@ -516,10 +514,10 @@ const MemberWrap = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
     padding: 5px 8px;
-    border-radius: 4px;
+    border-radius: 8px;
     z-index: 3;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 400;
     letter-spacing: -0.26px;
     align-items: center;
   }
@@ -563,6 +561,19 @@ const URLCopyBox = styled.div`
   width: 202px;
   position: "relative";
   z-index: 10;
+`;
+
+const BubbleWrap = styled.div`
+  font-size: 13px;
+  width: 202px;
+  height: 40px;
+  color: #f8f9fa;
+  background-color: #0028fa;
+  border-radius: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 `;
 
 export default React.memo(Videoplayer);

@@ -31,7 +31,7 @@ function Progress(props) {
       setText("벌써 절반이나 왔어요!");
     }
     if (curYoutubeTime >= (changeToSeconds(roomInfo.videoLength) - 1) * 0.745) {
-      setText("거의 다 왔습니다! 조금만 더 힘내요!");
+      setText("회원님 진짜 마지막 한세트만 더! 힘내세요!");
     }
     if (curYoutubeTime >= changeToSeconds(roomInfo.videoLength)) {
       setText("👏🏻 오늘도 운동 완료! 다들 수고하셨습니다!");
@@ -92,7 +92,7 @@ const ProgressWrap = styled.div`
 
 const TextWrap = styled.div`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.4;
 
   ${"" /* color: rgb(34, 307, 41); */};

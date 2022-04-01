@@ -188,7 +188,7 @@ const Detail = (props) => {
                           </BubbleWrap>
                           <Btn onClick={setClicked}>
                             <img src={Mute} alt="비디오 음소거해제 버튼" />
-                            <div>음소거해제</div>
+                            <div>음소거 해제</div>
                           </Btn>
                         </>
                       )}
@@ -198,13 +198,13 @@ const Detail = (props) => {
                       <Btn onClick={setSound}>
                         {soundOn ? (
                           <>
-                            <img src={Notmute} alt="음소거해제" />
-                            마이크켜기
+                            <img src={Notmute} alt="음소거 해제" />
+                            마이크 켜기
                           </>
                         ) : (
                           <>
                             <img src={Microphone} alt="음소거" />
-                            마이크끄기
+                            마이크 끄기
                           </>
                         )}
                       </Btn>
@@ -212,12 +212,12 @@ const Detail = (props) => {
                         {videoOn ? (
                           <>
                             <img src={NoVideo} alt="마이크 음소거" />
-                            비디오켜기
+                            비디오 켜기
                           </>
                         ) : (
                           <>
                             <img src={Video} alt="카메라 버튼" />
-                            비디오끄기
+                            비디오 끄기
                           </>
                         )}
                       </Btn>
@@ -339,6 +339,7 @@ const SoundBtn = styled.div`
   justify-content: space-between;
   margin-top: 32px;
   position: relative;
+  border-radius: 4px;
   @media screen and (max-width: 1440px) {
     width: 758px;
     margin: -114px 0px 0px 54px;
@@ -360,6 +361,8 @@ const Btn = styled.div`
   width: 114px;
   height: 48px;
   color: #4a5056;
+  font-size: 14px;
+  border-radius: 4px;
   background-color: rgba(0, 40, 250, 0.05);
   display: flex;
   justify-content: space-between;
