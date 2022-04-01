@@ -34,7 +34,11 @@ const RecommendList = (props) => {
                 className="RecommendThumbnail"
               />
 
-              <p className="RecommendTitle">아직 운동기록이 없네요...</p>
+              <p className="RecommendTitle">
+                아직 운동 기록이 없어요.
+                <br />
+                마지막으로 운동한 영상이 이곳에 나타날 거예요.
+              </p>
             </RecommendCard>
           </div>
         )}

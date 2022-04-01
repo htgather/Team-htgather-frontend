@@ -122,6 +122,7 @@ const DropdownInput = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  font-size: 16px;
 `;
 const DropdownModal = styled.div`
   position: absolute;

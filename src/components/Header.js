@@ -4,7 +4,7 @@ import MoreInfoModal from '../components/modals/MoreInfoModal';
 import MyInfoModal from '../components/modals/MyInfoModal';
 import ManualModal from '../components/modals/ManualModal';
 import Logo from '../Images/Logo.svg';
-import Icon_Menu from '../Images/Icon_Menu.svg';
+import hamburgerIcon from '../Images/HeaderIcon_hamburger.svg';
 import manualBtn from '../Images/manualBtn.svg';
 import CardIcon_person from '../Images/CardIcon_person.svg';
 import { history } from '../redux/configureStore';
@@ -61,7 +61,7 @@ const Header = (props) => {
 
         <IconsWrap>
           <Icons onClick={openModal}>
-            <img src={Icon_Menu} alt="메뉴 버튼" style={{ width: '24px' }} />
+            <img src={hamburgerIcon} alt="메뉴 버튼" />
             {showModal && <MoreInfoModal openModal={openModal} />}
           </Icons>
           <Icons>
