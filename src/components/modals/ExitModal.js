@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import styled from "styled-components";
-import Close from "./Images/Close.png";
-import { history } from "../../redux/configureStore";
+import styled from 'styled-components';
+import Close from './Images/Close.png';
+import { history } from '../../redux/configureStore';
 const ExitModal = (props) => {
   const { isDone, exitRoom } = props;
 
@@ -18,21 +18,17 @@ const ExitModal = (props) => {
             <ModalContents>
               <div
                 style={{
-                  fontSize: "33px",
-                  fontWeight: "bold",
-                  marginBottom: "20px",
+                  fontSize: '33px',
+                  fontWeight: 'bold',
+                  marginBottom: '20px',
                 }}
               >
                 정말 나가시겠어요?
               </div>
-              <div style={{ fontSize: "16px", color: "#878E95" }}>
-                {isDone
-                  ? "나가기 버튼을 누르면, 이 방에 다시 들어올 수 없어요"
-                  : "운동이 진행중이에요, 지금 운동을 종료하면 운동 시간이 기록되지 않아요"}
-              </div>
+              <div style={{ fontSize: '16px', color: '#878E95' }}>{isDone ? '나가기 버튼을 누르면, 이 방에 다시 들어올 수 없어요' : '운동이 진행중이에요, 지금 운동을 종료하면 운동 시간이 기록되지 않아요'}</div>
               <BtnWrap
                 onClick={() => {
-                  history.replace("/");
+                  history.replace('/');
                 }}
               >
                 메인페이지로 가기
