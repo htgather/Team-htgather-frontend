@@ -1,5 +1,5 @@
 
-<h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼</h1>
+<h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼!!</h1>
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
   <img src='https://img.shields.io/badge/ReactRouter-v5.2.1-pink?logo=React Router'/>
