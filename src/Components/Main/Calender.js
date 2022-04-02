@@ -18,7 +18,7 @@ const Calender = () => {
   const [getMoment, setMoment] = React.useState(moment());
   const today = getMoment; // 오늘
   // 체크된 날짜 받아오기
-  const myRecords = useSelector((state) => state.common.calendarList);
+  const myRecords = useSelector((state) => state.myinfo.calendarList);
   React.useEffect(() => {
     if (isLocal) {
       dispatch(myinfoActions.getCalendarDB());
