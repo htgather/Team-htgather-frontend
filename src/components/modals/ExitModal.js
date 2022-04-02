@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as roomActions } from "../../redux/modules/room";
+
 import styled from "styled-components";
-import Close from "../../Images/Close.png";
+import Close from "./Images/Close.png";
 import { history } from "../../redux/configureStore";
 const ExitModal = (props) => {
   const { isDone, exitRoom } = props;

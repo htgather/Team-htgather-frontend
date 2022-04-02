@@ -1,17 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import Close from '../../Images/Close.svg';
-import guide1 from '../../Images/guide1.svg';
-import guide3 from '../../Images/guide3.svg';
-import guide4 from '../../Images/guide4.svg';
-import guide5 from '../../Images/guide5.svg';
+import React from "react";
+import styled from "styled-components";
+import Close from "./Images/Close.svg";
+import guide1 from "./Images/ManualModal_Guide1.svg";
+import guide3 from "./Images/ManualModal_Guide3.svg";
+import guide4 from "./Images/ManualModal_Guide4.svg";
+import guide5 from "./Images/ManualModal_Guide5.svg";
 
-import Guide from './Guide';
+import Guide from "./Guide";
 
 const ManualModal = (props) => {
   const { openManual } = props;
-
-  const isLocal = localStorage.getItem('isLogin') ? true : false;
 
   const circleArray = [0, 0, 0, 0, 0];
 
@@ -49,45 +47,74 @@ const ManualModal = (props) => {
                 <>
                   <TextWrap>찾는 운동방이 없다면 직접 만들어보세요</TextWrap>
                   <Guide />
-                  <GreyText>함께하고 싶은 운동 영상의 링크를 유튜브에서 복사하고 붙여 넣어 주세요</GreyText>
+                  <GreyText>
+                    함께하고 싶은 운동 영상의 링크를 유튜브에서 복사하고 붙여
+                    넣어 주세요
+                  </GreyText>
                 </>
               ) : (
                 <>
                   <TextWrap>
                     {page === 0
-                      ? '운동방에 참여해 사람들과 함께 운동해 보세요'
+                      ? "운동방에 참여해 사람들과 함께 운동해 보세요"
                       : page === 2
-                      ? '운동 시작 전에 사람들과 함께 운동할 준비를 해주세요'
+                      ? "운동 시작 전에 사람들과 함께 운동할 준비를 해주세요"
                       : page === 3
-                      ? '사람들과 함께 같은 영상을 보며 홈트를 즐겨보세요'
-                      : '꾸준히 운동하는 재미를 느껴보세요'}
+                      ? "사람들과 함께 같은 영상을 보며 홈트를 즐겨보세요"
+                      : "꾸준히 운동하는 재미를 느껴보세요"}
                   </TextWrap>
-                  <ImageWrap src={page === 0 ? guide1 : page === 1 ? '' : page === 2 ? guide3 : page === 3 ? guide4 : guide5} style={{ margin: page === 2 || page === 3 ? '32px auto 28px' : '' }} />
+                  <ImageWrap
+                    src={
+                      page === 0
+                        ? guide1
+                        : page === 1
+                        ? ""
+                        : page === 2
+                        ? guide3
+                        : page === 3
+                        ? guide4
+                        : guide5
+                    }
+                    style={{
+                      margin: page === 2 || page === 3 ? "32px auto 28px" : "",
+                    }}
+                  />
                   <GreyText>
                     {page === 0 ? (
-                      '함께 운동할 영상의 난이도, 카테고리를 보고 나에게 맞는 방에 참가해보세요'
+                      "함께 운동할 영상의 난이도, 카테고리를 보고 나에게 맞는 방에 참가해보세요"
                     ) : page === 1 ? (
-                      '함께하고 싶은 운동 영상의 링크를 유튜브에서 복사하고 붙여 넣어 주세요'
+                      "함께하고 싶은 운동 영상의 링크를 유튜브에서 복사하고 붙여 넣어 주세요"
                     ) : page === 2 ? (
                       <div>
                         운동 시작 전 마이크와 카메라 상태를 체크하고
-                        <br /> 운동 영상 아래에 있는 음소거 해제 버튼을 눌러주세요
+                        <br /> 운동 영상 아래에 있는 음소거 해제 버튼을
+                        눌러주세요
                       </div>
                     ) : page === 3 ? (
                       <div>
-                        방의 링크를 복사해 다른 사람을 초대하고 함께 운동해 보세요 <br />
-                        격려하기 버튼을 통해 서로 응원하며 즐겁게 운동할 수 있어요
+                        방의 링크를 복사해 다른 사람을 초대하고 함께 운동해
+                        보세요 <br />
+                        격려하기 버튼을 통해 서로 응원하며 즐겁게 운동할 수
+                        있어요
                       </div>
                     ) : (
-                      '운동이 끝나면 운동 기록이 저장되어 나만의 운동 기록을 쌓을 수 있어요'
+                      "운동이 끝나면 운동 기록이 저장되어 나만의 운동 기록을 쌓을 수 있어요"
                     )}
                   </GreyText>
                 </>
               )}
             </ModalContents>
-            <Buttons style={{ marginTop: page === 2 || page === 3 ? '8px' : '' }}>
-              <Btn style={{ color: '#AEB5BC', cursor: page === 0 ? 'default' : null }} onClick={clickPrev}>
-                {page === 0 ? null : '이전'}
+            <Buttons
+              style={{ marginTop: page === 2 || page === 3 ? "8px" : "" }}
+            >
+              <Btn
+                style={{
+                  color: "#AEB5BC",
+                  cursor: page === 0 ? "default" : null,
+                }}
+                onClick={clickPrev}
+              >
+                {page === 0 ? null : "이전"}
               </Btn>
               <CircleBox>
                 {circleArray.map((e, i) => (
@@ -97,15 +124,21 @@ const ManualModal = (props) => {
                       clickCircle(i);
                     }}
                     style={{
-                      width: i === page ? '24px' : null,
-                      borderRadius: i === page ? '8px' : null,
-                      background: i === page ? '#0028FA' : null,
-                      transition: 'width 0.3s',
+                      width: i === page ? "24px" : null,
+                      borderRadius: i === page ? "8px" : null,
+                      background: i === page ? "#0028FA" : null,
+                      transition: "width 0.3s",
                     }}
                   ></Circle>
                 ))}
               </CircleBox>
-              <Btn onClick={page === circleArray.length - 1 ? openManual : ClickNext}>{page === circleArray.length - 1 ? '확인' : '다음'}</Btn>
+              <Btn
+                onClick={
+                  page === circleArray.length - 1 ? openManual : ClickNext
+                }
+              >
+                {page === circleArray.length - 1 ? "확인" : "다음"}
+              </Btn>
             </Buttons>
           </Container>
         </ModalWrap>

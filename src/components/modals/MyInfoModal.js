@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import KakaoLogin from '../KakaoLogin';
-import jwt_decode from 'jwt-decode';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import KakaoLogin from "../Common/Functions/KakaoLogin";
+import jwt_decode from "jwt-decode";
 
-import lock from '../../Images/lock.svg';
-import Close from '../../Images/Close.svg';
-import Dropdown from '../Dropdown';
+import lock from "./Images/Lock.svg";
+import Close from "./Images/Close.svg";
+import Dropdown from "./../Common/Dropdown";
 
-import { logoutWithKakao } from '../KakaoLogin';
-import { actionCreators as userActions } from '../../redux/modules/user';
+import { logoutWithKakao } from "../Common/Functions/KakaoLogin";
+import { actionCreators as userActions } from "../../redux/modules/user";
 
 const MyInfoModal = (props) => {
-  const { openMyInfoModal, width, background, fontcolor } = props;
+  const { openMyInfoModal } = props;
 
   const dispatch = useDispatch();
 
   // const token = localStorage.getItem('isLogin');
-  const is_local = localStorage.getItem('isLogin') ? true : false;
-  const myToken = is_local ? jwt_decode(localStorage.getItem('isLogin')) : null;
-  const nickName = is_local ? myToken.nickName : '';
+  const is_local = localStorage.getItem("isLogin") ? true : false;
+  const myToken = is_local ? jwt_decode(localStorage.getItem("isLogin")) : null;
+  const nickName = is_local ? myToken.nickName : "";
   const Goal = is_local ? myToken.weeklyGoal : null;
 
   //닉네임 변경
-  const [showModal, setShowModal] = useState(false);
+
   const [nickname, setNickname] = useState(nickName);
   const [selectGoal, setSelectGoal] = useState(Goal);
 
@@ -38,8 +38,8 @@ const MyInfoModal = (props) => {
   };
 
   const onClickChange = () => {
-    if (nickname === '') {
-      alert('닉네임을 입력해주세요');
+    if (nickname === "") {
+      alert("닉네임을 입력해주세요");
       return;
     }
 
@@ -47,10 +47,15 @@ const MyInfoModal = (props) => {
     let _reg = /^[a-zA-Zㄱ-힣0-9]{2,9}$/.test(nickname);
 
     if (_reg) {
-      dispatch(userActions.userInfoChangeFB(nickname, Goal !== selectGoal ? selectGoal + 1 : Goal));
+      dispatch(
+        userActions.userInfoChangeFB(
+          nickname,
+          Goal !== selectGoal ? selectGoal + 1 : Goal
+        )
+      );
       return;
     } else {
-      window.alert('닉네임 형식에 맞지 않습니다');
+      window.alert("닉네임 형식에 맞지 않습니다");
     }
   };
 
@@ -61,7 +66,7 @@ const MyInfoModal = (props) => {
 
   return (
     <>
-      <DIV style={{ height: is_local ? '' : '460px' }}>
+      <DIV style={{ height: is_local ? "" : "460px" }}>
         <CloseBtn>
           <img onClick={openMyInfoModal} src={Close} alt="closeBtn" />
         </CloseBtn>
@@ -79,13 +84,26 @@ const MyInfoModal = (props) => {
               <TextWrap>닉네임</TextWrap>
             </NickName>
             <NickChange>
-              <input type="text" maxLength="10" placeholder={'닉네임을 입력해주세요'} onChange={NicknameChange} value={nickname} className="nicknameInput" />
+              <input
+                type="text"
+                maxLength="10"
+                placeholder={"닉네임을 입력해주세요"}
+                onChange={NicknameChange}
+                value={nickname}
+                className="nicknameInput"
+              />
             </NickChange>
             <TextWrap>목표</TextWrap>
             <GoalWrap>
               주&nbsp;&nbsp;
               <CategoryBox>
-                <Dropdown changeGoal={changeGoal} myDropdownList={myDropdownList} width="89px" background="#D9DFFE" fontcolor="#878E95">
+                <Dropdown
+                  changeGoal={changeGoal}
+                  myDropdownList={myDropdownList}
+                  width="89px"
+                  background="#D9DFFE"
+                  fontcolor="#878E95"
+                >
                   {selectGoal}
                 </Dropdown>
               </CategoryBox>
@@ -118,7 +136,7 @@ const DIV = styled.div`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #fff;
-    content: '';
+    content: "";
     position: absolute;
     top: -10px;
     right: 24px;

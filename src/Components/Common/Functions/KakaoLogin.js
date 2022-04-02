@@ -14,7 +14,7 @@ export const LoginWithKakao = () => {
     success: function (response) {
       //카카오 SDK에 사용자 토큰을 설정한다.
       Kakao.Auth.setAccessToken(response.access_token);
-      const ACCESS_TOKEN = Kakao.Auth.getAccessToken();
+      // const ACCESS_TOKEN = Kakao.Auth.getAccessToken();
       // console.log(ACCESS_TOKEN); //토큰 발급 완료
       // 사용자 정보 불러오기
       Kakao.API.request({
@@ -57,22 +57,6 @@ export const logoutWithKakao = () => {
   window.location.reload("/");
 };
 
-// 회원탈퇴
-// export const UnlinkWithKakao = () => {
-// 	Kakao.API.request({
-//     	url: '/v1/user/unlink',
-//     	success: function(response) {
-//     		console.log(response);
-//     		//callback(); //연결끊기(탈퇴)성공시 서버에서 처리할 함수
-//     		window.location.href='/'
-//     	},
-//     	fail: function(error) {
-//     		console.log('탈퇴 미완료')
-//     		console.log(error);
-//     	},
-// 	});
-// };
-
 const KakaoLogin = () => {
   return (
     <>
@@ -81,7 +65,6 @@ const KakaoLogin = () => {
           src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
           width="250"
         />
-        {/* 222 */}
       </a>
     </>
   );

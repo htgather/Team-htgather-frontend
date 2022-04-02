@@ -4,8 +4,8 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 import User from "./modules/user";
 import Room from "./modules/room";
+import Myinfo from "./modules/myinfo";
 import Common from "./modules/common";
-import Player from "./modules/player";
 
 // import Post from "./modules/post" // 리듀서 연결위해 모듈스파일 임포트
 
@@ -13,10 +13,10 @@ export const history = createBrowserHistory();
 
 //history와 router가 연결되었다!
 const rootReducer = combineReducers({
-  User: User,
+  user: User,
   room: Room,
+  myinfo: Myinfo,
   common: Common,
-  player: Player,
   router: connectRouter(history),
 });
 

@@ -1,12 +1,15 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as commonActions } from "../redux/modules/common";
-import { actionCreators as playerActions } from "../redux/modules/player";
-import { getTimeStringSeconds, calCount } from "./YoutubeDataAPI";
-import { PlayInfoContext } from "../context/PlayInfoContext";
+import { useDispatch } from "react-redux";
+import { actionCreators as myinfoActions } from "../../redux/modules/myinfo";
+import { actionCreators as commonActions } from "../../redux/modules/common";
+import {
+  getTimeStringSeconds,
+  calCount,
+} from "../Common/Functions/YoutubeDataAPI";
+
 function Player(props) {
   // console.log("유튜브플레이어");
 
@@ -18,8 +21,6 @@ function Player(props) {
   const sendCurYoutubeTime = React.useRef();
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  const NewMedia = window.matchMedia("screen and (max-width: 1440px)");
-
   const endVideo = () => {
     const recordsData = {
       workOutTime: Math.ceil(player.current.getDuration() / 60),
@@ -27,7 +28,7 @@ function Player(props) {
       videoUrl: roomInfo.videoUrl,
       roomId: roomInfo.roomId,
     };
-    dispatch(commonActions.saveRecordsDB(recordsData));
+    dispatch(myinfoActions.saveRecordsDB(recordsData));
     props.setIsDone(true);
     setIsPlaying(false);
     setIsDone(true);
@@ -37,7 +38,7 @@ function Player(props) {
     if (isPlaying) {
       sendCurYoutubeTime.current = setInterval(() => {
         dispatch(
-          playerActions.setPlayInfo({
+          commonActions.setPlayInfo({
             curYoutubeTime: Math.ceil(player.current.getCurrentTime()),
           })
         );
@@ -60,8 +61,6 @@ function Player(props) {
             url={roomInfo.videoUrl}
             width="100%"
             height="100%"
-            // width={NewMedia.matches ? "758px" : "1095px"} //"758px" //1096px
-            // height={NewMedia.matches ? "426px" : "616px"} //"426px" //616px
             ref={player}
             playing={isPlaying}
             // 특정시점부터 시작
@@ -93,7 +92,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  ${"" /* position: absolute; */}
   @media screen and (max-width: 1440px) {
     width: 758px;
     height: 100%;
@@ -119,7 +117,6 @@ const BeforeTimer = (props) => {
   const videoStartAfter = roomInfo.videoStartAfter;
   const [countTime, setCountTime] = React.useState();
 
-  function finish() {}
   React.useEffect(() => {
     // 방입장시 동영상시작예정시간-현재시간을 setTimeout으로 계속 차이를 계산해서 타이머로 나타냄
     let getTimeInterval = setInterval(() => {
@@ -177,20 +174,10 @@ const Count = styled.div`
   color: white;
   position: absolute;
 
-  ${
-    "" /* left: -228px;
-  top: -128px; */
-  }
-
   z-index: 2;
   @media screen and (max-width: 1440px) {
     width: 758px;
     height: 428px;
     font-size: 40px;
-    ${
-      "" /* position: absolute;
-    left: -56px;
-    top: -35px; */
-    }
   }
 `;

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import ExitModal from "../components/modals/ExitModal";
-import People from "../Images/People.svg";
-import Logo from "../Images/Logo_only.svg";
-import CopyLink from "../Images/CopyLink.png";
-import URLCopied from "../Images/URLCopied.png";
+import ExitModal from "../Modals/ExitModal";
+import People from "./Images/DetailHeader_People.svg";
+import Logo from "./Images/DetailHeader_LogoOnly.svg";
+import URLCopied from "./Images/DetailHeader_URLCopied.png";
 
-import { history } from "../redux/configureStore";
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
   const { isDone } = props;

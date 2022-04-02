@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import instance from "../../shared/Request";
-import { _parserVideoId, _getVideoInfo } from "../../components/YoutubeDataAPI";
+import {
+  _parserVideoId,
+  _getVideoInfo,
+} from "../../Components/Common/Functions/YoutubeDataAPI";
 const GET_ROOM = "GET_ROOM";
 const ADD_ROOM = "ADD_ROOM";
 
@@ -16,7 +18,6 @@ const getRoom = createAction(GET_ROOM, (roomList, searchIdxObj) => ({
 const addRoom = createAction(ADD_ROOM, (room) => ({
   room,
 }));
-const getEnteringRoom = createAction(GET_ENTERING_ROOM, () => ({}));
 const getSuggestions = createAction(GET_SUGGESTIONS, (suggestions) => ({
   suggestions,
 }));
@@ -90,21 +91,6 @@ const getRoomDB = (difficulty, category) => {
         });
     };
   }
-};
-
-// 입장 가능한 방 불러오기
-const EnteringRoomDB = () => {
-  return function (dispatch, getState, { history }) {
-    instance
-      .get("/rooms")
-      .then((response) => {
-        const enteringList = response.data.rooms;
-        // dispatch(getEnteringRoom(enteringList));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 };
 
 // 방생성 axios 요청
@@ -208,7 +194,6 @@ const actionCreators = {
   addRoomDB,
   joinRoomDB,
   exitRoomDB,
-  EnteringRoomDB,
   getSuggestionsDB,
 };
 

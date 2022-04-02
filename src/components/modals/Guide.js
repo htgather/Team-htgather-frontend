@@ -1,8 +1,8 @@
-import react from 'react';
-import styled from 'styled-components';
+import react from "react";
+import styled from "styled-components";
 
-import guide2 from '../../Images/guide2.svg';
-import guide2_2 from '../../Images/guide2_2.svg';
+import guide2 from "./Images/Guide_Guide2.svg";
+import guide2_2 from "./Images/Guide_Guide2_2.svg";
 
 const Guide = () => {
   return (

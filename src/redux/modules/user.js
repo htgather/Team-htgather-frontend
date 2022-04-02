@@ -1,8 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import instance from "../../shared/Request";
 import axios from "axios";
-import { actionCreators as commonActions } from "./common";
+import { actionCreators as myinfoActions } from "./myinfo";
 
 const GET_NICKNAME = "GET_NICKNAME";
 const SET_WEEKLY_GOAL = "SET_WEEKLY_GOAL";
@@ -58,7 +57,6 @@ const userInfoChangeFB = (nickname, selectGoal) => {
         "https://test.kimjeongho-server.com/users",
         {
           nickName: nickname,
-          // weeklyGoal: selectGoal + 1,
           weeklyGoal: selectGoal,
         },
         {
@@ -70,10 +68,9 @@ const userInfoChangeFB = (nickname, selectGoal) => {
       .then((response) => {
         localStorage.removeItem("isLogin");
         localStorage.setItem("isLogin", response.data.token);
-        // const myToken = jwt_decode(access_token);
         dispatch(getNickname(nickname));
         dispatch(setWeeklyGoal(selectGoal));
-        dispatch(commonActions.setRecords(selectGoal));
+        dispatch(myinfoActions.setRecords(selectGoal));
         window.alert("회원 정보가 변경되었습니다");
       });
   };
