@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
-import { changeToSeconds } from "./YoutubeDataAPI";
-import { getTimeStringSeconds } from "./YoutubeDataAPI";
-import { useDispatch, useSelector } from "react-redux";
+import { changeToSeconds } from "../Common/Functions/YoutubeDataAPI";
+import { getTimeStringSeconds } from "../Common/Functions/YoutubeDataAPI";
+import { useSelector } from "react-redux";
 
 function Progress(props) {
   const { roomInfo, isDone } = props;
   // console.log("프로그래스바");
   let curYoutubeTime = useSelector(
-    (state) => state.player.playInfo.curYoutubeTime
+    (state) => state.common.playInfo.curYoutubeTime
   );
 
   const [text, setText] = useState("오늘도 운동하는 여러분👍🏻");
@@ -94,8 +94,6 @@ const TextWrap = styled.div`
   font-size: 24px;
   font-weight: 700;
   line-height: 1.4;
-
-  ${"" /* color: rgb(34, 307, 41); */};
 `;
 
 export default React.memo(Progress);

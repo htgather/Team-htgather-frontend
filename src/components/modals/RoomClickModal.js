@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import KakaoLogin from '../KakaoLogin';
-import loginImg from '../../Images/loginImg.svg';
-import lock from '../../Images/lock.svg';
-import Close from '../../Images/Close.svg';
+import KakaoLogin from "../Common/Functions/KakaoLogin";
+import loginImg from "./Images/LoginImg.svg";
+import lock from "./Images/Lock.svg";
+import Close from "./Images/Close.svg";
 
 const RoomClickModal = (props) => {
-  const is_local = localStorage.getItem('isLogin') ? true : false;
+  const is_local = localStorage.getItem("isLogin") ? true : false;
 
   const closeModal = () => {
     props.setIsLoginModal(false);
@@ -23,18 +23,31 @@ const RoomClickModal = (props) => {
             </CloseBtn>
             <LeftSide>
               <ImgWrap>
-                <img src={loginImg} alt="운동하는 사람들" style={{ width: '274px', height: '208px' }} />
-                <div style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '22px' }}>홈트게더와 함께하는 홈 트레이닝</div>
+                <img
+                  src={loginImg}
+                  alt="운동하는 사람들"
+                  style={{ width: "274px", height: "208px" }}
+                />
                 <div
                   style={{
-                    fontSize: '16px',
-                    marginTop: '28px',
-                    color: '#aaa',
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    marginTop: "22px",
+                  }}
+                >
+                  홈트게더와 함께하는 홈 트레이닝
+                </div>
+                <div
+                  style={{
+                    fontSize: "16px",
+                    marginTop: "28px",
+                    color: "#aaa",
                   }}
                 >
                   혼자하는 홈트가 아닌 함께하는 홈트를 경험해보세요.
                   <br />
-                  홈트게더와 함께 사람들과 소통하며 재미있는 홈트를 시작해보세요.
+                  홈트게더와 함께 사람들과 소통하며 재미있는 홈트를
+                  시작해보세요.
                 </div>
               </ImgWrap>
             </LeftSide>

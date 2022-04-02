@@ -1,12 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import React from "react";
+import styled from "styled-components";
 
-import banner1 from '../Images/banner1.png';
-import banner2 from '../Images/banner2.png';
+import banner1 from "./Images/Banner_1.png";
+import banner2 from "./Images/Banner_2.png";
 
 const Banner = () => {
-  const isLogin = localStorage.getItem('isLogin');
+  const isLogin = localStorage.getItem("isLogin");
   // 배너인덱스를 useState로 관리
   const [bannerIndex, setBannerIndex] = React.useState(0);
 
@@ -37,25 +36,33 @@ const Banner = () => {
 
   // useEffect와 setInterval을 활용해 일정시간마다 자동으로 슬라이더가 넘어가기 구현
   React.useEffect(() => {
-    const slider = setInterval(() => setBannerIndex((value) => (value === circleArray.length - 1 ? 0 : value + 1)), 5000);
+    const slider = setInterval(
+      () =>
+        setBannerIndex((value) =>
+          value === circleArray.length - 1 ? 0 : value + 1
+        ),
+      5000
+    );
     return () => clearInterval(slider);
   }, []);
 
-  const report = 'https://forms.gle/Shna39cfEnXqkLfu6';
-  const bug_report = 'https://forms.gle/ympKY1rVpspLX1Ut8';
+  const report = "https://forms.gle/Shna39cfEnXqkLfu6";
+  const bug_report = "https://forms.gle/ympKY1rVpspLX1Ut8";
 
   return (
     <Container>
       <Carousel bannerIndex={bannerIndex}>
         {circleArray.map((e, i) => (
-          <ContentBox style={{ display: 'flex' }} index={i} key={i}>
+          <ContentBox style={{ display: "flex" }} index={i} key={i}>
             {bannerIndex === 1 ? (
               <img
                 src={banner1}
                 alt="오류제보 배너"
                 width="315px"
                 onClick={() => {
-                  isLogin ? window.open(bug_report) : window.alert('로그인 후 이용가능합니다');
+                  isLogin
+                    ? window.open(bug_report)
+                    : window.alert("로그인 후 이용가능합니다");
                 }}
               />
             ) : (
@@ -64,7 +71,9 @@ const Banner = () => {
                 alt="사용후기 배너"
                 width="315px"
                 onClick={() => {
-                  isLogin ? window.open(report) : window.alert('로그인 후 이용가능합니다');
+                  isLogin
+                    ? window.open(report)
+                    : window.alert("로그인 후 이용가능합니다");
                 }}
               />
             )}
@@ -79,9 +88,9 @@ const Banner = () => {
               clickCircle(i);
             }}
             style={{
-              width: i === bannerIndex ? '32px' : null,
-              borderRadius: i === bannerIndex ? '12px' : null,
-              transition: 'width 0.1s',
+              width: i === bannerIndex ? "32px" : null,
+              borderRadius: i === bannerIndex ? "12px" : null,
+              transition: "width 0.1s",
             }}
           ></Circle>
         ))}
@@ -108,7 +117,7 @@ const Carousel = styled.div`
   display: flex;
   transform: translate(
     ${(props) => {
-      return -(props.bannerIndex * 315) + 'px';
+      return -(props.bannerIndex * 315) + "px";
     }}
   );
 `;

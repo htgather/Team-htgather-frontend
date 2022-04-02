@@ -1,27 +1,29 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import clap from '../Images/clap.svg';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import clap from "./Images/MySection_Clap.svg";
 
-import Banner from './Banner';
-import Calender from './Calender';
-import jwt_decode from 'jwt-decode';
-import MyPart from './modals/MyPart'; //로그인 안했을 때 가리는 모달
-import MyRecord from './MyRecord';
-import MostExercised from './MostExercised';
-import Ranking from './Ranking';
-import { actionCreators as commonActions } from '../redux/modules/common';
+import Banner from "./../Common/Banner";
+import Calender from "./Calender";
+import jwt_decode from "jwt-decode";
+import MyPart from "../Modals/MyPart"; //로그인 안했을 때 가리는 모달
+import MyRecord from "./MyRecord";
+import MostExercised from "./MostExercised";
+import Ranking from "./Ranking";
+import { actionCreators as myinfoActions } from "../../redux/modules/myinfo";
 
 const MySection = () => {
   const dispatch = useDispatch();
-  const myRecords = useSelector((state) => state.common.myRecords);
+  const myRecords = useSelector((state) => state.myinfo.myRecords);
 
-  const is_local = localStorage.getItem('isLogin');
-  const nickName = is_local ? jwt_decode(localStorage.getItem('isLogin')).nickName : false;
+  const is_local = localStorage.getItem("isLogin");
+  const nickName = is_local
+    ? jwt_decode(localStorage.getItem("isLogin")).nickName
+    : false;
 
   React.useEffect(() => {
     if (nickName) {
-      dispatch(commonActions.getRecordsDB());
+      dispatch(myinfoActions.getRecordsDB());
     }
   }, []);
 
@@ -30,16 +32,20 @@ const MySection = () => {
       <MySectionTitle>
         <div
           style={{
-            width: '24px',
-            height: '25px',
-            display: 'flex',
-            alignItems: 'center',
-            marginRight: '4px',
+            width: "24px",
+            height: "25px",
+            display: "flex",
+            alignItems: "center",
+            marginRight: "4px",
           }}
         >
           <img src={clap} alt="박수 아이콘" width="24" />
         </div>
-        <div>{nickName ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!` : '안녕하세요, 오늘도 함께 운동해요!'}</div>
+        <div>
+          {nickName
+            ? `안녕하세요 ${nickName}님, 오늘도 함께 운동해요!`
+            : "안녕하세요, 오늘도 함께 운동해요!"}
+        </div>
       </MySectionTitle>
       <MySectionContent>
         <MyPart />

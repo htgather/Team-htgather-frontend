@@ -1,15 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import mobile1 from '../Images/mobile1.svg';
-import mobile2 from '../Images/mobile2.svg';
-import mobile3 from '../Images/mobile3.svg';
-import mobile4 from '../Images/mobile4.svg';
+import mobile1 from "./Images/MobileLanding_1.svg";
+import mobile2 from "./Images/MobileLanding_2.svg";
+import mobile3 from "./Images/MobileLanding_3.svg";
+import mobile4 from "./Images/MobileLanding_4.svg";
 
 const MobileLanding = () => {
   const { Kakao } = window;
@@ -51,7 +49,13 @@ const MobileLanding = () => {
 
   // useEffect와 setInterval을 활용해 일정시간마다 자동으로 슬라이더가 넘어가기 구현
   React.useEffect(() => {
-    const slider = setInterval(() => setBannerIndex((value) => (value === circleArray.length - 1 ? 0 : value + 1)), 5500);
+    const slider = setInterval(
+      () =>
+        setBannerIndex((value) =>
+          value === circleArray.length - 1 ? 0 : value + 1
+        ),
+      5500
+    );
     return () => clearInterval(slider);
   }, []);
 
@@ -70,7 +74,7 @@ const MobileLanding = () => {
           /> */}
           <Carousel bannerIndex={bannerIndex}>
             {circleArray.map((e, i) => (
-              <ContentBox style={{ display: 'flex' }} index={i} key={i}>
+              <ContentBox style={{ display: "flex" }} index={i} key={i}>
                 <div className="banner">
                   {bannerIndex === 0 ? (
                     <img src={mobile1} alt="모바일 배너 1" />
@@ -93,8 +97,8 @@ const MobileLanding = () => {
                   clickCircle(i);
                 }}
                 style={{
-                  backgroundColor: i === bannerIndex ? '#AEB5BC' : '',
-                  transition: 'width 0.9s',
+                  backgroundColor: i === bannerIndex ? "#AEB5BC" : "",
+                  transition: "width 0.9s",
                 }}
               ></Circle>
             ))}
@@ -149,7 +153,7 @@ const Carousel = styled.div`
   transition: 0.2s;
   transform: translate(
     ${(props) => {
-      return -(props.bannerIndex * 292) + 'px';
+      return -(props.bannerIndex * 292) + "px";
     }}
   );
 `;

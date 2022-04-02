@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { _parserVideoId, _getVideoInfo } from '../YoutubeDataAPI';
-import { actionCreators as roomActions } from '../../redux/modules/room';
-import { useDispatch, useSelector } from 'react-redux';
-import defaultThumbnail from '../../Images/RecommendModal_defaultThumbnail.png';
+import React from "react";
+import styled from "styled-components";
+
+import { actionCreators as roomActions } from "../../redux/modules/room";
+import { useDispatch, useSelector } from "react-redux";
+import defaultThumbnail from "./Images/RecommendModal_DefaultThumbnail.png";
 // import emoji from '../Images/RoomCardIcon_emoji.svg';
 
 const RecommendList = (props) => {
@@ -20,7 +20,7 @@ const RecommendList = (props) => {
   return (
     <RecommendListContainer>
       <RecommendHeader>
-        <div className="lastHeader" style={{ marginRight: '46px' }}>
+        <div className="lastHeader" style={{ marginRight: "46px" }}>
           마지막으로 본 영상
         </div>
         <div className="top3Header">전체 인기 Top 3</div>
@@ -29,7 +29,11 @@ const RecommendList = (props) => {
         {suggestionsList.length === 3 && (
           <div>
             <RecommendCard>
-              <img src={defaultThumbnail} alt="" className="RecommendThumbnail" />
+              <img
+                src={defaultThumbnail}
+                alt=""
+                className="RecommendThumbnail"
+              />
 
               <p className="RecommendTitle">
                 아직 운동 기록이 없어요.

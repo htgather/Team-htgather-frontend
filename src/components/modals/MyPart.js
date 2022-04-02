@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import lock from '../../Images/lock.svg';
-import LoginWithKakao from '../KakaoLogin';
+import React, { useState } from "react";
+import styled from "styled-components";
+import lock from "./Images/Lock.svg";
+import LoginWithKakao from "../Common/Functions/KakaoLogin";
 
 const MyPart = () => {
-  const is_local = localStorage.getItem('isLogin') ? true : false;
+  const is_local = localStorage.getItem("isLogin") ? true : false;
 
   return (
     <>
       {is_local ? (
-        ''
+        ""
       ) : (
         <DIV>
           <Container>

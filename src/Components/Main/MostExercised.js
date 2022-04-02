@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import fighting from '../Images/fighting.svg';
+import fighting from "./Images/MostExercised_Fighting.svg";
 
 const MostExercised = (props) => {
   const { myRecords } = props;
@@ -15,7 +15,12 @@ const MostExercised = (props) => {
       <MostExercisedContainer>
         <MostExercisedHeader>
           이런 운동을 많이 했어요
-          <img src={fighting} alt="팔 아이콘" style={{ marginLeft: '2px' }} width="16" />
+          <img
+            src={fighting}
+            alt="팔 아이콘"
+            style={{ marginLeft: "2px" }}
+            width="16"
+          />
         </MostExercisedHeader>
         <MostExercisedContentBox>
           {isRecords ? (
@@ -34,10 +39,19 @@ const MostExercised = (props) => {
                 <>
                   {records[0] && (
                     <MostExercisedContent>
-                      <img src={records[0][2]} alt="" className="MostExercisedImg" />
+                      <img
+                        src={records[0][2]}
+                        alt=""
+                        className="MostExercisedImg"
+                      />
                       <div className="MostExercisedContentTextBox">
-                        <div className="MostExercisedTitle">{records[0][0]}</div>
-                        <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
+                        <div className="MostExercisedTitle">
+                          {records[0][0]}
+                        </div>
+                        <div
+                          className="MostExercisedTimes"
+                          style={{ marginTop: "-2px" }}
+                        >
                           {records[0][1]}회
                         </div>
                       </div>
@@ -45,10 +59,19 @@ const MostExercised = (props) => {
                   )}
                   {records[1] && (
                     <MostExercisedContent>
-                      <img src={records[1][2]} alt="" className="MostExercisedImg" />
+                      <img
+                        src={records[1][2]}
+                        alt=""
+                        className="MostExercisedImg"
+                      />
                       <div className="MostExercisedContentTextBox">
-                        <div className="MostExercisedTitle">{records[1][0]}</div>
-                        <div className="MostExercisedTimes" style={{ marginTop: '-2px' }}>
+                        <div className="MostExercisedTitle">
+                          {records[1][0]}
+                        </div>
+                        <div
+                          className="MostExercisedTimes"
+                          style={{ marginTop: "-2px" }}
+                        >
                           {records[1][1]}회
                         </div>
                       </div>

@@ -1,3 +1,9 @@
+const fontWeight = {
+  Regular: 400,
+  Medium: 500,
+  Bold: 700,
+};
+
 const colors = {
   gray200: "#EAECEF",
   gray700: "#4A5056",
