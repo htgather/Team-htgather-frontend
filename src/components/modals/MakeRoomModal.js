@@ -1,21 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
-import close from "./Images/Close.svg";
-import greyEye from "./Images/MakeRoomModal_GreyEye.png";
-import blackEye from "./Images/MakeRoomModal_BlackEye.png";
-import checkBox from "./Images/MakeRoomModal_CheckBox.png";
-import noneCheckBox from "./Images/MakeRoomModal_NoneCheckBox.png";
-import youtubeLogo from "./Images/MakeRoomModal_Youtube.svg";
-import Dropdown from "./../Common/Dropdown";
-import DropdownArrowIcon from "./Images/MakeRoomModal_ArrowIcon.svg";
-import {
-  _parserVideoId,
-  _getVideoInfo,
-} from "../Common/Functions/YoutubeDataAPI";
-import { actionCreators as roomActions } from "../../redux/modules/room";
-import RecommendModal from "./RecommendModal";
+import close from './Images/Close.svg';
+import greyEye from './Images/MakeRoomModal_GreyEye.png';
+import blackEye from './Images/MakeRoomModal_BlackEye.png';
+import checkBox from './Images/MakeRoomModal_CheckBox.png';
+import noneCheckBox from './Images/MakeRoomModal_NoneCheckBox.png';
+import youtubeLogo from './Images/MakeRoomModal_Youtube.svg';
+import Dropdown from '../Common/Dropdown';
+import DropdownArrowIcon from './Images/MakeRoomModal_ArrowIcon.svg';
+import { _parserVideoId, _getVideoInfo } from '../Common/Functions/YoutubeDataAPI';
+import { actionCreators as roomActions } from '../../redux/modules/room';
+import RecommendModal from './RecommendModal';
 const MakeRoomModal = (props) => {
   const dispatch = useDispatch();
 
@@ -24,9 +21,9 @@ const MakeRoomModal = (props) => {
   const modal = React.useRef();
   // 셀렉트탭
   const [clickedDifficulty, setClickedDifficulty] = React.useState();
-  const difficultyList = ["낮음", "보통", "높음"];
+  const difficultyList = ['낮음', '보통', '높음'];
   const [clickedStartTime, setClickedStartTime] = React.useState();
-  const startTimeList = ["5분 뒤", "10분 뒤", "20분 뒤"];
+  const startTimeList = ['5분 뒤', '10분 뒤', '20분 뒤'];
   // 태그선택
   const $RoomNameInput = React.useRef();
   const $LinkInput = React.useRef();
@@ -34,18 +31,18 @@ const MakeRoomModal = (props) => {
   const [clickedCategory, setClickedCategory] = React.useState();
 
   // textarea 입력된 글자수체크
-  const [inputTextarea, setTextarea] = React.useState("");
+  const [inputTextarea, setTextarea] = React.useState('');
   const onChange = (e) => {
     setTextarea(e.target.value);
   };
   // 추천영상관련
   const [isRecommend, setIsRecommend] = React.useState(false);
   React.useEffect(() => {
-    $LinkInput.current.addEventListener("focus", () => {
+    $LinkInput.current.addEventListener('focus', () => {
       setIsRecommend(true);
     });
 
-    $LinkInput.current.addEventListener("input", () => {
+    $LinkInput.current.addEventListener('input', () => {
       if ($LinkInput.current.value) {
         setIsRecommend(false);
       } else {
@@ -64,21 +61,17 @@ const MakeRoomModal = (props) => {
   const checkSecret = (e) => {
     setIsSecret(!isSecret);
     if (isSecret) {
-      $pwInputBox.current.style.pointerEvents = "none";
-      $pwInput.current.value = "";
+      $pwInputBox.current.style.pointerEvents = 'none';
+      $pwInput.current.value = '';
       setPwInputWrong(false);
     } else {
-      $pwInputBox.current.style.pointerEvents = "auto";
+      $pwInputBox.current.style.pointerEvents = 'auto';
     }
   };
   const pwOnkeydown = (e) => {
     let code = e.keyCode;
 
-    if (
-      (code > 47 && code < 58) ||
-      (code > 95 && code < 106) ||
-      e.keyCode === 8
-    ) {
+    if ((code > 47 && code < 58) || (code > 95 && code < 106) || e.keyCode === 8) {
       if ($pwInput.current.value.length < 3) {
         setPwInputWrong(true);
       } else {
@@ -94,55 +87,31 @@ const MakeRoomModal = (props) => {
   };
 
   // 카테고리값받아오기_ 자식 컴포넌트에서 부모컴포넌트로 값 전달방법 props에 함수 넘겨줌
-  const categoryList = [
-    "근력 운동",
-    "유산소 운동",
-    "스트레칭",
-    "요가/필라테스",
-    "기타",
-  ];
+  const categoryList = ['근력 운동', '유산소 운동', '스트레칭', '요가/필라테스', '기타'];
   const getCategory = (category) => {
     setClickedCategory(category);
   };
 
   const clickMakeBtn = () => {
     // 미입력시 알림창띄우기 => 나중에 이쁜 모달이나 글자가 흔들리는걸로 변경하기
-    const checkInputArray = [
-      $RoomNameInput.current.value,
-      difficultyList[clickedDifficulty],
-      categoryList[clickedCategory],
-      $LinkInput.current.value,
-      startTimeList[clickedStartTime],
-    ];
+    const checkInputArray = [$RoomNameInput.current.value, difficultyList[clickedDifficulty], categoryList[clickedCategory], $LinkInput.current.value, startTimeList[clickedStartTime]];
 
-    let alert = [
-      "방제목을 입력해주세요",
-      "운동 난이도를 선택해주세요",
-      "카테고리를 선택해주세요",
-      "링크를 입력해주세요",
-      "시작 시간을 설정해주세요",
-    ];
+    let alert = ['방제목을 입력해주세요', '운동 난이도를 선택해주세요', '카테고리를 선택해주세요', '링크를 입력해주세요', '시작 시간을 설정해주세요'];
     for (let i = 0; i < checkInputArray.length; i++) {
       if (!checkInputArray[i]) {
         window.alert(alert[i]);
         return;
       }
     }
-    if (
-      isSecret &&
-      ($pwInput.current.value === "" ||
-        $pwInput.current.value.length < 4 ||
-        $pwInput.current.value.length > 8 ||
-        isNaN($pwInput.current.value))
-    ) {
-      window.alert("비밀번호는 숫자 4~8자 사이로 입력해주세요");
+    if (isSecret && ($pwInput.current.value === '' || $pwInput.current.value.length < 4 || $pwInput.current.value.length > 8 || isNaN($pwInput.current.value))) {
+      window.alert('비밀번호는 숫자 4~8자 사이로 입력해주세요');
       return;
     }
 
     let videoId = _parserVideoId($LinkInput.current.value);
     if (!videoId) {
       // 유튜브 링크 형식이 아닌 것을 올렸을 때 리턴처리
-      window.alert("유튜브 링크가 올바른지 확인해주세요");
+      window.alert('유튜브 링크가 올바른지 확인해주세요');
       return;
     }
     //youtubeDataApi를 이용하여 입력받은 링크를 가지고 비디오데이터를 받아온뒤 서버 api에 보낼 데이터로 정제 후 보내기
@@ -154,16 +123,16 @@ const MakeRoomModal = (props) => {
           videoLength: v.duration,
           videoUrl: $LinkInput.current.value,
           videoTitle: v.title,
-          videoStartAfter: +startTimeList[clickedStartTime].split("분")[0],
+          videoStartAfter: +startTimeList[clickedStartTime].split('분')[0],
           category: categoryList[clickedCategory],
           difficulty: difficultyList[clickedDifficulty],
-          password: isSecret ? $pwInput.current.value : "",
+          password: isSecret ? $pwInput.current.value : '',
         };
         dispatch(roomActions.addRoomDB(roomInfo));
       })
       .catch((err) => {
         // 유튜브 링크 형식이지만 정보가 없는 것을 리턴처리
-        window.alert("현재 해당 영상의 정보를 받아올 수 없어요");
+        window.alert('현재 해당 영상의 정보를 받아올 수 없어요');
         return;
       });
   };
@@ -179,26 +148,20 @@ const MakeRoomModal = (props) => {
             onClick={() => {
               setIsMakeModal(false);
             }}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           />
         </MakeRoomHeader>
         <MakeRoomNameBox>
-          <Label style={{ margin: "42px 0px 14px 0px" }}>
+          <Label style={{ margin: '42px 0px 14px 0px' }}>
             <p className="boldText">방 이름</p>
-            <p style={{ fontSize: "16px" }}>{inputTextarea.length} / 50자</p>
+            <p style={{ fontSize: '16px' }}>{inputTextarea.length} / 50자</p>
           </Label>
-          <RoomNameInput
-            maxLength={50}
-            type="text"
-            placeholder="생성할 방의 이름을 입력해주세요"
-            ref={$RoomNameInput}
-            onChange={onChange}
-          />
+          <RoomNameInput maxLength={50} type="text" placeholder="생성할 방의 이름을 입력해주세요" ref={$RoomNameInput} onChange={onChange} />
         </MakeRoomNameBox>
         <MakeRoomOptionBox>
           <SelectBox>
             <p className="boldText">난이도</p>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: 'flex' }}>
               {difficultyList.map((e, i) => (
                 <DB_EL
                   key={i}
@@ -206,9 +169,9 @@ const MakeRoomModal = (props) => {
                     setClickedDifficulty(i);
                   }}
                   style={{
-                    color: clickedDifficulty === i ? "#FFF" : "",
-                    background: clickedDifficulty === i ? "#667EFC" : "",
-                    fontWeight: clickedDifficulty === i ? "600" : "",
+                    color: clickedDifficulty === i ? '#FFF' : '',
+                    background: clickedDifficulty === i ? '#667EFC' : '',
+                    fontWeight: clickedDifficulty === i ? '600' : '',
                   }}
                 >
                   {e}
@@ -217,38 +180,26 @@ const MakeRoomModal = (props) => {
             </div>
           </SelectBox>
           <CategoryBox>
-            <p className="boldText" style={{ margin: "14px 0px" }}>
+            <p className="boldText" style={{ margin: '14px 0px' }}>
               운동종류
             </p>
-            <Dropdown
-              dropdownList={categoryList}
-              getCategory={getCategory}
-              background="#D9DFFE"
-              fontcolor="#878E95"
-              width="276px"
-            >
+            <Dropdown dropdownList={categoryList} getCategory={getCategory} background="#D9DFFE" fontcolor="#878E95" width="276px">
               운동 카테고리를 골라주세요
             </Dropdown>
           </CategoryBox>
         </MakeRoomOptionBox>
         <LinkInputContainer>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <p className="boldText">운동 영상 링크</p>
 
-            <a
-              href="https://www.youtube.com/results?search_query=%ED%99%88%ED%8A%B8"
-              target="_blank"
-              className="youtubeLinkText"
-              color="#878e95"
-              rel="noreferrer"
-            >
+            <a href="https://www.youtube.com/results?search_query=%ED%99%88%ED%8A%B8" target="_blank" className="youtubeLinkText" color="#878e95" rel="noreferrer">
               <img
                 src={youtubeLogo}
                 style={{
-                  width: "20px",
-                  paddingTop: "1px",
-                  WebkitUserDrag: "none",
-                  margin: "0px 4px 0px 16px",
+                  width: '20px',
+                  paddingTop: '1px',
+                  WebkitUserDrag: 'none',
+                  margin: '0px 4px 0px 16px',
                 }}
                 alt="유튜브로고"
               />
@@ -256,11 +207,7 @@ const MakeRoomModal = (props) => {
             </a>
           </div>
           <LinkInputBox>
-            <LinkInput
-              type="text"
-              placeholder="운동 영상의 링크를 직접 입력하거나, 추천 영상을 선택해주세요"
-              ref={$LinkInput}
-            />
+            <LinkInput type="text" placeholder="운동 영상의 링크를 직접 입력하거나, 추천 영상을 선택해주세요" ref={$LinkInput} />
             <div
               className="arrowIconBox"
               onClick={() => {
@@ -268,24 +215,15 @@ const MakeRoomModal = (props) => {
               }}
             >
               추천 영상 보기
-              <img
-                src={DropdownArrowIcon}
-                alt="드롭다운화살표"
-                style={{ marginLeft: "2px" }}
-              ></img>
+              <img src={DropdownArrowIcon} alt="드롭다운화살표" style={{ marginLeft: '2px' }}></img>
             </div>
-            {isRecommend && (
-              <RecommendModal
-                $LinkInput={$LinkInput}
-                setIsRecommend={setIsRecommend}
-              ></RecommendModal>
-            )}
+            {isRecommend && <RecommendModal $LinkInput={$LinkInput} setIsRecommend={setIsRecommend}></RecommendModal>}
           </LinkInputBox>
         </LinkInputContainer>
         <SettingContainer>
-          <SelectBox style={{ width: "60%" }}>
+          <SelectBox style={{ width: '60%' }}>
             <p className="boldText">시작 시간 설정</p>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: 'flex' }}>
               {startTimeList.map((e, i) => (
                 <DB_EL
                   key={i}
@@ -293,11 +231,11 @@ const MakeRoomModal = (props) => {
                     setClickedStartTime(i);
                   }}
                   style={{
-                    padding: "8px 14px",
-                    margin: "14px 15px 0 0",
-                    color: clickedStartTime === i ? "#FFF" : "",
-                    background: clickedStartTime === i ? "#667EFC" : "",
-                    fontWeight: clickedStartTime === i ? "600" : "",
+                    padding: '8px 14px',
+                    margin: '14px 15px 0 0',
+                    color: clickedStartTime === i ? '#FFF' : '',
+                    background: clickedStartTime === i ? '#667EFC' : '',
+                    fontWeight: clickedStartTime === i ? '600' : '',
                   }}
                 >
                   {e}
@@ -306,35 +244,14 @@ const MakeRoomModal = (props) => {
             </div>
           </SelectBox>
           <PwInputContainer>
-            <p
-              className="boldText"
-              style={{ display: "flex", alignItems: "center", height: "21px" }}
-            >
+            <p className="boldText" style={{ display: 'flex', alignItems: 'center', height: '21px' }}>
               비밀방 여부
-              <img
-                src={isSecret ? checkBox : noneCheckBox}
-                alt="비밀방여부체크박스"
-                className="scaleHalf"
-                onClick={checkSecret}
-                style={{ WebkitUserDrag: "none", cursor: "pointer" }}
-              ></img>
+              <img src={isSecret ? checkBox : noneCheckBox} alt="비밀방여부체크박스" className="scaleHalf" onClick={checkSecret} style={{ WebkitUserDrag: 'none', cursor: 'pointer' }}></img>
             </p>
             <PwInputBox ref={$pwInputBox}>
-              <PwInput
-                type={isStar ? "password" : "text"}
-                placeholder="비밀번호를 입력해주세요"
-                ref={$pwInput}
-                maxLength={8}
-                onKeyDown={pwOnkeydown}
-                pwInputWrong={pwInputWrong}
-              />
+              <PwInput type={isStar ? 'password' : 'text'} placeholder="비밀번호를 입력해주세요" ref={$pwInput} maxLength={8} onKeyDown={pwOnkeydown} pwInputWrong={pwInputWrong} />
 
-              <EyeImg
-                src={isStar ? greyEye : blackEye}
-                className="scaleHalf"
-                onClick={changePwInputType}
-                style={{ WebkitUserDrag: "none" }}
-              />
+              <EyeImg src={isStar ? greyEye : blackEye} className="scaleHalf" onClick={changePwInputType} style={{ WebkitUserDrag: 'none' }} />
             </PwInputBox>
 
             <PwMessage ref={$postMessage} pwInputWrong={pwInputWrong}>
@@ -590,7 +507,7 @@ const PwInput = styled.input`
   //   border: 1px #f7444e solid;
   // }
   &:focus {
-    ${(props) => (props.pwInputWrong ? `outline:1px #f7444e solid;` : "")}
+    ${(props) => (props.pwInputWrong ? `outline:1px #f7444e solid;` : '')}
   }
 `;
 const EyeImg = styled.img`
@@ -610,7 +527,7 @@ const PwMessage = styled.div`
   .pwInputWrong {
     color: #f7444e;
   }
-  ${(props) => (props.pwInputWrong ? `color: #f7444e;` : "")}
+  ${(props) => (props.pwInputWrong ? `color: #f7444e;` : '')}
 `;
 
 export default MakeRoomModal;
