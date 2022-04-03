@@ -1,4 +1,5 @@
 <h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼</h1>
+<br>
 <p align='center'>
 <img width='70%' src='https://user-images.githubusercontent.com/89131236/161413678-eb585245-84a0-4507-ae2a-ed56e5257322.png'>
 </p>
@@ -40,7 +41,7 @@
 
 <br>
 
-## <a href="https://github.com/degurrrrrr/work-out-at-home-FE/wiki">📌 기술 및 고민 정리 - WIKI</a>
+## <a href="https://github.com/degurrrrrr/work-out-at-home-FE/wiki">기술 및 고민 정리 - WIKI 바로가기</a>
 ## 주요 기능
 
 <details>
@@ -135,7 +136,7 @@
 ## Front-End 기술스택
 <!-- ![Stack](https://user-images.githubusercontent.com/59644518/131254702-f92170c3-6c53-4b5f-ae77-ee3eb58e71c7.png) -->
 
-## 📌 팀원소개
+## 팀원소개
 ### 프론트엔드
 + 박상원: https://github.com/wkqkel
 + 고주열: https://github.com/Noah8922
