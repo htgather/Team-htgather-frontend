@@ -41,7 +41,7 @@
 
 <br>
 
-## <a href="https://github.com/wkqkel/work-out-at-home-FE/wiki">📌 기술 및 고민 정리 - WIKI</a>
+## <a href="https://github.com/degurrrrrr/work-out-at-home-FE/wiki">📌 기술 및 고민 정리 - WIKI</a>
 ## 📌 주요 기능
 ## 🎫 프로젝트 구조
 <!-- ![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png) -->
