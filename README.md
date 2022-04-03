@@ -18,7 +18,6 @@
   <img src="https://img.shields.io/badge/Route53-E68B49">
   <img src="https://img.shields.io/badge/AWS S3-569A31">
 </p>
-
 <br>
 
 ## 프로젝트 기간
@@ -134,15 +133,39 @@
 ## 프로젝트 구조
 <!-- ![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png) -->
 ## Front-End 기술스택
-<!-- ![Stack](https://user-images.githubusercontent.com/59644518/131254702-f92170c3-6c53-4b5f-ae77-ee3eb58e71c7.png) -->
+
+<p align="center">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">  
+<br>
+<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/WebRTC-333333?style=for-the-badge&logo=WebRTC&logoColor=white">
+<img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white">
+<img src="https://img.shields.io/badge/CloudFront-D05C4B?style=for-the-badge&logo=CloudFront&logoColor=white">
+<img src="https://img.shields.io/badge/Route53-E68B49?style=for-the-badge&logo=Route53s&logoColor=white">
+<img src="https://img.shields.io/badge/S3-569A31?style=for-the-badge&logo=S3&logoColor=white">
+<br>
+<br>
+<br>
+
 
 ## 팀원소개
-### 프론트엔드
-+ 박상원: https://github.com/wkqkel
-+ 고주열: https://github.com/Noah8922
-+ 이규리: https://github.com/degurrrrrr
-### 백엔드
-+ 김정호: https://github.com/fancyers
-+ 강경묵: https://github.com/G-moog
-+ 김승호: https://github.com/naho199345
+
+| Name     | GitHub                             | Position  |
+| -------- | ---------------------------------- | --------- |
+| 김정호🔰   | https://github.com/fancyers          | 백엔드 |
+| 강경묵   | https://github.com/G-moog           | 백엔드 |
+| 김승호   | https://github.com/naho199345       | 백엔드 |
+| 박상원🔰   | https://github.com/wkqkel        | 프론트엔드     |
+| 고주열   | https://github.com/Noah8922         | 프론트엔드     |
+| 이규리   |  https://github.com/degurrrrrr      | 프론트엔드     |
+| 강수빈   | -                                   | 디자인     |
+| 추성열   | -                                   | 디자인     |
+
+<br />
 
