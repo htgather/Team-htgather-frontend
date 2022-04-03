@@ -137,7 +137,7 @@
 <br>
   
  + 홈트게더는 태블릿 가로형 및 PC에 최적화되어 있습니다.
- + 모바일로 접속 시에는 PC로 쉽게 이동하실 수 있도록, 카카오톡 공유하기 기능을 도입했습니다.
+ + 모바일로 접속 시에는 PC로 쉽게 이동할 수 있도록, 카카오톡 공유하기 기능을 도입했습니다.
 
 ![반응형배속](https://user-images.githubusercontent.com/89131236/161423917-e63a4981-b62b-4b46-b6cf-11e26b1b23d9.gif)
 <img height='304px' src='https://user-images.githubusercontent.com/89131236/161428194-bd44b026-a24b-4154-b392-fcb6b1b3193e.png'>
