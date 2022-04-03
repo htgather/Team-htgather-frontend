@@ -1,5 +1,7 @@
-
-<h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼!!</h1>
+<h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼</h1>
+<p align='center'>
+<img width='70%' src='https://user-images.githubusercontent.com/89131236/161413678-eb585245-84a0-4507-ae2a-ed56e5257322.png'>
+</p>
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
   <img src='https://img.shields.io/badge/ReactRouter-v5.2.1-pink?logo=React Router'/>
@@ -10,9 +12,10 @@
   <img src='https://img.shields.io/badge/ReactPlayer-v2.9.0-red?'/>
   <img src='https://img.shields.io/badge/WebRTC-333333?logo=WebRTC'/>
   <img src='https://img.shields.io/badge/socket.io-v4.4.1-white?logo=Socket.io'/>
-  <img src="https://img.shields.io/badge/CloudFront-D05C4B?style=for-the-badge&logo=CloudFront&logoColor=white">
-  <img src="https://img.shields.io/badge/Route53-E68B49?style=for-the-badge&logo=Route53s&logoColor=white">
-  <img src="https://img.shields.io/badge/S3-569A31?style=for-the-badge&logo=S3&logoColor=white">
+  <img src='https://img.shields.io/badge/CloudFront-red?'/>
+
+  <img src="https://img.shields.io/badge/Route53-E68B49">
+  <img src="https://img.shields.io/badge/AWS S3-569A31">
 </p>
 
 <br>
