@@ -1,7 +1,7 @@
 <h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼</h1>
 <br>
 <p align='center'>
-<img width='70%' src='https://user-images.githubusercontent.com/89131236/161413678-eb585245-84a0-4507-ae2a-ed56e5257322.png'>
+<img width='50%' src='https://user-images.githubusercontent.com/89131236/161413678-eb585245-84a0-4507-ae2a-ed56e5257322.png'>
 </p>
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
@@ -18,6 +18,15 @@
   <img src="https://img.shields.io/badge/Route53-E68B49">
   <img src="https://img.shields.io/badge/AWS S3-569A31">
 </p>
+<br>
+
+
+## 📌 바로가기
+- 사이트 바로가기 : https://htgather.com
+- 프론트엔드 GitHub Repository : https://github.com/htgather/Team-htgather-frontend
+- 백엔드 GitHub Respository : https://github.com/htgather/Team-htgather-backend
+- 시연 영상 보러가기: https://www.youtube.com/watch?v=MHotySs09E4&t=1s
+
 <br>
 
 ## 프로젝트 기간
@@ -41,6 +50,14 @@
 <br>
 
 ## <a href="https://github.com/degurrrrrr/work-out-at-home-FE/wiki">기술 및 고민 정리 - WIKI 바로가기</a>
+
+<br>
+
+
+
+
+
+
 ## 주요 기능
 
 <details>
@@ -129,9 +146,15 @@
 
 
 
+<br>
+
 
 ## 프로젝트 구조
 <!-- ![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png) -->
+
+
+<br>
+
 ## Front-End 기술스택
 
 <p align="center">
@@ -153,6 +176,8 @@
 <br>
 <br>
 
+
+<br>
 
 ## 팀원소개
 
