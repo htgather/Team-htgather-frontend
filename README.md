@@ -1,7 +1,7 @@
 <h1 align="left">webRTC와 socketIO를 활용한<br/>비대면 홈트레이닝 플랫폼</h1>
 <br>
 <p align='center'>
-<img width='50%' src='https://user-images.githubusercontent.com/89131236/161413678-eb585245-84a0-4507-ae2a-ed56e5257322.png'>
+<img width='70%' src='https://user-images.githubusercontent.com/89131236/161413678-eb585245-84a0-4507-ae2a-ed56e5257322.png'>
 </p>
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
