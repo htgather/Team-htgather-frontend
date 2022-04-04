@@ -160,15 +160,15 @@
 
 <details markdown="2">
 <summary>API 명세서</summary>
-
-![api명세서](https://user-images.githubusercontent.com/89131236/161458386-fce7bcea-83a4-48e5-ab41-621bdd98a53d.png)
+  
+![swagger](https://user-images.githubusercontent.com/92852591/161463082-1570cccf-17db-4f7c-9d53-68946d19e7ab.png)
 
 </details>
 
 <br>
 
-## Front-End 기술스택
-
+## 기술스택
+> #### 프론트엔드
 <p align="center">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">  
@@ -187,6 +187,18 @@
 <br>
 <br>
 <br>
+
+> #### 백엔드
+  
+  <p align="center">
+  <img src="https://img.shields.io/badge/Node-42443b?style=for-the-badge&logo=Node.js&logoColor=green">
+  <img src="https://img.shields.io/badge/Express-7b7b7b?style=for-the-badge&logo=Express&logoColor=black">
+  <img src="https://img.shields.io/badge/MongoDB-3e2d1d?style=for-the-badge&logo=MongoDB&logoColor=green">
+  <br>
+  <img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white">
+  <img src="https://img.shields.io/badge/prettier-192932?style=for-the-badge&logo=prettier&logoColor=black">
+  <img src="https://img.shields.io/badge/mocha-835e40?style=for-the-badge&logo=mocha&logoColor=white">
+  <img src="https://img.shields.io/badge/swagger-80b43c?style=for-the-badge&logo=swagger&logoColor=black">
 
 
 <br>
