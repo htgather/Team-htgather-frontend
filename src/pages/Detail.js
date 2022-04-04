@@ -74,6 +74,18 @@ const Detail = (props) => {
     setModalOn(true);
   };
 
+  // 영상 시작 전 음소거
+  const offWebcamSound = () => {
+    setSoundOn(true);
+    childRef.current.handleAllMute();
+  };
+
+  React.useEffect(() => {
+    if (isStart) {
+      offWebcamSound();
+    }
+  }, [isStart]);
+
   const dispatch = useDispatch();
   React.useEffect(() => {
     if (NewMedia.matches) {
@@ -93,13 +105,6 @@ const Detail = (props) => {
       dispatch(roomActions.getRoomDB());
     }
   }, []);
-
-  React.useEffect(() => {
-    if (isStart) {
-      setSoundOn(true);
-      childRef.current.handleAllMute();
-    }
-  }, [isStart]);
 
   return (
     <>
@@ -137,6 +142,7 @@ const Detail = (props) => {
                         isMuted={isMuted}
                         setIsDone={setIsDone}
                         isDone={isDone}
+                        offWebcamSound={offWebcamSound}
                       ></Player>
                     </MainVideo>
                     <Videoplayer

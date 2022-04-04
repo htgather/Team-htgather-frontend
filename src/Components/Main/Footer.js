@@ -1,8 +1,8 @@
-import react from 'react';
-import styled from 'styled-components';
+import react from "react";
+import styled from "styled-components";
 
-import Footer_Copy from './Images/Footer_Copy.svg';
-import Footer_logo from './Images/Footer_logo.svg';
+import Footer_Copy from "./Images/Footer_Copy.svg";
+import Footer_logo from "./Images/Footer_logo.svg";
 
 const Footer = () => {
   return (
@@ -11,7 +11,7 @@ const Footer = () => {
         <FooterLogo />
         <MiddleButtons>
           <div
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             // onClick={() => {
             //   window.open('https://github.com/htgather');
             // }}
@@ -19,17 +19,17 @@ const Footer = () => {
             공지사항
           </div>
           <div
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             onClick={() => {
-              window.open('https://github.com/htgather');
+              window.open("https://github.com/htgather");
             }}
           >
             팀 소개
           </div>
           <div
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             onClick={() => {
-              window.open('https://www.instagram.com/htgather/');
+              window.open("https://www.instagram.com/htgather/");
             }}
           >
             인스타그램
@@ -50,9 +50,6 @@ const FooterWrap = styled.div`
   justify-content: center;
   align-items: center;
   border-top: 1px solid #eaecef;
-  @media screen and (max-width: 1360px) {
-    width: 990px;
-  }
 `;
 
 const FooterGrid = styled.div`
@@ -60,6 +57,9 @@ const FooterGrid = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 1360px) {
+    width: 990px;
+  }
 `;
 
 const FooterLogo = styled.div`

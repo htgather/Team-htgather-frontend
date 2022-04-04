@@ -24,18 +24,18 @@ const Header = (props) => {
 
   // const { Kakao } = window;
 
-  const copyLink = () => {
-    let url;
-    let textarea = document.createElement("textarea");
-    document.body.appendChild(textarea);
-    url = window.document.location.href;
-    textarea.value = url;
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-    setUrlCopied(!UrlCopied);
-    deleteCopyImg();
-  };
+  // const copyLink = () => {
+  //   let url;
+  //   let textarea = document.createElement("textarea");
+  //   document.body.appendChild(textarea);
+  //   url = window.document.location.href;
+  //   textarea.value = url;
+  //   textarea.select();
+  //   document.execCommand("copy");
+  //   document.body.removeChild(textarea);
+  //   setUrlCopied(!UrlCopied);
+  //   deleteCopyImg();
+  // };
 
   return (
     <HeaderContainer>
@@ -51,7 +51,7 @@ const Header = (props) => {
         </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
-          <HeaderBtn onClick={exitRoom}>
+          <HeaderBtn onClick={exitRoom} style={{ cursor: "pointer" }}>
             <BtnContents style={{ color: "#aeb5bc" }}>나가기</BtnContents>
             {modalOn && (
               <ExitModal roomId={roomId} isDone={isDone} exitRoom={exitRoom} />
@@ -113,7 +113,6 @@ const BtnWrap = styled.div`
 const HeaderBtn = styled.div`
   width: 92px;
   height: 40px;
-  cursor: pointer;
   position: relative;
 `;
 

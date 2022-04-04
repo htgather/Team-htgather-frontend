@@ -74,6 +74,7 @@ const RecommendListContainer = styled.div`
   // background: green;
   position: absolute;
   color: #878e95;
+  
   z-index: 1;
   padding: 16px 10px 10px 10px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
