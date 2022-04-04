@@ -5,6 +5,7 @@ import ExitModal from "../Modals/ExitModal";
 import People from "./Images/DetailHeader_People.svg";
 import Logo from "./Images/DetailHeader_LogoOnly.svg";
 import URLCopied from "./Images/DetailHeader_URLCopied.png";
+import CopyLink from "./Images/CopyLink.png";
 
 const Header = (props) => {
   const { roomTitle, roomId } = props.roomInfo;
@@ -43,7 +44,8 @@ const Header = (props) => {
           <img
             src={Logo}
             alt="홈트게더 로고"
-            style={{ height: "32px", marginRight: "12px" }}
+            style={{ height: "32px", marginRight: "12px", cursor: "pointer" }}
+            onClick={exitRoom}
           />
           {roomTitle}
           {/* <img
@@ -56,7 +58,7 @@ const Header = (props) => {
             <img
               src={URLCopied}
               alt="링크 복사 완료"
-              style={{ marginLeft: "25px" }}
+              style={{ marginLeft: "25px", width: "202px" }}
             ></img>
           )}
         </RoomTitle>
