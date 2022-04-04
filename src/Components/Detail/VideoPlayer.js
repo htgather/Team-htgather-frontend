@@ -33,10 +33,6 @@ const Videoplayer = React.forwardRef((props, ref) => {
   let pcObj = {};
   let peopleInRoom = 1;
 
-  const DeleteCopyImg = setTimeout(() => {
-    setUrlCopied(false);
-  }, 4000);
-
   // const { Kakao } = window; urlcopybox.current.style.display = "none";
 
   const copyLink = () => {
@@ -49,7 +45,9 @@ const Videoplayer = React.forwardRef((props, ref) => {
     document.execCommand("copy");
     document.body.removeChild(textarea);
     setUrlCopied(!UrlCopied);
-    setTimeout(() => { setUrlCopied(false); }, 4000);
+    setTimeout(() => {
+      setUrlCopied(false);
+    }, 4000);
   };
 
   const [socket, setSocket] = useState(null);
