@@ -152,6 +152,17 @@
 ## 프로젝트 구조
 <!-- ![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png) -->
 
+<details markdown="1">
+<summary>서비스 아키텍처</summary>
+  <img src="https://user-images.githubusercontent.com/97428216/160459796-c7f708e3-712a-4f33-9578-5c0f46db0acb.png">
+</details>
+
+<details markdown="2">
+<summary>API 명세서</summary>
+
+![api명세서](https://user-images.githubusercontent.com/89131236/161458386-fce7bcea-83a4-48e5-ab41-621bdd98a53d.png)
+
+</details>
 
 <br>
 
