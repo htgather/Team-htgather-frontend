@@ -150,11 +150,12 @@
 
 
 ## 프로젝트 구조
-<!-- ![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png) -->
+
 
 <details markdown="1">
 <summary>서비스 아키텍처</summary>
-  <img src="https://user-images.githubusercontent.com/97428216/160459796-c7f708e3-712a-4f33-9578-5c0f46db0acb.png">
+
+ ![서비스 아키텍처](https://user-images.githubusercontent.com/89131236/161458622-f9d47137-db73-433f-ad89-c7a6cef17e3c.jpg)
 </details>
 
 <details markdown="2">
