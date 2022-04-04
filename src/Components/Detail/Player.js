@@ -9,12 +9,13 @@ import {
   getTimeStringSeconds,
   calCount,
 } from "../Common/Functions/YoutubeDataAPI";
+import BeforeTimerSound from "./Sound/BeforeTimerSound.mp3";
 
 function Player(props) {
   // console.log("유튜브플레이어");
 
   const dispatch = useDispatch();
-  const { roomInfo, isMuted, vol, setIsDone, isDone } = props;
+  const { roomInfo, isMuted, vol, setIsDone, isDone, offWebcamSound } = props;
   // 동영상 재생으로 관리될 변수들
 
   const player = React.useRef();
@@ -55,6 +56,7 @@ function Player(props) {
           setIsPlaying={setIsPlaying}
           player={player}
           isDone={isDone}
+          offWebcamSound={offWebcamSound}
         ></BeforeTimer>
         <PlayerSize>
           <ReactPlayer
@@ -125,6 +127,12 @@ const BeforeTimer = (props) => {
       const diffMs = parseInt(videoStart - now);
       const durationS = Math.floor(player.current.getDuration()); // 영상길이(초단위)
       let diffS = parseInt(diffMs / 1000); // 동영상시작예정시간-현재시간(초단위)
+      if (diffS === 4) {
+        props.offWebcamSound();
+        const sound = new Audio();
+        sound.src = BeforeTimerSound;
+        sound.play();
+      }
       if (diffS > 0) {
         setCountTime(calCount(getTimeStringSeconds(diffS)));
       }
