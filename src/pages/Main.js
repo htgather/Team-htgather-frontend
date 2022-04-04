@@ -83,16 +83,18 @@ const Main = (props) => {
                   </DIV>
                 )}
                 <MySection></MySection>
-                <RoomSectionTab setIsLoginModal={setIsLoginModal} />
-                <RoomCardList>
-                  {roomList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
-                  ))}
-                  <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
-                  {enteringList.map((e, i) => (
-                    <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal} />
-                  ))}
-                </RoomCardList>
+                <RoomSection>
+                  <RoomSectionTab setIsLoginModal={setIsLoginModal}></RoomSectionTab>
+                  <RoomCardList>
+                    {roomList.map((e, i) => (
+                      <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal}></RoomCard>
+                    ))}
+                    <RoomCard last="last" setIsLoginModal={setIsLoginModal}></RoomCard>
+                    {enteringList.map((e, i) => (
+                      <RoomCard key={i} roomInfo={e} setIsLoginModal={setIsLoginModal} />
+                    ))}
+                  </RoomCardList>
+                </RoomSection>
                 <ToTopBtn onClick={moveToTop}>
                   <img src={toTop} alt="최상단 이동 버튼" className={BtnStatus ? 'topBtn active' : 'topBtn'} />
                 </ToTopBtn>
@@ -131,6 +133,14 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   padding-bottom: 100px;
+`;
+
+const RoomSection = styled.div`
+  /* @media screen and (max-width: 1023px) {
+    width: 100vh;
+    height: 100vw;
+    margin: 0px auto;
+  } */
 `;
 
 const RoomCardList = styled.div`
