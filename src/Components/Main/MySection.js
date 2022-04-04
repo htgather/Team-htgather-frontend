@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import clap from './Images/MySection_Clap.svg';
 
-import Banner from '../Common/Banner';
+import Banner from './Banner';
 import Calender from './Calender';
 import jwt_decode from 'jwt-decode';
 import MyPart from '../Modals/MyPart'; //로그인 안했을 때 가리는 모달
