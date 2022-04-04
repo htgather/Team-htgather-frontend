@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Close from "./Images/Close.svg";
-import guide1 from "./Images/ManualModal_Guide1.svg";
+import guide1 from "./Images/ManualModal_Guide1.png";
 import guide3 from "./Images/ManualModal_Guide3.svg";
 import guide4 from "./Images/ManualModal_Guide4.svg";
-import guide5 from "./Images/ManualModal_Guide5.svg";
+import guide5 from "./Images/ManualModal_Guide5.png";
 
 import Guide from "./Guide";
 
