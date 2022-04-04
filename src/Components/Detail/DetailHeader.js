@@ -48,19 +48,6 @@ const Header = (props) => {
             onClick={exitRoom}
           />
           {roomTitle}
-          {/* <img
-            src={CopyLink}
-            alt="링크공유"
-            onClick={copyLink}
-            style={{ cursor: "pointer", marginLeft: "25px" }}
-          /> */}
-          {UrlCopied && (
-            <img
-              src={URLCopied}
-              alt="링크 복사 완료"
-              style={{ marginLeft: "25px", width: "202px" }}
-            ></img>
-          )}
         </RoomTitle>
         <BtnWrap>
           {/* 나가기 */}
