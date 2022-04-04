@@ -170,9 +170,11 @@ const ToTopBtn = styled.div`
   }
   @media screen and (min-width: 1361px) and (max-width: 1680px) {
     right: 4rem;
+    z-index: 4;
   }
   @media screen and (min-width: 1681px) and (max-width: 1920px) {
     right: 8rem;
+    bottom: 8.7rem;
   }
 `;
 export default Main;
