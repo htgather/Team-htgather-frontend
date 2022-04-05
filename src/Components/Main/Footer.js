@@ -12,9 +12,9 @@ const Footer = () => {
         <MiddleButtons>
           <div
             style={{ cursor: "pointer" }}
-            onClick={() => {
-              window.open("https://github.com/htgather");
-            }}
+            // onClick={() => {
+            //   // window.open("https://github.com/htgather");
+            // }}
           >
             공지사항
           </div>
