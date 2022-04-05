@@ -12,16 +12,18 @@ const Footer = () => {
         <MiddleButtons>
           <div
             style={{ cursor: "pointer" }}
-            // onClick={() => {
-            //   window.open('https://github.com/htgather');
-            // }}
+            onClick={() => {
+              window.open("https://github.com/htgather");
+            }}
           >
             공지사항
           </div>
           <div
             style={{ cursor: "pointer" }}
             onClick={() => {
-              window.open("https://github.com/htgather");
+              window.open(
+                "https://iridescent-pin-665.notion.site/HTGATHER-0b374c797efc4c28a1683b8b20a0f87f"
+              );
             }}
           >
             팀 소개
