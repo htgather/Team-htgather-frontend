@@ -6,7 +6,7 @@
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
   <img src='https://img.shields.io/badge/ReactRouter-v5.2.1-pink?logo=React Router'/>
-  <img src='https://img.shields.io/badge/StyledComponents-v^5.3.3-violet?logo=styled-components'/>
+  <img src='https://img.shields.io/badge/StyledComponents-v5.3.3-violet?logo=styled-components'/>
   <img src='https://img.shields.io/badge/Redux-v4.1.2-764ABC?logo=Redux'/>
   <img src='https://img.shields.io/badge/Axios-v0.26.0-pink?'/>
   <br>
