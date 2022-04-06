@@ -49,7 +49,7 @@
 
 <br>
 
-## <a href="https://github.com/degurrrrrr/work-out-at-home-FE/wiki">기술 및 고민 정리 - WIKI 바로가기</a>
+## <a href="https://github.com/htgather/Team-htgather-frontend/wiki">기술 및 고민 정리 - WIKI 바로가기</a>
 
 <br>
 
